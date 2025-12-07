@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+@theme {
+  --color-green-yellow-50: #f9ffe6;
+  --color-green-yellow-100: #f0ffc8;
+  --color-green-yellow-200: #e1fe98;
+  --color-green-yellow-300: #c9fa5c;
+  --color-green-yellow-400: #bbf246; /* Primary */
+  --color-green-yellow-500: #92d60c;
+  --color-green-yellow-600: #70ac04;
+  --color-green-yellow-700: #558209;
+  --color-green-yellow-800: #45670d;
+  --color-green-yellow-900: #3a5710;
+  --color-green-yellow-950: #1d3003;
+
+  --color-shark-50: #f3f7f8;
+  --color-shark-100: #e0ebed;
+  --color-shark-200: #c5d8dc;
+  --color-shark-300: #9dbbc3;
+  --color-shark-400: #6d97a3;
+  --color-shark-500: #527b88;
+  --color-shark-600: #476773;
+  --color-shark-700: #3e5660;
+  --color-shark-800: #384952;
+  --color-shark-900: #323f47;
+  --color-shark-950: #192126; /* Primary */
+
+  --color-limed-spruce-50: #f4f7f7;
+  --color-limed-spruce-100: #e2e9eb;
+  --color-limed-spruce-200: #c9d5d8;
+  --color-limed-spruce-300: #a3b6bd;
+  --color-limed-spruce-400: #768f9a;
+  --color-limed-spruce-500: #5b747f;
+  --color-limed-spruce-600: #4e616c;
+  --color-limed-spruce-700: #44525a;
+  --color-limed-spruce-800: #3d474d;
+  --color-limed-spruce-900: #384046; /* Primary */
+  --color-limed-spruce-950: #21262b;
+}
