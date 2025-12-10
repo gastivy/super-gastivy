@@ -16,16 +16,16 @@ export const routes = {
       name: "Home",
       path: "/activity",
     },
-    category: {
-      name: "Category",
-      path: "/activity/category",
+    categories: {
+      name: "Categories Activity",
+      path: "/activity/categories",
     },
     statistic: {
-      name: "Statistic",
-      path: "/activity/statistic",
+      name: "Statistics",
+      path: "/activity/statistics",
     },
     activityLog: {
-      name: "Activity",
+      name: "Activity Logs",
       path: "/activity/log",
     },
   },

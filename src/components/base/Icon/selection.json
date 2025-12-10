@@ -1589,7 +1589,7 @@
       "properties": {
         "order": 384,
         "id": 71,
-        "name": "Logout-outline1",
+        "name": "Logout-outline",
         "prevSize": 32
       },
       "setIdx": 0,
@@ -3357,7 +3357,7 @@
       "properties": {
         "order": 402,
         "id": 19,
-        "name": "Logout-solid1",
+        "name": "Logout-solid",
         "prevSize": 32
       },
       "setIdx": 0,

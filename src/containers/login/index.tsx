@@ -101,7 +101,7 @@ const LoginContainer: React.FC = () => {
             widthFull
             shape="semi-round"
             size="large"
-            disabled={isPending}
+            disabled={isPending || isError}
           >
             Login
           </Button>

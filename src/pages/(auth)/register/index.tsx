@@ -7,7 +7,7 @@ const RegisterPage: React.FC = () => {
   return <RegisterContainer />;
 };
 
-export const Route = createFileRoute("/register/")({
+export const Route = createFileRoute("/(auth)/register/")({
   component: RegisterPage,
   beforeLoad: async () => {
     const token = await cookieStore.get(import.meta.env.VITE_KEY_ACCESS_TOKEN);

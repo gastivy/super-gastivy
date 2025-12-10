@@ -5,6 +5,6 @@ const NotesPage = () => {
   return <NotesContainer />;
 };
 
-export const Route = createFileRoute("/notes/")({
+export const Route = createFileRoute("/(app)/_layout/notes/")({
   component: NotesPage,
 });

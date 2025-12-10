@@ -1,0 +1,49 @@
+/* Animation Highlight slide */
+@keyframes slideHighlight {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.highlight-slide {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.highlight-slide > * {
+  position: relative;
+  z-index: 1;
+}
+
+.highlight-slide.active {
+  background-color: color-mix(in oklab, #bbf246 40%, transparent);
+}
+
+.highlight-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background-color: #bbf246; /* green-yellow-400 */
+  border-radius: 0.5rem;
+  z-index: 0;
+  transition: width 800ms ease;
+}
+
+.highlight-slide.active::before {
+  animation: slideHighlight 800ms ease;
+  width: 100%;
+}

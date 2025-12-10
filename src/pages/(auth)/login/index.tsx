@@ -7,7 +7,7 @@ const LoginPage: React.FC = () => {
   return <LoginContainer />;
 };
 
-export const Route = createFileRoute("/login/")({
+export const Route = createFileRoute("/(auth)/login/")({
   component: LoginPage,
   beforeLoad: async () => {
     const token = await cookieStore.get(import.meta.env.VITE_KEY_ACCESS_TOKEN);

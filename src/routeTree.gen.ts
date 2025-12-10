@@ -8,92 +8,200 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './app/__root'
-import { Route as IndexRouteImport } from './app/index'
-import { Route as RegisterIndexRouteImport } from './app/register/index'
-import { Route as NotesIndexRouteImport } from './app/notes/index'
-import { Route as LoginIndexRouteImport } from './app/login/index'
-import { Route as FinanceIndexRouteImport } from './app/finance/index'
-import { Route as ActivityIndexRouteImport } from './app/activity/index'
+import { Route as rootRouteImport } from './pages/__root'
+import { Route as IndexRouteImport } from './pages/index'
+import { Route as appLayoutRouteImport } from './pages/(app)/_layout'
+import { Route as authRegisterIndexRouteImport } from './pages/(auth)/register/index'
+import { Route as authLoginIndexRouteImport } from './pages/(auth)/login/index'
+import { Route as appLayoutNotesIndexRouteImport } from './pages/(app)/_layout.notes/index'
+import { Route as appLayoutFinanceIndexRouteImport } from './pages/(app)/_layout.finance/index'
+import { Route as appLayoutActivityIndexRouteImport } from './pages/(app)/_layout.activity/index'
+import { Route as appLayoutFinanceWalletIndexRouteImport } from './pages/(app)/_layout.finance/wallet/index'
+import { Route as appLayoutFinanceTransactionsIndexRouteImport } from './pages/(app)/_layout.finance/transactions/index'
+import { Route as appLayoutFinanceStatisticIndexRouteImport } from './pages/(app)/_layout.finance/statistic/index'
+import { Route as appLayoutFinanceCategoryIndexRouteImport } from './pages/(app)/_layout.finance/category/index'
+import { Route as appLayoutActivityStatisticsIndexRouteImport } from './pages/(app)/_layout.activity/statistics/index'
+import { Route as appLayoutActivityLogIndexRouteImport } from './pages/(app)/_layout.activity/log/index'
+import { Route as appLayoutActivityCategoriesIndexRouteImport } from './pages/(app)/_layout.activity/categories/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RegisterIndexRoute = RegisterIndexRouteImport.update({
-  id: '/register/',
+const appLayoutRoute = appLayoutRouteImport.update({
+  id: '/(app)/_layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const authRegisterIndexRoute = authRegisterIndexRouteImport.update({
+  id: '/(auth)/register/',
   path: '/register/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const NotesIndexRoute = NotesIndexRouteImport.update({
-  id: '/notes/',
-  path: '/notes/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginIndexRoute = LoginIndexRouteImport.update({
-  id: '/login/',
+const authLoginIndexRoute = authLoginIndexRouteImport.update({
+  id: '/(auth)/login/',
   path: '/login/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FinanceIndexRoute = FinanceIndexRouteImport.update({
+const appLayoutNotesIndexRoute = appLayoutNotesIndexRouteImport.update({
+  id: '/notes/',
+  path: '/notes/',
+  getParentRoute: () => appLayoutRoute,
+} as any)
+const appLayoutFinanceIndexRoute = appLayoutFinanceIndexRouteImport.update({
   id: '/finance/',
   path: '/finance/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appLayoutRoute,
 } as any)
-const ActivityIndexRoute = ActivityIndexRouteImport.update({
+const appLayoutActivityIndexRoute = appLayoutActivityIndexRouteImport.update({
   id: '/activity/',
   path: '/activity/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => appLayoutRoute,
 } as any)
+const appLayoutFinanceWalletIndexRoute =
+  appLayoutFinanceWalletIndexRouteImport.update({
+    id: '/finance/wallet/',
+    path: '/finance/wallet/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutFinanceTransactionsIndexRoute =
+  appLayoutFinanceTransactionsIndexRouteImport.update({
+    id: '/finance/transactions/',
+    path: '/finance/transactions/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutFinanceStatisticIndexRoute =
+  appLayoutFinanceStatisticIndexRouteImport.update({
+    id: '/finance/statistic/',
+    path: '/finance/statistic/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutFinanceCategoryIndexRoute =
+  appLayoutFinanceCategoryIndexRouteImport.update({
+    id: '/finance/category/',
+    path: '/finance/category/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutActivityStatisticsIndexRoute =
+  appLayoutActivityStatisticsIndexRouteImport.update({
+    id: '/activity/statistics/',
+    path: '/activity/statistics/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutActivityLogIndexRoute =
+  appLayoutActivityLogIndexRouteImport.update({
+    id: '/activity/log/',
+    path: '/activity/log/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutActivityCategoriesIndexRoute =
+  appLayoutActivityCategoriesIndexRouteImport.update({
+    id: '/activity/categories/',
+    path: '/activity/categories/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/activity': typeof ActivityIndexRoute
-  '/finance': typeof FinanceIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/notes': typeof NotesIndexRoute
-  '/register': typeof RegisterIndexRoute
+  '/login': typeof authLoginIndexRoute
+  '/register': typeof authRegisterIndexRoute
+  '/activity': typeof appLayoutActivityIndexRoute
+  '/finance': typeof appLayoutFinanceIndexRoute
+  '/notes': typeof appLayoutNotesIndexRoute
+  '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
+  '/activity/log': typeof appLayoutActivityLogIndexRoute
+  '/activity/statistics': typeof appLayoutActivityStatisticsIndexRoute
+  '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
+  '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
+  '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
+  '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/activity': typeof ActivityIndexRoute
-  '/finance': typeof FinanceIndexRoute
-  '/login': typeof LoginIndexRoute
-  '/notes': typeof NotesIndexRoute
-  '/register': typeof RegisterIndexRoute
+  '/login': typeof authLoginIndexRoute
+  '/register': typeof authRegisterIndexRoute
+  '/activity': typeof appLayoutActivityIndexRoute
+  '/finance': typeof appLayoutFinanceIndexRoute
+  '/notes': typeof appLayoutNotesIndexRoute
+  '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
+  '/activity/log': typeof appLayoutActivityLogIndexRoute
+  '/activity/statistics': typeof appLayoutActivityStatisticsIndexRoute
+  '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
+  '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
+  '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
+  '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/activity/': typeof ActivityIndexRoute
-  '/finance/': typeof FinanceIndexRoute
-  '/login/': typeof LoginIndexRoute
-  '/notes/': typeof NotesIndexRoute
-  '/register/': typeof RegisterIndexRoute
+  '/(app)/_layout': typeof appLayoutRouteWithChildren
+  '/(auth)/login/': typeof authLoginIndexRoute
+  '/(auth)/register/': typeof authRegisterIndexRoute
+  '/(app)/_layout/activity/': typeof appLayoutActivityIndexRoute
+  '/(app)/_layout/finance/': typeof appLayoutFinanceIndexRoute
+  '/(app)/_layout/notes/': typeof appLayoutNotesIndexRoute
+  '/(app)/_layout/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
+  '/(app)/_layout/activity/log/': typeof appLayoutActivityLogIndexRoute
+  '/(app)/_layout/activity/statistics/': typeof appLayoutActivityStatisticsIndexRoute
+  '/(app)/_layout/finance/category/': typeof appLayoutFinanceCategoryIndexRoute
+  '/(app)/_layout/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
+  '/(app)/_layout/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
+  '/(app)/_layout/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/activity' | '/finance' | '/login' | '/notes' | '/register'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/activity'
+    | '/finance'
+    | '/notes'
+    | '/activity/categories'
+    | '/activity/log'
+    | '/activity/statistics'
+    | '/finance/category'
+    | '/finance/statistic'
+    | '/finance/transactions'
+    | '/finance/wallet'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/activity' | '/finance' | '/login' | '/notes' | '/register'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/activity'
+    | '/finance'
+    | '/notes'
+    | '/activity/categories'
+    | '/activity/log'
+    | '/activity/statistics'
+    | '/finance/category'
+    | '/finance/statistic'
+    | '/finance/transactions'
+    | '/finance/wallet'
   id:
     | '__root__'
     | '/'
-    | '/activity/'
-    | '/finance/'
-    | '/login/'
-    | '/notes/'
-    | '/register/'
+    | '/(app)/_layout'
+    | '/(auth)/login/'
+    | '/(auth)/register/'
+    | '/(app)/_layout/activity/'
+    | '/(app)/_layout/finance/'
+    | '/(app)/_layout/notes/'
+    | '/(app)/_layout/activity/categories/'
+    | '/(app)/_layout/activity/log/'
+    | '/(app)/_layout/activity/statistics/'
+    | '/(app)/_layout/finance/category/'
+    | '/(app)/_layout/finance/statistic/'
+    | '/(app)/_layout/finance/transactions/'
+    | '/(app)/_layout/finance/wallet/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ActivityIndexRoute: typeof ActivityIndexRoute
-  FinanceIndexRoute: typeof FinanceIndexRoute
-  LoginIndexRoute: typeof LoginIndexRoute
-  NotesIndexRoute: typeof NotesIndexRoute
-  RegisterIndexRoute: typeof RegisterIndexRoute
+  appLayoutRoute: typeof appLayoutRouteWithChildren
+  authLoginIndexRoute: typeof authLoginIndexRoute
+  authRegisterIndexRoute: typeof authRegisterIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -105,51 +213,136 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/register/': {
-      id: '/register/'
+    '/(app)/_layout': {
+      id: '/(app)/_layout'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof appLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(auth)/register/': {
+      id: '/(auth)/register/'
       path: '/register'
       fullPath: '/register'
-      preLoaderRoute: typeof RegisterIndexRouteImport
+      preLoaderRoute: typeof authRegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/notes/': {
-      id: '/notes/'
-      path: '/notes'
-      fullPath: '/notes'
-      preLoaderRoute: typeof NotesIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login/': {
-      id: '/login/'
+    '/(auth)/login/': {
+      id: '/(auth)/login/'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof LoginIndexRouteImport
+      preLoaderRoute: typeof authLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/finance/': {
-      id: '/finance/'
+    '/(app)/_layout/notes/': {
+      id: '/(app)/_layout/notes/'
+      path: '/notes'
+      fullPath: '/notes'
+      preLoaderRoute: typeof appLayoutNotesIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/finance/': {
+      id: '/(app)/_layout/finance/'
       path: '/finance'
       fullPath: '/finance'
-      preLoaderRoute: typeof FinanceIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof appLayoutFinanceIndexRouteImport
+      parentRoute: typeof appLayoutRoute
     }
-    '/activity/': {
-      id: '/activity/'
+    '/(app)/_layout/activity/': {
+      id: '/(app)/_layout/activity/'
       path: '/activity'
       fullPath: '/activity'
-      preLoaderRoute: typeof ActivityIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof appLayoutActivityIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/finance/wallet/': {
+      id: '/(app)/_layout/finance/wallet/'
+      path: '/finance/wallet'
+      fullPath: '/finance/wallet'
+      preLoaderRoute: typeof appLayoutFinanceWalletIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/finance/transactions/': {
+      id: '/(app)/_layout/finance/transactions/'
+      path: '/finance/transactions'
+      fullPath: '/finance/transactions'
+      preLoaderRoute: typeof appLayoutFinanceTransactionsIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/finance/statistic/': {
+      id: '/(app)/_layout/finance/statistic/'
+      path: '/finance/statistic'
+      fullPath: '/finance/statistic'
+      preLoaderRoute: typeof appLayoutFinanceStatisticIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/finance/category/': {
+      id: '/(app)/_layout/finance/category/'
+      path: '/finance/category'
+      fullPath: '/finance/category'
+      preLoaderRoute: typeof appLayoutFinanceCategoryIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/activity/statistics/': {
+      id: '/(app)/_layout/activity/statistics/'
+      path: '/activity/statistics'
+      fullPath: '/activity/statistics'
+      preLoaderRoute: typeof appLayoutActivityStatisticsIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/activity/log/': {
+      id: '/(app)/_layout/activity/log/'
+      path: '/activity/log'
+      fullPath: '/activity/log'
+      preLoaderRoute: typeof appLayoutActivityLogIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/activity/categories/': {
+      id: '/(app)/_layout/activity/categories/'
+      path: '/activity/categories'
+      fullPath: '/activity/categories'
+      preLoaderRoute: typeof appLayoutActivityCategoriesIndexRouteImport
+      parentRoute: typeof appLayoutRoute
     }
   }
 }
 
+interface appLayoutRouteChildren {
+  appLayoutActivityIndexRoute: typeof appLayoutActivityIndexRoute
+  appLayoutFinanceIndexRoute: typeof appLayoutFinanceIndexRoute
+  appLayoutNotesIndexRoute: typeof appLayoutNotesIndexRoute
+  appLayoutActivityCategoriesIndexRoute: typeof appLayoutActivityCategoriesIndexRoute
+  appLayoutActivityLogIndexRoute: typeof appLayoutActivityLogIndexRoute
+  appLayoutActivityStatisticsIndexRoute: typeof appLayoutActivityStatisticsIndexRoute
+  appLayoutFinanceCategoryIndexRoute: typeof appLayoutFinanceCategoryIndexRoute
+  appLayoutFinanceStatisticIndexRoute: typeof appLayoutFinanceStatisticIndexRoute
+  appLayoutFinanceTransactionsIndexRoute: typeof appLayoutFinanceTransactionsIndexRoute
+  appLayoutFinanceWalletIndexRoute: typeof appLayoutFinanceWalletIndexRoute
+}
+
+const appLayoutRouteChildren: appLayoutRouteChildren = {
+  appLayoutActivityIndexRoute: appLayoutActivityIndexRoute,
+  appLayoutFinanceIndexRoute: appLayoutFinanceIndexRoute,
+  appLayoutNotesIndexRoute: appLayoutNotesIndexRoute,
+  appLayoutActivityCategoriesIndexRoute: appLayoutActivityCategoriesIndexRoute,
+  appLayoutActivityLogIndexRoute: appLayoutActivityLogIndexRoute,
+  appLayoutActivityStatisticsIndexRoute: appLayoutActivityStatisticsIndexRoute,
+  appLayoutFinanceCategoryIndexRoute: appLayoutFinanceCategoryIndexRoute,
+  appLayoutFinanceStatisticIndexRoute: appLayoutFinanceStatisticIndexRoute,
+  appLayoutFinanceTransactionsIndexRoute:
+    appLayoutFinanceTransactionsIndexRoute,
+  appLayoutFinanceWalletIndexRoute: appLayoutFinanceWalletIndexRoute,
+}
+
+const appLayoutRouteWithChildren = appLayoutRoute._addFileChildren(
+  appLayoutRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ActivityIndexRoute: ActivityIndexRoute,
-  FinanceIndexRoute: FinanceIndexRoute,
-  LoginIndexRoute: LoginIndexRoute,
-  NotesIndexRoute: NotesIndexRoute,
-  RegisterIndexRoute: RegisterIndexRoute,
+  appLayoutRoute: appLayoutRouteWithChildren,
+  authLoginIndexRoute: authLoginIndexRoute,
+  authRegisterIndexRoute: authRegisterIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -10,6 +10,7 @@ import { useRegister } from "@modules/auth/hooks/useAuth";
 import { routes } from "@constants/routes";
 import type { AxiosError } from "axios";
 import type { RegisterRequest } from "@modules/auth/models/Auth";
+import Alert from "@components/base/Alert";
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();
@@ -60,6 +61,10 @@ const RegisterContainer: React.FC = () => {
           className="w-full flex flex-col items-center gap-4"
           onSubmit={handleSubmit(handleSubmitForm)}
         >
+          {isError && errorMessage && (
+            <Alert message={errorMessage} variant="error" />
+          )}
+
           <div className="w-full flex flex-col items-center gap-4 mb-3">
             <InputText
               label="Name"
@@ -100,8 +105,13 @@ const RegisterContainer: React.FC = () => {
             </div>
           </div>
 
-          <Button widthFull shape="semi-round" size="large">
-            Login
+          <Button
+            widthFull
+            shape="semi-round"
+            size="large"
+            disabled={isPending || isError}
+          >
+            Register
           </Button>
         </form>
       </div>
