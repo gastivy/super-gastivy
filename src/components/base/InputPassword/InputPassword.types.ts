@@ -1,7 +1,7 @@
 import type { VariantProps } from "class-variance-authority";
-import type { inputVariants } from "./variants";
+import type { inputVariants } from "./InputPassword.variants";
 
-export interface InputTextProps extends Omit<
+export interface InputPasswordProps extends Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
   "size" | "prefix" | "suffix"
 > {

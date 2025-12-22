@@ -1,4 +1,4 @@
-import type { HttpResponse } from "@customTypes/HttpResponse";
+import type { HttpResponse } from "@custom-types/HttpResponse";
 
 export interface LoginRequest {
   email: string;

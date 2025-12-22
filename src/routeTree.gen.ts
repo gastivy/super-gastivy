@@ -20,6 +20,7 @@ import { Route as appLayoutFinanceWalletIndexRouteImport } from './pages/(app)/_
 import { Route as appLayoutFinanceTransactionsIndexRouteImport } from './pages/(app)/_layout.finance/transactions/index'
 import { Route as appLayoutFinanceStatisticIndexRouteImport } from './pages/(app)/_layout.finance/statistic/index'
 import { Route as appLayoutFinanceCategoryIndexRouteImport } from './pages/(app)/_layout.finance/category/index'
+import { Route as appLayoutActivityTimerIndexRouteImport } from './pages/(app)/_layout.activity/timer/index'
 import { Route as appLayoutActivityStatisticsIndexRouteImport } from './pages/(app)/_layout.activity/statistics/index'
 import { Route as appLayoutActivityLogIndexRouteImport } from './pages/(app)/_layout.activity/log/index'
 import { Route as appLayoutActivityCategoriesIndexRouteImport } from './pages/(app)/_layout.activity/categories/index'
@@ -82,6 +83,12 @@ const appLayoutFinanceCategoryIndexRoute =
     path: '/finance/category/',
     getParentRoute: () => appLayoutRoute,
   } as any)
+const appLayoutActivityTimerIndexRoute =
+  appLayoutActivityTimerIndexRouteImport.update({
+    id: '/activity/timer/',
+    path: '/activity/timer/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
 const appLayoutActivityStatisticsIndexRoute =
   appLayoutActivityStatisticsIndexRouteImport.update({
     id: '/activity/statistics/',
@@ -111,6 +118,7 @@ export interface FileRoutesByFullPath {
   '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
   '/activity/log': typeof appLayoutActivityLogIndexRoute
   '/activity/statistics': typeof appLayoutActivityStatisticsIndexRoute
+  '/activity/timer': typeof appLayoutActivityTimerIndexRoute
   '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
@@ -126,6 +134,7 @@ export interface FileRoutesByTo {
   '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
   '/activity/log': typeof appLayoutActivityLogIndexRoute
   '/activity/statistics': typeof appLayoutActivityStatisticsIndexRoute
+  '/activity/timer': typeof appLayoutActivityTimerIndexRoute
   '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
@@ -143,6 +152,7 @@ export interface FileRoutesById {
   '/(app)/_layout/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
   '/(app)/_layout/activity/log/': typeof appLayoutActivityLogIndexRoute
   '/(app)/_layout/activity/statistics/': typeof appLayoutActivityStatisticsIndexRoute
+  '/(app)/_layout/activity/timer/': typeof appLayoutActivityTimerIndexRoute
   '/(app)/_layout/finance/category/': typeof appLayoutFinanceCategoryIndexRoute
   '/(app)/_layout/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
   '/(app)/_layout/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
@@ -160,6 +170,7 @@ export interface FileRouteTypes {
     | '/activity/categories'
     | '/activity/log'
     | '/activity/statistics'
+    | '/activity/timer'
     | '/finance/category'
     | '/finance/statistic'
     | '/finance/transactions'
@@ -175,6 +186,7 @@ export interface FileRouteTypes {
     | '/activity/categories'
     | '/activity/log'
     | '/activity/statistics'
+    | '/activity/timer'
     | '/finance/category'
     | '/finance/statistic'
     | '/finance/transactions'
@@ -191,6 +203,7 @@ export interface FileRouteTypes {
     | '/(app)/_layout/activity/categories/'
     | '/(app)/_layout/activity/log/'
     | '/(app)/_layout/activity/statistics/'
+    | '/(app)/_layout/activity/timer/'
     | '/(app)/_layout/finance/category/'
     | '/(app)/_layout/finance/statistic/'
     | '/(app)/_layout/finance/transactions/'
@@ -283,6 +296,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutFinanceCategoryIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
+    '/(app)/_layout/activity/timer/': {
+      id: '/(app)/_layout/activity/timer/'
+      path: '/activity/timer'
+      fullPath: '/activity/timer'
+      preLoaderRoute: typeof appLayoutActivityTimerIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
     '/(app)/_layout/activity/statistics/': {
       id: '/(app)/_layout/activity/statistics/'
       path: '/activity/statistics'
@@ -314,6 +334,7 @@ interface appLayoutRouteChildren {
   appLayoutActivityCategoriesIndexRoute: typeof appLayoutActivityCategoriesIndexRoute
   appLayoutActivityLogIndexRoute: typeof appLayoutActivityLogIndexRoute
   appLayoutActivityStatisticsIndexRoute: typeof appLayoutActivityStatisticsIndexRoute
+  appLayoutActivityTimerIndexRoute: typeof appLayoutActivityTimerIndexRoute
   appLayoutFinanceCategoryIndexRoute: typeof appLayoutFinanceCategoryIndexRoute
   appLayoutFinanceStatisticIndexRoute: typeof appLayoutFinanceStatisticIndexRoute
   appLayoutFinanceTransactionsIndexRoute: typeof appLayoutFinanceTransactionsIndexRoute
@@ -327,6 +348,7 @@ const appLayoutRouteChildren: appLayoutRouteChildren = {
   appLayoutActivityCategoriesIndexRoute: appLayoutActivityCategoriesIndexRoute,
   appLayoutActivityLogIndexRoute: appLayoutActivityLogIndexRoute,
   appLayoutActivityStatisticsIndexRoute: appLayoutActivityStatisticsIndexRoute,
+  appLayoutActivityTimerIndexRoute: appLayoutActivityTimerIndexRoute,
   appLayoutFinanceCategoryIndexRoute: appLayoutFinanceCategoryIndexRoute,
   appLayoutFinanceStatisticIndexRoute: appLayoutFinanceStatisticIndexRoute,
   appLayoutFinanceTransactionsIndexRoute:

@@ -20,9 +20,11 @@ export default defineConfig({
       "@components": path.resolve(__dirname, "src/components"),
       "@containers": path.resolve(__dirname, "src/containers"),
       "@constants": path.resolve(__dirname, "src/constants"),
+      "@custom-types": path.resolve(__dirname, "src/custom-types"),
+      "@hooks": path.resolve(__dirname, "src/hooks"),
       "@libs": path.resolve(__dirname, "src/libs"),
       "@modules": path.resolve(__dirname, "src/modules"),
-      "@customTypes": path.resolve(__dirname, "src/customTypes"),
+      "@styles": path.resolve(__dirname, "src/styles"),
     },
   },
   server: {

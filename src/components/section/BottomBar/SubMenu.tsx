@@ -1,7 +1,7 @@
 import Icon from "@components/base/Icon";
 import { SIDEBAR_MENU } from "@constants/sidebar";
+import { cn } from "@libs/classnames";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { cx } from "class-variance-authority";
 import type React from "react";
 
 interface Props {
@@ -37,7 +37,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
           const isActive = router.location.pathname === item.path;
           return (
             <div
-              className={cx(
+              className={cn(
                 "flex flex-col items-center gap-2 p-2 rounded-lg",
                 isActive ? "bg-green-yellow-400" : "bg-transparent"
               )}
@@ -50,7 +50,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
                 size={18}
               />
               <div
-                className={cx(
+                className={cn(
                   "text-shark-950 text-xs font-medium",
                   isActive ? "text-shark-950" : "text-white"
                 )}

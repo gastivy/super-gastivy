@@ -7,7 +7,7 @@ import { useGetActivity } from "./useActivity";
 
 export const useFilterActivity = () => {
   const [idCategories, setIdCategories] = useState<string[]>([]);
-  const [currentRange, setCurrentRange] = useState<RangeDate>();
+  const [currentRange, setCurrentRange] = useState<RangeDate | undefined>();
   const [currentYear, setCurrentYear] = useState<number>(
     new Date().getFullYear()
   );
@@ -15,16 +15,19 @@ export const useFilterActivity = () => {
 
   const { data, isLoading, isRefetching, refetch } = useGetActivity(
     {
-      ...currentRange,
       ...(idCategories.length > 0 && { category_id: idCategories }),
+      start_date: currentRange?.start_date,
+      end_date: currentRange?.end_date,
     },
     {
-      enabled: Boolean(currentRange) || idCategories.length > 0,
+      enabled:
+        Boolean(currentRange?.start_date && currentRange.end_date) ||
+        idCategories.length > 0,
       queryKey: ["activities", currentRange],
     }
   );
 
-  const getLogActivity = () => {
+  const logActivity = (() => {
     const grouped: { [key: string]: LogActivity[] } = {};
 
     data?.data.forEach((activity: LogActivity) => {
@@ -42,19 +45,19 @@ export const useFilterActivity = () => {
       key: date,
       logActivity: grouped[date],
     }));
-  };
+  })();
 
-  useEffect(() => {
-    const thisMonth = monthList[new Date().getMonth()];
-    setCurrentRange(thisMonth.value);
-  }, [currentYear]);
+  // useEffect(() => {
+  //   const thisMonth = monthList[new Date().getMonth()];
+  //   setCurrentRange(thisMonth.value);
+  // }, [currentYear]);
 
   useEffect(() => {
     if (currentRange) refetch();
   }, [currentRange, idCategories]);
 
   return {
-    logActivity: getLogActivity(),
+    logActivity,
     isLoading,
     isRefetching,
     currentYear,

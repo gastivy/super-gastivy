@@ -1,9 +1,9 @@
-import type { HttpResponse } from "@customTypes/HttpResponse";
+import type { HttpResponse } from "@custom-types/HttpResponse";
 
 export interface Activity {
   category_id: string;
-  start_date: Date;
-  end_date: Date;
+  start_date: Date | null;
+  end_date: Date | null;
   is_done: boolean;
   description: string;
 }

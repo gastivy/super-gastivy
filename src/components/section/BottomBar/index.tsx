@@ -1,9 +1,9 @@
 import Icon from "@components/base/Icon";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { useRouterState } from "@tanstack/react-router";
-import { cx } from "class-variance-authority";
 import { useState } from "react";
 import { SubMenu } from "./SubMenu";
+import { cn } from "@libs/classnames";
 
 const BottomBar = () => {
   const router = useRouterState();
@@ -18,7 +18,7 @@ const BottomBar = () => {
           return (
             <div
               key={index}
-              className={cx(
+              className={cn(
                 "w-full flex justify-center items-center gap-2 p-2 rounded-lg",
                 isActive ? "bg-green-yellow-400" : "bg-transparent"
               )}
@@ -30,7 +30,7 @@ const BottomBar = () => {
                 className={isActive ? "text-shark-950" : "text-white"}
               />
               <div
-                className={cx("text-shark-950 text-xs font-medium", {
+                className={cn("text-shark-950 text-xs font-medium", {
                   "text-white": !isActive,
                 })}
               >

@@ -12,9 +12,13 @@ export const routes = {
     path: "/register",
   },
   activity: {
-    home: {
-      name: "Home",
+    overview: {
+      name: "Overview",
       path: "/activity",
+    },
+    timer: {
+      name: "Timer",
+      path: "/activity/timer",
     },
     categories: {
       name: "Categories Activity",

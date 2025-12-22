@@ -1,0 +1,134 @@
+import Button from "@components/base/Button";
+import Dropdown from "@components/base/Dropdown";
+import type { DropdownOption } from "@components/base/Dropdown/Dropdown.types";
+import Icon from "@components/base/Icon";
+import useDisclosure from "@hooks/useDisclosure";
+import DexieDB from "@libs/dexieDB";
+import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
+import { useGetListCategory } from "@modules/activity/categories/hooks/useCategory";
+import React, { useMemo } from "react";
+import {
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
+import { ModalConfirm } from "../ModalConfirm";
+import { useNavigate } from "@tanstack/react-router";
+import { routes } from "@constants/routes";
+import { cn } from "@libs/classnames";
+
+interface TimerControllerProps {
+  isStarted: boolean;
+  formatted: string;
+  seconds: number;
+  currentActivity: ActivitiesDexieStore;
+  onChangeTimer: () => void;
+  onFinishActivity: () => void;
+}
+
+export const TimerController: React.FC<TimerControllerProps> = ({
+  isStarted,
+  formatted,
+  seconds,
+  currentActivity,
+  onChangeTimer,
+  onFinishActivity,
+}) => {
+  const navigate = useNavigate();
+  const { data, isLoading } = useGetListCategory();
+  const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
+  const categoryOptions =
+    useMemo(
+      () =>
+        data?.data?.map((category) => ({
+          ...category,
+          label: category.name,
+          value: category.id,
+        })),
+      [data?.data]
+    ) || [];
+
+  const handleSelect = async (id: string | number, option: DropdownOption) => {
+    await DexieDB.activities.clear();
+    await DexieDB.activities.put({
+      id: String(id) || "",
+      name: String(option.name) || "",
+      data: [],
+    });
+  };
+
+  const handleCancelActivity = async () => {
+    if (isStarted) return;
+    await DexieDB.activities.clear();
+    navigate({ to: routes.activity.overview.path });
+  };
+
+  const handleFinishActivity = () => {
+    if (isStarted) return;
+    onFinishActivity();
+  };
+
+  return (
+    <>
+      <ModalConfirm
+        isOpen={isOpen}
+        onClose={onClose}
+        onConfirm={handleCancelActivity}
+      />
+
+      <div className="w-[60%] max-[720px]:w-full flex flex-col items-center gap-12">
+        <div className="flex flex-col justify-center items-center gap-6">
+          <Dropdown
+            value={currentActivity?.id}
+            isLoading={isLoading}
+            disabled={currentActivity?.data.length > 0}
+            options={categoryOptions}
+            onSelect={handleSelect}
+          />
+          <div className="flex w-64">
+            <CircularProgressbarWithChildren
+              value={((seconds % 60) / 60) * 100}
+              strokeWidth={3}
+              styles={buildStyles({
+                textColor: "red",
+                pathColor: "#bbf246",
+                trailColor: "#e2e9eb",
+              })}
+            >
+              <div className="flex text-4xl">{formatted}</div>
+            </CircularProgressbarWithChildren>
+          </div>
+        </div>
+        <div className="flex items-center gap-4">
+          <div
+            className={cn(
+              "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
+              isStarted &&
+                "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
+            )}
+            onClick={() => !isStarted && onOpen()}
+          >
+            <Icon name="Close-solid" size={18} className="text-white" />
+          </div>
+          <Button
+            shape="pill"
+            className="w-20 h-20"
+            disabled={!currentActivity?.id}
+            onClick={onChangeTimer}
+          >
+            <Icon name={isStarted ? "Pause-solid" : "Play-solid"} size={48} />
+          </Button>
+          <div
+            className={cn(
+              "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
+              isStarted &&
+                "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
+            )}
+            onClick={handleFinishActivity}
+          >
+            <Icon name="Check-solid" size={18} className="text-white" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};

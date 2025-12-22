@@ -14,19 +14,24 @@ export interface SidebarMenu extends Menu {
 export const SIDEBAR_MENU: SidebarMenu[] = [
   {
     name: "Activity",
-    path: routes.activity.home.path,
+    path: routes.activity.overview.path,
     icon: "Activity-solid",
     children: [
       {
         name: "Overview",
-        path: routes.activity.home.path,
+        path: routes.activity.overview.path,
         icon: "Home-solid",
       },
       {
-        name: "Statistics",
-        path: routes.activity.statistic.path,
-        icon: "Chart-solid",
+        name: "Timer",
+        path: routes.activity.timer.path,
+        icon: "Alarm-solid",
       },
+      // {
+      //   name: "Statistics",
+      //   path: routes.activity.statistic.path,
+      //   icon: "Chart-solid",
+      // },
       {
         name: "Logs",
         path: routes.activity.activityLog.path,

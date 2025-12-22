@@ -1,3 +1,5 @@
+import type { Range } from "@components/base/DatePicker/DatePicker.types";
+
 export enum Day {
   Sunday = 0,
   Monday = 1,
@@ -13,6 +15,8 @@ export interface RangeDate {
   end_date: string;
 }
 
+type Direction = "previous" | "next" | "current";
+
 export const dateTime = {
   formatDate(date: Date) {
     return new Intl.DateTimeFormat("en-CA", {
@@ -22,12 +26,10 @@ export const dateTime = {
     }).format(date);
   },
 
-  getRangeDaily(): RangeDate {
-    const today = new Date();
-
+  getRangeDaily(date: Date): Range {
     return {
-      start_date: this.formatDate(today),
-      end_date: this.formatDate(today),
+      start_date: date,
+      end_date: date,
     };
   },
 
@@ -44,35 +46,34 @@ export const dateTime = {
    *
    * @returns
    */
-  getRangeWeekly(startDay: Day = 5): RangeDate {
-    const today = new Date();
+  getRangeWeekly(date: Date, direction: Direction = "previous"): Range {
+    if (direction === "previous") {
+      const today = new Date(date);
+      today.setDate(date.getDate() - 6);
+      return {
+        start_date: today,
+        end_date: date,
+      };
+    }
 
-    /**
-     * Sunday: 0
-     * Monday: 1
-     * Tuesday: 2
-     * Wednesday: 3
-     * Thursday: 4
-     * Friday: 5
-     * Saturday: 6
-     */
-    const dayOfWeek = today.getDay();
+    if (direction === "next") {
+      const end = new Date(date);
+      end.setDate(date.getDate() + 6);
+      return {
+        start_date: date,
+        end_date: end,
+      };
+    }
 
-    // Calculate days since the specified start day (e.g., Friday if startDay = 5)
-    const daysSinceStartDay =
-      dayOfWeek >= startDay ? dayOfWeek - startDay : 7 - (startDay - dayOfWeek);
+    const startDate = new Date(date);
+    const endDate = new Date(date);
 
-    // Set the start date to the last occurrence of the specified start day
-    const start = new Date(today);
-    start.setDate(today.getDate() - daysSinceStartDay);
-
-    // Set the end date to 6 days after the start date (covers a 7-day range)
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6); // Go to next 6 days from start day
+    startDate.setDate(date.getDate() + (0 - date.getDay()));
+    endDate.setDate(date.getDate() + (6 - date.getDay()));
 
     return {
-      start_date: this.formatDate(start),
-      end_date: this.formatDate(end),
+      start_date: startDate,
+      end_date: endDate,
     };
   },
 
@@ -86,7 +87,7 @@ export const dateTime = {
   getRangeThisMonth(
     year = new Date().getFullYear(),
     month = new Date().getMonth() + 1
-  ): { start_date: string; end_date: string } {
+  ): Range {
     if (month < 1 || month > 12) {
       throw new Error("Month must be between 1 and 12.");
     }
@@ -95,8 +96,8 @@ export const dateTime = {
     const lastDate = new Date(year, month, 0);
 
     return {
-      start_date: this.formatDate(firstDate),
-      end_date: this.formatDate(lastDate),
+      start_date: firstDate,
+      end_date: lastDate,
     };
   },
 
@@ -105,13 +106,13 @@ export const dateTime = {
    * @param year
    * @returns
    */
-  getRangeThisYear(year = new Date().getFullYear()): RangeDate {
+  getRangeThisYear(year = new Date().getFullYear()): Range {
     const firstDate = new Date(year, 0, 1);
     const lastDate = new Date(year, 12, 0);
 
     return {
-      start_date: this.formatDate(firstDate),
-      end_date: this.formatDate(lastDate),
+      start_date: firstDate,
+      end_date: lastDate,
     };
   },
 

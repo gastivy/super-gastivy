@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { inputVariants } from "./variants";
-import type { InputTextProps } from "./types";
+import { inputVariants } from "./InputText.variants";
+import type { InputTextProps } from "./InputText.types";
 
 const InputText: React.FC<InputTextProps> = ({
   size,
@@ -33,9 +33,9 @@ const InputText: React.FC<InputTextProps> = ({
       )}
       <div className="relative flex items-center">
         {prefix && (
-          <span className="absolute left-3 text-gray-500 pointer-events-none">
+          <div className="flex justify-center items-center absolute left-3 text-gray-500 pointer-events-none">
             {prefix}
-          </span>
+          </div>
         )}
 
         <input

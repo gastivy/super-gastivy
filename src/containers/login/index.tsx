@@ -10,6 +10,7 @@ import { useLogin } from "@modules/auth/hooks/useAuth";
 import { routes } from "@constants/routes";
 import type { AxiosError } from "axios";
 import Alert from "@components/base/Alert";
+import InputPassword from "@components/base/InputPassword";
 
 const LoginContainer: React.FC = () => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ const LoginContainer: React.FC = () => {
   const { isPending, isError, mutate } = useLogin({
     onSuccess: ({ data }) => {
       if (data.token) {
-        navigate({ to: routes.activity.home.path });
+        navigate({ to: routes.activity.overview.path });
       }
     },
     onError: ({ response }) => {
@@ -76,8 +77,7 @@ const LoginContainer: React.FC = () => {
               error={errors.email?.message}
               {...register("email")}
             />
-            <InputText
-              type="password"
+            <InputPassword
               size="large"
               shape="semi-rounded"
               placeholder="Input your password"

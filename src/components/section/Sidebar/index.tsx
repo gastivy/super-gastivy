@@ -1,9 +1,9 @@
 import Icon from "@components/base/Icon";
 import { routes } from "@constants/routes";
 import { SIDEBAR_MENU } from "@constants/sidebar";
+import { cn } from "@libs/classnames";
 import { useLogout } from "@modules/auth/hooks/useAuth";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { cx } from "class-variance-authority";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Sidebar = () => {
             const isActive = router.location.pathname.includes(item.path || "");
             return (
               <div
-                className={cx(
+                className={cn(
                   "flex justify-between items-center cursor-pointer p-3 rounded-lg",
                   isActive
                     ? "bg-green-yellow-400"
@@ -45,9 +45,9 @@ const Sidebar = () => {
         </div>
 
         <div
-          className={cx(
+          className={
             "flex justify-between items-center cursor-pointer p-3 rounded-lg hover:bg-shark-200/50"
-          )}
+          }
           onClick={() => logout()}
         >
           <Icon
@@ -70,7 +70,7 @@ const Sidebar = () => {
             return (
               <div
                 key={child.path}
-                className={cx(
+                className={cn(
                   "highlight-slide w-full flex items-center gap-2 cursor-pointer px-3 py-2 rounded-md transition-all duration-300 ease-out hover:bg-green-yellow-400/40",
                   {
                     active: isActive,
@@ -88,7 +88,7 @@ const Sidebar = () => {
                   }
                 />
                 <div
-                  className={cx(
+                  className={cn(
                     "text-sm",
                     isActive
                       ? "text-limed-spruce-900"

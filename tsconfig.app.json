@@ -28,13 +28,15 @@
     "paths": {
       "@pages/*": ["./src/pages/*"],
       "@assets/*": ["./src/assets/*"],
+      "@custom-types/*": ["./src/custom-types/*"],
       "@components/*": ["./src/components/*"],
       "@containers/*": ["./src/containers/*"],
       "@constants/*": ["./src/constants/*"],
+      "@hooks/*": ["./src/hooks/*"],
       "@libs/*": ["./src/libs/*"],
       "@modules/*": ["./src/modules/*"],
-      "@customTypes/*": ["./src/customTypes/*"]
+      "@styles/*": ["./src/styles/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/types/router.d.ts"]
 }

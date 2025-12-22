@@ -13,7 +13,6 @@ export const httpService = axios.create({
 httpService.interceptors.request.use(
   (config) => config,
   (error) => {
-    // eslint-disable-next-line no-console
     console.error("Request Error:", error);
     return Promise.reject(error);
   }
@@ -25,7 +24,6 @@ httpService.interceptors.response.use(
     if (error?.response?.status === 401) {
       await AuthServices.refresh();
     } else {
-      // eslint-disable-next-line no-console
       console.error("Response Error:", error.response?.data || error);
     }
 

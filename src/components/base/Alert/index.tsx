@@ -1,6 +1,6 @@
 import { cn } from "@libs/classnames";
 import type React from "react";
-import { alertVariants } from "./variants";
+import { alertVariants } from "./Alert.variants";
 
 interface AlertProps {
   message: string;
