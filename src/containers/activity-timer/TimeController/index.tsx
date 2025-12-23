@@ -75,7 +75,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
         onConfirm={handleCancelActivity}
       />
 
-      <div className="w-[60%] max-[720px]:w-full flex flex-col items-center gap-12">
+      <div className="w-[60%] min-[720px]:bg-white max-[720px]:w-full py-8 rounded-xl flex flex-col items-center gap-12 ">
         <div className="flex flex-col justify-center items-center gap-6">
           <Dropdown
             value={currentActivity?.id}

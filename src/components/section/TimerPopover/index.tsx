@@ -22,7 +22,7 @@ const TimerPopover = () => {
   )
     return;
   return (
-    <div className="fixed z-1 top-6 right-6 flex justify-between gap-5 items-center bg-white shadow-xl shadow-shark-400/20 min-w-100 p-3 rounded-xl border border-shark-400/10">
+    <div className="fixed z-1 top-6 right-6 max-[768px]:left-6 flex justify-between gap-5 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10">
       <div className="flex items-center gap-3">
         <div className="flex justify-center items-center bg-green-yellow-400 hover:bg-green-yellow-500 p-2 rounded-full cursor-pointer transition-all duration-300 ease-out">
           <Icon

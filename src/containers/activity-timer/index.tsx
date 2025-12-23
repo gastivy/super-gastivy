@@ -16,7 +16,7 @@ const TimerActivityContainer: React.FC = () => {
   } = useTimerActivity();
 
   return (
-    <div className="h-[calc(100dvh-32px)] flex max-[720px]:flex-col gap-12 py-8 px-4 bg-white rounded-lg">
+    <div className="h-[calc(100dvh-32px)] flex max-[720px]:flex-col max-[720px]:gap-6 gap-4 px-4 max-[720px]:bg-white rounded-lg max-[720px]:h-[calc(100dvh-110px)]">
       <TimerController
         isStarted={isStarted || false}
         seconds={seconds}
