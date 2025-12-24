@@ -1,20 +1,10 @@
-import type { DateRange, Mode, PropsBase, PropsRange } from "react-day-picker";
+import type { PropsBase } from "react-day-picker";
 
-export type DatePickerRangeProps = PropsBase &
-  Omit<PropsRange, "onSelect"> & {
-    mode?: Mode;
-    showShortcut?: boolean;
-    onSelect?: (range: DateRange | undefined) => void;
-    onBlur?: () => void;
-  };
-
-export interface Range {
-  start_date?: Date | undefined;
-  end_date?: Date;
-}
-
-export interface ShortcutDate {
-  name: string;
-  value: string;
-  range: Range;
-}
+export type DatePickerRangeProps = PropsBase & {
+  label?: string;
+  value: Date | undefined;
+  mode?: "single";
+  error?: string;
+  onBlur?: () => void;
+  onSelect?: (date: Date | undefined) => void;
+};

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import type { ModalProps } from "./Modal.types";
 import { cn } from "@libs/classnames";
+import useClickOutside from "@hooks/useClickOutside";
 
 const Modal = ({
   isOpen,
@@ -10,6 +11,12 @@ const Modal = ({
   className,
   onClose,
 }: ModalProps) => {
+  const handleClose = () => {
+    if (closeOnOverlay) return onClose();
+  };
+
+  const dropdownRef = useClickOutside(handleClose);
+
   useEffect(() => {
     if (!isOpen) return;
 
@@ -31,11 +38,11 @@ const Modal = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-      onClick={closeOnOverlay ? onClose : undefined}
-    >
-      <div className={cn("w-lg rounded-lg bg-white shadow-xl", className)}>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
+      <div
+        ref={dropdownRef}
+        className={cn("w-lg rounded-lg bg-white shadow-xl", className)}
+      >
         {children}
       </div>
     </div>,

@@ -1,4 +1,4 @@
-import type { Range } from "@components/base/DatePicker/DatePicker.types";
+import type { Range } from "@components/base/DatePickerRange/DatePickerRange.types";
 
 export enum Day {
   Sunday = 0,

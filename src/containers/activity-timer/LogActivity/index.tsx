@@ -14,7 +14,7 @@ interface LogActivityProps {
 export const LogActivity: React.FC<LogActivityProps> = ({ data }) => {
   const activityData = [...data].reverse();
   return (
-    <div className="w-[40%] max-[720px]:w-full max-[720px]:border-t border-gray-300 min-[720px]:bg-white min-[720px]:rounded-xl flex flex-col gap-10 max-[720px]:gap-6 px-4 py-8 max-[720px]:py-4">
+    <div className="w-[40%] max-[720px]:h-[calc(100dvh-200px)] max-[720px]:w-full bg-white rounded-xl flex flex-col gap-10 max-[720px]:gap-6 px-4 py-8 max-[720px]:py-4 border border-shark-700/10">
       <div className="text-center text-xl font-medium text-limed-spruce-700">
         Current Log Activity
       </div>
@@ -25,7 +25,7 @@ export const LogActivity: React.FC<LogActivityProps> = ({ data }) => {
           description="Start your activity now"
         />
       </Conditional>
-      <div className="flex flex-col overflow-y-auto max-[720px]:h-[calc(100dvh-736px)]">
+      <div className="flex flex-col overflow-y-auto">
         <Each
           of={activityData}
           render={({ start_date, end_date }, index) => (

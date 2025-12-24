@@ -11,6 +11,7 @@ const InputText: React.FC<InputTextProps> = ({
   className,
   label,
   value = "",
+  inputMode,
   onChange,
   onChangeInput,
   ...props
@@ -18,9 +19,13 @@ const InputText: React.FC<InputTextProps> = ({
   const [inputValue, setInputValue] = useState(value);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget?.value);
+    let val = e.currentTarget.value;
+    if (inputMode === "numeric") {
+      val = val.replace(/\D/g, "");
+    }
+    setInputValue(val);
     onChange?.(e);
-    onChangeInput?.(e.currentTarget?.value);
+    onChangeInput?.(val);
   };
 
   useEffect(() => {
@@ -39,7 +44,6 @@ const InputText: React.FC<InputTextProps> = ({
         )}
 
         <input
-          type="text"
           value={inputValue}
           className={inputVariants({
             size,

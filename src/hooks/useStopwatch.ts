@@ -18,7 +18,7 @@ const formatSecondsToHMS = (seconds: number): string => {
   return `${hoursStr} : ${minutesStr} : ${secondsStr}`;
 };
 
-const useStopwatch = (dataTimer: Timer[], interval?: number) => {
+const useStopwatch = (dataTimer: Timer[], interval = 1000) => {
   const [timer, setTimer] = useState(0);
 
   // Calculate Timer
@@ -59,7 +59,7 @@ const useStopwatch = (dataTimer: Timer[], interval?: number) => {
 
       updateTimer();
 
-      const intervalId = setInterval(updateTimer, interval || 1000);
+      const intervalId = setInterval(updateTimer, interval);
       return () => clearInterval(intervalId);
     }
   }, [dataTimer]);

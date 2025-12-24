@@ -1,6 +1,6 @@
 import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
-import DatePicker from "@components/base/DatePicker";
+import DatePickerRange from "@components/base/DatePickerRange";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
 import { useSummaryActivity } from "@modules/activity/overview/useSummaryActivity";
@@ -30,7 +30,7 @@ export const ProgressActivty: React.FC = () => {
         <div className="font-medium text-xl">Overview Activity</div>
 
         <div className="relative flex justify-between gap-4">
-          <DatePicker
+          <DatePickerRange
             showShortcut
             numberOfMonths={numberOfMonths}
             mode="range"

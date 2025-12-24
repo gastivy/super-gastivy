@@ -11,10 +11,9 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
-import { ModalConfirm } from "../ModalConfirm";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
+// import { ModalConfirm } from "../ModalConfirm";
 import { cn } from "@libs/classnames";
+import ModalConfirm from "@components/base/ModalConfirm";
 
 interface TimerControllerProps {
   isStarted: boolean;
@@ -33,9 +32,9 @@ export const TimerController: React.FC<TimerControllerProps> = ({
   onChangeTimer,
   onFinishActivity,
 }) => {
-  const navigate = useNavigate();
   const { data, isLoading } = useGetListCategory();
   const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
+  const hasData = currentActivity?.data?.length > 0;
   const categoryOptions =
     useMemo(
       () =>
@@ -57,13 +56,13 @@ export const TimerController: React.FC<TimerControllerProps> = ({
   };
 
   const handleCancelActivity = async () => {
-    if (isStarted) return;
+    if (isStarted && !hasData) return;
     await DexieDB.activities.clear();
-    navigate({ to: routes.activity.overview.path });
+    onClose();
   };
 
   const handleFinishActivity = () => {
-    if (isStarted) return;
+    if (isStarted || !hasData) return;
     onFinishActivity();
   };
 
@@ -71,11 +70,12 @@ export const TimerController: React.FC<TimerControllerProps> = ({
     <>
       <ModalConfirm
         isOpen={isOpen}
+        description="Are you sure you want to cancel this activity?"
         onClose={onClose}
         onConfirm={handleCancelActivity}
       />
 
-      <div className="w-[60%] min-[720px]:bg-white max-[720px]:w-full py-8 rounded-xl flex flex-col items-center gap-12 ">
+      <div className="w-[60%] max-[720px]:h-[calc(100dvh-200px)] bg-white max-[720px]:w-full py-8 rounded-xl flex flex-col items-center gap-12 border border-shark-700/10">
         <div className="flex flex-col justify-center items-center gap-6">
           <Dropdown
             value={currentActivity?.id}
@@ -102,10 +102,10 @@ export const TimerController: React.FC<TimerControllerProps> = ({
           <div
             className={cn(
               "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
-              isStarted &&
+              (isStarted || !hasData) &&
                 "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
             )}
-            onClick={() => !isStarted && onOpen()}
+            onClick={() => !isStarted && hasData && onOpen()}
           >
             <Icon name="Close-solid" size={18} className="text-white" />
           </div>
@@ -120,7 +120,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
           <div
             className={cn(
               "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
-              isStarted &&
+              (isStarted || !hasData) &&
                 "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
             )}
             onClick={handleFinishActivity}
