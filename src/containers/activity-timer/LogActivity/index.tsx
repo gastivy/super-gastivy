@@ -14,7 +14,7 @@ interface LogActivityProps {
 export const LogActivity: React.FC<LogActivityProps> = ({ data }) => {
   const activityData = [...data].reverse();
   return (
-    <div className="w-[40%] max-[720px]:h-[calc(100dvh-200px)] max-[720px]:w-full bg-white rounded-xl flex flex-col gap-10 max-[720px]:gap-6 px-4 py-8 max-[720px]:py-4 border border-shark-700/10">
+    <div className="w-[40%] max-[720px]:h-[calc(100dvh-190px)]  max-[720px]:w-full bg-white rounded-xl flex flex-col gap-10 max-[720px]:gap-6 px-4 py-8 max-[720px]:py-4 border border-shark-700/10">
       <div className="text-center text-xl font-medium text-limed-spruce-700">
         Current Log Activity
       </div>

@@ -89,12 +89,12 @@ export const useTimerActivity = () => {
 
   const handleFinishActivity = () => {
     mutate({
-      activities: currentActivity?.data.map((act) => ({
+      activities: currentActivity?.data.map((act, index) => ({
         ...act,
         category_id: currentActivity.id,
         start_date: act.start_date || null,
         end_date: act.end_date || null,
-        is_done: act.is_done,
+        is_done: currentActivity.data.length - 1 === index,
         description: act.description,
       })),
     });

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { inputVariants } from "./InputText.variants";
 import type { InputTextProps } from "./InputText.types";
+import { cn } from "@libs/classnames";
 
 const InputText: React.FC<InputTextProps> = ({
   size,
@@ -12,6 +13,7 @@ const InputText: React.FC<InputTextProps> = ({
   label,
   value = "",
   inputMode,
+  wrapperClassName,
   onChange,
   onChangeInput,
   ...props
@@ -32,7 +34,7 @@ const InputText: React.FC<InputTextProps> = ({
     setInputValue(value);
   }, [value]);
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className={cn("flex flex-col gap-2 w-full", wrapperClassName)}>
       {label && (
         <span className="text-sm font-medium text-shark-700">{label}</span>
       )}

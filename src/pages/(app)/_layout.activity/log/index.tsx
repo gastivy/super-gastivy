@@ -1,9 +1,10 @@
+import ActivityLogContainer from "@containers/activity-log";
 import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/(app)/_layout/activity/log/")({
-  component: RouteComponent,
-});
+const ActivityLogPage = () => {
+  return <ActivityLogContainer />;
+};
 
-function RouteComponent() {
-  return <div>Hello "/activity/logs/"!</div>;
-}
+export const Route = createFileRoute("/(app)/_layout/activity/log/")({
+  component: ActivityLogPage,
+});

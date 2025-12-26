@@ -25,31 +25,32 @@ const ActivityCategoryList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8">
-      <div className="flex justify-between items-center bg-white p-5 rounded-lg border border-shark-700/10">
+    <div className="flex flex-col gap-4 max-[960px]:gap-8">
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
         <div className="text-lg text-limed-spruce-700 font-medium">
           Activity Category
         </div>
         <Button shape="semi-round" onClick={handleAddCategory}>
-          Tambah
+          Add
         </Button>
       </div>
 
       <div
         className={cn(
-          "h-[calc(100dvh-140px)] max-[960px]:h-[calc(100dvh-230px)] overflow-y-auto",
-          ((data?.data || []).length === 0 || isLoading) && "bg-white"
+          "max-h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] overflow-y-auto max-[960px]:mb-24",
+          ((data?.data || []).length === 0 || isLoading) &&
+            "bg-white rounded-lg"
         )}
       >
         <Conditional if={isLoading}>
           <SkeletonLoading />
         </Conditional>
         <Conditional if={!isLoading && (data?.data || []).length === 0}>
-          <div className="h-full flex flex-col justify-center items-center">
+          <div className="flex flex-col justify-center items-center">
             <EmptyState
               src={Assets.ActivityEmpty}
               title="Activity Category is empty"
-              className="max-w-90"
+              className="h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] max-w-90"
               description="You don't have any activity categories yet. Create one to start organizing your activities."
             />
           </div>

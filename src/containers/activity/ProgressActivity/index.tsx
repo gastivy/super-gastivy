@@ -39,14 +39,14 @@ export const ProgressActivty: React.FC = () => {
           />
         </div>
       </div>
-      <div className="max-h-[calc(100dvh-260px)] overflow-auto flex flex-col px-4 bg-white">
+      <div className="h-[calc(100dvh-250px)] max-[960px]:h-[calc(100dvh-330px)] overflow-auto flex flex-col px-4 bg-white rounded-lg">
         <Conditional if={isLoading}>
           <SkeletonLoading />
         </Conditional>
         <Conditional if={!isLoading && activities.length === 0}>
           <EmptyState
             src={Assets.ActivityEmpty}
-            className="h-[calc(100dvh-260px)] bg-white p-4 rounded-lg"
+            className="h-[calc(100dvh-250px)] bg-white p-4 rounded-lg"
             title="You haven't created an activity yet"
             description="Start create your activities now to achieve better productivity"
           />

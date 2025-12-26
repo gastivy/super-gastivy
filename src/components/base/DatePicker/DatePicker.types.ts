@@ -5,6 +5,7 @@ export type DatePickerRangeProps = PropsBase & {
   value: Date | undefined;
   mode?: "single";
   error?: string;
+  wrapperClassName?: string;
   onBlur?: () => void;
   onSelect?: (date: Date | undefined) => void;
 };

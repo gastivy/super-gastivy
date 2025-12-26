@@ -11,5 +11,6 @@ export interface InputTextProps extends Omit<
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   error?: string;
+  wrapperClassName?: string;
   onChangeInput?: (value: string) => void;
 }

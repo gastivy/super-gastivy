@@ -7,6 +7,16 @@
   font-family: "Poppins", sans-serif;
 }
 
+/* hide scrollbar but keep scroll */
+.scrollbar-hidden {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 @theme {
   --color-green-yellow-50: #f9ffe6;
   --color-green-yellow-100: #f0ffc8;

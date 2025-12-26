@@ -1,6 +1,6 @@
 import { useRouterState } from "@tanstack/react-router";
 import ActivityCategoryList from "./ActivityCategoryList";
-import { ActivityCategoryForm } from "./ActivityCategoryForm";
+import ActivityCategoryForm from "./ActivityCategoryForm";
 
 const ActivityCategoriesContainer = () => {
   const routerState = useRouterState();

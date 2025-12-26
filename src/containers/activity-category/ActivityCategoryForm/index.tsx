@@ -8,7 +8,7 @@ import { useActivityCategoryForm } from "@modules/activity/categories/hooks/useA
 import { Controller } from "react-hook-form";
 import { SkeletonLoading } from "./SkeletonLoading";
 
-export const ActivityCategoryForm = () => {
+const ActivityCategoryForm = () => {
   const {
     confirmDeleteModal,
     title,
@@ -34,8 +34,8 @@ export const ActivityCategoryForm = () => {
         onConfirm={handeDelete}
       />
 
-      <div className="flex flex-col gap-4">
-        <div className="w-full flex items-center gap-4 p-5 bg-white rounded-xl">
+      <div className="flex flex-col gap-4 max-[960px]:gap-8 max-[960px]:pb-24">
+        <div className="flex items-center gap-2 bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
           <Icon
             name="Arrow-Left-outline"
             size={28}
@@ -45,7 +45,7 @@ export const ActivityCategoryForm = () => {
           <div className="text-lg font-medium">{title}</div>
         </div>
 
-        <div className="h-[calc(100dvh-120px)] max-[960px]:h-[calc(100dvh-200px)] flex flex-col justify-between gap-5 bg-white p-6 max-[960px]:p-4 rounded-lg">
+        <div className="h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-190px)] overflow-y-auto max-[960px]:overflow-x-auto flex flex-col justify-between bg-white rounded-lg p-6 max-[960px]:p-4">
           <Conditional if={isLoading}>
             <SkeletonLoading />
           </Conditional>
@@ -121,3 +121,5 @@ export const ActivityCategoryForm = () => {
     </>
   );
 };
+
+export default ActivityCategoryForm;

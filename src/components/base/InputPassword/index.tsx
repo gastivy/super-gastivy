@@ -38,7 +38,7 @@ const InputPassword: React.FC<InputPasswordProps> = ({
   }, [value]);
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex flex-col gap-2 w-full">
       {label && (
         <span className="text-sm font-medium text-shark-700">{label}</span>
       )}

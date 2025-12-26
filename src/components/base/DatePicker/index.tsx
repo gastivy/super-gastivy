@@ -8,10 +8,12 @@ import useClickOutside from "@hooks/useClickOutside";
 import type { DatePickerRangeProps } from "./DatePicker.types";
 import "react-day-picker/dist/style.css";
 import "./DatePicker.scss";
+import { cn } from "@libs/classnames";
 
 const DatePicker: React.FC<DatePickerRangeProps> = ({
   label,
   error,
+  wrapperClassName,
   onBlur,
   onSelect,
   ...props
@@ -31,7 +33,10 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
   const dropdownRef = useClickOutside(handleBlur);
 
   return (
-    <div className="w-full flex flex-col gap-1" ref={dropdownRef}>
+    <div
+      className={cn("w-full flex flex-col gap-2", wrapperClassName)}
+      ref={dropdownRef}
+    >
       {label && (
         <span className="text-sm font-medium text-shark-700">{label}</span>
       )}

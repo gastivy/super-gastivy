@@ -14,7 +14,7 @@ export const LastActivity = () => {
   const { data, isLoading } = useGetActivity();
   const activities = data?.data || [];
   return (
-    <div className="w-full lg:max-w-[40%] flex flex-col gap-2 bg-white rounded-xl p-4 shadow-2xl shadow-shark-400/10">
+    <div className="w-full lg:max-w-[40%] max-h-[calc(100dvh-120px)] max-[960px]:h-[calc(100dvh-200px)] flex flex-col gap-2 bg-white rounded-xl p-4 shadow-2xl shadow-shark-400/10">
       <div className="flex justify-between items-center pt-3 pb-5 border-b border-gray-300">
         <div className="font-medium text-xl">Last Activities</div>
         {activities.length > 0 && (

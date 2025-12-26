@@ -12,7 +12,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
   return (
     <div
       className={cn(
-        "flex flex-col justify-center items-center gap-10",
+        "flex flex-col justify-center items-center gap-10 p-4",
         className
       )}
     >

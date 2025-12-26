@@ -1,3 +1,4 @@
+import Each from "@components/base/Each";
 import Icon from "@components/base/Icon";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { cn } from "@libs/classnames";
@@ -33,33 +34,36 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
           ${menu ? "translate-y-0" : "invisible translate-y-[120%]"}
         `}
       >
-        {submenu.map((item, index) => {
-          const isActive = router.location.pathname === item.path;
-          return (
-            <div
-              className={cn(
-                "flex flex-col items-center gap-2 p-2 rounded-lg",
-                isActive ? "bg-green-yellow-400" : "bg-transparent"
-              )}
-              key={index}
-              onClick={() => navigate({ to: item.path })}
-            >
-              <Icon
-                name={item.icon}
-                className={isActive ? "text-shark-950" : "text-white"}
-                size={18}
-              />
+        <Each
+          of={submenu}
+          render={(item, index) => {
+            const isActive = router.location.pathname === item.path;
+            return (
               <div
                 className={cn(
-                  "text-shark-950 text-xs font-medium",
-                  isActive ? "text-shark-950" : "text-white"
+                  "flex flex-col items-center gap-2 p-2 rounded-lg",
+                  isActive ? "bg-green-yellow-400" : "bg-transparent"
                 )}
+                key={index}
+                onClick={() => navigate({ to: item.path })}
               >
-                {item.name}
+                <Icon
+                  name={item.icon}
+                  className={isActive ? "text-shark-950" : "text-white"}
+                  size={18}
+                />
+                <div
+                  className={cn(
+                    "text-shark-950 text-xs font-medium",
+                    isActive ? "text-shark-950" : "text-white"
+                  )}
+                >
+                  {item.name}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          }}
+        />
       </div>
     </div>
   );

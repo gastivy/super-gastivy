@@ -18,13 +18,13 @@ export const useFilterActivity = () => {
       ...(idCategories.length > 0 && { category_id: idCategories }),
       start_date: currentRange?.start_date,
       end_date: currentRange?.end_date,
-    },
-    {
-      enabled:
-        Boolean(currentRange?.start_date && currentRange.end_date) ||
-        idCategories.length > 0,
-      queryKey: ["activities", currentRange],
     }
+    // {
+    //   enabled:
+    //     Boolean(currentRange?.start_date && currentRange.end_date) ||
+    //     idCategories.length > 0,
+    //   queryKey: ["activities", currentRange],
+    // }
   );
 
   const logActivity = (() => {

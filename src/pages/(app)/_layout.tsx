@@ -4,14 +4,14 @@ import BottomBar from "@components/section/BottomBar";
 import TimerPopover from "@components/section/TimerPopover";
 
 export const Route = createFileRoute("/(app)/_layout")({
-  component: NotesLayout,
+  component: Layout,
 });
 
-function NotesLayout() {
+function Layout() {
   return (
-    <div className="min-h-screen max-h-screen relative flex bg-white-shark">
+    <div className="h-screen max-h-dvh relative flex bg-white-shark">
       <Sidebar />
-      <main className="relative flex-1 px-5 py-4 max-[60rem]:pb-30">
+      <main className="h-screen relative flex-1 p-4 max-[960px]:py-0 overflow-y-auto">
         <TimerPopover />
         <Outlet />
       </main>
