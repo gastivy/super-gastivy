@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { dateTime, type RangeDate } from "@libs/dateTime";
 
-import type { LogActivity } from "../models";
-import { useGetActivity } from "./useActivity";
+import type { LogActivity, ParamsActivitesRequest } from "../models";
+import { useInifiteGetActivity } from "./useActivity";
 
 export const useFilterActivity = () => {
   const [idCategories, setIdCategories] = useState<string[]>([]);
@@ -12,25 +12,28 @@ export const useFilterActivity = () => {
     new Date().getFullYear()
   );
   const monthList = dateTime.generateMonths(currentYear);
+  const [params, setParams] = useState<ParamsActivitesRequest>({
+    category_id: undefined,
+    page: 1,
+    limit: 50,
+    start_date: undefined,
+    end_date: undefined,
+  });
 
-  const { data, isLoading, isRefetching, refetch } = useGetActivity(
-    {
-      ...(idCategories.length > 0 && { category_id: idCategories }),
-      start_date: currentRange?.start_date,
-      end_date: currentRange?.end_date,
-    }
-    // {
-    //   enabled:
-    //     Boolean(currentRange?.start_date && currentRange.end_date) ||
-    //     idCategories.length > 0,
-    //   queryKey: ["activities", currentRange],
-    // }
-  );
+  const {
+    data,
+    isLoading: isLoadingActivity,
+    isRefetching: isRefetchingActivity,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
+  } = useInifiteGetActivity(params);
 
-  const logActivity = (() => {
+  const logActivity = useMemo(() => {
+    const dataActivity = data?.pages?.flatMap((res) => res.data || []) || [];
     const grouped: { [key: string]: LogActivity[] } = {};
 
-    data?.data.forEach((activity: LogActivity) => {
+    dataActivity.forEach((activity: LogActivity) => {
       const date = dateTime
         .convertToLocalTime(String(activity.start_date))
         .split("T")[0];
@@ -45,25 +48,22 @@ export const useFilterActivity = () => {
       key: date,
       logActivity: grouped[date],
     }));
-  })();
+  }, [data]);
 
-  // useEffect(() => {
-  //   const thisMonth = monthList[new Date().getMonth()];
-  //   setCurrentRange(thisMonth.value);
-  // }, [currentYear]);
-
-  useEffect(() => {
-    if (currentRange) refetch();
-  }, [currentRange, idCategories]);
+  const isLoading = isLoadingActivity || isRefetchingActivity;
 
   return {
     logActivity,
     isLoading,
-    isRefetching,
     currentYear,
     currentRange,
     monthList,
     idCategories,
+    isFetchingNextPage,
+    hasNextPage,
+    params,
+    setParams,
+    fetchNextPage,
     setIdCategories,
     setCurrentYear,
     setCurrentRange,

@@ -5,21 +5,29 @@ import { dateTime } from "@libs/dateTime";
 import { useFilterActivity } from "@modules/activity/activity-log/hooks/useFilterActivity";
 import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
 import type React from "react";
-import { useMemo, useState } from "react";
-import type { DateRange } from "react-day-picker";
+import { useMemo } from "react";
 import { CardActivityLog } from "./CardActivityLog";
 import Button from "@components/base/Button";
 import { useNavigate } from "@tanstack/react-router";
 import { routes } from "@constants/routes";
+import Conditional from "@components/base/Conditional";
+import EmptyState from "@components/base/EmptyState";
+import { Assets } from "@assets/illustrations";
+import { SkeletonLoading } from "./SkeletonLoading";
+import InfiniteScroll from "@components/base/InfiniteScroll";
+import { useDisplayWidth } from "@hooks/useDisplayWidth";
 
 const ActivityLogs: React.FC = () => {
   const navigate = useNavigate();
-  const [range, setRange] = useState<DateRange | undefined>(undefined);
-  const [selected, setSelected] = useState<string[]>([]);
+  const { width } = useDisplayWidth();
   const {
     logActivity,
-    // isLoading,
-    // isRefetching,
+    isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    params,
+    setParams,
+    fetchNextPage,
     // currentYear,
     // currentRange,
     // monthList,
@@ -28,9 +36,6 @@ const ActivityLogs: React.FC = () => {
     // setCurrentYear,
     // setCurrentRange,
   } = useFilterActivity();
-  // const containerRef = useRef<HTMLDivElement>(null);
-  // const itemIds = logActivity.map((a) => `activity-${a.key}`);
-  // const stickyKey = useStickyVisible({ containerRef, itemIds });
 
   const { data } = useGetCategory({});
 
@@ -67,52 +72,90 @@ const ActivityLogs: React.FC = () => {
         </Button>
       </div>
 
-      <div className="max-h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] overflow-y-auto flex flex-col bg-white rounded-lg p-6 max-[960px]:p-4">
-        <div className="flex gap-5 pb-6 border-b border-gray-300">
+      <div className="max-h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] flex flex-col bg-white rounded-lg p-6 max-[960px]:p-4">
+        <div className="flex max-[520px]:flex-col gap-5 pb-6 border-b border-gray-300">
           <DatePickerRange
-            showShortcut
+            showShortcut={width > 520}
             numberOfMonths={numberOfMonths}
             mode="range"
-            selected={range}
-            onSelect={setRange}
+            selected={{
+              from: params.start_date ? new Date(params.start_date) : undefined,
+              to: params.end_date ? new Date(params.end_date) : undefined,
+            }}
+            onSelect={(date) => {
+              setParams((prev) => ({
+                ...prev,
+                start_date: date?.from
+                  ? dateTime.formatDate(date?.from)
+                  : undefined,
+                end_date: date?.to ? dateTime.formatDate(date?.to) : undefined,
+              }));
+            }}
           />
 
-          <div className="w-full max-w-75">
-            <MultiSelect
-              value={selected}
-              placeholder="Select Category"
-              size="regular"
-              options={categoryOptions}
-              onSelect={setSelected}
-            />
-          </div>
-        </div>
-
-        <div className="relative flex flex-1 overflow-y-auto flex-col gap-4 pt-6">
-          <Each
-            of={logActivity.slice(0, 10)}
-            render={(activity) => (
-              <div
-                className="flex flex-col gap-2"
-                key={activity.key}
-                id={`activity-${activity.key}`}
-              >
-                <div className="sticky -top-4 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-shark-900 text-sm font-medium bg-green-yellow-200 z-1">
-                  {dateTime.getDate(new Date(activity.key), "en-GB", {
-                    dateStyle: "long",
-                  })}
-                </div>
-
-                <div className="flex flex-col">
-                  <Each
-                    of={activity.logActivity}
-                    render={(log) => <CardActivityLog log={log} key={log.id} />}
-                  />
-                </div>
-              </div>
-            )}
+          <MultiSelect
+            value={params.category_id}
+            placeholder="Select Category"
+            size="regular"
+            wrapperClassName="max-w-75 max-[520px]:max-w-130"
+            options={categoryOptions}
+            onSelect={(val) =>
+              setParams((prev) => ({ ...prev, category_id: val }))
+            }
           />
         </div>
+
+        <InfiniteScroll
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+          onNextPage={fetchNextPage}
+          className="h-[calc(100dvh)] pt-6"
+        >
+          <Conditional if={isLoading}>
+            <SkeletonLoading />
+          </Conditional>
+
+          <Conditional if={!isLoading && logActivity.length === 0}>
+            <div className="h-full flex flex-col justify-center items-center">
+              <EmptyState
+                src={Assets.ActivityEmpty}
+                title="Activity Category is empty"
+                className="max-w-90"
+                description="You don't have any activity categories yet. Create one to start organizing your activities."
+              />
+            </div>
+          </Conditional>
+
+          <Conditional if={!isLoading && logActivity.length > 0}>
+            <div className="flex flex-col gap-4">
+              <Each
+                of={logActivity}
+                render={(activity) => (
+                  <div
+                    className="flex flex-col gap-2"
+                    key={activity.key}
+                    id={`activity-${activity.key}`}
+                  >
+                    <div className="sticky -top-4 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-shark-900 text-sm font-medium bg-green-yellow-200 z-1">
+                      {dateTime.getDate(new Date(activity.key), "en-GB", {
+                        dateStyle: "long",
+                      })}
+                    </div>
+
+                    <div className="flex flex-col">
+                      <Each
+                        of={activity.logActivity}
+                        render={(log) => (
+                          <CardActivityLog log={log} key={log.id} />
+                        )}
+                      />
+                    </div>
+                  </div>
+                )}
+              />
+            </div>
+          </Conditional>
+        </InfiniteScroll>
       </div>
     </div>
   );

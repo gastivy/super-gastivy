@@ -26,10 +26,10 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
   const { width } = useDisplayWidth();
   const queryClient = useQueryClient();
 
-  const { mutate } = useDeleteActivity({
+  const { mutate, isPending } = useDeleteActivity({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["activities"] });
-      onClose();
+      queryClient.invalidateQueries({ queryKey: ["infinity-activities"] });
+      confirmModalDelete.onClose();
     },
   });
 
@@ -58,7 +58,6 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
       key: "delete",
       onClick: () => {
         confirmModalDelete.onOpen();
-        // onConfirmDelete();
       },
     },
   ];
@@ -73,6 +72,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
       {/* Confirm Delete */}
       <ModalConfirmDelete
         isOpen={confirmModalDelete.isOpen}
+        isLoading={isPending}
         logActivity={log}
         onConfirm={handleDelete}
         onClose={confirmModalDelete.onClose}

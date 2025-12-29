@@ -20,5 +20,6 @@ export interface MultiSelectProps extends Omit<
   options: Option[];
   value?: string[];
   placeholder?: string;
+  wrapperClassName?: string;
   onSelect: (val: string[], option: Option) => void;
 }

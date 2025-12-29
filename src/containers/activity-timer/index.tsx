@@ -17,7 +17,7 @@ const TimerActivityContainer: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="max-[960px]:sticky z-10 top-4 left-77 max-[960px]:left-5 right-5 flex items-center gap-4 bg-white p-6 rounded-lg shadow-lg shadow-shark-700/10 max-[720px]:p-4">
+      <div className="max-[960px]:sticky z-10 top-4 left-77 max-[960px]:left-5 right-5 flex items-center gap-4 bg-white p-6 rounded-lg max-[960px]:shadow-lg shadow-shark-700/10 max-[720px]:p-4">
         <div className="text-shark-700 font-medium text-lg">Timer</div>
       </div>
 

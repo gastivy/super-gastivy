@@ -6,13 +6,14 @@ import useClickOutside from "@hooks/useClickOutside";
 
 const Modal = ({
   isOpen,
+  isLoading,
   children,
   closeOnOverlay = true,
   className,
   onClose,
 }: ModalProps) => {
   const handleClose = () => {
-    if (closeOnOverlay) return onClose();
+    if (closeOnOverlay && !isLoading) return onClose();
   };
 
   const dropdownRef = useClickOutside(handleClose);

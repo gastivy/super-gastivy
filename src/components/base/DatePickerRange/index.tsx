@@ -18,6 +18,7 @@ import "./DatePickerRange.scss";
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   mode = "range",
   showShortcut,
+  selected,
   onBlur,
   onSelect,
   ...props
@@ -25,13 +26,14 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   const [currentShortcut, setCurrentShortcut] = useState<
     ShortcutDate | undefined
   >(shortcutDate[0]);
+  const [value, setValue] = useState<DateRange | undefined>(selected);
   const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
 
   const displayValue = (() => {
-    if (props.selected?.from) {
-      return props.selected.to
-        ? `${format(props.selected.from, "dd-MMM-yyyy")} → ${format(props.selected.to, "dd-MMM-yyyy")}`
-        : format(props.selected.from, "dd-MMM-yyyy");
+    if (selected?.from) {
+      return selected.to
+        ? `${format(selected.from, "dd-MMM-yyyy")} → ${format(selected.to, "dd-MMM-yyyy")}`
+        : format(selected.from, "dd-MMM-yyyy");
     }
     return "";
   })();
@@ -39,11 +41,12 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   const handleBlur = () => {
     onBlur?.();
     onClose();
+    onSelect?.(value);
   };
 
   const handleSelect = (option: ShortcutDate) => {
     setCurrentShortcut(option);
-    onSelect?.({
+    setValue({
       from: option.range.start_date,
       to: option.range.end_date,
     });
@@ -51,7 +54,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
 
   const handleSelectDate = (date: DateRange | undefined) => {
     setCurrentShortcut(undefined);
-    onSelect?.(date);
+    setValue?.(date);
   };
 
   const dropdownRef = useClickOutside(handleBlur);
@@ -73,6 +76,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
         <div className="flex gap-4 absolute left-0 top-12 z-20 rounded-lg bg-white p-4 shadow-lg shadow-gray-400/50">
           <DayPicker
             mode={mode}
+            selected={value}
             numberOfMonths={2}
             showOutsideDays
             components={{

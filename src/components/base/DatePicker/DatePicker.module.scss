@@ -1,0 +1,92 @@
+.single-rdp {
+  :global {
+    .rdp-months {
+      flex-wrap: nowrap;
+      .rdp-nav {
+        height: 32px;
+
+        .rdp-button_previous {
+          padding: 0;
+        }
+      }
+
+      .rdp-month {
+        .rdp-month_caption {
+          height: 32px;
+          padding: 1px 12px;
+          max-width: max-content;
+          cursor: pointer;
+          border-radius: 4px;
+
+          &:hover {
+            background-color: #f7f6fa;
+          }
+
+          .rdp-caption_label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #384952;
+          }
+        }
+
+        .rdp-month_grid {
+          .rdp-weekdays {
+            color: #476773;
+            display: flex;
+            margin: 16px 0 12px;
+
+            border-top: 1px solid #9dbbc3;
+            border-bottom: 1px solid #9dbbc3;
+
+            .rdp-weekday {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 32px;
+              height: 32px;
+            }
+          }
+
+          .rdp-weeks {
+            display: grid;
+            grid-template-columns: repeat(7fr);
+            gap: 4px;
+
+            .rdp-day {
+              color: #384952;
+              font-size: 12px;
+              width: 32px;
+              height: 32px;
+              border-radius: 99px;
+
+              &:hover {
+                background-color: #f0ffc8;
+              }
+
+              .rdp-day_button {
+                width: 32px;
+                height: 32px;
+              }
+            }
+
+            .rdp-day.rdp-outside {
+              color: #527b88;
+            }
+
+            .rdp-day.rdp-selected {
+              font-weight: 600;
+              color: #323f47;
+
+              background-color: #bbf246;
+              border-radius: 99px;
+
+              .rdp-day_button {
+                border-color: #bbf246;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

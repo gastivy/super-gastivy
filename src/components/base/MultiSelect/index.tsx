@@ -1,4 +1,4 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { multiSelectVariants } from "./MultiSelect.variants";
 import type { MultiSelectProps, Option } from "./MultiSelect.types";
 import Each from "../Each";
@@ -18,12 +18,15 @@ export default function MultiSelect({
   shape = "semi-rounded",
   prefix,
   suffix,
+  wrapperClassName,
 }: MultiSelectProps) {
   const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
+  const handleClose = useCallback(onClose, []);
+  const wrapperRef = useClickOutside(handleClose);
+
   const multiSelectRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const tagRefs = useRef<(HTMLSpanElement | null)[]>([]);
-  const wrapperRef = useClickOutside(onClose);
   const [search, setSearch] = useState("");
   const [visibleCount, setVisibleCount] = useState(0);
 
@@ -78,7 +81,7 @@ export default function MultiSelect({
   }, [selectedOptions]);
 
   return (
-    <div ref={wrapperRef} className="relative w-full">
+    <div ref={wrapperRef} className={cn("relative w-full", wrapperClassName)}>
       <div
         ref={multiSelectRef}
         className={multiSelectVariants({
@@ -156,7 +159,7 @@ export default function MultiSelect({
         </Conditional>
       </div>
 
-      {/* dropdown */}
+      {/* Dropdown */}
       {isOpen && (
         <div className="absolute mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
           {filtered.length === 0 && (

@@ -6,9 +6,9 @@ import InputText from "@components/base/InputText";
 import Icon from "@components/base/Icon";
 import useClickOutside from "@hooks/useClickOutside";
 import type { DatePickerRangeProps } from "./DatePicker.types";
-import "react-day-picker/dist/style.css";
-import "./DatePicker.scss";
 import { cn } from "@libs/classnames";
+import "react-day-picker/dist/style.css";
+import styles from "./DatePicker.module.scss";
 
 const DatePicker: React.FC<DatePickerRangeProps> = ({
   label,
@@ -57,6 +57,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
         {isOpen && (
           <div className="flex gap-4 absolute left-0 top-12 z-20 rounded-lg bg-white p-4 shadow-lg shadow-gray-400/50">
             <DayPicker
+              className={styles["single-rdp"]}
               mode="single"
               selected={props.value}
               numberOfMonths={1}

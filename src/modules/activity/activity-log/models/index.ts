@@ -1,4 +1,7 @@
-import type { HttpResponse } from "@custom-types/HttpResponse";
+import type {
+  HttpInfiniteResponse,
+  HttpResponse,
+} from "@custom-types/HttpResponse";
 
 export interface Activity {
   category_id: string;
@@ -24,6 +27,8 @@ export interface ParamsActivitesRequest {
   category_id?: string[];
   start_date?: string;
   end_date?: string;
+  page?: number;
+  limit?: number;
 }
 
 export interface CreateActivityRequest {
@@ -40,3 +45,5 @@ export interface UpdateActivityRequest {
 }
 
 export type LogActivityResponse = HttpResponse<LogActivity[]>;
+export type LogActivityInfinityResponse =
+  HttpInfiniteResponse<LogActivityResponse>;
