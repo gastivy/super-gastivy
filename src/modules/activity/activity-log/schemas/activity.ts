@@ -27,3 +27,7 @@ export const schemaActivity = Yup.object()
       return true;
     }
   );
+
+export const schemaActivities = Yup.object().shape({
+  activities: Yup.array().of(schemaActivity),
+});
