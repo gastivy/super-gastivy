@@ -11,6 +11,7 @@ export const buttonVariants = cva(
           "border border-white bg-white shadow-sm hover:bg-gray-50 disabled:bg-gray-200 disabled:border-gray-200",
         outline:
           "border border-shark-700 shadow-xs hover:bg-shark-200 disabled:bg-gray-200 disabled:border-gray-200",
+        text: "text-red-400 bg-red-50 hover:bg-red-100 disabled:bg-gray-200 disabled:border-gray-200",
       },
       size: {
         small: "text-xs px-2.5 py-1",

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { inputVariants } from "./InputText.variants";
 import type { InputTextProps } from "./InputText.types";
 import { cn } from "@libs/classnames";
+import { clamp } from "@libs/common";
 
 const InputText: React.FC<InputTextProps> = ({
   size,
@@ -12,6 +13,7 @@ const InputText: React.FC<InputTextProps> = ({
   className,
   label,
   value = "",
+  type,
   inputMode,
   wrapperClassName,
   onChange,
@@ -22,9 +24,14 @@ const InputText: React.FC<InputTextProps> = ({
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.currentTarget.value;
-    if (inputMode === "numeric") {
+    if (inputMode === "numeric" || type === "number") {
       val = val.replace(/\D/g, "");
+
+      if (props.max || props.min) {
+        val = String(clamp(Number(val), Number(props.min), Number(props.max)));
+      }
     }
+
     setInputValue(val);
     onChange?.(e);
     onChangeInput?.(val);
@@ -53,7 +60,6 @@ const InputText: React.FC<InputTextProps> = ({
             hasPrefix: Boolean(prefix),
             hasSuffix: Boolean(suffix),
             error: Boolean(error),
-            hasValue: !error && Boolean(inputValue),
             className,
           })}
           onChange={handleOnChange}
@@ -67,7 +73,9 @@ const InputText: React.FC<InputTextProps> = ({
         )}
       </div>
 
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && typeof error === "string" && (
+        <p className="text-red-500 text-xs">{error}</p>
+      )}
     </div>
   );
 };

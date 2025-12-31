@@ -1,22 +1,10 @@
+import { dateTime } from "@libs/dateTime";
 import { useEffect, useState } from "react";
 
 export interface Timer {
   start_date: string | Date;
   end_date: string | Date;
 }
-
-const formatSecondsToHMS = (seconds: number): string => {
-  const hours = Math.floor(seconds / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const secs = seconds % 60;
-
-  const hoursStr = hours.toString().padStart(2, "0");
-  const minutesStr = minutes.toString().padStart(2, "0");
-  const secondsStr = secs.toString().padStart(2, "0");
-
-  if (hoursStr === "00") return `${minutesStr} : ${secondsStr}`;
-  return `${hoursStr} : ${minutesStr} : ${secondsStr}`;
-};
 
 const useStopwatch = (dataTimer: Timer[], interval = 1000) => {
   const [timer, setTimer] = useState(0);
@@ -65,7 +53,7 @@ const useStopwatch = (dataTimer: Timer[], interval = 1000) => {
   }, [dataTimer]);
 
   return {
-    formatted: formatSecondsToHMS(timer),
+    formatted: dateTime.formatSecondsToHMS(timer),
     seconds: timer,
   };
 };

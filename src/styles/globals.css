@@ -17,6 +17,16 @@
   display: none; /* Chrome, Safari */
 }
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
 @theme {
   --color-green-yellow-50: #f9ffe6;
   --color-green-yellow-100: #f0ffc8;

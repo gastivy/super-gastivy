@@ -10,7 +10,7 @@ export interface InputTextProps extends Omit<
   shape?: VariantProps<typeof inputVariants>["shape"];
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
-  error?: string;
+  error?: string | boolean;
   wrapperClassName?: string;
   onChangeInput?: (value: string) => void;
 }

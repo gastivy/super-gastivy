@@ -95,6 +95,8 @@ const Select = ({
         />
       </div>
 
+      {error && <p className="text-red-500 text-xs">{error}</p>}
+
       {/* dropdown */}
       {isOpen && (
         <div className="absolute mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">

@@ -8,13 +8,11 @@ const Switch: React.FC<SwitchProps> = ({
   label,
   onChange,
 }) => {
-  const [isEnabled, setIsEnabled] = useState(enabled);
   const [knobTranslate, setKnobTranslate] = useState(0);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const toggleSwitch = () => {
-    const newState = !isEnabled;
-    setIsEnabled(newState);
+    const newState = !enabled;
     if (onChange) onChange(newState);
   };
 
@@ -23,9 +21,9 @@ const Switch: React.FC<SwitchProps> = ({
       const trackWidth = trackRef.current.offsetWidth;
       const knobWidth = 24;
       const maxTranslate = trackWidth - knobWidth - 2 * 1;
-      setKnobTranslate(isEnabled ? maxTranslate : 2);
+      setKnobTranslate(enabled ? maxTranslate : 2);
     }
-  }, [isEnabled]);
+  }, [enabled]);
 
   return (
     <div className="flex flex-col gap-2">
@@ -37,7 +35,7 @@ const Switch: React.FC<SwitchProps> = ({
         onClick={toggleSwitch}
         className={cn(
           "w-full h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300",
-          isEnabled ? "bg-green-yellow-400" : "bg-gray-300",
+          enabled ? "bg-green-yellow-400" : "bg-gray-300",
           className
         )}
       >

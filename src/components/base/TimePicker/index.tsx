@@ -27,16 +27,16 @@ const TimerPicker: React.FC<TimerPickerProps> = ({
   const timePickerRef = useClickOutside(onClose);
 
   const [hour, minute] = useMemo(() => {
-    if (!value) return ["00", "00"];
+    if (!value) return ["", ""];
     return value.split(":");
   }, [value]);
 
   const setHour = (h: string) => {
-    onChange?.(`${h}:${minute}`);
+    onChange?.(`${h}:${minute || "00"}`);
   };
 
   const setMinute = (m: string) => {
-    onChange?.(`${hour}:${m}`);
+    onChange?.(`${hour || "00"}:${m}`);
   };
 
   return (
@@ -66,6 +66,8 @@ const TimerPicker: React.FC<TimerPickerProps> = ({
         <div>:</div>
         <div className="w-1/2 text-center">{minute}</div>
       </div>
+
+      {error && <p className="text-red-500 text-xs">{error}</p>}
 
       {/* DROPDOWN */}
       <Conditional if={isOpen}>

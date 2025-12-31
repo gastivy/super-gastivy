@@ -48,7 +48,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
       onClick: () => {
         navigate({
           to: routes.activity.activityLog.path,
-          state: (prev) => ({ ...prev, activityLogId: log.id }),
+          state: (prev) => ({ ...prev, form: { ...log } }),
         });
         // onUpdateActivity();
       },

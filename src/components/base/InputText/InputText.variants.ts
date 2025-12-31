@@ -22,10 +22,6 @@ export const inputVariants = cva(
         true: "pr-9",
         false: "",
       },
-      hasValue: {
-        true: "border-shark-500",
-        false: "",
-      },
       error: {
         true: "border-red-500 focus:border-red-500",
         false: "border-gray-300 focus:border-green-yellow-500",
@@ -36,7 +32,6 @@ export const inputVariants = cva(
       shape: "square",
       hasPrefix: false,
       hasSuffix: false,
-      hasValue: false,
       error: false,
     },
   }

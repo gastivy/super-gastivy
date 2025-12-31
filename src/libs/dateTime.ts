@@ -223,4 +223,29 @@ export const dateTime = {
       };
     });
   },
+
+  formatSecondsToHMS(seconds: number, showZero?: boolean): string {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    const hoursStr = hours.toString().padStart(2, "0");
+    const minutesStr = minutes.toString().padStart(2, "0");
+    const secondsStr = secs.toString().padStart(2, "0");
+
+    if (hoursStr === "00" && !showZero) return `${minutesStr} : ${secondsStr}`;
+    return `${hoursStr} : ${minutesStr} : ${secondsStr}`;
+  },
+
+  secondsToHMS(totalSeconds: number) {
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    return { hours, minutes, seconds };
+  },
+
+  HMSToSeconds(h: number, m: number, s: number) {
+    return h * 3600 + m * 60 + s;
+  },
 };
