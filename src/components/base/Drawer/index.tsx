@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@libs/classnames";
 import type { DrawerProps } from "./Drawer.types";
@@ -10,7 +10,8 @@ const Drawer: React.FC<DrawerProps> = ({
   isFullHeight = false,
   onClose,
 }) => {
-  const drawerRef = useClickOutside(onClose);
+  const handleClose = useCallback(() => onClose(), []);
+  const drawerRef = useClickOutside(handleClose);
 
   useEffect(() => {
     if (isOpen) {

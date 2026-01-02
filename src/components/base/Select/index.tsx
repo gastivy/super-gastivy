@@ -55,86 +55,88 @@ const Select = ({
   return (
     <div
       ref={wrapperRef}
-      className={cn("relative w-full flex flex-col gap-2", wrapperClassName)}
+      className={cn("w-full flex flex-col gap-2", wrapperClassName)}
     >
       {label && (
         <span className="text-sm font-medium text-shark-700">{label}</span>
       )}
 
-      <div
-        className={selectVariants({
-          size,
-          shape,
-          error: Boolean(error),
-          hasPrefix: Boolean(prefix),
-          hasSuffix: Boolean(suffix),
-          className,
-        })}
-        onClick={() => {
-          onOpen();
-          inputRef.current?.focus();
-        }}
-      >
-        {/* value / input */}
-        <input
-          ref={inputRef}
-          className="w-full outline-none bg-transparent text-sm cursor-pointer"
-          value={isOpen ? search : selectedOption?.label || ""}
-          placeholder={placeholder}
-          readOnly={!isOpen}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className="relative">
+        <div
+          className={selectVariants({
+            size,
+            shape,
+            error: Boolean(error),
+            hasPrefix: Boolean(prefix),
+            hasSuffix: Boolean(suffix),
+            className,
+          })}
+          onClick={() => {
+            onOpen();
+            inputRef.current?.focus();
+          }}
+        >
+          {/* value / input */}
+          <input
+            ref={inputRef}
+            className="w-full outline-none bg-transparent text-sm cursor-pointer"
+            value={isOpen ? search : selectedOption?.label || ""}
+            placeholder={placeholder}
+            readOnly={!isOpen}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
-        <Icon
-          name="Down-outline"
-          size={sizeIcon}
-          className={cn(
-            "transition-transform text-limed-spruce-300",
-            isOpen && "rotate-180"
-          )}
-        />
+          <Icon
+            name="Down-outline"
+            size={sizeIcon}
+            className={cn(
+              "transition-transform text-limed-spruce-300",
+              isOpen && "rotate-180"
+            )}
+          />
+        </div>
+
+        {/* dropdown */}
+        {isOpen && (
+          <div className="absolute top-8 mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
+            {filtered.length === 0 && (
+              <div className="px-3 py-2 text-sm text-gray-400">
+                Tidak ada hasil
+              </div>
+            )}
+
+            <Each
+              of={filtered}
+              render={(opt) => {
+                const selected = opt.value === value;
+                return (
+                  <div
+                    key={opt.value}
+                    onClick={() => handleSelect(opt)}
+                    className={cn(
+                      "flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-green-yellow-100",
+                      selected && "font-medium"
+                    )}
+                  >
+                    <span className="text-sm text-limed-spruce-900">
+                      {opt.label}
+                    </span>
+                    {selected && (
+                      <Icon
+                        name="Check-solid"
+                        size={16}
+                        className="text-green-yellow-500"
+                      />
+                    )}
+                  </div>
+                );
+              }}
+            />
+          </div>
+        )}
       </div>
 
       {error && <p className="text-red-500 text-xs">{error}</p>}
-
-      {/* dropdown */}
-      {isOpen && (
-        <div className="absolute mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
-          {filtered.length === 0 && (
-            <div className="px-3 py-2 text-sm text-gray-400">
-              Tidak ada hasil
-            </div>
-          )}
-
-          <Each
-            of={filtered}
-            render={(opt) => {
-              const selected = opt.value === value;
-              return (
-                <div
-                  key={opt.value}
-                  onClick={() => handleSelect(opt)}
-                  className={cn(
-                    "flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-green-yellow-100",
-                    selected && "font-medium"
-                  )}
-                >
-                  <span className="text-sm text-limed-spruce-900">
-                    {opt.label}
-                  </span>
-                  {selected && (
-                    <Icon
-                      name="Check-solid"
-                      size={16}
-                      className="text-green-yellow-500"
-                    />
-                  )}
-                </div>
-              );
-            }}
-          />
-        </div>
-      )}
     </div>
   );
 };

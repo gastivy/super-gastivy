@@ -27,7 +27,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import TimeHours from "@components/base/TimeHours";
 import type { LogActivity } from "@modules/activity/activity-log/models";
 import { dateTime } from "@libs/dateTime";
-import useDisclosure, { type useDisclosureProps } from "@hooks/useDisclosure";
+import { type useDisclosureProps } from "@hooks/useDisclosure";
 import Disclosure from "@components/base/Disclosure";
 
 interface FormActivity {
@@ -126,27 +126,25 @@ const ActivityLogForm = () => {
       };
     });
 
-    console.log("ACT: ", activities);
-
     // For Update Activity
-    // if (form?.id) {
-    //   updateActivity({
-    //     id: form?.id,
-    //     ...(!!activities[0].category_id && {
-    //       category_id: activities[0].category_id,
-    //     }),
-    //     is_done: activities[0].is_done,
-    //     start_date: activities[0].start_date,
-    //     end_date: activities[0].end_date,
-    //     seconds: activities[0].seconds,
-    //   });
-    //   return;
-    // }
+    if (form?.id) {
+      updateActivity({
+        id: form?.id,
+        ...(!!activities[0].category_id && {
+          category_id: activities[0].category_id,
+        }),
+        is_done: activities[0].is_done,
+        start_date: activities[0].start_date,
+        end_date: activities[0].end_date,
+        seconds: activities[0].seconds,
+      });
+      return;
+    }
 
-    // // For Create Activity
-    // createActivity({
-    //   activities: activities,
-    // });
+    // For Create Activity
+    createActivity({
+      activities: activities,
+    });
   };
 
   useEffect(() => {
@@ -238,7 +236,7 @@ const ActivityLogForm = () => {
                         </div>
                       </div>
 
-                      {isOpen && (
+                      {(isOpen || width > 960) && (
                         <div className="w-full flex max-[960px]:flex-col gap-6">
                           <Controller
                             name={`activities.${index}.categoryActivity`}
