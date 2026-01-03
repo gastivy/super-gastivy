@@ -1,4 +1,7 @@
-import { HttpInfiniteResponse, HttpResponse } from "@/types/HttpResponse";
+import type {
+  HttpInfiniteResponse,
+  HttpResponse,
+} from "@custom-types/HttpResponse";
 
 export type TransactionsResponse = HttpResponse<Transactions[]>;
 export type TransactionInfinteResponse =

@@ -1,6 +1,6 @@
-import { useQuery, UseQueryOptions } from "@tanstack/react-query";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 
-import {
+import type {
   SummaryCategoryTransactionResponse,
   SummaryCategoryTransactionRsequest,
 } from "../models";

@@ -1,14 +1,14 @@
 import {
   useInfiniteQuery,
-  UseInfiniteQueryOptions,
   useMutation,
-  UseMutationOptions,
   useQuery,
-  UseQueryOptions,
+  type UseInfiniteQueryOptions,
+  type UseMutationOptions,
+  type UseQueryOptions,
 } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import {
+import type {
   CreateTransactionRequest,
   DetailTransactionsResponse,
   GetTransactionRequest,

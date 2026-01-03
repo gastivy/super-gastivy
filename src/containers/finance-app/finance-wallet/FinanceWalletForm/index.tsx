@@ -11,10 +11,7 @@ import {
   useGetDetailWallet,
   useUpdateWallet,
 } from "@modules/finance/wallet/hooks/useWallet";
-import type {
-  CreateWalletRequest,
-  UpdateWalletRequest,
-} from "@modules/finance/wallet/models";
+import type { CreateWalletRequest } from "@modules/finance/wallet/models";
 import { schemaWallet } from "@modules/finance/wallet/schema";
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
@@ -50,7 +47,7 @@ const FinanceWalletForm = () => {
     queryKey: ["wallet-detail", walletId],
   });
 
-  const { mutate: createWallet, isPending: isPendingCreate } = useCreateWallet({
+  const { mutate: createWallet } = useCreateWallet({
     onSuccess: () => {
       reset();
       navigate({ to: routes.finance.wallet.path });
@@ -58,7 +55,7 @@ const FinanceWalletForm = () => {
     },
   });
 
-  const { mutate: updateWallet, isPending: isPendingUpdate } = useUpdateWallet({
+  const { mutate: updateWallet } = useUpdateWallet({
     onSuccess: () => {
       reset();
       navigate({ to: routes.finance.wallet.path });

@@ -1,6 +1,5 @@
-import { httpService } from "@/utils/httpService";
-
-import {
+import { httpService } from "@libs/httpService";
+import type {
   SummaryCategoryTransactionResponse,
   SummaryCategoryTransactionRsequest,
 } from "../models";

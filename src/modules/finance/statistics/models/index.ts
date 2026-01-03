@@ -1,4 +1,4 @@
-import { HttpResponse } from "@/types/HttpResponse";
+import type { HttpResponse } from "@custom-types/HttpResponse";
 
 export type SummaryCategoryTransactionResponse = HttpResponse<
   SummaryCategoryTransaction[]

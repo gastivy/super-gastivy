@@ -1,11 +1,10 @@
 import { useQueryClient } from "@tanstack/react-query";
-import { useDisclosure } from "astarva-ui";
 import { useEffect, useState } from "react";
 
-import { dateTime, RangeDate } from "@/utils/dateTime";
-import { lodash } from "@/utils/lodash";
-
 import { useInfiniteTransactions } from "./useTransaction";
+import useDisclosure from "@hooks/useDisclosure";
+import { dateTime, type RangeDate } from "@libs/dateTime";
+import { isObjectEmpty } from "@libs/common";
 
 export const useFilterTransactions = () => {
   const queryClient = useQueryClient();
@@ -38,7 +37,7 @@ export const useFilterTransactions = () => {
     refetch,
   } = useInfiniteTransactions(
     {
-      ...(!lodash.isObjectEmpty(currentRange) && { ...currentRange }),
+      ...(!isObjectEmpty(currentRange) && { ...currentRange }),
       ...(idCategories.length > 0 && { category_ids: idCategories }),
       ...(idsWallet.length > 0 && { wallet_ids: idsWallet }),
     },
@@ -59,7 +58,7 @@ export const useFilterTransactions = () => {
   );
 
   useEffect(() => {
-    if (!lodash.isObjectEmpty(currentRange)) {
+    if (!isObjectEmpty(currentRange)) {
       queryClient.invalidateQueries({ queryKey: ["transactions"] });
     }
   }, [currentRange, idCategories, idsWallet]);
