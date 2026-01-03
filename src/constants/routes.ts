@@ -42,9 +42,9 @@ export const routes = {
       name: "Wallet",
       path: "/finance/wallet",
     },
-    category: {
-      name: "Category",
-      path: "/finance/category",
+    categories: {
+      name: "Categories Transaction",
+      path: "/finance/categories",
     },
     statistic: {
       name: "Statistic",

@@ -1,4 +1,4 @@
-import TimerActivityContainer from "@containers/activity-app/activity-timer";
+import TimerActivityContainer from "@containers/activity-app/timer";
 import { createFileRoute } from "@tanstack/react-router";
 
 const TimerActivityPage = () => {

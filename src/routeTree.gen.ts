@@ -19,7 +19,7 @@ import { Route as appLayoutActivityIndexRouteImport } from './pages/(app)/_layou
 import { Route as appLayoutFinanceWalletIndexRouteImport } from './pages/(app)/_layout.finance/wallet/index'
 import { Route as appLayoutFinanceTransactionsIndexRouteImport } from './pages/(app)/_layout.finance/transactions/index'
 import { Route as appLayoutFinanceStatisticIndexRouteImport } from './pages/(app)/_layout.finance/statistic/index'
-import { Route as appLayoutFinanceCategoryIndexRouteImport } from './pages/(app)/_layout.finance/category/index'
+import { Route as appLayoutFinanceCategoriesIndexRouteImport } from './pages/(app)/_layout.finance/categories/index'
 import { Route as appLayoutActivityTimerIndexRouteImport } from './pages/(app)/_layout.activity/timer/index'
 import { Route as appLayoutActivityLogIndexRouteImport } from './pages/(app)/_layout.activity/log/index'
 import { Route as appLayoutActivityCategoriesIndexRouteImport } from './pages/(app)/_layout.activity/categories/index'
@@ -76,10 +76,10 @@ const appLayoutFinanceStatisticIndexRoute =
     path: '/finance/statistic/',
     getParentRoute: () => appLayoutRoute,
   } as any)
-const appLayoutFinanceCategoryIndexRoute =
-  appLayoutFinanceCategoryIndexRouteImport.update({
-    id: '/finance/category/',
-    path: '/finance/category/',
+const appLayoutFinanceCategoriesIndexRoute =
+  appLayoutFinanceCategoriesIndexRouteImport.update({
+    id: '/finance/categories/',
+    path: '/finance/categories/',
     getParentRoute: () => appLayoutRoute,
   } as any)
 const appLayoutActivityTimerIndexRoute =
@@ -111,7 +111,7 @@ export interface FileRoutesByFullPath {
   '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
   '/activity/log': typeof appLayoutActivityLogIndexRoute
   '/activity/timer': typeof appLayoutActivityTimerIndexRoute
-  '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
+  '/finance/categories': typeof appLayoutFinanceCategoriesIndexRoute
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
@@ -126,7 +126,7 @@ export interface FileRoutesByTo {
   '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
   '/activity/log': typeof appLayoutActivityLogIndexRoute
   '/activity/timer': typeof appLayoutActivityTimerIndexRoute
-  '/finance/category': typeof appLayoutFinanceCategoryIndexRoute
+  '/finance/categories': typeof appLayoutFinanceCategoriesIndexRoute
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
@@ -143,7 +143,7 @@ export interface FileRoutesById {
   '/(app)/_layout/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
   '/(app)/_layout/activity/log/': typeof appLayoutActivityLogIndexRoute
   '/(app)/_layout/activity/timer/': typeof appLayoutActivityTimerIndexRoute
-  '/(app)/_layout/finance/category/': typeof appLayoutFinanceCategoryIndexRoute
+  '/(app)/_layout/finance/categories/': typeof appLayoutFinanceCategoriesIndexRoute
   '/(app)/_layout/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
   '/(app)/_layout/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
   '/(app)/_layout/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
@@ -160,7 +160,7 @@ export interface FileRouteTypes {
     | '/activity/categories'
     | '/activity/log'
     | '/activity/timer'
-    | '/finance/category'
+    | '/finance/categories'
     | '/finance/statistic'
     | '/finance/transactions'
     | '/finance/wallet'
@@ -175,7 +175,7 @@ export interface FileRouteTypes {
     | '/activity/categories'
     | '/activity/log'
     | '/activity/timer'
-    | '/finance/category'
+    | '/finance/categories'
     | '/finance/statistic'
     | '/finance/transactions'
     | '/finance/wallet'
@@ -191,7 +191,7 @@ export interface FileRouteTypes {
     | '/(app)/_layout/activity/categories/'
     | '/(app)/_layout/activity/log/'
     | '/(app)/_layout/activity/timer/'
-    | '/(app)/_layout/finance/category/'
+    | '/(app)/_layout/finance/categories/'
     | '/(app)/_layout/finance/statistic/'
     | '/(app)/_layout/finance/transactions/'
     | '/(app)/_layout/finance/wallet/'
@@ -276,11 +276,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutFinanceStatisticIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
-    '/(app)/_layout/finance/category/': {
-      id: '/(app)/_layout/finance/category/'
-      path: '/finance/category'
-      fullPath: '/finance/category'
-      preLoaderRoute: typeof appLayoutFinanceCategoryIndexRouteImport
+    '/(app)/_layout/finance/categories/': {
+      id: '/(app)/_layout/finance/categories/'
+      path: '/finance/categories'
+      fullPath: '/finance/categories'
+      preLoaderRoute: typeof appLayoutFinanceCategoriesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/activity/timer/': {
@@ -314,7 +314,7 @@ interface appLayoutRouteChildren {
   appLayoutActivityCategoriesIndexRoute: typeof appLayoutActivityCategoriesIndexRoute
   appLayoutActivityLogIndexRoute: typeof appLayoutActivityLogIndexRoute
   appLayoutActivityTimerIndexRoute: typeof appLayoutActivityTimerIndexRoute
-  appLayoutFinanceCategoryIndexRoute: typeof appLayoutFinanceCategoryIndexRoute
+  appLayoutFinanceCategoriesIndexRoute: typeof appLayoutFinanceCategoriesIndexRoute
   appLayoutFinanceStatisticIndexRoute: typeof appLayoutFinanceStatisticIndexRoute
   appLayoutFinanceTransactionsIndexRoute: typeof appLayoutFinanceTransactionsIndexRoute
   appLayoutFinanceWalletIndexRoute: typeof appLayoutFinanceWalletIndexRoute
@@ -327,7 +327,7 @@ const appLayoutRouteChildren: appLayoutRouteChildren = {
   appLayoutActivityCategoriesIndexRoute: appLayoutActivityCategoriesIndexRoute,
   appLayoutActivityLogIndexRoute: appLayoutActivityLogIndexRoute,
   appLayoutActivityTimerIndexRoute: appLayoutActivityTimerIndexRoute,
-  appLayoutFinanceCategoryIndexRoute: appLayoutFinanceCategoryIndexRoute,
+  appLayoutFinanceCategoriesIndexRoute: appLayoutFinanceCategoriesIndexRoute,
   appLayoutFinanceStatisticIndexRoute: appLayoutFinanceStatisticIndexRoute,
   appLayoutFinanceTransactionsIndexRoute:
     appLayoutFinanceTransactionsIndexRoute,

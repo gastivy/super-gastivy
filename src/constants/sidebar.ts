@@ -70,8 +70,8 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
         icon: "Document-solid",
       },
       {
-        name: "Category",
-        path: routes.finance.category.path,
+        name: "Categories",
+        path: routes.finance.categories.path,
         icon: "Grid-solid",
       },
     ],
