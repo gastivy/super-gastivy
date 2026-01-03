@@ -3,7 +3,7 @@ import type { selectVariants } from "./Select.variants";
 
 export type Option = {
   label: string;
-  value: string;
+  value: string | number;
   [key: string]: unknown;
 };
 
@@ -12,7 +12,7 @@ export interface SelectProps extends Omit<
   "size" | "prefix" | "suffix" | "onSelect"
 > {
   label?: string;
-  value?: string;
+  value?: string | number;
   size?: VariantProps<typeof selectVariants>["size"];
   shape?: VariantProps<typeof selectVariants>["shape"];
   prefix?: React.ReactNode;
@@ -21,5 +21,5 @@ export interface SelectProps extends Omit<
   options: Option[];
   placeholder?: string;
   wrapperClassName?: string;
-  onSelect: (val: string, option: Option) => void;
+  onSelect: (val: string | number, option: Option) => void;
 }

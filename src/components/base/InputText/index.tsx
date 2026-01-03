@@ -22,14 +22,38 @@ const InputText: React.FC<InputTextProps> = ({
 }) => {
   const [inputValue, setInputValue] = useState(value);
 
+  const formatNumber = (value: string, locale = "id") => {
+    if (!value) return "";
+    const parsed = Number(value);
+    if (isNaN(parsed)) return "";
+    return new Intl.NumberFormat(locale).format(parsed);
+  };
+
+  const unformatNumber = (value: string) => {
+    return value.replace(/[^\d]/g, "");
+  };
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.currentTarget.value;
+
     if (inputMode === "numeric" || type === "number") {
+      const rawNumber = unformatNumber(val);
       val = val.replace(/\D/g, "");
 
       if (props.max || props.min) {
-        val = String(clamp(Number(val), Number(props.min), Number(props.max)));
+        val = String(
+          clamp(Number(rawNumber), Number(props.min), Number(props.max))
+        );
+        setInputValue(formatNumber(val));
+        return;
       }
+
+      onChange?.(e);
+      onChangeInput?.(val);
+
+      // tampilkan versi locale
+      setInputValue(formatNumber(rawNumber));
+      return;
     }
 
     setInputValue(val);
@@ -38,8 +62,12 @@ const InputText: React.FC<InputTextProps> = ({
   };
 
   useEffect(() => {
-    setInputValue(value);
-  }, [value]);
+    if (type === "number") {
+      setInputValue(formatNumber(String(value)));
+    } else {
+      setInputValue(value);
+    }
+  }, [value, type]);
   return (
     <div className={cn("flex flex-col gap-2 w-full", wrapperClassName)}>
       {label && (

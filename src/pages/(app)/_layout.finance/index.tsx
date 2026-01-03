@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import FinanceContainer from "@containers/finance";
+import FinanceOverviewContainer from "@containers/finance-app/finance-overview";
 
-const FinancePage = () => {
-  return <FinanceContainer />;
+const FinanceOverviewPage = () => {
+  return <FinanceOverviewContainer />;
 };
 
 export const Route = createFileRoute("/(app)/_layout/finance/")({
-  component: FinancePage,
+  component: FinanceOverviewPage,
 });

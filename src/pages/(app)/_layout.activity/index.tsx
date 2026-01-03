@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import ActivityContainer from "@containers/activity";
+import ActivityOverviewContainer from "@containers/activity-app/activity-overview";
 
-const ActivityPage = () => {
-  return <ActivityContainer />;
+const ActivityOverviewPage = () => {
+  return <ActivityOverviewContainer />;
 };
 
 export const Route = createFileRoute("/(app)/_layout/activity/")({
-  component: ActivityPage,
+  component: ActivityOverviewPage,
 });

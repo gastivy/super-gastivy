@@ -66,7 +66,6 @@ const ActivityCategoryForm = () => {
               <InputText
                 value={target}
                 type="text"
-                inputMode="numeric"
                 label="Target Daily"
                 size="regular"
                 shape="semi-rounded"

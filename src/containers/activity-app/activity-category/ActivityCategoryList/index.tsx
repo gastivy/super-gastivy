@@ -17,10 +17,7 @@ const ActivityCategoryList = () => {
   const handleAddCategory = () => {
     navigate({
       to: routes.activity.categories.path,
-      state: (prev) => ({
-        ...prev,
-        isCreated: true,
-      }),
+      state: (prev) => ({ ...prev, isCreated: true }),
     });
   };
 

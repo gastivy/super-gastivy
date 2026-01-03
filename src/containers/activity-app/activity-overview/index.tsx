@@ -1,7 +1,7 @@
 import { ProgressActivty } from "./ProgressActivity";
 import { LastActivity } from "./LastActivity";
 
-const ActivityContainer = () => {
+const ActivityOverviewContainer = () => {
   const hour = new Date().getHours();
   const greeting = (() => {
     if (hour < 12) return "Good Morning";
@@ -24,4 +24,4 @@ const ActivityContainer = () => {
   );
 };
 
-export default ActivityContainer;
+export default ActivityOverviewContainer;
