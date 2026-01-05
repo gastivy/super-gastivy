@@ -19,7 +19,7 @@ import { useDisplayWidth } from "@hooks/useDisplayWidth";
 
 const ActivityLogs: React.FC = () => {
   const navigate = useNavigate();
-  const { width } = useDisplayWidth();
+  const { widthScreen } = useDisplayWidth();
   const {
     logActivity,
     isLoading,
@@ -28,13 +28,6 @@ const ActivityLogs: React.FC = () => {
     params,
     setParams,
     fetchNextPage,
-    // currentYear,
-    // currentRange,
-    // monthList,
-    // idCategories,
-    // setIdCategories,
-    // setCurrentYear,
-    // setCurrentRange,
   } = useFilterActivity();
 
   const { data } = useGetCategory({});
@@ -75,7 +68,7 @@ const ActivityLogs: React.FC = () => {
       <div className="max-h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] flex flex-col bg-white rounded-lg p-6 max-[960px]:p-4">
         <div className="flex max-[520px]:flex-col gap-5 pb-6 border-b border-gray-300">
           <DatePickerRange
-            showShortcut={width > 520}
+            showShortcut={widthScreen > 520}
             numberOfMonths={numberOfMonths}
             mode="range"
             selected={{

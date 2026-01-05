@@ -46,7 +46,7 @@ const ActivityLogForm = () => {
   const queryClient = useQueryClient();
   const routerState = useRouterState();
   const navigate = useNavigate();
-  const { width } = useDisplayWidth();
+  const { widthScreen } = useDisplayWidth();
   const form = routerState.location.state.form as LogActivity;
 
   const defaultActivity: FormActivity = {
@@ -225,7 +225,7 @@ const ActivityLogForm = () => {
                     <>
                       <div
                         className="max-[960px]:w-full flex justify-between items-center max-[960px]:py-3 max-[960px]:border-b border-gray-300"
-                        onClick={() => width < 960 && onToggle()}
+                        onClick={() => widthScreen < 960 && onToggle()}
                       >
                         <div className="w-26 flex item-center text text-gray-400 font-medium">
                           Activity #{index + 1}
@@ -236,7 +236,7 @@ const ActivityLogForm = () => {
                         </div>
                       </div>
 
-                      {(isOpen || width > 960) && (
+                      {(isOpen || widthScreen > 960) && (
                         <div className="w-full flex max-[960px]:flex-col gap-6">
                           <Controller
                             name={`activities.${index}.categoryActivity`}
@@ -247,7 +247,9 @@ const ActivityLogForm = () => {
                             render={({ field }) => (
                               <Select
                                 label={
-                                  width < 960 ? "Activity Category" : undefined
+                                  widthScreen < 960
+                                    ? "Activity Category"
+                                    : undefined
                                 }
                                 value={field.value}
                                 placeholder="Select Activity Category"
@@ -271,7 +273,9 @@ const ActivityLogForm = () => {
                             }}
                             render={({ field }) => (
                               <DatePicker
-                                label={width < 960 ? "Start Date" : undefined}
+                                label={
+                                  widthScreen < 960 ? "Start Date" : undefined
+                                }
                                 wrapperClassName="max-w-lg min-[960px]:min-w-[200px] min-[960px]:max-w-[200px]"
                                 value={field.value}
                                 error={
@@ -289,7 +293,9 @@ const ActivityLogForm = () => {
                             }}
                             render={({ field }) => (
                               <TimePicker
-                                label={width < 960 ? "Start Time" : undefined}
+                                label={
+                                  widthScreen < 960 ? "Start Time" : undefined
+                                }
                                 value={field.value}
                                 error={
                                   errors.activities?.[index]?.startTime?.message
@@ -309,7 +315,9 @@ const ActivityLogForm = () => {
                             render={({ field }) => (
                               <TimeHours
                                 value={field.value}
-                                label={width < 960 ? "Duration" : undefined}
+                                label={
+                                  widthScreen < 960 ? "Duration" : undefined
+                                }
                                 error={
                                   errors.activities?.[index]?.seconds?.message
                                 }
@@ -329,7 +337,9 @@ const ActivityLogForm = () => {
                                 <Switch
                                   enabled={field.value}
                                   label={
-                                    width < 960 ? "Is it done?" : undefined
+                                    widthScreen < 960
+                                      ? "Is it done?"
+                                      : undefined
                                   }
                                   className="min-w-16 max-w-16"
                                   onChange={(enabled) =>

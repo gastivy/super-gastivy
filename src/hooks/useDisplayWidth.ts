@@ -1,8 +1,8 @@
 import { useLayoutEffect, useState } from "react";
 
 type BodyInfo = {
-  width: number;
-  height: number;
+  widthScreen: number;
+  heightScreen: number;
   lockScroll: () => void;
   unlockScroll: () => void;
 };
@@ -39,8 +39,8 @@ export const useDisplayWidth = (): BodyInfo => {
   }, []);
 
   return {
-    width: size.width,
-    height: size.height,
+    widthScreen: size.width,
+    heightScreen: size.height,
     lockScroll,
     unlockScroll,
   };

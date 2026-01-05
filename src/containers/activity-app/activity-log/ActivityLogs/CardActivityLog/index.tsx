@@ -23,7 +23,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
   const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
   const confirmModalDelete = useDisclosure({ open: false });
   const optionsRef = useClickOutside(onClose);
-  const { width } = useDisplayWidth();
+  const { widthScreen } = useDisplayWidth();
   const queryClient = useQueryClient();
 
   const { mutate, isPending } = useDeleteActivity({
@@ -34,7 +34,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
   });
 
   const handleOpenOptions = () => {
-    if (width < 720) return onOpen();
+    if (widthScreen < 720) return onOpen();
   };
 
   const handleDelete = () => {
@@ -50,7 +50,6 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
           to: routes.activity.activityLog.path,
           state: (prev) => ({ ...prev, form: { ...log } }),
         });
-        // onUpdateActivity();
       },
     },
     {
@@ -65,7 +64,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
   return (
     <>
       {/* Drawer Options */}
-      <Conditional if={width < 720}>
+      <Conditional if={widthScreen < 720}>
         <OptionsDrawer isOpen={isOpen} options={options} onClose={onClose} />
       </Conditional>
 
@@ -109,7 +108,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
           </div>
         </div>
 
-        <Conditional if={width >= 720}>
+        <Conditional if={widthScreen >= 720}>
           <div
             ref={optionsRef}
             className="min-w-6 max-[720px]:hidden flex justify-end cursor-pointer"

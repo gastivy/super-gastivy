@@ -2,7 +2,7 @@ import * as Yup from "yup";
 
 export const schemaCategoryTransaction = Yup.object().shape({
   name: Yup.string().required("Name Category is required"),
-  type: Yup.number().required("Target is required"),
+  type: Yup.number().required("Type Transactions is required"),
 });
 
 export const schemaTransaction = Yup.object().shape({
