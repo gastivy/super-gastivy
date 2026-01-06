@@ -70,7 +70,7 @@ export const useInfiniteTransactions = (
     getNextPageParam: (lastPage) => {
       const { current_page = 1, total_pages = 1 } = lastPage.pagination || {};
       if (current_page < total_pages) {
-        return total_pages + 1;
+        return current_page + 1;
       } else {
         return undefined;
       }

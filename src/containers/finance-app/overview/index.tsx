@@ -9,12 +9,16 @@ import { SkeletonLoading } from "./SkeletonLoading";
 import EmptyState from "@components/base/EmptyState";
 import { Assets } from "@assets/illustrations";
 import { routes } from "@constants/routes";
-import useDisclosure from "@hooks/useDisclosure";
+import useDisclosure, { type useDisclosureProps } from "@hooks/useDisclosure";
+import { useGetBalance } from "@modules/finance/wallet/hooks/useWallet";
+import Disclosure from "@components/base/Disclosure";
 
 const FinanceOverviewContainer = () => {
   const navigate = useNavigate();
   const { isOpen, onToggle } = useDisclosure({ open: false });
   const LIMIT_TRANSACTIONS = 5;
+
+  const { data: dataBalance, isLoading: isLoadingBalance } = useGetBalance();
 
   const { data, isLoading } = useGetTransactions({
     limit: LIMIT_TRANSACTIONS,
@@ -72,17 +76,26 @@ const FinanceOverviewContainer = () => {
                 <div className="text-sm text-limed-spruce-700">
                   Current Balance
                 </div>
-                <div className="flex items-center gap-2">
-                  <div className="text-lg font-medium text-limed-spruce-700">
-                    {isOpen ? formatter.currency(120003434) : "Rp ********"}
+                <Conditional if={isLoadingBalance}>
+                  <div className="h-4 w-40 animate-pulse bg-gray-200" />
+                </Conditional>
+                <Conditional
+                  if={!isLoadingBalance && Boolean(dataBalance?.data?.balance)}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="text-lg font-medium text-limed-spruce-700">
+                      {isOpen
+                        ? formatter.currency(dataBalance?.data?.balance)
+                        : "Rp ********"}
+                    </div>
+                    <Icon
+                      name={isOpen ? "Eye-outline" : "Hide-outline"}
+                      className="cursor-pointer"
+                      size={20}
+                      onClick={onToggle}
+                    />
                   </div>
-                  <Icon
-                    name={isOpen ? "Eye-outline" : "Hide-outline"}
-                    className="cursor-pointer"
-                    size={20}
-                    onClick={onToggle}
-                  />
-                </div>
+                </Conditional>
               </div>
             </div>
           </div>
@@ -118,30 +131,69 @@ const FinanceOverviewContainer = () => {
                 <Each
                   of={data?.data || []}
                   render={(item) => (
-                    <div
-                      key={item.id}
-                      className="flex justify-between py-4 border-t border-gray-300"
-                    >
-                      <div className="flex flex-col gap-1">
-                        <div className="text-limed-spruce-900">{item.name}</div>
-                        <div className="text-sm text-gray-400">
-                          {item.category_name}
-                        </div>
-                      </div>
-                      <div className="w-36 flex flex-col items-end gap-1">
-                        <div className="text-sm text-limed-spruce-600 font-medium">
-                          {item.from_wallet_name}
-                        </div>
-                        <div
-                          className={
-                            getValueTransaction(item.type, item.money)
-                              ?.className
-                          }
-                        >
-                          {getValueTransaction(item.type, item.money)?.money}
-                        </div>
-                      </div>
-                    </div>
+                    <Disclosure defaultOpen={false} key={item.id}>
+                      {({ isOpen, onOpen }: useDisclosureProps) => {
+                        const isNoteTooLong =
+                          (item.description?.length || 0) > 40;
+                        return (
+                          <div
+                            className="flex flex-col gap-4 border-b border-gray-300 py-4"
+                            onClick={onOpen}
+                          >
+                            <div className="w-full flex justify-between">
+                              <div className="flex flex-col gap-1">
+                                <div className="text-limed-spruce-900">
+                                  {item.name}
+                                </div>
+                                <div className="text-sm text-gray-400">
+                                  {item.category_name}
+                                </div>
+                              </div>
+                              <div className="w-36 flex flex-col items-end gap-1">
+                                <div className="text-sm text-limed-spruce-600 font-medium">
+                                  {item.from_wallet_name}
+                                </div>
+                                <div
+                                  className={
+                                    getValueTransaction(item.type, item.money)
+                                      ?.className
+                                  }
+                                >
+                                  {
+                                    getValueTransaction(item.type, item.money)
+                                      ?.money
+                                  }
+                                </div>
+                              </div>
+                            </div>
+
+                            {item.description && (
+                              <div className="flex flex-col gap-1">
+                                <div className="text-xs">Note:</div>
+                                <div className="flex gap-2 items-center">
+                                  <div
+                                    className="flex text-xs text-gray-400"
+                                    onClick={() => !isOpen && onOpen()}
+                                  >
+                                    {item.description?.slice(
+                                      0,
+                                      isOpen ? 99999 : 10
+                                    )}
+                                    {!isOpen && isNoteTooLong ? "...." : ""}
+                                  </div>
+
+                                  {!isOpen && isNoteTooLong && (
+                                    <div className="text-xs text-green-yellow-500">
+                                      See more
+                                    </div>
+                                  )}
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      }}
+                    </Disclosure>
                   )}
                 />
               </Conditional>
