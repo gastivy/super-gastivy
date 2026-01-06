@@ -219,7 +219,8 @@ export const dateTime = {
     ].map((month, index) => {
       return {
         label: month,
-        value: this.getRangeThisMonth(year, index + 1),
+        value: index,
+        options: this.getRangeThisMonth(year, index + 1),
       };
     });
   },
