@@ -9,13 +9,13 @@ import InfiniteScroll from "@components/base/InfiniteScroll";
 
 const TransactionsList = () => {
   const {
-    isRefetching,
-    isLoading,
+    // isRefetching,
+    // isLoading,
     isFetchingNextPage,
     data,
     hasNextPage,
     fetchNextPage,
-    refetch,
+    // refetch,
   } = useInfiniteTransactions({
     // ...(!lodash.isObjectEmpty(currentRange) && { ...currentRange }),
     // ...(idCategories.length > 0 && { category_ids: idCategories }),
