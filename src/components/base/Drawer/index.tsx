@@ -8,6 +8,7 @@ const Drawer: React.FC<DrawerProps> = ({
   children,
   isOpen,
   isFullHeight = false,
+  className,
   onClose,
 }) => {
   const handleClose = useCallback(() => onClose(), []);
@@ -28,7 +29,7 @@ const Drawer: React.FC<DrawerProps> = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 bottom-0 border border-r-amber-400 z-10">
+    <div className="fixed inset-0 bottom-0 z-10">
       {/* overlay */}
       <div
         className={cn(
@@ -43,7 +44,8 @@ const Drawer: React.FC<DrawerProps> = ({
         className={cn(
           "absolute right-0 left-0 bottom-0 w-full rounded-t-2xl bg-white shadow-xl transition-transform duration-300 ease-out",
           isFullHeight ? "h-full" : "h-auto",
-          isOpen ? "translate-y-0" : "translate-y-full"
+          isOpen ? "translate-y-0" : "translate-y-full",
+          className
         )}
       >
         {children}

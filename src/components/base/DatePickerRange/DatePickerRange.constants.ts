@@ -1,7 +1,7 @@
 import { dateTime } from "@libs/dateTime";
 import type { ShortcutDate } from "./DatePickerRange.types";
 
-const today = new Date("2025-12-13");
+const today = new Date();
 const ONE_DAY = 24 * 60 * 60 * 1000;
 
 export const shortcutDate: ShortcutDate[] = [

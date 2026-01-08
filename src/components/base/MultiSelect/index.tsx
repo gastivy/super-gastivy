@@ -11,14 +11,15 @@ import Conditional from "../Conditional";
 export default function MultiSelect({
   options,
   value = [],
-  onSelect,
   placeholder = "Select",
+  label,
   error = "",
   size = "regular",
   shape = "semi-rounded",
   prefix,
   suffix,
   wrapperClassName,
+  onSelect,
 }: MultiSelectProps) {
   const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
   const handleClose = useCallback(onClose, []);
@@ -81,7 +82,14 @@ export default function MultiSelect({
   }, [selectedOptions]);
 
   return (
-    <div ref={wrapperRef} className={cn("relative w-full", wrapperClassName)}>
+    <div
+      ref={wrapperRef}
+      className={cn("relative w-full flex flex-col gap-2", wrapperClassName)}
+    >
+      {label && (
+        <span className="text-sm font-medium text-shark-700">{label}</span>
+      )}
+
       <div
         ref={multiSelectRef}
         className={multiSelectVariants({
@@ -163,9 +171,7 @@ export default function MultiSelect({
       {isOpen && (
         <div className="absolute mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
           {filtered.length === 0 && (
-            <div className="px-3 py-2 text-sm text-gray-400">
-              Tidak ada hasil
-            </div>
+            <div className="px-3 py-2 text-sm text-gray-400">No Result</div>
           )}
 
           <Each

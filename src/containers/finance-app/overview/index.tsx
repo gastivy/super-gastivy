@@ -2,16 +2,15 @@ import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import Icon from "@components/base/Icon";
 import { formatter } from "@libs/formatter";
-import { TypesTransactions } from "@modules/finance/category/models";
 import { useGetTransactions } from "@modules/finance/transactions/hooks/useTransaction";
 import { useNavigate } from "@tanstack/react-router";
 import { SkeletonLoading } from "./SkeletonLoading";
 import EmptyState from "@components/base/EmptyState";
 import { Assets } from "@assets/illustrations";
 import { routes } from "@constants/routes";
-import useDisclosure, { type useDisclosureProps } from "@hooks/useDisclosure";
+import useDisclosure from "@hooks/useDisclosure";
 import { useGetBalance } from "@modules/finance/wallet/hooks/useWallet";
-import Disclosure from "@components/base/Disclosure";
+import { CardTransactions } from "../transactions/TransactionsList/CardTransactions";
 
 const FinanceOverviewContainer = () => {
   const navigate = useNavigate();
@@ -23,35 +22,6 @@ const FinanceOverviewContainer = () => {
   const { data, isLoading } = useGetTransactions({
     limit: LIMIT_TRANSACTIONS,
   });
-
-  const getValueTransaction = (type: TypesTransactions, value?: number) => {
-    if ([TypesTransactions.INCOME, TypesTransactions.PROFIT].includes(type)) {
-      return {
-        className: "text-sm text-green-400",
-        money: `+${formatter.currency(value)}`,
-      };
-    }
-
-    if (
-      [
-        TypesTransactions.EXPENSES,
-        TypesTransactions.FEE_TRANSFER,
-        TypesTransactions.LOSS,
-      ].includes(type)
-    ) {
-      return {
-        className: "text-sm text-red-400",
-        money: `-${formatter.currency(value)}`,
-      };
-    }
-
-    if (type === TypesTransactions.TRANSFER) {
-      return {
-        className: "text-sm text-gray-400",
-        money: formatter.currency(value),
-      };
-    }
-  };
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
@@ -131,69 +101,7 @@ const FinanceOverviewContainer = () => {
                 <Each
                   of={data?.data || []}
                   render={(item) => (
-                    <Disclosure defaultOpen={false} key={item.id}>
-                      {({ isOpen, onOpen }: useDisclosureProps) => {
-                        const isNoteTooLong =
-                          (item.description?.length || 0) > 40;
-                        return (
-                          <div
-                            className="flex flex-col gap-4 border-b border-gray-300 py-4"
-                            onClick={onOpen}
-                          >
-                            <div className="w-full flex justify-between">
-                              <div className="flex flex-col gap-1">
-                                <div className="text-limed-spruce-900">
-                                  {item.name}
-                                </div>
-                                <div className="text-sm text-gray-400">
-                                  {item.category_name}
-                                </div>
-                              </div>
-                              <div className="w-36 flex flex-col items-end gap-1">
-                                <div className="text-sm text-limed-spruce-600 font-medium">
-                                  {item.from_wallet_name}
-                                </div>
-                                <div
-                                  className={
-                                    getValueTransaction(item.type, item.money)
-                                      ?.className
-                                  }
-                                >
-                                  {
-                                    getValueTransaction(item.type, item.money)
-                                      ?.money
-                                  }
-                                </div>
-                              </div>
-                            </div>
-
-                            {item.description && (
-                              <div className="flex flex-col gap-1">
-                                <div className="text-xs">Note:</div>
-                                <div className="flex gap-2 items-center">
-                                  <div
-                                    className="flex text-xs text-gray-400"
-                                    onClick={() => !isOpen && onOpen()}
-                                  >
-                                    {item.description?.slice(
-                                      0,
-                                      isOpen ? 99999 : 10
-                                    )}
-                                    {!isOpen && isNoteTooLong ? "...." : ""}
-                                  </div>
-
-                                  {!isOpen && isNoteTooLong && (
-                                    <div className="text-xs text-green-yellow-500">
-                                      See more
-                                    </div>
-                                  )}
-                                </div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      }}
-                    </Disclosure>
+                    <CardTransactions transaction={item} key={item.id} />
                   )}
                 />
               </Conditional>

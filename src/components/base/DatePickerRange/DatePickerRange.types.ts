@@ -2,6 +2,7 @@ import type { DateRange, Mode, PropsBase, PropsRange } from "react-day-picker";
 
 export type DatePickerRangeProps = PropsBase &
   Omit<PropsRange, "onSelect"> & {
+    label?: string;
     mode?: Mode;
     showShortcut?: boolean;
     onSelect?: (range: DateRange | undefined) => void;

@@ -19,6 +19,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   mode = "range",
   showShortcut,
   selected,
+  label,
   onBlur,
   onSelect,
   ...props
@@ -60,7 +61,11 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   const dropdownRef = useClickOutside(handleBlur);
 
   return (
-    <div className="relative w-full" ref={dropdownRef}>
+    <div className="relative w-full flex flex-col gap-2" ref={dropdownRef}>
+      {label && (
+        <span className="text-sm font-medium text-shark-700">{label}</span>
+      )}
+
       <InputText
         type="text"
         shape="semi-rounded"
