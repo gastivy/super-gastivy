@@ -13,6 +13,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { ModalConfirmDelete } from "../ModalConfirmDelete";
 import { useNavigate } from "@tanstack/react-router";
 import { routes } from "@constants/routes";
+import { useCallback } from "react";
 
 interface CardActivityLogProps {
   log: LogActivity;
@@ -20,11 +21,13 @@ interface CardActivityLogProps {
 
 export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
   const navigate = useNavigate();
-  const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
-  const confirmModalDelete = useDisclosure({ open: false });
-  const optionsRef = useClickOutside(onClose);
   const { widthScreen } = useDisplayWidth();
   const queryClient = useQueryClient();
+  const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
+  const confirmModalDelete = useDisclosure({ open: false });
+
+  const handleClose = useCallback(onClose, []);
+  const optionsRef = useClickOutside(handleClose);
 
   const { mutate, isPending } = useDeleteActivity({
     onSuccess: () => {

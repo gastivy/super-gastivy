@@ -169,7 +169,7 @@ export default function MultiSelect({
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute mt-1 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
+        <div className="absolute top-10 w-full bg-white rounded shadow max-h-60 overflow-auto z-10">
           {filtered.length === 0 && (
             <div className="px-3 py-2 text-sm text-gray-400">No Result</div>
           )}

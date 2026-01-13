@@ -18,8 +18,12 @@ import MultiSelect from "@components/base/MultiSelect";
 import { FilterDrawer } from "./FilterDrawer";
 import useDisclosure from "@hooks/useDisclosure";
 import Icon from "@components/base/Icon";
+import Button from "@components/base/Button";
+import { useNavigate } from "@tanstack/react-router";
+import { routes } from "@constants/routes";
 
 const TransactionsList = () => {
+  const navigate = useNavigate();
   const { widthScreen } = useDisplayWidth();
   const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
   const [params, setParams] = useState<GetTransactionRequest>({
@@ -79,10 +83,17 @@ const TransactionsList = () => {
     }));
   })();
 
+  const handleCreate = () => {
+    navigate({
+      to: routes.finance.transactions.path,
+      state: (prev) => ({ ...prev, isCreated: true }),
+    });
+  };
+
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      {/* Filter Drawer */}
       <Conditional if={widthScreen < 720}>
+        {/* Filter Drawer */}``
         <FilterDrawer
           isOpen={isOpen}
           params={params}
@@ -98,6 +109,10 @@ const TransactionsList = () => {
         <div className="text-lg text-limed-spruce-700 font-medium">
           Transactions
         </div>
+
+        <Button shape="semi-round" onClick={handleCreate}>
+          Create
+        </Button>
       </div>
       <div className="max-h-[calc(100dvh-130px)] max-[960px]:h-[calc(100dvh-200px)] flex flex-col gap-5 max-[960px]:mb-24 bg-white rounded-lg p-6 max-[560px]:p-4">
         <div className="flex items-center gap-4">
@@ -182,6 +197,7 @@ const TransactionsList = () => {
                         <CardTransactions
                           key={`${transaction.id}-${index}`}
                           transaction={transaction}
+                          hasOptions
                         />
                       )}
                     />
