@@ -14,6 +14,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
   label,
   error,
   wrapperClassName,
+  placeholder = "Select date",
   onBlur,
   onSelect,
   ...props
@@ -45,7 +46,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
         <InputText
           type="text"
           shape="semi-rounded"
-          placeholder="Select date range"
+          placeholder={placeholder}
           size="regular"
           value={displayValue}
           error={error}

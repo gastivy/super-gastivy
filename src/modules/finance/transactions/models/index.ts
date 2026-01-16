@@ -23,7 +23,9 @@ export interface CreateTransactionRequest {
   transactions: TransactionRequest[];
 }
 
-export interface UpdateTransactionRequest extends TransactionRequest {}
+export interface UpdateTransactionRequest extends TransactionRequest {
+  id: string;
+}
 
 export interface Transactions {
   id: string;

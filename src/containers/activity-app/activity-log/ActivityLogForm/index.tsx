@@ -61,7 +61,6 @@ const ActivityLogForm = () => {
     control,
     formState: { errors },
     handleSubmit: onSubmit,
-    // reset,
     setValue,
   } = useForm({
     // @ts-ignore
