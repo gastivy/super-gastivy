@@ -72,14 +72,14 @@ const ActivityLogForm = () => {
 
   const { data } = useGetCategory({});
 
-  const { mutate: createActivity } = useCreateActivity({
+  const { mutate: createActivity, isPending: isPendingCreate } = useCreateActivity({
     onSuccess: async () => {
       navigate({ to: routes.activity.activityLog.path });
       queryClient.invalidateQueries({ queryKey: ["activities"] });
     },
   });
 
-  const { mutate: updateActivity } = useUpdateActivity({
+  const { mutate: updateActivity, isPending: isPendingUpdate } = useUpdateActivity({
     onSuccess: () => {
       navigate({ to: routes.activity.activityLog.path });
       queryClient.invalidateQueries({ queryKey: ["activities"] });
@@ -180,7 +180,7 @@ const ActivityLogForm = () => {
             {form?.id ? "Update Activity Log" : "Create Activity Log"}
           </div>
         </div>
-        <Button shape="semi-round" onClick={onSubmit(handleCreate)}>
+        <Button shape="semi-round" disabled={isPendingCreate || isPendingUpdate} onClick={onSubmit(handleCreate)}>
           {form?.id ? "Save" : "Create"}
         </Button>
       </div>
@@ -195,6 +195,7 @@ const ActivityLogForm = () => {
             <Button
               shape="semi-round"
               size="small"
+              disabled={isPendingCreate || isPendingUpdate}
               onClick={() => append(defaultActivity)}
             >
               <Icon name="Plus-solid" size={14} />

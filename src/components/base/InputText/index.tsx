@@ -45,6 +45,8 @@ const InputText: React.FC<InputTextProps> = ({
           clamp(Number(rawNumber), Number(props.min), Number(props.max))
         );
         setInputValue(formatNumber(val));
+        onChange?.(e);
+        onChangeInput?.(val);
         return;
       }
 
