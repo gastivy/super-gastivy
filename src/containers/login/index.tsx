@@ -2,7 +2,7 @@ import Button from "@components/base/Button";
 import { useNavigate } from "@tanstack/react-router";
 import InputText from "@components/base/InputText";
 import React, { useState } from "react";
-import LogoIcon from "@assets/logo-icon/icon-2-160.svg";
+import LogoIcon from "@assets/logo-icon/icon-192.png";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schemaLogin, type FormLogin } from "@modules/auth/schemas/login";
