@@ -11,12 +11,12 @@ import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
-// import { ModalConfirm } from "../ModalConfirm";
 import { cn } from "@libs/classnames";
 import ModalConfirm from "@components/base/ModalConfirm";
 
 interface TimerControllerProps {
   isStarted: boolean;
+  isLoadingCreate: boolean
   formatted: string;
   seconds: number;
   currentActivity: ActivitiesDexieStore;
@@ -26,6 +26,7 @@ interface TimerControllerProps {
 
 export const TimerController: React.FC<TimerControllerProps> = ({
   isStarted,
+  isLoadingCreate,
   formatted,
   seconds,
   currentActivity,
@@ -102,10 +103,10 @@ export const TimerController: React.FC<TimerControllerProps> = ({
           <div
             className={cn(
               "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
-              (isStarted || !hasData) &&
+              (isStarted || isLoadingCreate || !hasData) &&
                 "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
             )}
-            onClick={() => !isStarted && hasData && onOpen()}
+            onClick={() => !isStarted && !isLoadingCreate && hasData && onOpen()}
           >
             <Icon name="Close-solid" size={18} className="text-white" />
           </div>

@@ -11,6 +11,7 @@ const TimerActivityContainer: React.FC = () => {
     formatted,
     currentActivity,
     isStarted,
+    isLoadingCreate,
     handleTimer,
     handleFinishActivity,
   } = useTimerActivity();
@@ -24,6 +25,7 @@ const TimerActivityContainer: React.FC = () => {
       <div className="h-[calc(100dvh-124px)] max-[720px]:pb-24 max-[960px]:h-[calc(100dvh-200px)] max-[720px]:h-full flex max-[720px]:flex-col gap-4 rounded-lg">
         <TimerController
           isStarted={isStarted || false}
+          isLoadingCreate={isLoadingCreate}
           seconds={seconds}
           formatted={formatted}
           currentActivity={currentActivity}

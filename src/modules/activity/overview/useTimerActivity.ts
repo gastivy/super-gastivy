@@ -13,7 +13,7 @@ export const useTimerActivity = () => {
   const activities = useLiveQuery(() => DexieDB.activities.toArray(), []) || [];
   const currentActivity = activities?.[0];
 
-  const { mutate } = useCreateActivity({
+  const { mutate, isPending: isLoadingCreate } = useCreateActivity({
     onSuccess: async () => {
       await DexieDB.activities.clear();
       navigate({ to: routes.activity.overview.path });
@@ -106,6 +106,7 @@ export const useTimerActivity = () => {
     seconds,
     isStarted,
     name,
+    isLoadingCreate,
     handleTimer,
     handleFinishActivity,
   };

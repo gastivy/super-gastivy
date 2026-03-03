@@ -10,6 +10,7 @@ const TimerPopover = () => {
     name,
     currentActivity,
     isStarted,
+    isLoadingCreate,
     formatted,
     handleTimer,
     handleFinishActivity,
@@ -40,7 +41,7 @@ const TimerPopover = () => {
       <div className="flex items-center gap-4">
         <Button
           shape="semi-round"
-          disabled={isStarted}
+          disabled={isStarted || isLoadingCreate}
           onClick={handleFinishActivity}
         >
           Done
