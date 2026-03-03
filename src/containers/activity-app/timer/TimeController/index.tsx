@@ -57,13 +57,13 @@ export const TimerController: React.FC<TimerControllerProps> = ({
   };
 
   const handleCancelActivity = async () => {
-    if (isStarted && !hasData) return;
+    if ((isStarted || isLoadingCreate) && !hasData) return;
     await DexieDB.activities.clear();
     onClose();
   };
 
   const handleFinishActivity = () => {
-    if (isStarted || !hasData) return;
+    if (isStarted || isLoadingCreate || !hasData) return;
     onFinishActivity();
   };
 
@@ -113,7 +113,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
           <Button
             shape="pill"
             className="w-20 h-20"
-            disabled={!currentActivity?.id}
+            disabled={!currentActivity?.id || isLoadingCreate}
             onClick={onChangeTimer}
           >
             <Icon name={isStarted ? "Pause-solid" : "Play-solid"} size={48} />
@@ -121,7 +121,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
           <div
             className={cn(
               "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
-              (isStarted || !hasData) &&
+              (isStarted || isLoadingCreate || !hasData) &&
                 "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
             )}
             onClick={handleFinishActivity}
