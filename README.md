@@ -1,7 +1,7 @@
 # Gastivy
 
 <p align="center">
-  <a href='https://stg-lyceum.gastivy.my.id/'>
+  <a href='https://stg-lyceum.gastivy.my.id/' target="_blank">
     <img src="public/icons/png/icon-1920.png" alt="Gastivy Logo" width="200" />
   </a>
 </p>
@@ -12,7 +12,9 @@
 
 ## Live Demo
 
-https://stg-lyceum.gastivy.my.id/
+  <a href='https://stg-lyceum.gastivy.my.id/' target="_blank">
+    See Live Demo
+  </a>
 
 ---
 
