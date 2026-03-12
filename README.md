@@ -1,73 +1,128 @@
-# React + TypeScript + Vite
+# Gastivy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p align="center">
+  <a href='https://stg-lyceum.gastivy.my.id/'>
+    <img src="public/icons/png/icon-1920.png" alt="Gastivy Logo" width="200" />
+  </a>
+</p>
 
-Currently, two official plugins are available:
+<p align="center">
+  Gastivy is a personal web application for Tracking daily activities and Personal finances in one place. It helps users monitor productivity, manage expenses, and gain better insight into their personal habits and spending patterns.
+</p>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Live Demo
 
-## React Compiler
+https://stg-lyceum.gastivy.my.id/
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Activity tracking for daily productivity
+- Personal finance tracking (income & expenses)
+- Calendar-based activity overview
+- Progress visualization
+- Form validation and data management
+- Local/offline data handling using IndexedDB
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Frontend
+
+- React 19
+- TypeScript
+- Vite
+
+### Routing & Data
+
+- TanStack Router
+- TanStack React Query
+- TanStack React Form
+
+### Forms & Validation
+
+- React Hook Form
+- Yup
+- Hookform Resolvers
+
+### Styling
+
+- TailwindCSS v4
+- Sass
+- Tailwind Merge
+- Class Variance Authority
+
+### Storage
+
+- Dexie (IndexedDB wrapper)
+- idb
+
+### Utilities
+
+- Axios
+
+---
+
+## Development Tools
+
+- ESLint
+- Prettier
+- TypeScript
+- Vite
+- React Refresh
+- Simple Import Sort
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/gastivy.git
+cd gastivy
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Install dependencies:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+Run development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## Available Scripts
+
+```bash
+npm run dev      # Start development server
+npm run build    # Build for production
+npm run preview  # Preview production build
+npm run lint     # Run ESLint
+```
+
+---
+
+## Project Goals
+
+Gastivy is designed to combine **activity tracking** and **personal
+finance tracking** into a single lightweight web application.\
+The focus of the project is:
+
+- Clean and scalable frontend architecture
+- Strong type safety using TypeScript
+- Efficient data fetching and caching
+- Good developer experience with modern tooling
+
+---
+
+## License
+
+This project is licensed under the MIT License.
