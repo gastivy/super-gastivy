@@ -21,11 +21,11 @@ httpService.interceptors.request.use(
 httpService.interceptors.response.use(
   (response) => response,
   async (error) => {
-    if (error?.response?.status === 401) {
-      await AuthServices.refresh();
-    } else {
-      console.error("Response Error:", error.response?.data || error);
-    }
+    // if (error?.response?.status === 401) {
+    //   await AuthServices.refresh();
+    // } else {
+    //   console.error("Response Error:", error.response?.data || error);
+    // }
 
     return Promise.reject(error);
   }

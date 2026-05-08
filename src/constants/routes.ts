@@ -55,6 +55,20 @@ export const routes = {
       path: "/finance/transactions",
     },
   },
+  portfolio: {
+    overview: {
+      name: "Overview",
+      path: "/portfolio/overview",
+    },
+    stocks: {
+      name: "Stocks",
+      path: "/portfolio/stocks",
+    },
+    crypto: {
+      name: "Crypto",
+      path: "/portfolio/crypto",
+    },
+  },
 };
 
 export const ROUTES_UNPROTECTED = [routes.login.path, routes.register.path];

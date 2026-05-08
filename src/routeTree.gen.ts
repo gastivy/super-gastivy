@@ -16,6 +16,9 @@ import { Route as authLoginIndexRouteImport } from './pages/(auth)/login/index'
 import { Route as appLayoutNotesIndexRouteImport } from './pages/(app)/_layout.notes/index'
 import { Route as appLayoutFinanceIndexRouteImport } from './pages/(app)/_layout.finance/index'
 import { Route as appLayoutActivityIndexRouteImport } from './pages/(app)/_layout.activity/index'
+import { Route as appLayoutPortfolioStocksIndexRouteImport } from './pages/(app)/_layout.portfolio/stocks/index'
+import { Route as appLayoutPortfolioOverviewIndexRouteImport } from './pages/(app)/_layout.portfolio/overview/index'
+import { Route as appLayoutPortfolioCryptoIndexRouteImport } from './pages/(app)/_layout.portfolio/crypto/index'
 import { Route as appLayoutFinanceWalletIndexRouteImport } from './pages/(app)/_layout.finance/wallet/index'
 import { Route as appLayoutFinanceTransactionsIndexRouteImport } from './pages/(app)/_layout.finance/transactions/index'
 import { Route as appLayoutFinanceStatisticIndexRouteImport } from './pages/(app)/_layout.finance/statistic/index'
@@ -58,6 +61,24 @@ const appLayoutActivityIndexRoute = appLayoutActivityIndexRouteImport.update({
   path: '/activity/',
   getParentRoute: () => appLayoutRoute,
 } as any)
+const appLayoutPortfolioStocksIndexRoute =
+  appLayoutPortfolioStocksIndexRouteImport.update({
+    id: '/portfolio/stocks/',
+    path: '/portfolio/stocks/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutPortfolioOverviewIndexRoute =
+  appLayoutPortfolioOverviewIndexRouteImport.update({
+    id: '/portfolio/overview/',
+    path: '/portfolio/overview/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutPortfolioCryptoIndexRoute =
+  appLayoutPortfolioCryptoIndexRouteImport.update({
+    id: '/portfolio/crypto/',
+    path: '/portfolio/crypto/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
 const appLayoutFinanceWalletIndexRoute =
   appLayoutFinanceWalletIndexRouteImport.update({
     id: '/finance/wallet/',
@@ -115,6 +136,9 @@ export interface FileRoutesByFullPath {
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
+  '/portfolio/crypto': typeof appLayoutPortfolioCryptoIndexRoute
+  '/portfolio/overview': typeof appLayoutPortfolioOverviewIndexRoute
+  '/portfolio/stocks': typeof appLayoutPortfolioStocksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -130,6 +154,9 @@ export interface FileRoutesByTo {
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
+  '/portfolio/crypto': typeof appLayoutPortfolioCryptoIndexRoute
+  '/portfolio/overview': typeof appLayoutPortfolioOverviewIndexRoute
+  '/portfolio/stocks': typeof appLayoutPortfolioStocksIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -147,6 +174,9 @@ export interface FileRoutesById {
   '/(app)/_layout/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
   '/(app)/_layout/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
   '/(app)/_layout/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
+  '/(app)/_layout/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
+  '/(app)/_layout/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
+  '/(app)/_layout/portfolio/stocks/': typeof appLayoutPortfolioStocksIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -164,6 +194,9 @@ export interface FileRouteTypes {
     | '/finance/statistic'
     | '/finance/transactions'
     | '/finance/wallet'
+    | '/portfolio/crypto'
+    | '/portfolio/overview'
+    | '/portfolio/stocks'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -179,6 +212,9 @@ export interface FileRouteTypes {
     | '/finance/statistic'
     | '/finance/transactions'
     | '/finance/wallet'
+    | '/portfolio/crypto'
+    | '/portfolio/overview'
+    | '/portfolio/stocks'
   id:
     | '__root__'
     | '/'
@@ -195,6 +231,9 @@ export interface FileRouteTypes {
     | '/(app)/_layout/finance/statistic/'
     | '/(app)/_layout/finance/transactions/'
     | '/(app)/_layout/finance/wallet/'
+    | '/(app)/_layout/portfolio/crypto/'
+    | '/(app)/_layout/portfolio/overview/'
+    | '/(app)/_layout/portfolio/stocks/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -253,6 +292,27 @@ declare module '@tanstack/react-router' {
       path: '/activity'
       fullPath: '/activity'
       preLoaderRoute: typeof appLayoutActivityIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/portfolio/stocks/': {
+      id: '/(app)/_layout/portfolio/stocks/'
+      path: '/portfolio/stocks'
+      fullPath: '/portfolio/stocks'
+      preLoaderRoute: typeof appLayoutPortfolioStocksIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/portfolio/overview/': {
+      id: '/(app)/_layout/portfolio/overview/'
+      path: '/portfolio/overview'
+      fullPath: '/portfolio/overview'
+      preLoaderRoute: typeof appLayoutPortfolioOverviewIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/portfolio/crypto/': {
+      id: '/(app)/_layout/portfolio/crypto/'
+      path: '/portfolio/crypto'
+      fullPath: '/portfolio/crypto'
+      preLoaderRoute: typeof appLayoutPortfolioCryptoIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/wallet/': {
@@ -318,6 +378,9 @@ interface appLayoutRouteChildren {
   appLayoutFinanceStatisticIndexRoute: typeof appLayoutFinanceStatisticIndexRoute
   appLayoutFinanceTransactionsIndexRoute: typeof appLayoutFinanceTransactionsIndexRoute
   appLayoutFinanceWalletIndexRoute: typeof appLayoutFinanceWalletIndexRoute
+  appLayoutPortfolioCryptoIndexRoute: typeof appLayoutPortfolioCryptoIndexRoute
+  appLayoutPortfolioOverviewIndexRoute: typeof appLayoutPortfolioOverviewIndexRoute
+  appLayoutPortfolioStocksIndexRoute: typeof appLayoutPortfolioStocksIndexRoute
 }
 
 const appLayoutRouteChildren: appLayoutRouteChildren = {
@@ -332,6 +395,9 @@ const appLayoutRouteChildren: appLayoutRouteChildren = {
   appLayoutFinanceTransactionsIndexRoute:
     appLayoutFinanceTransactionsIndexRoute,
   appLayoutFinanceWalletIndexRoute: appLayoutFinanceWalletIndexRoute,
+  appLayoutPortfolioCryptoIndexRoute: appLayoutPortfolioCryptoIndexRoute,
+  appLayoutPortfolioOverviewIndexRoute: appLayoutPortfolioOverviewIndexRoute,
+  appLayoutPortfolioStocksIndexRoute: appLayoutPortfolioStocksIndexRoute,
 }
 
 const appLayoutRouteWithChildren = appLayoutRoute._addFileChildren(

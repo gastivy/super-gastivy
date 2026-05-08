@@ -127,4 +127,7 @@ The focus of the project is:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the GNU General Public License v3.0 (GPL-3.0).  
+See [LICENSE](LICENSE) for details.
+
+**Note:** You may use and modify this project, but you must share your modifications under the same license.

@@ -76,4 +76,26 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
       },
     ],
   },
+  {
+    name: "Portfolio",
+    path: routes.portfolio.overview.path,
+    icon: "Chart-solid",
+    children: [
+      {
+        name: "Overview",
+        path: routes.portfolio.overview.path,
+        icon: "Home-solid",
+      },
+      {
+        name: "Stocks",
+        path: routes.portfolio.stocks.path,
+        icon: "Chart-solid",
+      },
+      {
+        name: "Crypto",
+        path: routes.portfolio.crypto.path,
+        icon: "Coins-solid",
+      },
+    ],
+  },
 ];
