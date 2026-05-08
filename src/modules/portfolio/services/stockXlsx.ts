@@ -1,14 +1,6 @@
 import * as XLSX from "xlsx";
 import type { StockItem, StockGroup } from "../models/stockTypes";
 
-interface StockExportRow {
-  Group: string;
-  Symbol: string;
-  Name: string;
-  Shares: number;
-  AddedAt: string;
-}
-
 export const exportStockPortfolioToXlsx = (
   items: StockItem[],
   groups: StockGroup[],

@@ -54,10 +54,6 @@ const PortfolioOverviewContainer = () => {
     }).format(value);
   };
 
-  // Convert USD value to selected currency
-  const convertFromUsd = (usdValue: number) =>
-    currency === "idr" ? usdValue * usdToIdr : usdValue;
-
   // Crypto calculations
   const cryptoPriceMap = cryptoPriceData?.[currency];
 
@@ -285,7 +281,7 @@ const PortfolioOverviewContainer = () => {
                   className="text-xs text-gray-400 hover:text-limed-spruce-700 cursor-pointer transition-colors flex items-center gap-1"
                 >
                   View All
-                  <Icon name="Arrow-right-outline" size={12} />
+                  <Icon name="Arrow-Right-outline" size={12} />
                 </button>
               </div>
 
@@ -407,7 +403,7 @@ const PortfolioOverviewContainer = () => {
                   className="text-xs text-gray-400 hover:text-limed-spruce-700 cursor-pointer transition-colors flex items-center gap-1"
                 >
                   View All
-                  <Icon name="Arrow-right-outline" size={12} />
+                  <Icon name="Arrow-Right-outline" size={12} />
                 </button>
               </div>
 

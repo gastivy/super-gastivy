@@ -1,15 +1,6 @@
 import * as XLSX from "xlsx";
 import type { PortfolioItem, PortfolioGroup } from "../models/types";
 
-interface PortfolioExportRow {
-  Group: string;
-  Coin: string;
-  Symbol: string;
-  CoinId: string;
-  Amount: number;
-  AddedAt: string;
-}
-
 export const exportPortfolioToXlsx = (
   items: PortfolioItem[],
   groups: PortfolioGroup[],

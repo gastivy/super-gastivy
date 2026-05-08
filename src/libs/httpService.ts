@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import { AuthServices } from "../modules/auth/services/index";
-
 export const httpService = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
   withCredentials: true,
