@@ -69,6 +69,24 @@ export const routes = {
       path: "/portfolio/crypto",
     },
   },
+  journaling: {
+    home: {
+      name: "Journal",
+      path: "/journaling",
+    },
+    create: {
+      name: "New Journal",
+      path: "/journaling/create",
+    },
+    templates: {
+      name: "Templates",
+      path: "/journaling/templates",
+    },
+  },
+  settings: {
+    name: "Settings",
+    path: "/settings",
+  },
 };
 
 export const ROUTES_UNPROTECTED = [routes.login.path, routes.register.path];

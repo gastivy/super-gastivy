@@ -1,4 +1,5 @@
 import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
+import type { JournalEntry, JournalTemplate } from "@modules/journaling/models/types";
 import type { PortfolioItem, PortfolioGroup } from "@modules/portfolio/models/types";
 import type { StockItem, StockGroup } from "@modules/portfolio/models/stockTypes";
 import Dexie, { type Table } from "dexie";
@@ -11,6 +12,8 @@ interface DexieStores extends Dexie {
   portfolioGroups: Table<PortfolioGroup, number>;
   stockPortfolio: Table<StockItem, number>;
   stockGroups: Table<StockGroup, number>;
+  journals: Table<JournalEntry, number>;
+  journalTemplates: Table<JournalTemplate, number>;
 }
 
 db.version(1).stores({
@@ -34,6 +37,16 @@ db.version(4).stores({
   portfolioGroups: "++id, name, createdAt",
   stockPortfolio: "++id, groupId, symbol, name, shares, createdAt",
   stockGroups: "++id, name, createdAt",
+});
+
+db.version(5).stores({
+  activities: "id, name, data",
+  portfolio: "++id, groupId, coinId, symbol, name, amount, createdAt",
+  portfolioGroups: "++id, name, createdAt",
+  stockPortfolio: "++id, groupId, symbol, name, shares, createdAt",
+  stockGroups: "++id, name, createdAt",
+  journals: "++id, date, title, createdAt",
+  journalTemplates: "++id, name, createdAt",
 });
 
 const DexieDB = db as DexieStores;

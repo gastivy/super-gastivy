@@ -98,4 +98,32 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
       },
     ],
   },
+  {
+    name: "Journal",
+    path: routes.journaling.home.path,
+    icon: "Book-solid",
+    children: [
+      {
+        name: "Overview",
+        path: routes.journaling.home.path,
+        icon: "Home-solid",
+      },
+      {
+        name: "New Entry",
+        path: routes.journaling.create.path,
+        icon: "Pencil-solid",
+      },
+      {
+        name: "Templates",
+        path: routes.journaling.templates.path,
+        icon: "Document-solid",
+      },
+    ],
+  },
+  {
+    name: "Settings",
+    path: routes.settings.path,
+    icon: "Settings-solid",
+    children: [],
+  },
 ];
