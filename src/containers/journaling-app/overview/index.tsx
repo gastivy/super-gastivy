@@ -1,23 +1,35 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+
+import {
+  IconArrowNarrowLeft,
+  IconArrowNarrowRight,
+  IconChevronDown,
+  IconEdit,
+  IconPlusFilled,
+  IconTrash,
+} from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 import {
-  format,
-  startOfMonth,
-  endOfMonth,
-  eachDayOfInterval,
-  getDay,
   addMonths,
-  subMonths,
+  eachDayOfInterval,
+  endOfMonth,
+  format,
+  getDay,
   isSameDay,
-  parseISO,
   isValid,
+  parseISO,
+  startOfMonth,
+  subMonths,
 } from "date-fns";
-import { useJournalsByDateRange, useJournalDates, useDeleteJournal } from "@modules/journaling/hooks/useJournals";
-import TiptapEditor from "@components/base/TiptapEditor";
 
 import Button from "@components/base/Button";
+import TiptapEditor from "@components/base/TiptapEditor";
 import { routes } from "@constants/routes";
-import { IconArrowNarrowLeft, IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
+import {
+  useDeleteJournal,
+  useJournalDates,
+  useJournalsByDateRange,
+} from "@modules/journaling/hooks/useJournals";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -32,14 +44,15 @@ const JournalOverviewContainer = () => {
   const startDate = format(monthStart, "yyyy-MM-dd");
   const endDate = format(monthEnd, "yyyy-MM-dd");
 
-  const { data: journalDates = new Set() } = useJournalDates(startDate, endDate);
+  const { data: journalDates = new Set() } = useJournalDates(
+    startDate,
+    endDate
+  );
 
   const filterStart = selectedDate
     ? format(selectedDate, "yyyy-MM-dd")
     : startDate;
-  const filterEnd = selectedDate
-    ? format(selectedDate, "yyyy-MM-dd")
-    : endDate;
+  const filterEnd = selectedDate ? format(selectedDate, "yyyy-MM-dd") : endDate;
 
   const { data: journals = [], refetch } = useJournalsByDateRange(
     filterStart,
@@ -116,9 +129,7 @@ const JournalOverviewContainer = () => {
                   {/* Collapsible Header */}
                   <div
                     className="flex items-center justify-between p-4 cursor-pointer"
-                    onClick={() =>
-                      journal.id && toggleExpand(journal.id)
-                    }
+                    onClick={() => journal.id && toggleExpand(journal.id)}
                   >
                     <div className="flex items-center gap-3 flex-1 min-w-0">
                       <IconChevronDown
@@ -152,7 +163,7 @@ const JournalOverviewContainer = () => {
                         }}
                         className="p-1 text-shark-400 hover:text-shark-900 transition-colors"
                       >
-                        <Icon name="Edit-outline" size={14} />
+                        <IconEdit stroke={2} size={14} />
                       </button>
                       <button
                         onClick={(e) => {
@@ -161,7 +172,7 @@ const JournalOverviewContainer = () => {
                         }}
                         className="p-1 text-shark-400 hover:text-red-500 transition-colors"
                       >
-                        <Icon name="Trash-outline" size={14} />
+                        <IconTrash stroke={2} size={14} />
                       </button>
                     </div>
                   </div>
@@ -201,7 +212,7 @@ const JournalOverviewContainer = () => {
                   onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
                   className="p-1 text-shark-400 hover:text-shark-950 transition-colors"
                 >
-                  <Icon name="Arrow-Right-outline" size={16} />
+                  <IconArrowNarrowRight stroke={2} size={16} />
                 </button>
               </div>
 
@@ -218,7 +229,8 @@ const JournalOverviewContainer = () => {
                   if (!day) return <div key={`blank-${idx}`} />;
                   const dateStr = format(day, "yyyy-MM-dd");
                   const hasJournal = journalDates.has(dateStr);
-                  const isSelected = selectedDate && isSameDay(day, selectedDate);
+                  const isSelected =
+                    selectedDate && isSameDay(day, selectedDate);
                   const isToday = isSameDay(day, new Date());
 
                   return (

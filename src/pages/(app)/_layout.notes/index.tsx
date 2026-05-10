@@ -1,5 +1,6 @@
-import NotesContainer from "@containers/notes";
 import { createFileRoute } from "@tanstack/react-router";
+
+import NotesContainer from "@containers/notes";
 
 const NotesPage = () => {
   return <NotesContainer />;

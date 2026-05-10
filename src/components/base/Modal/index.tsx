@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
-import type { ModalProps } from "./Modal.types";
-import { cn } from "@libs/classnames";
+
 import useClickOutside from "@hooks/useClickOutside";
+import { cn } from "@libs/classnames";
+
+import type { ModalProps } from "./Modal.types";
 
 const Modal = ({
   isOpen,

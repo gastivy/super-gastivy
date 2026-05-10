@@ -1,8 +1,10 @@
 import type React from "react";
-import type { InfiniteScrollProps } from "./InfiniteScroll.types";
 import { useRef } from "react";
-import { cn } from "@libs/classnames";
+
 import Spinner from "@components/base/Spinner";
+import { cn } from "@libs/classnames";
+
+import type { InfiniteScrollProps } from "./InfiniteScroll.types";
 
 const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
   isFetchingNextPage,

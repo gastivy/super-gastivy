@@ -1,7 +1,9 @@
 import { useRouterState } from "@tanstack/react-router";
-import ActivityLogs from "./ActivityLogs";
-import ActivityLogForm from "./ActivityLogForm";
+
 import type { LogActivity } from "@modules/activity/activity-log/models";
+
+import ActivityLogForm from "./ActivityLogForm";
+import ActivityLogs from "./ActivityLogs";
 
 const ActivityLogContainer = () => {
   const routerState = useRouterState();

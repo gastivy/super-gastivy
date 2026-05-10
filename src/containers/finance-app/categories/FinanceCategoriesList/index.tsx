@@ -1,17 +1,19 @@
+import { IconCoins, IconShoppingCart } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
 import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
+import EmptyState from "@components/base/EmptyState";
 import { routes } from "@constants/routes";
 import { typeTransactionOptions } from "@constants/transactions";
+import { useDisplayWidth } from "@hooks/useDisplayWidth";
 import { cn } from "@libs/classnames";
 import { useGetCategoryTransaction } from "@modules/finance/category/hooks/useCategoryTransaction";
 import { TypesTransactions } from "@modules/finance/category/models";
-import { useNavigate } from "@tanstack/react-router";
+
 import { SkeletonLoading } from "./SkeletonLoading";
-import EmptyState from "@components/base/EmptyState";
-import { Assets } from "@assets/illustrations";
-import { useDisplayWidth } from "@hooks/useDisplayWidth";
 
 const FinanceCategoriesList = () => {
   const navigate = useNavigate();
@@ -74,15 +76,19 @@ const FinanceCategoriesList = () => {
                   }
                 >
                   <div className="flex justify-center items-center bg-green-yellow-400 p-3 rounded-lg">
-                    <Icon
-                      name={
-                        category.type === TypesTransactions.EXPENSES
-                          ? "Cart-outline"
-                          : "Coins-outline"
-                      }
-                      size={32}
-                      className="text-limed-spruce-800"
-                    />
+                    {category.type === TypesTransactions.EXPENSES ? (
+                      <IconShoppingCart
+                        stroke={2}
+                        size={32}
+                        className="text-limed-spruce-800"
+                      />
+                    ) : (
+                      <IconCoins
+                        stroke={2}
+                        size={32}
+                        className="text-limed-spruce-800"
+                      />
+                    )}
                   </div>
                   <div className="flex flex-col gap-1">
                     <div className="font-medium text-limed-spruce-800">

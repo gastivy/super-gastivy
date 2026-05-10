@@ -1,18 +1,21 @@
+import type React from "react";
+import { useCallback, useMemo } from "react";
+
+import { IconArrowNarrowRight, IconDots } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
+import { routes } from "@constants/routes";
 import useClickOutside from "@hooks/useClickOutside";
 import useDisclosure from "@hooks/useDisclosure";
 import { useDisplayWidth } from "@hooks/useDisplayWidth";
 import { formatter } from "@libs/formatter";
 import { TypesTransactions } from "@modules/finance/category/models";
 import type { Transactions } from "@modules/finance/transactions/models";
-import type React from "react";
-import { useCallback, useMemo } from "react";
-import { OptionsDrawer } from "../OptionsDrawer";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
+
 import { ModalConfirmDelete } from "../DeleteConfirmModal";
+import { OptionsDrawer } from "../OptionsDrawer";
 
 interface CardTransactionsProps {
   transaction: Transactions;
@@ -94,8 +97,8 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
             <div className="text-xs font-medium text-limed-spruce-800">
               {transaction.from_wallet_name}
             </div>
-            <Icon
-              name="Arrow-Right-outline"
+            <IconArrowNarrowRight
+              stroke={2}
               size={16}
               className="text-gray-400"
             />
@@ -152,8 +155,8 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
               ref={optionsRef}
               className="min-w-6 relative max-[720px]:hidden flex justify-end cursor-pointer"
             >
-              <Icon
-                name="More-Square-outline"
+              <IconDots
+                stroke={2}
                 className="text-gray-400"
                 onClick={optionActionsDisclosure.onOpen}
               />

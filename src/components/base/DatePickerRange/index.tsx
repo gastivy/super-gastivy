@@ -1,19 +1,28 @@
 import React, { useState } from "react";
+import { type DateRange, DayPicker } from "react-day-picker";
+
+import {
+  IconCalendar,
+  IconChevronLeft,
+  IconChevronRight,
+} from "@tabler/icons-react";
 import { format } from "date-fns";
-import { DayPicker, type DateRange } from "react-day-picker";
-import useDisclosure from "@hooks/useDisclosure";
-import InputText from "../InputText";
+
 import useClickOutside from "@hooks/useClickOutside";
+import useDisclosure from "@hooks/useDisclosure";
+import { cn } from "@libs/classnames";
+
+import Each from "../Each";
+import InputText from "../InputText";
+
+import { shortcutDate } from "./DatePickerRange.constants";
 import type {
   DatePickerRangeProps,
   ShortcutDate,
 } from "./DatePickerRange.types";
-import Each from "../Each";
-import { shortcutDate } from "./DatePickerRange.constants";
-import { cn } from "@libs/classnames";
+
 import "react-day-picker/dist/style.css";
 import "./DatePickerRange.scss";
-import { IconCalendar, IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
 const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   mode = "range",
@@ -88,20 +97,14 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
               PreviousMonthButton: (props) => (
                 <button {...props}>
                   <div className="flex justify-center items-center w-6 h-6 bg-white shadow rounded-full">
-                    <IconChevronLeft
-                      className="text-gray-400"
-                      size={18}
-                    />
+                    <IconChevronLeft className="text-gray-400" size={18} />
                   </div>
                 </button>
               ),
               NextMonthButton: (props) => (
                 <button {...props}>
                   <div className="flex justify-center items-center w-6 h-6 bg-white shadow rounded-full">
-                    <IconChevronRight
-                      className="text-gray-400"
-                      size={20}
-                    />
+                    <IconChevronRight className="text-gray-400" size={20} />
                   </div>
                 </button>
               ),

@@ -1,5 +1,6 @@
-import ActivityCategoriesContainer from "@containers/activity-app/categories";
 import { createFileRoute } from "@tanstack/react-router";
+
+import ActivityCategoriesContainer from "@containers/activity-app/categories";
 
 const TimerActivityPage = () => {
   return <ActivityCategoriesContainer />;

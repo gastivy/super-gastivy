@@ -1,6 +1,7 @@
 import { useRouterState } from "@tanstack/react-router";
-import FinanceCategoriesList from "./FinanceCategoriesList";
+
 import FinanceCategoriesForm from "./FinanceCategoriesForm";
+import FinanceCategoriesList from "./FinanceCategoriesList";
 
 const FinanceCategoriesContainer = () => {
   const routerState = useRouterState();

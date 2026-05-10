@@ -1,11 +1,15 @@
 import { useMemo, useRef, useState } from "react";
-import type { SelectProps, Option } from "./Select.types";
-import Each from "../Each";
-import { cn } from "@libs/classnames";
-import useDisclosure from "@hooks/useDisclosure";
-import useClickOutside from "@hooks/useClickOutside";
-import { selectVariants } from "./Select.variants";
+
 import { IconChevronDown, IconCircleCheckFilled } from "@tabler/icons-react";
+
+import useClickOutside from "@hooks/useClickOutside";
+import useDisclosure from "@hooks/useDisclosure";
+import { cn } from "@libs/classnames";
+
+import Each from "../Each";
+
+import type { Option, SelectProps } from "./Select.types";
+import { selectVariants } from "./Select.variants";
 
 const Select = ({
   label,

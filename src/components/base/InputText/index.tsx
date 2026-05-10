@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { inputVariants } from "./InputText.variants";
-import type { InputTextProps } from "./InputText.types";
+
 import { cn } from "@libs/classnames";
 import { clamp } from "@libs/common";
+
+import type { InputTextProps } from "./InputText.types";
+import { inputVariants } from "./InputText.variants";
 
 const InputText: React.FC<InputTextProps> = ({
   size,

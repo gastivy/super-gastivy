@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+
 import useDebounce from "@hooks/useDebounce";
-import { CoinGeckoService } from "../services/coingecko";
+
 import type { PortfolioItem } from "../models/types";
+import { CoinGeckoService } from "../services/coingecko";
 
 export type CurrencyCode = "usd" | "idr";
 

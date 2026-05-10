@@ -1,13 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+import {
+  IconArrowNarrowLeft,
+  IconBook2,
+  IconCircleCheckFilled,
+} from "@tabler/icons-react";
 import { useNavigate, useSearch } from "@tanstack/react-router";
 import { format } from "date-fns";
-import { useJournal, useSaveJournal } from "@modules/journaling/hooks/useJournals";
-import { useJournalTemplates } from "@modules/journaling/hooks/useJournalTemplates";
-import TiptapEditor from "@components/base/TiptapEditor";
-import Button from "@components/base/Button";
 
+import Button from "@components/base/Button";
+import TiptapEditor from "@components/base/TiptapEditor";
 import { routes } from "@constants/routes";
-import { IconArrowNarrowLeft, IconCircleCheckFilled } from "@tabler/icons-react";
+import {
+  useJournal,
+  useSaveJournal,
+} from "@modules/journaling/hooks/useJournals";
+import { useJournalTemplates } from "@modules/journaling/hooks/useJournalTemplates";
 
 const JournalCreateContainer = () => {
   const navigate = useNavigate();
@@ -105,7 +113,7 @@ const JournalCreateContainer = () => {
           onClick={() => setShowTemplates(!showTemplates)}
           className="flex items-center gap-2 rounded-lg border border-shark-200 bg-white px-3 py-2 text-xs text-shark-600 hover:text-shark-900 hover:border-shark-300 transition-colors"
         >
-          <Icon name="Document-solid" size={14} />
+          <IconBook2 stroke={2} size={14} />
           Templates
         </button>
         {showTemplates && templates.length > 0 && (

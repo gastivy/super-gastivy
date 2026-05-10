@@ -1,4 +1,5 @@
 import type { VariantProps } from "class-variance-authority";
+
 import type { selectVariants } from "./Select.variants";
 
 export type Option = {

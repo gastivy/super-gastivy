@@ -1,7 +1,8 @@
+import type React from "react";
+
 import Drawer from "@components/base/Drawer";
 import type { DrawerProps } from "@components/base/Drawer/Drawer.types";
 import Each from "@components/base/Each";
-import type React from "react";
 
 interface Options {
   label: string;

@@ -1,4 +1,5 @@
 import type { VariantProps } from "class-variance-authority";
+
 import type { textareaVariants } from "./TextArea.variants";
 
 export interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {

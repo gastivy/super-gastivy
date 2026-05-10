@@ -1,5 +1,6 @@
-import { cn } from "@libs/classnames";
 import type React from "react";
+
+import { cn } from "@libs/classnames";
 
 interface RowDataProps {
   label: string;

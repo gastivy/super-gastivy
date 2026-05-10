@@ -1,4 +1,5 @@
 import type { VariantProps } from "class-variance-authority";
+
 import type { inputVariants } from "./InputText.variants";
 
 export interface InputTextProps extends Omit<

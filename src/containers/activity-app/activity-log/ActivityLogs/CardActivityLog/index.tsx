@@ -1,20 +1,22 @@
+import type React from "react";
+import { useCallback } from "react";
+
+import { IconClockHour5, IconDots, IconFlameFilled } from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
+import { routes } from "@constants/routes";
 import useClickOutside from "@hooks/useClickOutside";
 import useDisclosure from "@hooks/useDisclosure";
-import { dateTime } from "@libs/dateTime";
-import type { LogActivity } from "@modules/activity/activity-log/models";
-import type React from "react";
-import { OptionsDrawer } from "../OptionsDrawer";
 import { useDisplayWidth } from "@hooks/useDisplayWidth";
+import { dateTime } from "@libs/dateTime";
 import { useDeleteActivity } from "@modules/activity/activity-log/hooks/useActivity";
-import { useQueryClient } from "@tanstack/react-query";
+import type { LogActivity } from "@modules/activity/activity-log/models";
+
 import { ModalConfirmDelete } from "../ModalConfirmDelete";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
-import { useCallback } from "react";
-import { IconClockHour5, IconDots, IconFlameFilled } from "@tabler/icons-react";
+import { OptionsDrawer } from "../OptionsDrawer";
 
 interface CardActivityLogProps {
   log: LogActivity;
@@ -90,7 +92,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
           <div className="flex basis-[40%] items-center gap-1">
             {log.is_done ? (
               <IconFlameFilled className="text-green-yellow-500" size={16} />
-            ): (
+            ) : (
               <IconClockHour5 className="text-gray-400" size={16} />
             )}
             <div className="text-shark-700">
@@ -115,11 +117,7 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
             ref={optionsRef}
             className="min-w-6 max-[720px]:hidden flex justify-end cursor-pointer"
           >
-            <IconDots
-              stroke={2}
-              className="text-gray-400"
-              onClick={onOpen}
-            />
+            <IconDots stroke={2} className="text-gray-400" onClick={onOpen} />
 
             <Conditional if={isOpen}>
               <div className="w-40 absolute z-1 top-12 right-0 flex flex-col bg-white border border-shark-400/30 rounded-lg overflow-hidden">

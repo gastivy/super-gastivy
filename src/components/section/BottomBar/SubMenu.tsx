@@ -1,9 +1,10 @@
-import Each from "@components/base/Each";
+import type React from "react";
 
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+
+import Each from "@components/base/Each";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { cn } from "@libs/classnames";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
-import type React from "react";
 
 interface Props {
   menu: string;
@@ -47,11 +48,15 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
                 key={index}
                 onClick={() => navigate({ to: item.path })}
               >
-                <Icon
-                  name={item.icon}
-                  className={isActive ? "text-shark-950" : "text-white"}
-                  size={18}
-                />
+                {(() => {
+                  const TablerIcon = item.icon;
+                  return (
+                    <TablerIcon
+                      className={isActive ? "text-shark-950" : "text-white"}
+                      size={18}
+                    />
+                  );
+                })()}
                 <div
                   className={cn(
                     "text-shark-950 text-xs font-medium",

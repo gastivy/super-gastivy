@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { cn } from "@libs/classnames";
-import type { DrawerProps } from "./Drawer.types";
+
 import useClickOutside from "@hooks/useClickOutside";
+import { cn } from "@libs/classnames";
+
+import type { DrawerProps } from "./Drawer.types";
 
 const Drawer: React.FC<DrawerProps> = ({
   children,

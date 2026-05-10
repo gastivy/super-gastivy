@@ -1,34 +1,40 @@
-import DatePicker from "@components/base/DatePicker";
-import Select from "@components/base/Select";
-import { routes } from "@constants/routes";
-import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useMemo } from "react";
-import Switch from "@components/base/Switch";
-import TimePicker from "@components/base/TimePicker";
-import Each from "@components/base/Each";
-import Button from "@components/base/Button";
-import { cn } from "@libs/classnames";
-import { useDisplayWidth } from "@hooks/useDisplayWidth";
-import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Controller,
+  type SubmitHandler,
   useFieldArray,
   useForm,
-  type SubmitHandler,
 } from "react-hook-form";
-import { schemaActivities } from "@modules/activity/activity-log/schemas/activity";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  IconArrowNarrowLeft,
+  IconChevronDown,
+  IconPlusFilled,
+} from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+
+import Button from "@components/base/Button";
+import DatePicker from "@components/base/DatePicker";
+import Disclosure from "@components/base/Disclosure";
+import Each from "@components/base/Each";
+import Select from "@components/base/Select";
+import Switch from "@components/base/Switch";
+import TimeHours from "@components/base/TimeHours";
+import TimePicker from "@components/base/TimePicker";
+import { routes } from "@constants/routes";
+import { type useDisclosureProps } from "@hooks/useDisclosure";
+import { useDisplayWidth } from "@hooks/useDisplayWidth";
+import { cn } from "@libs/classnames";
+import { dateTime } from "@libs/dateTime";
 import {
   useCreateActivity,
   useUpdateActivity,
 } from "@modules/activity/activity-log/hooks/useActivity";
-import { useQueryClient } from "@tanstack/react-query";
-import TimeHours from "@components/base/TimeHours";
 import type { LogActivity } from "@modules/activity/activity-log/models";
-import { dateTime } from "@libs/dateTime";
-import { type useDisclosureProps } from "@hooks/useDisclosure";
-import Disclosure from "@components/base/Disclosure";
-import { IconArrowNarrowLeft, IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
+import { schemaActivities } from "@modules/activity/activity-log/schemas/activity";
+import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
 
 interface FormActivity {
   seconds: number;
@@ -72,19 +78,21 @@ const ActivityLogForm = () => {
 
   const { data } = useGetCategory({});
 
-  const { mutate: createActivity, isPending: isPendingCreate } = useCreateActivity({
-    onSuccess: async () => {
-      navigate({ to: routes.activity.activityLog.path });
-      queryClient.invalidateQueries({ queryKey: ["activities"] });
-    },
-  });
+  const { mutate: createActivity, isPending: isPendingCreate } =
+    useCreateActivity({
+      onSuccess: async () => {
+        navigate({ to: routes.activity.activityLog.path });
+        queryClient.invalidateQueries({ queryKey: ["activities"] });
+      },
+    });
 
-  const { mutate: updateActivity, isPending: isPendingUpdate } = useUpdateActivity({
-    onSuccess: () => {
-      navigate({ to: routes.activity.activityLog.path });
-      queryClient.invalidateQueries({ queryKey: ["activities"] });
-    },
-  });
+  const { mutate: updateActivity, isPending: isPendingUpdate } =
+    useUpdateActivity({
+      onSuccess: () => {
+        navigate({ to: routes.activity.activityLog.path });
+        queryClient.invalidateQueries({ queryKey: ["activities"] });
+      },
+    });
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -179,7 +187,11 @@ const ActivityLogForm = () => {
             {form?.id ? "Update Activity Log" : "Create Activity Log"}
           </div>
         </div>
-        <Button shape="semi-round" disabled={isPendingCreate || isPendingUpdate} onClick={onSubmit(handleCreate)}>
+        <Button
+          shape="semi-round"
+          disabled={isPendingCreate || isPendingUpdate}
+          onClick={onSubmit(handleCreate)}
+        >
           {form?.id ? "Save" : "Create"}
         </Button>
       </div>

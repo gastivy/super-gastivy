@@ -1,23 +1,29 @@
-import Button from "@components/base/Button";
-import Dropdown from "@components/base/Dropdown";
-import type { DropdownOption } from "@components/base/Dropdown/Dropdown.types";
-
-import useDisclosure from "@hooks/useDisclosure";
-import DexieDB from "@libs/dexieDB";
-import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
-import { useGetListCategory } from "@modules/activity/categories/hooks/useCategory";
 import React, { useMemo } from "react";
 import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
-import { cn } from "@libs/classnames";
+
+import {
+  IconCheck,
+  IconPlayerPauseFilled,
+  IconPlayerPlayFilled,
+  IconXFilled,
+} from "@tabler/icons-react";
+
+import Button from "@components/base/Button";
+import Dropdown from "@components/base/Dropdown";
+import type { DropdownOption } from "@components/base/Dropdown/Dropdown.types";
 import ModalConfirm from "@components/base/ModalConfirm";
-import { IconCircleCheckFilled } from "@tabler/icons-react";
+import useDisclosure from "@hooks/useDisclosure";
+import { cn } from "@libs/classnames";
+import DexieDB from "@libs/dexieDB";
+import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
+import { useGetListCategory } from "@modules/activity/categories/hooks/useCategory";
 
 interface TimerControllerProps {
   isStarted: boolean;
-  isLoadingCreate: boolean
+  isLoadingCreate: boolean;
   formatted: string;
   seconds: number;
   currentActivity: ActivitiesDexieStore;
@@ -107,9 +113,11 @@ export const TimerController: React.FC<TimerControllerProps> = ({
               (isStarted || isLoadingCreate || !hasData) &&
                 "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
             )}
-            onClick={() => !isStarted && !isLoadingCreate && hasData && onOpen()}
+            onClick={() =>
+              !isStarted && !isLoadingCreate && hasData && onOpen()
+            }
           >
-            <Icon name="Close-solid" size={18} className="text-white" />
+            <IconXFilled size={18} className="text-white" />
           </div>
           <Button
             shape="pill"
@@ -117,7 +125,17 @@ export const TimerController: React.FC<TimerControllerProps> = ({
             disabled={!currentActivity?.id || isLoadingCreate}
             onClick={onChangeTimer}
           >
-            <Icon name={isStarted ? "Pause-solid" : "Play-solid"} size={48} />
+            {isStarted ? (
+              <IconPlayerPauseFilled
+                size={48}
+                className="text-limed-spruce-800"
+              />
+            ) : (
+              <IconPlayerPlayFilled
+                size={48}
+                className="text-limed-spruce-800"
+              />
+            )}
           </Button>
           <div
             className={cn(
@@ -127,7 +145,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
             )}
             onClick={handleFinishActivity}
           >
-            <IconCircleCheckFilled size={18} className="text-white" />
+            <IconCheck stroke={2} size={18} className="text-white" />
           </div>
         </div>
       </div>

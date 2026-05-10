@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import Sidebar from "@components/section/Sidebar";
+
 import BottomBar from "@components/section/BottomBar";
+import Sidebar from "@components/section/Sidebar";
 import TimerPopover from "@components/section/TimerPopover";
 
 export const Route = createFileRoute("/(app)/_layout")({

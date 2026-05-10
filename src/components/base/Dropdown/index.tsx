@@ -1,10 +1,14 @@
 import type React from "react";
-import type { DropdownProps } from "./Dropdown.types";
-import Each from "../Each";
-import useDisclosure from "@hooks/useDisclosure";
 import { useMemo } from "react";
-import { cn } from "@libs/classnames";
+
 import { IconCheck, IconChevronDown } from "@tabler/icons-react";
+
+import useDisclosure from "@hooks/useDisclosure";
+import { cn } from "@libs/classnames";
+
+import Each from "../Each";
+
+import type { DropdownProps } from "./Dropdown.types";
 
 const Dropdown: React.FC<DropdownProps> = ({
   value,
@@ -59,10 +63,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 </div>
 
                 {option.value === value && (
-                  <IconCheck
-                    size={14}
-                    className="text-green-yellow-500"
-                  />
+                  <IconCheck size={14} className="text-green-yellow-500" />
                 )}
               </div>
             )}

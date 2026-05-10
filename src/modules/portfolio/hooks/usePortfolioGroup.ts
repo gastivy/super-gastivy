@@ -1,5 +1,7 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+
 import DexieDB from "@libs/dexieDB";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+
 import type { PortfolioGroup } from "../models/types";
 
 const GROUP_QUERY_KEY = ["portfolioGroups"];
@@ -11,7 +13,7 @@ export const useGetGroups = () => {
       const groups = await DexieDB.portfolioGroups.toArray();
       return groups.sort(
         (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
       );
     },
   });

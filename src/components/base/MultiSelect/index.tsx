@@ -1,12 +1,20 @@
 import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { multiSelectVariants } from "./MultiSelect.variants";
-import type { MultiSelectProps, Option } from "./MultiSelect.types";
-import Each from "../Each";
-import { cn } from "@libs/classnames";
-import useDisclosure from "@hooks/useDisclosure";
+
+import {
+  IconChevronDown,
+  IconCircleCheckFilled,
+  IconXFilled,
+} from "@tabler/icons-react";
+
 import useClickOutside from "@hooks/useClickOutside";
+import useDisclosure from "@hooks/useDisclosure";
+import { cn } from "@libs/classnames";
+
 import Conditional from "../Conditional";
-import { IconChevronDown, IconCircleCheckFilled, IconXFilled } from "@tabler/icons-react";
+import Each from "../Each";
+
+import type { MultiSelectProps, Option } from "./MultiSelect.types";
+import { multiSelectVariants } from "./MultiSelect.variants";
 
 export default function MultiSelect({
   options,

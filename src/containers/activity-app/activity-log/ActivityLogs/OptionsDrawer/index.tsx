@@ -1,6 +1,7 @@
+import type React from "react";
+
 import Drawer from "@components/base/Drawer";
 import Each from "@components/base/Each";
-import type React from "react";
 
 type Option = {
   title: string;

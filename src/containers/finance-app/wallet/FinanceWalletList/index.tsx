@@ -1,15 +1,17 @@
+import { IconWallet } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
+import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
+import EmptyState from "@components/base/EmptyState";
+import { routes } from "@constants/routes";
 import { cn } from "@libs/classnames";
 import { formatter } from "@libs/formatter";
 import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";
+
 import { SkeletonLoading } from "./SkeletonLoading";
-import EmptyState from "@components/base/EmptyState";
-import { Assets } from "@assets/illustrations";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
-import Button from "@components/base/Button";
 
 const FinanceWalletList = () => {
   const navigate = useNavigate();
@@ -69,8 +71,8 @@ const FinanceWalletList = () => {
                   }
                 >
                   <div className="flex justify-center items-center bg-green-yellow-400 p-3 rounded-lg">
-                    <Icon
-                      name="Wallet-outline"
+                    <IconWallet
+                      stroke={2}
                       size={32}
                       className="text-limed-spruce-800"
                     />

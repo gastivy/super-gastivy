@@ -1,6 +1,7 @@
+import { createRootRoute, Outlet, redirect } from "@tanstack/react-router";
+
 import { routes, ROUTES_UNPROTECTED } from "@constants/routes";
 import { cookies } from "@libs/cookies";
-import { createRootRoute, Outlet, redirect } from "@tanstack/react-router";
 
 const RootLayout = () => <Outlet />;
 

@@ -1,15 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "@tanstack/react-router";
+
 import {
+  IconArrowNarrowLeft,
+  IconEdit,
+  IconPlusFilled,
+  IconTrash,
+} from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import Button from "@components/base/Button";
+import TiptapEditor from "@components/base/TiptapEditor";
+import { routes } from "@constants/routes";
+import {
+  useDeleteJournalTemplate,
   useJournalTemplates,
   useSaveJournalTemplate,
-  useDeleteJournalTemplate,
 } from "@modules/journaling/hooks/useJournalTemplates";
-import TiptapEditor from "@components/base/TiptapEditor";
-import Button from "@components/base/Button";
-
-import { routes } from "@constants/routes";
-import { IconArrowNarrowLeft, IconPlusFilled } from "@tabler/icons-react";
 
 const JournalTemplatesContainer = () => {
   const navigate = useNavigate();
@@ -151,15 +157,13 @@ const JournalTemplatesContainer = () => {
                     onClick={() => handleEdit(template)}
                     className="p-1 text-shark-400 hover:text-shark-900 transition-colors"
                   >
-                    <Icon name="Edit-outline" size={14} />
+                    <IconEdit stroke={2} size={14} />
                   </button>
                   <button
-                    onClick={() =>
-                      template.id && handleDelete(template.id)
-                    }
+                    onClick={() => template.id && handleDelete(template.id)}
                     className="p-1 text-shark-400 hover:text-red-500 transition-colors"
                   >
-                    <Icon name="Trash-outline" size={14} />
+                    <IconTrash stroke={2} size={14} />
                   </button>
                 </div>
               </div>

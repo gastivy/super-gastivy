@@ -1,10 +1,14 @@
 import * as XLSX from "xlsx";
-import type { StockItem, StockGroup } from "../models/stockTypes";
+
+import type { StockGroup, StockItem } from "../models/stockTypes";
 
 export const exportStockPortfolioToXlsx = (
   items: StockItem[],
   groups: StockGroup[],
-  quoteMap?: Map<string, { regularMarketPrice: number; regularMarketChangePercent: number }>,
+  quoteMap?: Map<
+    string,
+    { regularMarketPrice: number; regularMarketChangePercent: number }
+  >,
   filename = "stock-portfolio"
 ) => {
   const groupMap = new Map(groups.map((g) => [g.id, g.name]));
@@ -78,12 +82,8 @@ export const importStockPortfolioFromXlsx = (
           const group = String(
             row["Group"] ?? row["group"] ?? "Default"
           ).trim();
-          const symbol = String(
-            row["Symbol"] ?? row["symbol"] ?? ""
-          ).trim();
-          const name = String(
-            row["Name"] ?? row["name"] ?? ""
-          ).trim();
+          const symbol = String(row["Symbol"] ?? row["symbol"] ?? "").trim();
+          const name = String(row["Name"] ?? row["name"] ?? "").trim();
           const sharesRaw = row["Shares"] ?? row["shares"];
           const shares = Number(sharesRaw);
 

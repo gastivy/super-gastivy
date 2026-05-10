@@ -1,10 +1,16 @@
-import Button from "@components/base/Button";
+import { useEffect } from "react";
+import { Controller, type SubmitHandler, useForm } from "react-hook-form";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import { IconArrowNarrowLeft, IconTrash } from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+
+import Button from "@components/base/Button";
 import InputText from "@components/base/InputText";
 import Select from "@components/base/Select";
 import { routes } from "@constants/routes";
 import { typeTransactionOptions } from "@constants/transactions";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { setValues } from "@libs/react-hooks-form-libs";
 import {
   useCreateCategoryTransaction,
@@ -14,11 +20,6 @@ import {
 } from "@modules/finance/category/hooks/useCategoryTransaction";
 import type { CategoryTransactionRequest } from "@modules/finance/category/models";
 import { schemaCategoryTransaction } from "@modules/finance/category/schema/category";
-import { IconArrowNarrowLeft } from "@tabler/icons-react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 
 const FinanceCategoriesForm = () => {
   const navigate = useNavigate();
@@ -153,7 +154,7 @@ const FinanceCategoriesForm = () => {
             disabled={isPendingCreate || isPendingUpdate || isPendingDelete}
             onClick={handleDelete}
           >
-            <Icon name="Trash-outline" className="text-white" />
+            <IconTrash stroke={2} className="text-white" />
             Delete
           </Button>
         )}

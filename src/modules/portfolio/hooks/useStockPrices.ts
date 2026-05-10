@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+
 import useDebounce from "@hooks/useDebounce";
-import { YahooFinanceService } from "../services/yahooFinance";
+
 import type { StockItem } from "../models/stockTypes";
+import { YahooFinanceService } from "../services/yahooFinance";
 
 export const useExchangeRate = () => {
   return useQuery({

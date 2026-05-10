@@ -1,4 +1,5 @@
 import type { VariantProps } from "class-variance-authority";
+
 import type { inputVariants } from "./InputPassword.variants";
 
 export interface InputPasswordProps extends Omit<

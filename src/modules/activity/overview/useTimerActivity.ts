@@ -1,11 +1,13 @@
+import { useMemo } from "react";
+
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "@tanstack/react-router";
+import { useLiveQuery } from "dexie-react-hooks";
+
+import { routes } from "@constants/routes";
 import useStopwatch from "@hooks/useStopwatch";
 import DexieDB from "@libs/dexieDB";
-import { useLiveQuery } from "dexie-react-hooks";
-import { useMemo } from "react";
 import { useCreateActivity } from "@modules/activity/activity-log/hooks/useActivity";
-import { routes } from "@constants/routes";
-import { useNavigate } from "@tanstack/react-router";
-import { useQueryClient } from "@tanstack/react-query";
 
 export const useTimerActivity = () => {
   const navigate = useNavigate();

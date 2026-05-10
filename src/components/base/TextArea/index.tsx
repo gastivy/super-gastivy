@@ -1,6 +1,8 @@
 import type React from "react";
-import type { TextAreaProps } from "./TextArea.types";
+
 import { cn } from "@libs/classnames";
+
+import type { TextAreaProps } from "./TextArea.types";
 import { textareaVariants } from "./TextArea.variants";
 
 const TextArea: React.FC<TextAreaProps> = ({

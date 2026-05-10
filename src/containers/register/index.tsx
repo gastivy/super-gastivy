@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useNavigate } from "@tanstack/react-router";
+import type { AxiosError } from "axios";
+
 import LogoIcon from "@assets/logo-icon/icon-2-160.svg";
+import Alert from "@components/base/Alert";
 import Button from "@components/base/Button";
 import InputText from "@components/base/InputText";
-import { useNavigate } from "@tanstack/react-router";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaRegister } from "@modules/auth/schemas/register";
-import { useForm } from "react-hook-form";
-import { useRegister } from "@modules/auth/hooks/useAuth";
 import { routes } from "@constants/routes";
-import type { AxiosError } from "axios";
+import { useRegister } from "@modules/auth/hooks/useAuth";
 import type { RegisterRequest } from "@modules/auth/models/Auth";
-import Alert from "@components/base/Alert";
+import { schemaRegister } from "@modules/auth/schemas/register";
 
 const RegisterContainer: React.FC = () => {
   const navigate = useNavigate();

@@ -1,26 +1,29 @@
+import { useMemo, useState } from "react";
+
+import { IconFilterFilled } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import Button from "@components/base/Button";
+import Conditional from "@components/base/Conditional";
+import DatePickerRange from "@components/base/DatePickerRange";
 import Each from "@components/base/Each";
+import InfiniteScroll from "@components/base/InfiniteScroll";
+import MultiSelect from "@components/base/MultiSelect";
+import { routes } from "@constants/routes";
+import useDisclosure from "@hooks/useDisclosure";
+import { useDisplayWidth } from "@hooks/useDisplayWidth";
 import { dateTime } from "@libs/dateTime";
+import { useGetCategoryTransaction } from "@modules/finance/category/hooks/useCategoryTransaction";
 import { useInfiniteTransactions } from "@modules/finance/transactions/hooks/useTransaction";
 import type {
   GetTransactionRequest,
   Transactions,
 } from "@modules/finance/transactions/models";
-import { useMemo, useState } from "react";
-import { CardTransactions } from "./CardTransactions";
-import InfiniteScroll from "@components/base/InfiniteScroll";
-import DatePickerRange from "@components/base/DatePickerRange";
-import Conditional from "@components/base/Conditional";
-import { SkeletonLoading } from "./SkeletonLoading";
-import { useDisplayWidth } from "@hooks/useDisplayWidth";
-import { useGetCategoryTransaction } from "@modules/finance/category/hooks/useCategoryTransaction";
 import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";
-import MultiSelect from "@components/base/MultiSelect";
-import { FilterDrawer } from "./FilterDrawer";
-import useDisclosure from "@hooks/useDisclosure";
 
-import Button from "@components/base/Button";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
+import { CardTransactions } from "./CardTransactions";
+import { FilterDrawer } from "./FilterDrawer";
+import { SkeletonLoading } from "./SkeletonLoading";
 
 const TransactionsList = () => {
   const navigate = useNavigate();
@@ -162,7 +165,7 @@ const TransactionsList = () => {
               className="w-8.5 h-8.5 flex justify-center items-center border border-gray-300 rounded p-0.5"
               onClick={onOpen}
             >
-              <Icon name="Filter-solid" className="text-gray-400" size={18} />
+              <IconFilterFilled className="text-gray-400" size={18} />
             </div>
           </Conditional>
         </div>

@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css,scss,json}\"",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "yup": "^1.7.1"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^9.39.1",
     "@tanstack/router-plugin": "^1.139.12",
     "@types/axios": "^0.9.36",
@@ -60,6 +63,7 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "^3.7.3",
     "typescript": "~5.9.3",
+    "typescript-eslint": "^8.59.2",
     "vite": "^7.2.4"
   }
 }

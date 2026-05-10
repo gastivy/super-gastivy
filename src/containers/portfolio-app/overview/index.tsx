@@ -1,21 +1,27 @@
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
+
+import {
+  IconArrowNarrowRight,
+  IconCoins,
+  IconStack2Filled,
+} from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-
 import Spinner from "@components/base/Spinner";
-import { Assets } from "@assets/illustrations";
-import { useNavigate } from "@tanstack/react-router";
 import { routes } from "@constants/routes";
-import { useGetPortfolio } from "@modules/portfolio/hooks/usePortfolio";
 import {
-  useCryptoPrices,
   type CurrencyCode,
+  useCryptoPrices,
 } from "@modules/portfolio/hooks/useCryptoPrices";
+import { useGetPortfolio } from "@modules/portfolio/hooks/usePortfolio";
 import { useGetStockPortfolio } from "@modules/portfolio/hooks/useStockPortfolio";
 import {
-  useStockPrices,
   useExchangeRate,
+  useStockPrices,
 } from "@modules/portfolio/hooks/useStockPrices";
 
 const PortfolioOverviewContainer = () => {
@@ -146,9 +152,7 @@ const PortfolioOverviewContainer = () => {
           Portfolio Overview
         </div>
         <button
-          onClick={() =>
-            setCurrency(currency === "usd" ? "idr" : "usd")
-          }
+          onClick={() => setCurrency(currency === "usd" ? "idr" : "usd")}
           className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-sm hover:bg-gray-50 cursor-pointer transition-colors"
         >
           <span
@@ -194,7 +198,9 @@ const PortfolioOverviewContainer = () => {
         <div className="flex flex-col gap-6">
           {/* Grand Total */}
           <div className="bg-white p-6 rounded-lg">
-            <div className="text-sm text-gray-500 mb-1">Total Portfolio Value</div>
+            <div className="text-sm text-gray-500 mb-1">
+              Total Portfolio Value
+            </div>
             <Conditional if={isLoading}>
               <div className="h-9 w-56 animate-pulse bg-gray-200 rounded" />
             </Conditional>
@@ -203,13 +209,9 @@ const PortfolioOverviewContainer = () => {
                 {formatCurrency(grandTotal)}
               </div>
               <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
-                <span>
-                  Crypto: {formatCurrency(cryptoTotal)}
-                </span>
+                <span>Crypto: {formatCurrency(cryptoTotal)}</span>
                 <span>•</span>
-                <span>
-                  Stocks: {formatCurrency(stockTotal)}
-                </span>
+                <span>Stocks: {formatCurrency(stockTotal)}</span>
               </div>
             </Conditional>
           </div>
@@ -241,8 +243,7 @@ const PortfolioOverviewContainer = () => {
                   <div className="flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
                     <span className="text-xs text-gray-600">
-                      Crypto{" "}
-                      {((cryptoTotal / grandTotal) * 100).toFixed(1)}%
+                      Crypto {((cryptoTotal / grandTotal) * 100).toFixed(1)}%
                     </span>
                   </div>
                 </Conditional>
@@ -250,8 +251,7 @@ const PortfolioOverviewContainer = () => {
                   <div className="flex items-center gap-1.5">
                     <div className="w-2.5 h-2.5 rounded-full bg-blue-400" />
                     <span className="text-xs text-gray-600">
-                      Stocks{" "}
-                      {((stockTotal / grandTotal) * 100).toFixed(1)}%
+                      Stocks {((stockTotal / grandTotal) * 100).toFixed(1)}%
                     </span>
                   </div>
                 </Conditional>
@@ -265,23 +265,17 @@ const PortfolioOverviewContainer = () => {
             <div className="bg-white rounded-lg overflow-hidden">
               <div className="flex items-center justify-between p-6 pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Icon
-                    name="Coins-solid"
-                    size={18}
-                    className="text-yellow-500"
-                  />
+                  <IconCoins stroke={2} size={18} className="text-yellow-500" />
                   <span className="text-md font-semibold text-limed-spruce-700">
                     Crypto
                   </span>
                 </div>
                 <button
-                  onClick={() =>
-                    navigate({ to: routes.portfolio.crypto.path })
-                  }
+                  onClick={() => navigate({ to: routes.portfolio.crypto.path })}
                   className="text-xs text-gray-400 hover:text-limed-spruce-700 cursor-pointer transition-colors flex items-center gap-1"
                 >
                   View All
-                  <Icon name="Arrow-Right-outline" size={12} />
+                  <IconArrowNarrowRight stroke={2} size={12} />
                 </button>
               </div>
 
@@ -387,23 +381,17 @@ const PortfolioOverviewContainer = () => {
             <div className="bg-white rounded-lg overflow-hidden">
               <div className="flex items-center justify-between p-6 pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
-                  <Icon
-                    name="Chart-solid"
-                    size={18}
-                    className="text-blue-500"
-                  />
+                  <IconStack2Filled size={18} className="text-blue-500" />
                   <span className="text-md font-semibold text-limed-spruce-700">
                     Stocks
                   </span>
                 </div>
                 <button
-                  onClick={() =>
-                    navigate({ to: routes.portfolio.stocks.path })
-                  }
+                  onClick={() => navigate({ to: routes.portfolio.stocks.path })}
                   className="text-xs text-gray-400 hover:text-limed-spruce-700 cursor-pointer transition-colors flex items-center gap-1"
                 >
                   View All
-                  <Icon name="Arrow-Right-outline" size={12} />
+                  <IconArrowNarrowRight stroke={2} size={12} />
                 </button>
               </div>
 

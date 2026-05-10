@@ -1,5 +1,7 @@
+import React, { useEffect, useRef, useState } from "react";
+
 import { cn } from "@libs/classnames";
-import React, { useState, useRef, useEffect } from "react";
+
 import type { SwitchProps } from "./Switch.types";
 
 const Switch: React.FC<SwitchProps> = ({

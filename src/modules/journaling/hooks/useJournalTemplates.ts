@@ -1,6 +1,7 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
+
 import DexieDB from "@libs/dexieDB";
 import type { JournalTemplate } from "@modules/journaling/models/types";
-import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useJournalTemplates() {
   return useQuery({

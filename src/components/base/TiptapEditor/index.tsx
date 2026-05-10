@@ -1,7 +1,8 @@
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Placeholder from "@tiptap/extension-placeholder";
 import { useEffect, useRef } from "react";
+
+import Placeholder from "@tiptap/extension-placeholder";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 interface TiptapEditorProps {
   content?: string;
@@ -95,7 +96,9 @@ const TiptapEditor = ({
           <div className="w-px h-4 bg-shark-300 mx-1" />
           <button
             type="button"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 2 }).run()
+            }
             className={`px-2 py-1 rounded text-xs font-bold transition-colors ${
               editor.isActive("heading", { level: 2 })
                 ? "bg-shark-900 text-white"
@@ -106,7 +109,9 @@ const TiptapEditor = ({
           </button>
           <button
             type="button"
-            onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+            onClick={() =>
+              editor.chain().focus().toggleHeading({ level: 3 }).run()
+            }
             className={`px-2 py-1 rounded text-xs font-bold transition-colors ${
               editor.isActive("heading", { level: 3 })
                 ? "bg-shark-900 text-white"

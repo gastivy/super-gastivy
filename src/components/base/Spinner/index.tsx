@@ -1,5 +1,7 @@
-import { cn } from "@libs/classnames";
 import type React from "react";
+
+import { cn } from "@libs/classnames";
+
 import type { SpinnerProps } from "./Spinner.types";
 
 const Spinner: React.FC<SpinnerProps> = ({ className }) => {

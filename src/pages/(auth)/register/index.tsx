@@ -1,7 +1,9 @@
 import React from "react";
+
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import RegisterContainer from "@containers/register";
+
 import { routes } from "@constants/routes";
+import RegisterContainer from "@containers/register";
 
 const RegisterPage: React.FC = () => {
   return <RegisterContainer />;

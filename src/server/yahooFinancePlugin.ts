@@ -35,8 +35,8 @@ export function yahooFinancePlugin(): Plugin {
             const stocks = (result.quotes || [])
               .filter(
                 (q) =>
-                  ("quoteType" in q &&
-                    (q.quoteType === "EQUITY" || q.quoteType === "ETF")) &&
+                  "quoteType" in q &&
+                  (q.quoteType === "EQUITY" || q.quoteType === "ETF") &&
                   "symbol" in q &&
                   q.symbol
               )

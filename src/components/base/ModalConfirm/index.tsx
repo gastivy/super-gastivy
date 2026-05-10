@@ -1,6 +1,7 @@
+import type React from "react";
+
 import Button from "@components/base/Button";
 import Modal from "@components/base/Modal";
-import type React from "react";
 
 interface ModalConfirmProps {
   isOpen: boolean;

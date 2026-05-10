@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+
 import { IconEye, IconEyeOff } from "@tabler/icons-react";
-import { inputVariants } from "./InputPassword.variants";
-import type { InputPasswordProps } from "./InputPassword.types";
+
 import useDisclosure from "@hooks/useDisclosure";
 import { cn } from "@libs/classnames";
+
+import type { InputPasswordProps } from "./InputPassword.types";
+import { inputVariants } from "./InputPassword.variants";
 
 const InputPassword: React.FC<InputPasswordProps> = ({
   size,

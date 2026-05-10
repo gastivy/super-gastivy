@@ -1,5 +1,5 @@
-import { ProgressActivty } from "./ProgressActivity";
 import { LastActivity } from "./LastActivity";
+import { ProgressActivty } from "./ProgressActivity";
 
 const ActivityOverviewContainer = () => {
   const hour = new Date().getHours();

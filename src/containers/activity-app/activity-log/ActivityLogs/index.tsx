@@ -1,21 +1,24 @@
+import type React from "react";
+import { useMemo } from "react";
+
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
+import Button from "@components/base/Button";
+import Conditional from "@components/base/Conditional";
 import DatePickerRange from "@components/base/DatePickerRange";
 import Each from "@components/base/Each";
+import EmptyState from "@components/base/EmptyState";
+import InfiniteScroll from "@components/base/InfiniteScroll";
 import MultiSelect from "@components/base/MultiSelect";
+import { routes } from "@constants/routes";
+import { useDisplayWidth } from "@hooks/useDisplayWidth";
 import { dateTime } from "@libs/dateTime";
 import { useFilterActivity } from "@modules/activity/activity-log/hooks/useFilterActivity";
 import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
-import type React from "react";
-import { useMemo } from "react";
+
 import { CardActivityLog } from "./CardActivityLog";
-import Button from "@components/base/Button";
-import { useNavigate } from "@tanstack/react-router";
-import { routes } from "@constants/routes";
-import Conditional from "@components/base/Conditional";
-import EmptyState from "@components/base/EmptyState";
-import { Assets } from "@assets/illustrations";
 import { SkeletonLoading } from "./SkeletonLoading";
-import InfiniteScroll from "@components/base/InfiniteScroll";
-import { useDisplayWidth } from "@hooks/useDisplayWidth";
 
 const ActivityLogs: React.FC = () => {
   const navigate = useNavigate();

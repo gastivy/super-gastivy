@@ -1,14 +1,7 @@
-import {
-  useQuery,
-  type UseQueryOptions,
-} from "@tanstack/react-query";
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 
-import type {
-  GetUsersRequest,
-  UserResponse,
-  UsersResponse,
-} from "../models";
+import type { GetUsersRequest, UserResponse, UsersResponse } from "../models";
 import { UserServices } from "../services";
 
 export const userKeys = {

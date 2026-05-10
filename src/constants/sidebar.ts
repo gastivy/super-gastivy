@@ -1,10 +1,25 @@
-import type { IconNames } from "@components/base/Icon/Icon.types";
+import type { ComponentType } from "react";
+
+import {
+  IconAlarm,
+  IconBook,
+  IconChartLine,
+  IconCoins,
+  IconDropletHalf2Filled,
+  IconFileDescription,
+  IconHome,
+  IconLayoutGrid,
+  IconPencil,
+  IconSettings,
+  IconWallet,
+} from "@tabler/icons-react";
+
 import { routes } from "./routes";
 
 export interface Menu {
   name: string;
   path: string;
-  icon: IconNames;
+  icon: ComponentType<{ size?: number; className?: string }>;
 }
 
 export interface SidebarMenu extends Menu {
@@ -15,115 +30,115 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
   {
     name: "Activity",
     path: routes.activity.overview.path,
-    icon: "Activity-solid",
+    icon: IconDropletHalf2Filled,
     children: [
       {
         name: "Overview",
         path: routes.activity.overview.path,
-        icon: "Home-solid",
+        icon: IconHome,
       },
       {
         name: "Timer",
         path: routes.activity.timer.path,
-        icon: "Alarm-solid",
+        icon: IconAlarm,
       },
       // {
       //   name: "Statistics",
       //   path: routes.activity.statistic.path,
-      //   icon: "Chart-solid",
+      //   icon: IconChartLine,
       // },
       {
         name: "Logs",
         path: routes.activity.activityLog.path,
-        icon: "Document-solid",
+        icon: IconFileDescription,
       },
       {
         name: "Categories",
         path: routes.activity.categories.path,
-        icon: "Grid-solid",
+        icon: IconLayoutGrid,
       },
     ],
   },
   {
     name: "Finance",
     path: routes.finance.home.path,
-    icon: "Coins-solid",
+    icon: IconCoins,
     children: [
       {
         name: "Overview",
         path: routes.finance.home.path,
-        icon: "Home-solid",
+        icon: IconHome,
       },
       {
         name: "Statistic",
         path: routes.finance.statistic.path,
-        icon: "Chart-solid",
+        icon: IconChartLine,
       },
       {
         name: "Wallet",
         path: routes.finance.wallet.path,
-        icon: "Wallet-solid",
+        icon: IconWallet,
       },
       {
         name: "Transaction",
         path: routes.finance.transactions.path,
-        icon: "Document-solid",
+        icon: IconFileDescription,
       },
       {
         name: "Categories",
         path: routes.finance.categories.path,
-        icon: "Grid-solid",
+        icon: IconLayoutGrid,
       },
     ],
   },
   {
     name: "Portfolio",
     path: routes.portfolio.overview.path,
-    icon: "Chart-solid",
+    icon: IconChartLine,
     children: [
       {
         name: "Overview",
         path: routes.portfolio.overview.path,
-        icon: "Home-solid",
+        icon: IconHome,
       },
       {
         name: "Stocks",
         path: routes.portfolio.stocks.path,
-        icon: "Chart-solid",
+        icon: IconChartLine,
       },
       {
         name: "Crypto",
         path: routes.portfolio.crypto.path,
-        icon: "Coins-solid",
+        icon: IconCoins,
       },
     ],
   },
   {
     name: "Journal",
     path: routes.journaling.home.path,
-    icon: "Book-solid",
+    icon: IconBook,
     children: [
       {
         name: "Overview",
         path: routes.journaling.home.path,
-        icon: "Home-solid",
+        icon: IconHome,
       },
       {
         name: "New Entry",
         path: routes.journaling.create.path,
-        icon: "Pencil-solid",
+        icon: IconPencil,
       },
       {
         name: "Templates",
         path: routes.journaling.templates.path,
-        icon: "Document-solid",
+        icon: IconFileDescription,
       },
     ],
   },
   {
     name: "Settings",
     path: routes.settings.path,
-    icon: "Settings-solid",
+    icon: IconSettings,
     children: [],
   },
 ];

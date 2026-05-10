@@ -1,10 +1,10 @@
+import { httpService } from "@libs/httpService";
 import type {
   LoginRequest,
   LoginResponse,
   RegisterRequest,
   RegisterResponse,
 } from "@modules/auth/models/Auth";
-import { httpService } from "@libs/httpService";
 
 export const AuthServices = {
   login: (payload: LoginRequest) =>

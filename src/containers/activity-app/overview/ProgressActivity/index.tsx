@@ -1,12 +1,14 @@
+import type React from "react";
+
 import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
 import DatePickerRange from "@components/base/DatePickerRange";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-import { useSummaryActivity } from "@modules/activity/overview/useSummaryActivity";
-import type React from "react";
-import { SkeletonLoading } from "./SkeletonLoading";
 import { cn } from "@libs/classnames";
+import { useSummaryActivity } from "@modules/activity/overview/useSummaryActivity";
+
+import { SkeletonLoading } from "./SkeletonLoading";
 
 export const ProgressActivty: React.FC = () => {
   const {

@@ -1,28 +1,45 @@
-import { useState, useRef, useEffect, useMemo, useCallback } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+
+import {
+  IconCheck,
+  IconChevronDown,
+  IconDownloadFilled,
+  IconEdit,
+  IconPlusFilled,
+  IconTrash,
+  IconUpload,
+  IconXFilled,
+} from "@tabler/icons-react";
+
+import { Assets } from "@assets/illustrations";
 import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-
 import InputText from "@components/base/InputText";
 import Spinner from "@components/base/Spinner";
 import {
-  useGetStockPortfolio,
+  useAddStockGroup,
+  useDeleteStockGroup,
+  useGetStockGroups,
+  useUpdateStockGroup,
+} from "@modules/portfolio/hooks/useStockGroup";
+import {
   useAddStockPortfolio,
-  useUpdateStockPortfolio,
   useDeleteStockPortfolio,
+  useGetStockPortfolio,
+  useUpdateStockPortfolio,
 } from "@modules/portfolio/hooks/useStockPortfolio";
 import {
-  useGetStockGroups,
-  useAddStockGroup,
-  useUpdateStockGroup,
-  useDeleteStockGroup,
-} from "@modules/portfolio/hooks/useStockGroup";
-import { useStockPrices, useStockSearch, useExchangeRate } from "@modules/portfolio/hooks/useStockPrices";
-import { exportStockPortfolioToXlsx, importStockPortfolioFromXlsx } from "@modules/portfolio/services/stockXlsx";
-import { Assets } from "@assets/illustrations";
+  useExchangeRate,
+  useStockPrices,
+  useStockSearch,
+} from "@modules/portfolio/hooks/useStockPrices";
 import type { StockItem } from "@modules/portfolio/models/stockTypes";
-import { IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
+import {
+  exportStockPortfolioToXlsx,
+  importStockPortfolioFromXlsx,
+} from "@modules/portfolio/services/stockXlsx";
 
 const StockPortfolioContainer = () => {
   // Group state
@@ -51,7 +68,9 @@ const StockPortfolioContainer = () => {
   const [currency, setCurrency] = useState<"usd" | "idr">("usd");
 
   // Collapse state per group
-  const [collapsedGroups, setCollapsedGroups] = useState<Set<number>>(new Set());
+  const [collapsedGroups, setCollapsedGroups] = useState<Set<number>>(
+    new Set()
+  );
 
   const toggleCollapse = (groupId: number) => {
     setCollapsedGroups((prev) => {
@@ -197,7 +216,10 @@ const StockPortfolioContainer = () => {
 
   const saveEditGroup = () => {
     if (editingGroupId === null || !editingGroupName.trim()) return;
-    updateGroupMutation.mutate({ id: editingGroupId, name: editingGroupName.trim() });
+    updateGroupMutation.mutate({
+      id: editingGroupId,
+      name: editingGroupName.trim(),
+    });
     setEditingGroupId(null);
     setEditingGroupName("");
   };
@@ -214,8 +236,16 @@ const StockPortfolioContainer = () => {
   };
 
   const saveEditItem = () => {
-    if (editingItemId === null || !editingItemShares || Number(editingItemShares) <= 0) return;
-    updateItemMutation.mutate({ id: editingItemId, shares: Number(editingItemShares) });
+    if (
+      editingItemId === null ||
+      !editingItemShares ||
+      Number(editingItemShares) <= 0
+    )
+      return;
+    updateItemMutation.mutate({
+      id: editingItemId,
+      shares: Number(editingItemShares),
+    });
     setEditingItemId(null);
     setEditingItemShares("");
   };
@@ -360,11 +390,23 @@ const StockPortfolioContainer = () => {
             onClick={() => setCurrency(currency === "usd" ? "idr" : "usd")}
             className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-gray-200 rounded-sm hover:bg-gray-50 cursor-pointer transition-colors"
           >
-            <span className={currency === "usd" ? "text-limed-spruce-700 font-bold" : "text-gray-400"}>
+            <span
+              className={
+                currency === "usd"
+                  ? "text-limed-spruce-700 font-bold"
+                  : "text-gray-400"
+              }
+            >
               USD
             </span>
             <span className="text-gray-300">/</span>
-            <span className={currency === "idr" ? "text-limed-spruce-700 font-bold" : "text-gray-400"}>
+            <span
+              className={
+                currency === "idr"
+                  ? "text-limed-spruce-700 font-bold"
+                  : "text-gray-400"
+              }
+            >
               IDR
             </span>
           </button>
@@ -383,7 +425,7 @@ const StockPortfolioContainer = () => {
             size="small"
             onClick={() => importRef.current?.click()}
           >
-            <Icon name="Upload-outline" size={16} />
+            <IconUpload stroke={2} size={16} />
             <span className="ml-1">Import</span>
           </Button>
           <Button
@@ -392,7 +434,7 @@ const StockPortfolioContainer = () => {
             onClick={handleExport}
             disabled={stockItems.length === 0}
           >
-            <Icon name="Download-outline" size={16} />
+            <IconDownloadFilled size={16} />
             <span className="ml-1">Export</span>
           </Button>
         </div>
@@ -401,9 +443,7 @@ const StockPortfolioContainer = () => {
       <div className="flex flex-col gap-6">
         {/* Total Portfolio Value */}
         <div className="bg-white p-6 rounded-lg">
-          <div className="text-sm text-gray-500 mb-1">
-            Total Stock Value
-          </div>
+          <div className="text-sm text-gray-500 mb-1">Total Stock Value</div>
           <Conditional if={isLoadingPrices && stockItems.length > 0}>
             <div className="h-8 w-48 animate-pulse bg-gray-200 rounded" />
           </Conditional>
@@ -447,7 +487,7 @@ const StockPortfolioContainer = () => {
               onClick={() => setImportError(null)}
               className="text-red-400 hover:text-red-600 cursor-pointer"
             >
-              <Icon name="Close-solid" size={16} />
+              <IconXFilled size={16} />
             </button>
           </div>
         </Conditional>
@@ -474,15 +514,20 @@ const StockPortfolioContainer = () => {
           of={groups}
           render={(group) => {
             const form = getGroupForm(group.id!);
-            const groupItems = (itemsByGroup.get(group.id!) || []).sort((a, b) => {
-              const aPrice = quoteMap?.get(a.symbol)?.regularMarketPrice || 0;
-              const bPrice = quoteMap?.get(b.symbol)?.regularMarketPrice || 0;
-              return b.shares * bPrice - a.shares * aPrice;
-            });
+            const groupItems = (itemsByGroup.get(group.id!) || []).sort(
+              (a, b) => {
+                const aPrice = quoteMap?.get(a.symbol)?.regularMarketPrice || 0;
+                const bPrice = quoteMap?.get(b.symbol)?.regularMarketPrice || 0;
+                return b.shares * bPrice - a.shares * aPrice;
+              }
+            );
             const groupTotal = getGroupTotal(group.id!);
 
             return (
-              <div key={group.id} className="bg-white rounded-lg overflow-hidden">
+              <div
+                key={group.id}
+                className="bg-white rounded-lg overflow-hidden"
+              >
                 {/* Group Header */}
                 <div className="flex items-center justify-between p-6 pb-4 border-b border-gray-100">
                   <div className="flex flex-col">
@@ -504,14 +549,14 @@ const StockPortfolioContainer = () => {
                           className="text-green-600 hover:text-green-700 cursor-pointer"
                           title="Save"
                         >
-                          <Icon name="Checkmark-outline" size={16} />
+                          <IconCheck stroke={2} size={16} />
                         </button>
                         <button
                           onClick={cancelEditGroup}
                           className="text-gray-400 hover:text-gray-600 cursor-pointer"
                           title="Cancel"
                         >
-                          <Icon name="Close-solid" size={14} />
+                          <IconXFilled size={14} />
                         </button>
                       </div>
                     </Conditional>
@@ -525,7 +570,7 @@ const StockPortfolioContainer = () => {
                           className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors"
                           title="Edit group name"
                         >
-                          <Icon name="Edit-outline" size={14} />
+                          <IconEdit stroke={2} size={14} />
                         </button>
                       </div>
                     </Conditional>
@@ -537,9 +582,13 @@ const StockPortfolioContainer = () => {
                     <button
                       onClick={() => toggleCollapse(group.id!)}
                       className="text-gray-400 hover:text-gray-600 cursor-pointer transition-transform duration-200"
-                      title={collapsedGroups.has(group.id!) ? "Expand" : "Collapse"}
+                      title={
+                        collapsedGroups.has(group.id!) ? "Expand" : "Collapse"
+                      }
                       style={{
-                        transform: collapsedGroups.has(group.id!) ? "rotate(-90deg)" : "rotate(0deg)",
+                        transform: collapsedGroups.has(group.id!)
+                          ? "rotate(-90deg)"
+                          : "rotate(0deg)",
                       }}
                     >
                       <IconChevronDown size={18} />
@@ -549,56 +598,58 @@ const StockPortfolioContainer = () => {
                       className="text-red-400 hover:text-red-600 cursor-pointer transition-colors"
                       title="Delete group and all its items"
                     >
-                      <Icon name="Trash-outline" size={18} />
+                      <IconTrash stroke={2} size={18} />
                     </button>
                   </div>
                 </div>
 
                 {/* Collapsible Content */}
                 <Conditional if={!collapsedGroups.has(group.id!)}>
-
-                {/* Add Item Form */}
-                <div className="p-6 pb-4 border-b border-gray-50">
-                  <div className="flex flex-col gap-4 max-[960px]:flex-col md:flex-row md:items-end">
-                    {/* Stock Search */}
-                    <div
-                      className="flex-1 relative"
-                      ref={(el) => {
-                        searchRefs.current[group.id!] = el;
-                      }}
-                    >
-                      <InputText
-                        label="Stock Ticker / Name"
-                        placeholder="Search stock (e.g. AAPL, Tesla)"
-                        value={form.searchQuery}
-                        onChangeInput={(val) => {
-                          updateGroupForm(group.id!, {
-                            searchQuery: val,
-                            selectedStock: null,
-                            showSearchResults: true,
-                          });
+                  {/* Add Item Form */}
+                  <div className="p-6 pb-4 border-b border-gray-50">
+                    <div className="flex flex-col gap-4 max-[960px]:flex-col md:flex-row md:items-end">
+                      {/* Stock Search */}
+                      <div
+                        className="flex-1 relative"
+                        ref={(el) => {
+                          searchRefs.current[group.id!] = el;
                         }}
-                        onFocus={() =>
-                          updateGroupForm(group.id!, {
-                            showSearchResults: true,
-                          })
-                        }
-                      />
-
-                      {/* Search Results Dropdown */}
-                      <Conditional
-                        if={form.showSearchResults && form.searchQuery.trim().length >= 1}
                       >
-                        <StockSearchDropdown
-                          query={form.searchQuery}
-                          onSelect={(stock) =>
-                            handleSelectStock(group.id!, stock)
+                        <InputText
+                          label="Stock Ticker / Name"
+                          placeholder="Search stock (e.g. AAPL, Tesla)"
+                          value={form.searchQuery}
+                          onChangeInput={(val) => {
+                            updateGroupForm(group.id!, {
+                              searchQuery: val,
+                              selectedStock: null,
+                              showSearchResults: true,
+                            });
+                          }}
+                          onFocus={() =>
+                            updateGroupForm(group.id!, {
+                              showSearchResults: true,
+                            })
                           }
                         />
-                      </Conditional>
-                    </div>
 
-                    {/* Shares Input */}
+                        {/* Search Results Dropdown */}
+                        <Conditional
+                          if={
+                            form.showSearchResults &&
+                            form.searchQuery.trim().length >= 1
+                          }
+                        >
+                          <StockSearchDropdown
+                            query={form.searchQuery}
+                            onSelect={(stock) =>
+                              handleSelectStock(group.id!, stock)
+                            }
+                          />
+                        </Conditional>
+                      </div>
+
+                      {/* Shares Input */}
                       <div className="md:w-48">
                         <InputText
                           label="Shares"
@@ -623,137 +674,151 @@ const StockPortfolioContainer = () => {
                       >
                         Add
                       </Button>
+                    </div>
+
+                    {/* Selected stock indicator */}
+                    <Conditional if={Boolean(form.selectedStock)}>
+                      <div className="mt-2 flex items-center gap-2 text-sm text-green-600">
+                        <IconCheck stroke={2} size={16} />
+                        <span>
+                          Selected: {form.selectedStock?.symbol} (
+                          {form.selectedStock?.shortName})
+                        </span>
+                      </div>
+                    </Conditional>
                   </div>
 
-                  {/* Selected stock indicator */}
-                  <Conditional if={Boolean(form.selectedStock)}>
-                    <div className="mt-2 flex items-center gap-2 text-sm text-green-600">
-                      <Icon name="Checkmark-outline" size={16} />
-                      <span>
-                        Selected: {form.selectedStock?.symbol} (
-                        {form.selectedStock?.shortName})
-                      </span>
-                    </div>
-                  </Conditional>
-                </div>
+                  {/* Group Items */}
+                  <div className="p-6 pt-4 border-t border-gray-50">
+                    <Conditional if={groupItems.length === 0}>
+                      <p className="text-sm text-gray-400 text-center py-4">
+                        No stocks in this group. Add your first stock above.
+                      </p>
+                    </Conditional>
 
-                {/* Group Items */}
-                <div className="p-6 pt-4 border-t border-gray-50">
-                  <Conditional if={groupItems.length === 0}>
-                    <p className="text-sm text-gray-400 text-center py-4">
-                      No stocks in this group. Add your first stock above.
-                    </p>
-                  </Conditional>
+                    <Conditional if={groupItems.length > 0}>
+                      <div className="flex flex-col gap-3">
+                        <Each
+                          of={groupItems}
+                          render={(item: StockItem) => {
+                            const quote = quoteMap?.get(item.symbol);
+                            const nativePrice = quote?.regularMarketPrice || 0;
+                            const convertedPrice = convertPrice(
+                              item.symbol,
+                              nativePrice
+                            );
+                            const priceChange =
+                              quote?.regularMarketChangePercent || 0;
+                            const totalItemValue = item.shares * convertedPrice;
 
-                  <Conditional if={groupItems.length > 0}>
-                    <div className="flex flex-col gap-3">
-                      <Each
-                        of={groupItems}
-                        render={(item: StockItem) => {
-                          const quote = quoteMap?.get(item.symbol);
-                          const nativePrice = quote?.regularMarketPrice || 0;
-                          const convertedPrice = convertPrice(item.symbol, nativePrice);
-                          const priceChange = quote?.regularMarketChangePercent || 0;
-                          const totalItemValue = item.shares * convertedPrice;
-
-                          return (
-                            <div
-                              key={item.id}
-                              className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
-                            >
-                              <div className="flex items-center gap-3">
-                                <div className="w-8 h-8 rounded-full bg-green-yellow-400/30 flex items-center justify-center text-xs font-bold text-limed-spruce-700">
-                                  {item.symbol.charAt(0)}
-                                </div>
-                                <div className="flex flex-col">
-                                  <span className="text-sm font-medium text-limed-spruce-700">
-                                    {item.symbol}
-                                  </span>
-                                  <span className="text-xs text-gray-500">
-                                    {item.name}
-                                  </span>
-                                </div>
-                              </div>
-                              
-                              <div className="flex gap-4">
-                                <div className="flex flex-col items-end">
-                                  <span className="text-sm font-medium text-limed-spruce-700">
-                                    {formatCurrency(totalItemValue)}
-                                  </span>
-                                  <div className="flex items-center gap-2">
-                                    <Conditional if={editingItemId === item.id}>
-                                      <input
-                                        type="text"
-                                        inputMode="decimal"
-                                        value={editingItemShares}
-                                        onChange={(e) => {
-                                          const val = e.target.value.replace(/[^0-9.]/g, "");
-                                          const parts = val.split(".");
-                                          if (parts.length <= 2) setEditingItemShares(val);
-                                        }}
-                                        onKeyDown={(e) => {
-                                          if (e.key === "Enter") saveEditItem();
-                                          if (e.key === "Escape") cancelEditItem();
-                                        }}
-                                        autoFocus
-                                        className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-green-yellow-400"
-                                      />
-                                      <button
-                                        onClick={saveEditItem}
-                                        className="text-green-600 hover:text-green-700 cursor-pointer"
-                                        title="Save"
-                                      >
-                                        <Icon name="Checkmark-outline" size={14} />
-                                      </button>
-                                      <button
-                                        onClick={cancelEditItem}
-                                        className="text-gray-400 hover:text-gray-600 cursor-pointer"
-                                        title="Cancel"
-                                      >
-                                        <Icon name="Close-solid" size={12} />
-                                      </button>
-                                    </Conditional>
-                                    <Conditional if={editingItemId !== item.id}>
-                                      <span className="text-xs text-gray-500">
-                                        {item.shares} × {formatCurrency(convertedPrice)}
-                                      </span>
-                                      <button
-                                        onClick={() => startEditItem(item)}
-                                        className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors"
-                                        title="Edit shares"
-                                      >
-                                        <Icon name="Edit-outline" size={12} />
-                                      </button>
-                                    </Conditional>
-                                    <span
-                                      className={`text-xs font-medium ${
-                                        priceChange >= 0
-                                          ? "text-green-600"
-                                          : "text-red-500"
-                                      }`}
-                                    >
-                                      {priceChange >= 0 ? "+" : ""}
-                                      {priceChange.toFixed(2)}%
+                            return (
+                              <div
+                                key={item.id}
+                                className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 rounded-full bg-green-yellow-400/30 flex items-center justify-center text-xs font-bold text-limed-spruce-700">
+                                    {item.symbol.charAt(0)}
+                                  </div>
+                                  <div className="flex flex-col">
+                                    <span className="text-sm font-medium text-limed-spruce-700">
+                                      {item.symbol}
+                                    </span>
+                                    <span className="text-xs text-gray-500">
+                                      {item.name}
                                     </span>
                                   </div>
                                 </div>
 
-                                <button
-                                  onClick={() => handleDelete(item.id!)}
-                                  className="ml-3 text-red-400 hover:text-red-600 cursor-pointer transition-colors"
-                                  title="Remove from portfolio"
-                                >
-                                  <Icon name="Trash-outline" size={18} />
-                                </button>
-                              </div>
-                            </div>
-                          );
-                        }}
-                      />
-                    </div>
-                  </Conditional>
-                </div>
+                                <div className="flex gap-4">
+                                  <div className="flex flex-col items-end">
+                                    <span className="text-sm font-medium text-limed-spruce-700">
+                                      {formatCurrency(totalItemValue)}
+                                    </span>
+                                    <div className="flex items-center gap-2">
+                                      <Conditional
+                                        if={editingItemId === item.id}
+                                      >
+                                        <input
+                                          type="text"
+                                          inputMode="decimal"
+                                          value={editingItemShares}
+                                          onChange={(e) => {
+                                            const val = e.target.value.replace(
+                                              /[^0-9.]/g,
+                                              ""
+                                            );
+                                            const parts = val.split(".");
+                                            if (parts.length <= 2)
+                                              setEditingItemShares(val);
+                                          }}
+                                          onKeyDown={(e) => {
+                                            if (e.key === "Enter")
+                                              saveEditItem();
+                                            if (e.key === "Escape")
+                                              cancelEditItem();
+                                          }}
+                                          autoFocus
+                                          className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-green-yellow-400"
+                                        />
+                                        <button
+                                          onClick={saveEditItem}
+                                          className="text-green-600 hover:text-green-700 cursor-pointer"
+                                          title="Save"
+                                        >
+                                          <IconCheck stroke={2} size={14} />
+                                        </button>
+                                        <button
+                                          onClick={cancelEditItem}
+                                          className="text-gray-400 hover:text-gray-600 cursor-pointer"
+                                          title="Cancel"
+                                        >
+                                          <IconXFilled size={12} />
+                                        </button>
+                                      </Conditional>
+                                      <Conditional
+                                        if={editingItemId !== item.id}
+                                      >
+                                        <span className="text-xs text-gray-500">
+                                          {item.shares} ×{" "}
+                                          {formatCurrency(convertedPrice)}
+                                        </span>
+                                        <button
+                                          onClick={() => startEditItem(item)}
+                                          className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors"
+                                          title="Edit shares"
+                                        >
+                                          <IconEdit stroke={2} size={12} />
+                                        </button>
+                                      </Conditional>
+                                      <span
+                                        className={`text-xs font-medium ${
+                                          priceChange >= 0
+                                            ? "text-green-600"
+                                            : "text-red-500"
+                                        }`}
+                                      >
+                                        {priceChange >= 0 ? "+" : ""}
+                                        {priceChange.toFixed(2)}%
+                                      </span>
+                                    </div>
+                                  </div>
 
+                                  <button
+                                    onClick={() => handleDelete(item.id!)}
+                                    className="ml-3 text-red-400 hover:text-red-600 cursor-pointer transition-colors"
+                                    title="Remove from portfolio"
+                                  >
+                                    <IconTrash stroke={2} size={18} />
+                                  </button>
+                                </div>
+                              </div>
+                            );
+                          }}
+                        />
+                      </div>
+                    </Conditional>
+                  </div>
                 </Conditional>
               </div>
             );
@@ -809,7 +874,9 @@ const StockSearchDropdown = ({
               </span>
               <span className="text-xs text-gray-500">{stock.shortName}</span>
             </div>
-            <span className="ml-auto text-xs text-gray-400">{stock.exchange}</span>
+            <span className="ml-auto text-xs text-gray-400">
+              {stock.exchange}
+            </span>
           </div>
         )}
       />

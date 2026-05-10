@@ -1,14 +1,29 @@
+import { type MouseEvent, useEffect, useMemo } from "react";
+import {
+  Controller,
+  type SubmitHandler,
+  useFieldArray,
+  useForm,
+} from "react-hook-form";
+
+import { yupResolver } from "@hookform/resolvers/yup";
+import {
+  IconArrowNarrowLeft,
+  IconChevronDown,
+  IconTrash,
+} from "@tabler/icons-react";
+import { useQueryClient } from "@tanstack/react-query";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
+
 import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import DatePicker from "@components/base/DatePicker";
 import Disclosure from "@components/base/Disclosure";
 import Each from "@components/base/Each";
-
 import InputText from "@components/base/InputText";
 import Select from "@components/base/Select";
 import TextArea from "@components/base/TextArea";
 import { routes } from "@constants/routes";
-import { yupResolver } from "@hookform/resolvers/yup";
 import type { useDisclosureProps } from "@hooks/useDisclosure";
 import { useGetCategoryTransaction } from "@modules/finance/category/hooks/useCategoryTransaction";
 import { TypesTransactions } from "@modules/finance/category/models";
@@ -20,17 +35,8 @@ import {
 } from "@modules/finance/transactions/hooks/useTransaction";
 import type { CreateTransactionRequest } from "@modules/finance/transactions/models";
 import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";
-import { useQueryClient } from "@tanstack/react-query";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { useEffect, useMemo, type MouseEvent } from "react";
-import {
-  Controller,
-  useFieldArray,
-  useForm,
-  type SubmitHandler,
-} from "react-hook-form";
+
 import { SkeletonLoading } from "./SkeletonLoading";
-import { IconArrowNarrowLeft, IconChevronDown } from "@tabler/icons-react";
 
 const TransactionsForm = () => {
   const navigate = useNavigate();
@@ -284,8 +290,8 @@ const TransactionsForm = () => {
                               </div>
                               <Conditional if={fields.length > 1}>
                                 <div onClick={(e) => handleDelete(e, index)}>
-                                  <Icon
-                                    name="Trash-outline"
+                                  <IconTrash
+                                    stroke={2}
                                     size={24}
                                     className="text-red-400 cursor-pointer bg-red-50 hover:bg-red-100 rounded p-1"
                                   />

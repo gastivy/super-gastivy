@@ -1,16 +1,18 @@
-import Button from "@components/base/Button";
-import { useNavigate } from "@tanstack/react-router";
-import InputText from "@components/base/InputText";
 import React, { useState } from "react";
-import LogoIcon from "@assets/logo-icon/icon-192.png";
 import { useForm } from "react-hook-form";
+
 import { yupResolver } from "@hookform/resolvers/yup";
-import { schemaLogin, type FormLogin } from "@modules/auth/schemas/login";
-import { useLogin } from "@modules/auth/hooks/useAuth";
-import { routes } from "@constants/routes";
+import { useNavigate } from "@tanstack/react-router";
 import type { AxiosError } from "axios";
+
+import LogoIcon from "@assets/logo-icon/icon-192.png";
 import Alert from "@components/base/Alert";
+import Button from "@components/base/Button";
 import InputPassword from "@components/base/InputPassword";
+import InputText from "@components/base/InputText";
+import { routes } from "@constants/routes";
+import { useLogin } from "@modules/auth/hooks/useAuth";
+import { type FormLogin, schemaLogin } from "@modules/auth/schemas/login";
 
 const LoginContainer: React.FC = () => {
   const navigate = useNavigate();

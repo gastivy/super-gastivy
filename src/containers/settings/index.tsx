@@ -1,10 +1,15 @@
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
+
+import {
+  IconArrowNarrowLeft,
+  IconDownloadFilled,
+  IconUpload,
+} from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
-import DexieDB from "@libs/dexieDB";
 
 import Button from "@components/base/Button";
 import { routes } from "@constants/routes";
-import { IconArrowNarrowLeft } from "@tabler/icons-react";
+import DexieDB from "@libs/dexieDB";
 
 interface BackupData {
   version: string;
@@ -36,15 +41,21 @@ const SettingsContainer = () => {
   const handleBackup = async () => {
     setLoading(true);
     try {
-      const [journals, journalTemplates, stockPortfolio, stockGroups, portfolio, portfolioGroups] =
-        await Promise.all([
-          DexieDB.journals.toArray(),
-          DexieDB.journalTemplates.toArray(),
-          DexieDB.stockPortfolio.toArray(),
-          DexieDB.stockGroups.toArray(),
-          DexieDB.portfolio.toArray(),
-          DexieDB.portfolioGroups.toArray(),
-        ]);
+      const [
+        journals,
+        journalTemplates,
+        stockPortfolio,
+        stockGroups,
+        portfolio,
+        portfolioGroups,
+      ] = await Promise.all([
+        DexieDB.journals.toArray(),
+        DexieDB.journalTemplates.toArray(),
+        DexieDB.stockPortfolio.toArray(),
+        DexieDB.stockGroups.toArray(),
+        DexieDB.portfolio.toArray(),
+        DexieDB.portfolioGroups.toArray(),
+      ]);
 
       const data: BackupData = {
         version: "1.0",
@@ -77,9 +88,7 @@ const SettingsContainer = () => {
     }
   };
 
-  const handleRestore = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleRestore = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -111,7 +120,9 @@ const SettingsContainer = () => {
         (async () => {
           await DexieDB.stockPortfolio.clear();
           if (data.stockPortfolio?.length) {
-            await DexieDB.stockPortfolio.bulkAdd(data.stockPortfolio as never[]);
+            await DexieDB.stockPortfolio.bulkAdd(
+              data.stockPortfolio as never[]
+            );
           }
         })(),
         (async () => {
@@ -188,19 +199,13 @@ const SettingsContainer = () => {
 
       {/* Backup & Restore */}
       <div className="space-y-4">
-        <h2 className="text-sm font-medium text-shark-900">
-          Backup & Restore
-        </h2>
+        <h2 className="text-sm font-medium text-shark-900">Backup & Restore</h2>
 
         <div className="rounded-xl border border-shark-200 bg-white p-5 space-y-5">
           {/* Backup */}
           <div className="flex items-start gap-4">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-green-50 shrink-0">
-              <Icon
-                name="Download-outline"
-                size={18}
-                className="text-green-600"
-              />
+              <IconDownloadFilled size={18} className="text-green-600" />
             </div>
             <div className="flex-1">
               <h3 className="text-sm font-medium text-shark-950">
@@ -218,7 +223,7 @@ const SettingsContainer = () => {
                 disabled={loading}
                 className="flex items-center gap-2 mt-3"
               >
-                <Icon name="Download-outline" size={14} />
+                <IconDownloadFilled size={14} />
                 Download Backup
               </Button>
             </div>
@@ -229,11 +234,7 @@ const SettingsContainer = () => {
           {/* Restore */}
           <div className="flex items-start gap-4">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-blue-50 shrink-0">
-              <Icon
-                name="Upload-outline"
-                size={18}
-                className="text-blue-600"
-              />
+              <IconUpload size={18} className="text-blue-600" />
             </div>
             <div className="flex-1">
               <h3 className="text-sm font-medium text-shark-950">
@@ -251,7 +252,7 @@ const SettingsContainer = () => {
                 disabled={loading}
                 className="flex items-center gap-2 mt-3"
               >
-                <Icon name="Upload-outline" size={14} />
+                <IconUpload stroke={2} size={14} />
                 Upload Backup
               </Button>
             </div>

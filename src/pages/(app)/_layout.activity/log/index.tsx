@@ -1,5 +1,6 @@
-import ActivityLogContainer from "@containers/activity-app/activity-log";
 import { createFileRoute } from "@tanstack/react-router";
+
+import ActivityLogContainer from "@containers/activity-app/activity-log";
 
 const ActivityLogPage = () => {
   return <ActivityLogContainer />;

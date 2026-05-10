@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import TransactionsContainer from "@containers/finance-app/transactions";
 
 const FinanceTransactionsPage = () => {

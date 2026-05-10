@@ -1,10 +1,12 @@
-
-import { SIDEBAR_MENU } from "@constants/sidebar";
-import { useRouterState } from "@tanstack/react-router";
 import { useState } from "react";
-import { SubMenu } from "./SubMenu";
-import { cn } from "@libs/classnames";
+
+import { useRouterState } from "@tanstack/react-router";
+
 import Each from "@components/base/Each";
+import { SIDEBAR_MENU } from "@constants/sidebar";
+import { cn } from "@libs/classnames";
+
+import { SubMenu } from "./SubMenu";
 
 const BottomBar = () => {
   const router = useRouterState();
@@ -28,11 +30,15 @@ const BottomBar = () => {
                 )}
                 onClick={() => setSelectMenu(menu.name)}
               >
-                <Icon
-                  name={menu.icon}
-                  size={20}
-                  className={isActive ? "text-shark-950" : "text-white"}
-                />
+                {(() => {
+                  const TablerIcon = menu.icon;
+                  return (
+                    <TablerIcon
+                      size={20}
+                      className={isActive ? "text-shark-950" : "text-white"}
+                    />
+                  );
+                })()}
                 <div
                   className={cn("text-shark-950 text-xs font-medium", {
                     "text-white": !isActive,

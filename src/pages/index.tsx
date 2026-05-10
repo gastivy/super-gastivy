@@ -1,5 +1,6 @@
-import { routes } from "@constants/routes";
 import { createFileRoute, redirect } from "@tanstack/react-router";
+
+import { routes } from "@constants/routes";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,

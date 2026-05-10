@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import StockPortfolioContainer from "@containers/portfolio-app/stocks";
 
 const StockPortfolioPage = () => {

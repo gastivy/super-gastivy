@@ -1,16 +1,19 @@
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
-import { formatter } from "@libs/formatter";
-import { useGetTransactions } from "@modules/finance/transactions/hooks/useTransaction";
-import { useNavigate } from "@tanstack/react-router";
-import { SkeletonLoading } from "./SkeletonLoading";
 import EmptyState from "@components/base/EmptyState";
-import { Assets } from "@assets/illustrations";
 import { routes } from "@constants/routes";
 import useDisclosure from "@hooks/useDisclosure";
+import { formatter } from "@libs/formatter";
+import { useGetTransactions } from "@modules/finance/transactions/hooks/useTransaction";
 import { useGetBalance } from "@modules/finance/wallet/hooks/useWallet";
+
 import { CardTransactions } from "../transactions/TransactionsList/CardTransactions";
+
+import { SkeletonLoading } from "./SkeletonLoading";
 
 const FinanceOverviewContainer = () => {
   const navigate = useNavigate();
@@ -58,12 +61,19 @@ const FinanceOverviewContainer = () => {
                         ? formatter.currency(dataBalance?.data?.balance)
                         : "Rp ********"}
                     </div>
-                    <Icon
-                      name={isOpen ? "Eye-outline" : "Hide-outline"}
-                      className="cursor-pointer"
-                      size={20}
-                      onClick={onToggle}
-                    />
+                    {isOpen ? (
+                      <IconEye
+                        size={20}
+                        className="cursor-pointer"
+                        onClick={onToggle}
+                      />
+                    ) : (
+                      <IconEyeOff
+                        size={20}
+                        className="cursor-pointer"
+                        onClick={onToggle}
+                      />
+                    )}
                   </div>
                 </Conditional>
               </div>

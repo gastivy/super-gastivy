@@ -1,8 +1,10 @@
 import React from "react";
+
 import Spinner from "@components/base/Spinner";
-import { buttonVariants } from "./Button.variants";
-import type { ButtonProps } from "./Button.types";
 import { cn } from "@libs/classnames";
+
+import type { ButtonProps } from "./Button.types";
+import { buttonVariants } from "./Button.variants";
 
 const Button: React.FC<ButtonProps> = ({
   className,

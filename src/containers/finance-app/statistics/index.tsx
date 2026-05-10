@@ -1,13 +1,15 @@
+import { useEffect, useState } from "react";
+
+import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import Select from "@components/base/Select";
 import { dateTime } from "@libs/dateTime";
 import { formatter } from "@libs/formatter";
 import { TypesTransactions } from "@modules/finance/category/models";
 import { useSummaryCategoryTransactions } from "@modules/finance/statistics/hooks/useStatisticsFinance";
-import { useEffect, useState } from "react";
+
 import { RowData } from "./RowData";
 import { SkeletonLoading } from "./SkeletonLoading";
-import Conditional from "@components/base/Conditional";
 
 interface FilterStatistics {
   year: number;

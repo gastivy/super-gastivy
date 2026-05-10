@@ -1,7 +1,9 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
 import React from "react";
-import LoginContainer from "@containers/login";
+
+import { createFileRoute, redirect } from "@tanstack/react-router";
+
 import { routes } from "@constants/routes";
+import LoginContainer from "@containers/login";
 
 const LoginPage: React.FC = () => {
   return <LoginContainer />;

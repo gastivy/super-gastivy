@@ -1,8 +1,10 @@
 import React from "react";
 
 import { useTimerActivity } from "@modules/activity/overview/useTimerActivity";
+
 import { LogActivity } from "./LogActivity";
 import { TimerController } from "./TimeController";
+
 import "react-circular-progressbar/dist/styles.css";
 
 const TimerActivityContainer: React.FC = () => {

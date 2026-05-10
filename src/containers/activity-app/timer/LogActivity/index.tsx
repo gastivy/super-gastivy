@@ -1,3 +1,5 @@
+import type React from "react";
+
 import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
@@ -5,7 +7,6 @@ import EmptyState from "@components/base/EmptyState";
 import { cn } from "@libs/classnames";
 import { dateTime } from "@libs/dateTime";
 import type { DataActivity } from "@modules/activity/activity-log/models/dexie";
-import type React from "react";
 
 interface LogActivityProps {
   data: DataActivity[];

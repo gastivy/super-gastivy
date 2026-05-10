@@ -1,9 +1,12 @@
-import Button from "@components/base/Button";
+import {
+  IconPlayerPauseFilled,
+  IconPlayerPlayFilled,
+} from "@tabler/icons-react";
+import { useRouterState } from "@tanstack/react-router";
 
+import Button from "@components/base/Button";
 import { routes } from "@constants/routes";
 import { useTimerActivity } from "@modules/activity/overview/useTimerActivity";
-import { IconPlayerPauseFilled, IconPlayerPlayFilled } from "@tabler/icons-react";
-import { useRouterState } from "@tanstack/react-router";
 
 const TimerPopover = () => {
   const routerState = useRouterState();
@@ -30,13 +33,13 @@ const TimerPopover = () => {
           {isStarted ? (
             <IconPlayerPauseFilled
               size={26}
-              className="text-limed-spruce-800" 
+              className="text-limed-spruce-800"
               onClick={handleTimer}
             />
           ) : (
             <IconPlayerPlayFilled
               size={26}
-              className="text-limed-spruce-800" 
+              className="text-limed-spruce-800"
               onClick={handleTimer}
             />
           )}

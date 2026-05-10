@@ -1,5 +1,7 @@
-import useDisclosure from "@hooks/useDisclosure";
 import React from "react";
+
+import useDisclosure from "@hooks/useDisclosure";
+
 import type { DisclosureProps } from "./Disclosure.types";
 
 const Disclosure: React.FC<DisclosureProps> = ({

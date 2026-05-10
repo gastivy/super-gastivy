@@ -1,10 +1,12 @@
-import Button from "@components/base/Button";
+import type React from "react";
 
+import { IconClockBolt, IconClockHour5 } from "@tabler/icons-react";
+
+import Button from "@components/base/Button";
 import Modal from "@components/base/Modal";
 import { cn } from "@libs/classnames";
 import { dateTime } from "@libs/dateTime";
 import type { LogActivity } from "@modules/activity/activity-log/models";
-import type React from "react";
 
 interface ModalConfirmDeleteProps {
   isOpen: boolean;
@@ -56,19 +58,19 @@ export const ModalConfirmDelete: React.FC<ModalConfirmDeleteProps> = ({
             <div className="text-shark-800 text-sm">State</div>
             <div className="flex items-center gap-1 text-shark-800 text-sm">
               :{" "}
-              <Icon
-                name={
-                  logActivity.is_done
-                    ? "Instant-outline"
-                    : "Time-Square-outline"
-                }
-                className={
-                  logActivity.is_done
-                    ? "text-green-yellow-500"
-                    : "text-shark-800"
-                }
-                size={logActivity.is_done ? 14 : 14}
-              />
+              {logActivity.is_done ? (
+                <IconClockBolt
+                  stroke={2}
+                  size={14}
+                  className="text-green-yellow-500"
+                />
+              ) : (
+                <IconClockHour5
+                  stroke={2}
+                  size={14}
+                  className="text-shark-800"
+                />
+              )}
               <div className="text-shark-800 text-sm">
                 {logActivity.is_done ? "Done" : "Pause"}
               </div>

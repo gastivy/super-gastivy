@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+
 import JournalCreateContainer from "@containers/journaling-app/create";
 
 const JournalCreatePage = () => {

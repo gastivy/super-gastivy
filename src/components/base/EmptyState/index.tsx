@@ -1,5 +1,6 @@
-import type { EmptyStateProps } from "./EmptyState.types";
 import { cn } from "@libs/classnames";
+
+import type { EmptyStateProps } from "./EmptyState.types";
 
 const EmptyState: React.FC<EmptyStateProps> = ({
   src,

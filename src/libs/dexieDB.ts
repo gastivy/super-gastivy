@@ -1,8 +1,18 @@
-import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
-import type { JournalEntry, JournalTemplate } from "@modules/journaling/models/types";
-import type { PortfolioItem, PortfolioGroup } from "@modules/portfolio/models/types";
-import type { StockItem, StockGroup } from "@modules/portfolio/models/stockTypes";
 import Dexie, { type Table } from "dexie";
+
+import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
+import type {
+  JournalEntry,
+  JournalTemplate,
+} from "@modules/journaling/models/types";
+import type {
+  StockGroup,
+  StockItem,
+} from "@modules/portfolio/models/stockTypes";
+import type {
+  PortfolioGroup,
+  PortfolioItem,
+} from "@modules/portfolio/models/types";
 
 const db = new Dexie("GastivyDB");
 

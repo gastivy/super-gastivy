@@ -1,4 +1,5 @@
 import React from "react";
+
 import type { ConditionalProps } from "./Conditional.types";
 
 const Conditional: React.FC<ConditionalProps> = ({

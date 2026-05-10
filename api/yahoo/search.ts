@@ -24,8 +24,8 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const stocks = (result.quotes || [])
       .filter(
         (q) =>
-          ("quoteType" in q &&
-            (q.quoteType === "EQUITY" || q.quoteType === "ETF")) &&
+          "quoteType" in q &&
+          (q.quoteType === "EQUITY" || q.quoteType === "ETF") &&
           "symbol" in q &&
           q.symbol
       )

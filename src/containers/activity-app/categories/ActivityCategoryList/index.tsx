@@ -1,13 +1,15 @@
+import { IconDropletHalf2Filled } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
 import { Assets } from "@assets/illustrations";
 import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-
 import { routes } from "@constants/routes";
 import { cn } from "@libs/classnames";
 import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
-import { useNavigate } from "@tanstack/react-router";
+
 import { SkeletonLoading } from "./SkeletonLoading";
 
 const ActivityCategoryList = () => {
@@ -70,8 +72,8 @@ const ActivityCategoryList = () => {
                     }
                   >
                     <div className="flex bg-green-yellow-400 p-2.5 rounded-lg">
-                      <Icon
-                        name="Activity-outline"
+                      <IconDropletHalf2Filled
+                        stroke={2}
                         className="text-limed-spruce-900"
                         size={28}
                       />

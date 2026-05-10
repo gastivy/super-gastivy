@@ -1,10 +1,10 @@
+import { IconLogout } from "@tabler/icons-react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 
 import { routes } from "@constants/routes";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { cn } from "@libs/classnames";
 import { useLogout } from "@modules/auth/hooks/useAuth";
-import { IconLogout } from "@tabler/icons-react";
-import { useNavigate, useRouterState } from "@tanstack/react-router";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -31,15 +31,19 @@ const Sidebar = () => {
                 key={item.path}
                 onClick={() => navigate({ to: item.path })}
               >
-                <Icon
-                  name={item.icon}
-                  size={20}
-                  className={
-                    isActive
-                      ? "text-limed-spruce-900"
-                      : "text-shark-700 hover:text-limed-spruce-900"
-                  }
-                />
+                {(() => {
+                  const TablerIcon = item.icon;
+                  return (
+                    <TablerIcon
+                      size={20}
+                      className={
+                        isActive
+                          ? "text-limed-spruce-900"
+                          : "text-shark-700 hover:text-limed-spruce-900"
+                      }
+                    />
+                  );
+                })()}
               </div>
             );
           })}
@@ -78,15 +82,19 @@ const Sidebar = () => {
                 )}
                 onClick={() => navigate({ to: child.path })}
               >
-                <Icon
-                  name={child.icon}
-                  size={20}
-                  className={
-                    isActive
-                      ? "text-limed-spruce-900"
-                      : "text-shark-700 hover:text-limed-spruce-900"
-                  }
-                />
+                {(() => {
+                  const TablerIcon = child.icon;
+                  return (
+                    <TablerIcon
+                      size={20}
+                      className={
+                        isActive
+                          ? "text-limed-spruce-900"
+                          : "text-shark-700 hover:text-limed-spruce-900"
+                      }
+                    />
+                  );
+                })()}
                 <div
                   className={cn(
                     "text-sm",

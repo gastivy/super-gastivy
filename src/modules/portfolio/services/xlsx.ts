@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
-import type { PortfolioItem, PortfolioGroup } from "../models/types";
+
+import type { PortfolioGroup, PortfolioItem } from "../models/types";
 
 export const exportPortfolioToXlsx = (
   items: PortfolioItem[],
@@ -58,9 +59,7 @@ export interface ImportResult {
   errors: string[];
 }
 
-export const importPortfolioFromXlsx = (
-  file: File
-): Promise<ImportResult> => {
+export const importPortfolioFromXlsx = (file: File): Promise<ImportResult> => {
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -84,9 +83,7 @@ export const importPortfolioFromXlsx = (
           const coinId = String(
             row["CoinId"] ?? row["coinId"] ?? row["coin_id"] ?? ""
           ).trim();
-          const symbol = String(
-            row["Symbol"] ?? row["symbol"] ?? ""
-          ).trim();
+          const symbol = String(row["Symbol"] ?? row["symbol"] ?? "").trim();
           const name = String(
             row["Coin"] ?? row["coin"] ?? row["Name"] ?? row["name"] ?? ""
           ).trim();

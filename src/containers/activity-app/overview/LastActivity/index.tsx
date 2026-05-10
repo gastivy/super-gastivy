@@ -1,13 +1,15 @@
+import { IconClockHour9, IconFlameFilled } from "@tabler/icons-react";
+import { useNavigate } from "@tanstack/react-router";
+
+import { Assets } from "@assets/illustrations";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-
+import EmptyState from "@components/base/EmptyState";
 import { routes } from "@constants/routes";
 import { dateTime } from "@libs/dateTime";
 import { useGetActivity } from "@modules/activity/activity-log/hooks/useActivity";
-import { useNavigate } from "@tanstack/react-router";
+
 import { SkeletonLoading } from "./SkeletonLoading";
-import EmptyState from "@components/base/EmptyState";
-import { Assets } from "@assets/illustrations";
 
 export const LastActivity = () => {
   const navigate = useNavigate();
@@ -57,15 +59,18 @@ export const LastActivity = () => {
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <Icon
-                      name={is_done ? "Flame-solid" : "Time-Square-outline"}
-                      className={
-                        is_done
-                          ? "text-green-yellow-500"
-                          : "text-limed-spruce-400"
-                      }
-                      size="18px"
-                    />
+                    {is_done ? (
+                      <IconFlameFilled
+                        size={18}
+                        className="text-green-yellow-500"
+                      />
+                    ) : (
+                      <IconClockHour9
+                        stroke={2}
+                        size={18}
+                        className="text-limed-spruce-400"
+                      />
+                    )}
                     <div
                       className={
                         is_done ? "text-shark-900" : "text-limed-spruce-400"
