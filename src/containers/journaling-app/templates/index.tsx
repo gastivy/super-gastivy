@@ -69,7 +69,7 @@ const JournalTemplatesContainer = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
-            onClick={() => navigate({ to: routes.journaling.home.path })}
+            onClick={() => navigate({ to: routes.journaling.overview.path })}
             className="p-1 text-shark-500 hover:text-shark-900 transition-colors"
           >
             <IconArrowNarrowLeft size={16} />

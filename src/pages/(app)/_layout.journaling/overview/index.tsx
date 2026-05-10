@@ -6,6 +6,6 @@ const JournalOverviewPage = () => {
   return <JournalOverviewContainer />;
 };
 
-export const Route = createFileRoute("/(app)/_layout/journaling/")({
+export const Route = createFileRoute("/(app)/_layout/journaling/overview/")({
   component: JournalOverviewPage,
 });

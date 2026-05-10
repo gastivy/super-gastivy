@@ -70,13 +70,17 @@ export const routes = {
     },
   },
   journaling: {
-    home: {
-      name: "Journal",
-      path: "/journaling",
+    overview: {
+      name: "Overview",
+      path: "/journaling/overview",
     },
     create: {
       name: "New Journal",
       path: "/journaling/create",
+    },
+    detail: {
+      name: "Journal Detail",
+      path: "/journaling/$id",
     },
     templates: {
       name: "Templates",

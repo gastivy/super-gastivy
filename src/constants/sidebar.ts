@@ -115,12 +115,12 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
   },
   {
     name: "Journal",
-    path: routes.journaling.home.path,
+    path: routes.journaling.overview.path,
     icon: IconBook,
     children: [
       {
         name: "Overview",
-        path: routes.journaling.home.path,
+        path: routes.journaling.overview.path,
         icon: IconHome,
       },
       {

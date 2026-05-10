@@ -15,14 +15,15 @@ import { Route as authRegisterIndexRouteImport } from './pages/(auth)/register/i
 import { Route as authLoginIndexRouteImport } from './pages/(auth)/login/index'
 import { Route as appLayoutSettingsIndexRouteImport } from './pages/(app)/_layout.settings/index'
 import { Route as appLayoutNotesIndexRouteImport } from './pages/(app)/_layout.notes/index'
-import { Route as appLayoutJournalingIndexRouteImport } from './pages/(app)/_layout.journaling/index'
 import { Route as appLayoutFinanceIndexRouteImport } from './pages/(app)/_layout.finance/index'
 import { Route as appLayoutActivityIndexRouteImport } from './pages/(app)/_layout.activity/index'
 import { Route as appLayoutPortfolioStocksIndexRouteImport } from './pages/(app)/_layout.portfolio/stocks/index'
 import { Route as appLayoutPortfolioOverviewIndexRouteImport } from './pages/(app)/_layout.portfolio/overview/index'
 import { Route as appLayoutPortfolioCryptoIndexRouteImport } from './pages/(app)/_layout.portfolio/crypto/index'
 import { Route as appLayoutJournalingTemplatesIndexRouteImport } from './pages/(app)/_layout.journaling/templates/index'
+import { Route as appLayoutJournalingOverviewIndexRouteImport } from './pages/(app)/_layout.journaling/overview/index'
 import { Route as appLayoutJournalingCreateIndexRouteImport } from './pages/(app)/_layout.journaling/create/index'
+import { Route as appLayoutJournalingIdIndexRouteImport } from './pages/(app)/_layout.journaling/$id/index'
 import { Route as appLayoutFinanceWalletIndexRouteImport } from './pages/(app)/_layout.finance/wallet/index'
 import { Route as appLayoutFinanceTransactionsIndexRouteImport } from './pages/(app)/_layout.finance/transactions/index'
 import { Route as appLayoutFinanceStatisticIndexRouteImport } from './pages/(app)/_layout.finance/statistic/index'
@@ -60,12 +61,6 @@ const appLayoutNotesIndexRoute = appLayoutNotesIndexRouteImport.update({
   path: '/notes/',
   getParentRoute: () => appLayoutRoute,
 } as any)
-const appLayoutJournalingIndexRoute =
-  appLayoutJournalingIndexRouteImport.update({
-    id: '/journaling/',
-    path: '/journaling/',
-    getParentRoute: () => appLayoutRoute,
-  } as any)
 const appLayoutFinanceIndexRoute = appLayoutFinanceIndexRouteImport.update({
   id: '/finance/',
   path: '/finance/',
@@ -100,10 +95,22 @@ const appLayoutJournalingTemplatesIndexRoute =
     path: '/journaling/templates/',
     getParentRoute: () => appLayoutRoute,
   } as any)
+const appLayoutJournalingOverviewIndexRoute =
+  appLayoutJournalingOverviewIndexRouteImport.update({
+    id: '/journaling/overview/',
+    path: '/journaling/overview/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
 const appLayoutJournalingCreateIndexRoute =
   appLayoutJournalingCreateIndexRouteImport.update({
     id: '/journaling/create/',
     path: '/journaling/create/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutJournalingIdIndexRoute =
+  appLayoutJournalingIdIndexRouteImport.update({
+    id: '/journaling/$id/',
+    path: '/journaling/$id/',
     getParentRoute: () => appLayoutRoute,
   } as any)
 const appLayoutFinanceWalletIndexRoute =
@@ -155,7 +162,6 @@ export interface FileRoutesByFullPath {
   '/register/': typeof authRegisterIndexRoute
   '/activity/': typeof appLayoutActivityIndexRoute
   '/finance/': typeof appLayoutFinanceIndexRoute
-  '/journaling/': typeof appLayoutJournalingIndexRoute
   '/notes/': typeof appLayoutNotesIndexRoute
   '/settings/': typeof appLayoutSettingsIndexRoute
   '/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
@@ -165,7 +171,9 @@ export interface FileRoutesByFullPath {
   '/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
+  '/journaling/$id/': typeof appLayoutJournalingIdIndexRoute
   '/journaling/create/': typeof appLayoutJournalingCreateIndexRoute
+  '/journaling/overview/': typeof appLayoutJournalingOverviewIndexRoute
   '/journaling/templates/': typeof appLayoutJournalingTemplatesIndexRoute
   '/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
   '/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
@@ -177,7 +185,6 @@ export interface FileRoutesByTo {
   '/register': typeof authRegisterIndexRoute
   '/activity': typeof appLayoutActivityIndexRoute
   '/finance': typeof appLayoutFinanceIndexRoute
-  '/journaling': typeof appLayoutJournalingIndexRoute
   '/notes': typeof appLayoutNotesIndexRoute
   '/settings': typeof appLayoutSettingsIndexRoute
   '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
@@ -187,7 +194,9 @@ export interface FileRoutesByTo {
   '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
   '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
   '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
+  '/journaling/$id': typeof appLayoutJournalingIdIndexRoute
   '/journaling/create': typeof appLayoutJournalingCreateIndexRoute
+  '/journaling/overview': typeof appLayoutJournalingOverviewIndexRoute
   '/journaling/templates': typeof appLayoutJournalingTemplatesIndexRoute
   '/portfolio/crypto': typeof appLayoutPortfolioCryptoIndexRoute
   '/portfolio/overview': typeof appLayoutPortfolioOverviewIndexRoute
@@ -201,7 +210,6 @@ export interface FileRoutesById {
   '/(auth)/register/': typeof authRegisterIndexRoute
   '/(app)/_layout/activity/': typeof appLayoutActivityIndexRoute
   '/(app)/_layout/finance/': typeof appLayoutFinanceIndexRoute
-  '/(app)/_layout/journaling/': typeof appLayoutJournalingIndexRoute
   '/(app)/_layout/notes/': typeof appLayoutNotesIndexRoute
   '/(app)/_layout/settings/': typeof appLayoutSettingsIndexRoute
   '/(app)/_layout/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
@@ -211,7 +219,9 @@ export interface FileRoutesById {
   '/(app)/_layout/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
   '/(app)/_layout/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
   '/(app)/_layout/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
+  '/(app)/_layout/journaling/$id/': typeof appLayoutJournalingIdIndexRoute
   '/(app)/_layout/journaling/create/': typeof appLayoutJournalingCreateIndexRoute
+  '/(app)/_layout/journaling/overview/': typeof appLayoutJournalingOverviewIndexRoute
   '/(app)/_layout/journaling/templates/': typeof appLayoutJournalingTemplatesIndexRoute
   '/(app)/_layout/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
   '/(app)/_layout/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
@@ -225,7 +235,6 @@ export interface FileRouteTypes {
     | '/register/'
     | '/activity/'
     | '/finance/'
-    | '/journaling/'
     | '/notes/'
     | '/settings/'
     | '/activity/categories/'
@@ -235,7 +244,9 @@ export interface FileRouteTypes {
     | '/finance/statistic/'
     | '/finance/transactions/'
     | '/finance/wallet/'
+    | '/journaling/$id/'
     | '/journaling/create/'
+    | '/journaling/overview/'
     | '/journaling/templates/'
     | '/portfolio/crypto/'
     | '/portfolio/overview/'
@@ -247,7 +258,6 @@ export interface FileRouteTypes {
     | '/register'
     | '/activity'
     | '/finance'
-    | '/journaling'
     | '/notes'
     | '/settings'
     | '/activity/categories'
@@ -257,7 +267,9 @@ export interface FileRouteTypes {
     | '/finance/statistic'
     | '/finance/transactions'
     | '/finance/wallet'
+    | '/journaling/$id'
     | '/journaling/create'
+    | '/journaling/overview'
     | '/journaling/templates'
     | '/portfolio/crypto'
     | '/portfolio/overview'
@@ -270,7 +282,6 @@ export interface FileRouteTypes {
     | '/(auth)/register/'
     | '/(app)/_layout/activity/'
     | '/(app)/_layout/finance/'
-    | '/(app)/_layout/journaling/'
     | '/(app)/_layout/notes/'
     | '/(app)/_layout/settings/'
     | '/(app)/_layout/activity/categories/'
@@ -280,7 +291,9 @@ export interface FileRouteTypes {
     | '/(app)/_layout/finance/statistic/'
     | '/(app)/_layout/finance/transactions/'
     | '/(app)/_layout/finance/wallet/'
+    | '/(app)/_layout/journaling/$id/'
     | '/(app)/_layout/journaling/create/'
+    | '/(app)/_layout/journaling/overview/'
     | '/(app)/_layout/journaling/templates/'
     | '/(app)/_layout/portfolio/crypto/'
     | '/(app)/_layout/portfolio/overview/'
@@ -338,13 +351,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutNotesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
-    '/(app)/_layout/journaling/': {
-      id: '/(app)/_layout/journaling/'
-      path: '/journaling'
-      fullPath: '/journaling/'
-      preLoaderRoute: typeof appLayoutJournalingIndexRouteImport
-      parentRoute: typeof appLayoutRoute
-    }
     '/(app)/_layout/finance/': {
       id: '/(app)/_layout/finance/'
       path: '/finance'
@@ -387,11 +393,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appLayoutJournalingTemplatesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
+    '/(app)/_layout/journaling/overview/': {
+      id: '/(app)/_layout/journaling/overview/'
+      path: '/journaling/overview'
+      fullPath: '/journaling/overview/'
+      preLoaderRoute: typeof appLayoutJournalingOverviewIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
     '/(app)/_layout/journaling/create/': {
       id: '/(app)/_layout/journaling/create/'
       path: '/journaling/create'
       fullPath: '/journaling/create/'
       preLoaderRoute: typeof appLayoutJournalingCreateIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/journaling/$id/': {
+      id: '/(app)/_layout/journaling/$id/'
+      path: '/journaling/$id'
+      fullPath: '/journaling/$id/'
+      preLoaderRoute: typeof appLayoutJournalingIdIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/wallet/': {
@@ -449,7 +469,6 @@ declare module '@tanstack/react-router' {
 interface appLayoutRouteChildren {
   appLayoutActivityIndexRoute: typeof appLayoutActivityIndexRoute
   appLayoutFinanceIndexRoute: typeof appLayoutFinanceIndexRoute
-  appLayoutJournalingIndexRoute: typeof appLayoutJournalingIndexRoute
   appLayoutNotesIndexRoute: typeof appLayoutNotesIndexRoute
   appLayoutSettingsIndexRoute: typeof appLayoutSettingsIndexRoute
   appLayoutActivityCategoriesIndexRoute: typeof appLayoutActivityCategoriesIndexRoute
@@ -459,7 +478,9 @@ interface appLayoutRouteChildren {
   appLayoutFinanceStatisticIndexRoute: typeof appLayoutFinanceStatisticIndexRoute
   appLayoutFinanceTransactionsIndexRoute: typeof appLayoutFinanceTransactionsIndexRoute
   appLayoutFinanceWalletIndexRoute: typeof appLayoutFinanceWalletIndexRoute
+  appLayoutJournalingIdIndexRoute: typeof appLayoutJournalingIdIndexRoute
   appLayoutJournalingCreateIndexRoute: typeof appLayoutJournalingCreateIndexRoute
+  appLayoutJournalingOverviewIndexRoute: typeof appLayoutJournalingOverviewIndexRoute
   appLayoutJournalingTemplatesIndexRoute: typeof appLayoutJournalingTemplatesIndexRoute
   appLayoutPortfolioCryptoIndexRoute: typeof appLayoutPortfolioCryptoIndexRoute
   appLayoutPortfolioOverviewIndexRoute: typeof appLayoutPortfolioOverviewIndexRoute
@@ -469,7 +490,6 @@ interface appLayoutRouteChildren {
 const appLayoutRouteChildren: appLayoutRouteChildren = {
   appLayoutActivityIndexRoute: appLayoutActivityIndexRoute,
   appLayoutFinanceIndexRoute: appLayoutFinanceIndexRoute,
-  appLayoutJournalingIndexRoute: appLayoutJournalingIndexRoute,
   appLayoutNotesIndexRoute: appLayoutNotesIndexRoute,
   appLayoutSettingsIndexRoute: appLayoutSettingsIndexRoute,
   appLayoutActivityCategoriesIndexRoute: appLayoutActivityCategoriesIndexRoute,
@@ -480,7 +500,9 @@ const appLayoutRouteChildren: appLayoutRouteChildren = {
   appLayoutFinanceTransactionsIndexRoute:
     appLayoutFinanceTransactionsIndexRoute,
   appLayoutFinanceWalletIndexRoute: appLayoutFinanceWalletIndexRoute,
+  appLayoutJournalingIdIndexRoute: appLayoutJournalingIdIndexRoute,
   appLayoutJournalingCreateIndexRoute: appLayoutJournalingCreateIndexRoute,
+  appLayoutJournalingOverviewIndexRoute: appLayoutJournalingOverviewIndexRoute,
   appLayoutJournalingTemplatesIndexRoute:
     appLayoutJournalingTemplatesIndexRoute,
   appLayoutPortfolioCryptoIndexRoute: appLayoutPortfolioCryptoIndexRoute,

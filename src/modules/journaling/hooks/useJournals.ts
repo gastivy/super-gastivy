@@ -3,6 +3,44 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import DexieDB from "@libs/dexieDB";
 import type { JournalEntry } from "@modules/journaling/models/types";
 
+export const JOURNAL_PAGE_SIZE = 50;
+
+export function useAllJournals() {
+  return useQuery({
+    queryKey: ["journals", "all"],
+    queryFn: async () => {
+      const journals = await DexieDB.journals
+        .orderBy("date")
+        .reverse()
+        .toArray();
+      return journals;
+    },
+  });
+}
+
+export function useJournalCount() {
+  return useQuery({
+    queryKey: ["journals", "count"],
+    queryFn: () => DexieDB.journals.count(),
+  });
+}
+
+export function useJournalsPage(page: number) {
+  return useQuery({
+    queryKey: ["journals", "page", page],
+    queryFn: async () => {
+      const offset = page * JOURNAL_PAGE_SIZE;
+      const journals = await DexieDB.journals
+        .orderBy("date")
+        .reverse()
+        .offset(offset)
+        .limit(JOURNAL_PAGE_SIZE)
+        .toArray();
+      return journals;
+    },
+  });
+}
+
 export function useJournalsByDateRange(startDate: string, endDate: string) {
   return useQuery({
     queryKey: ["journals", startDate, endDate],

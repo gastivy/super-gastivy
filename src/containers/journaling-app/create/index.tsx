@@ -57,7 +57,7 @@ const JournalCreateContainer = () => {
     };
 
     const id = await saveMutation.mutateAsync(entry);
-    navigate({ to: routes.journaling.home.path });
+    // navigate({ to: routes.journaling.overview.path });
     return id;
   };
 
@@ -68,22 +68,21 @@ const JournalCreateContainer = () => {
 
   return (
     <div className="space-y-5">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <button
-          onClick={() => navigate({ to: routes.journaling.home.path })}
+          onClick={() => navigate({ to: routes.journaling.overview.path })}
           className="flex items-center gap-2 text-sm text-shark-500 hover:text-shark-900 transition-colors"
         >
           <IconArrowNarrowLeft size={16} />
           Back
         </button>
         <Button
-          onClick={handleSave}
           disabled={saveMutation.isPending}
           variant="primary"
           size="regular"
           shape="semi-round"
           className="flex items-center gap-2"
+          onClick={handleSave}
         >
           <IconCircleCheckFilled size={14} />
           {isEditing ? "Update" : "Save"}
