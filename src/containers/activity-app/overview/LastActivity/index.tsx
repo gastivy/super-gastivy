@@ -1,6 +1,6 @@
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-import Icon from "@components/base/Icon";
+
 import { routes } from "@constants/routes";
 import { dateTime } from "@libs/dateTime";
 import { useGetActivity } from "@modules/activity/activity-log/hooks/useActivity";

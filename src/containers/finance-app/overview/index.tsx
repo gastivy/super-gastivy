@@ -1,6 +1,6 @@
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-import Icon from "@components/base/Icon";
+
 import { formatter } from "@libs/formatter";
 import { useGetTransactions } from "@modules/finance/transactions/hooks/useTransaction";
 import { useNavigate } from "@tanstack/react-router";

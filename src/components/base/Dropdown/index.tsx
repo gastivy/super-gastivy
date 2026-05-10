@@ -2,9 +2,9 @@ import type React from "react";
 import type { DropdownProps } from "./Dropdown.types";
 import Each from "../Each";
 import useDisclosure from "@hooks/useDisclosure";
-import Icon from "../Icon";
 import { useMemo } from "react";
 import { cn } from "@libs/classnames";
+import { IconCheck, IconChevronDown } from "@tabler/icons-react";
 
 const Dropdown: React.FC<DropdownProps> = ({
   value,
@@ -38,7 +38,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       onClick={handleClick}
     >
       <div className="text-limed-spruce-400">{label || placeholder}</div>
-      <Icon name="Down-outline" className="text-limed-spruce-300" />
+      <IconChevronDown className="text-limed-spruce-300" />
 
       {isOpen && (
         <div className="w-full min-w-max absolute z-1 top-10 left-0 flex flex-col bg-white max-h-50 overflow-y-auto shadow-xl rounded-lg">
@@ -59,8 +59,7 @@ const Dropdown: React.FC<DropdownProps> = ({
                 </div>
 
                 {option.value === value && (
-                  <Icon
-                    name="Check-solid"
+                  <IconCheck
                     size={14}
                     className="text-green-yellow-500"
                   />

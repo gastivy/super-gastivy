@@ -2,10 +2,10 @@ import { useMemo, useRef, useState } from "react";
 import type { SelectProps, Option } from "./Select.types";
 import Each from "../Each";
 import { cn } from "@libs/classnames";
-import Icon from "../Icon";
 import useDisclosure from "@hooks/useDisclosure";
 import useClickOutside from "@hooks/useClickOutside";
 import { selectVariants } from "./Select.variants";
+import { IconChevronDown, IconCircleCheckFilled } from "@tabler/icons-react";
 
 const Select = ({
   label,
@@ -86,8 +86,7 @@ const Select = ({
             onChange={(e) => setSearch(e.target.value)}
           />
 
-          <Icon
-            name="Down-outline"
+          <IconChevronDown
             size={sizeIcon}
             className={cn(
               "transition-transform text-limed-spruce-300",
@@ -122,8 +121,7 @@ const Select = ({
                       {opt.label}
                     </span>
                     {selected && (
-                      <Icon
-                        name="Check-solid"
+                      <IconCircleCheckFilled
                         size={16}
                         className="text-green-yellow-500"
                       />

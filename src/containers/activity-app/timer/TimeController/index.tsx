@@ -1,7 +1,7 @@
 import Button from "@components/base/Button";
 import Dropdown from "@components/base/Dropdown";
 import type { DropdownOption } from "@components/base/Dropdown/Dropdown.types";
-import Icon from "@components/base/Icon";
+
 import useDisclosure from "@hooks/useDisclosure";
 import DexieDB from "@libs/dexieDB";
 import type { ActivitiesDexieStore } from "@modules/activity/activity-log/models/dexie";
@@ -13,6 +13,7 @@ import {
 } from "react-circular-progressbar";
 import { cn } from "@libs/classnames";
 import ModalConfirm from "@components/base/ModalConfirm";
+import { IconCircleCheckFilled } from "@tabler/icons-react";
 
 interface TimerControllerProps {
   isStarted: boolean;
@@ -126,7 +127,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
             )}
             onClick={handleFinishActivity}
           >
-            <Icon name="Check-solid" size={18} className="text-white" />
+            <IconCircleCheckFilled size={18} className="text-white" />
           </div>
         </div>
       </div>

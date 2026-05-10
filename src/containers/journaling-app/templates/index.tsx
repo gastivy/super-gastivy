@@ -7,8 +7,9 @@ import {
 } from "@modules/journaling/hooks/useJournalTemplates";
 import TiptapEditor from "@components/base/TiptapEditor";
 import Button from "@components/base/Button";
-import Icon from "@components/base/Icon";
+
 import { routes } from "@constants/routes";
+import { IconArrowNarrowLeft, IconPlusFilled } from "@tabler/icons-react";
 
 const JournalTemplatesContainer = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const JournalTemplatesContainer = () => {
             onClick={() => navigate({ to: routes.journaling.home.path })}
             className="p-1 text-shark-500 hover:text-shark-900 transition-colors"
           >
-            <Icon name="Arrow-Left-outline" size={16} />
+            <IconArrowNarrowLeft size={16} />
           </button>
           <h1 className="text-xl font-semibold text-shark-950">Templates</h1>
         </div>
@@ -77,7 +78,7 @@ const JournalTemplatesContainer = () => {
             shape="semi-round"
             className="flex items-center gap-2"
           >
-            <Icon name="Plus-solid" size={14} />
+            <IconPlusFilled size={14} />
             New Template
           </Button>
         )}

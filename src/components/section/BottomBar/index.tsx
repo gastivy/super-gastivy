@@ -1,4 +1,4 @@
-import Icon from "@components/base/Icon";
+
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { useRouterState } from "@tanstack/react-router";
 import { useState } from "react";

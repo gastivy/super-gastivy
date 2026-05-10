@@ -1,12 +1,13 @@
 import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import DatePicker from "@components/base/DatePicker";
-import Icon from "@components/base/Icon";
+
 import InputText from "@components/base/InputText";
 import ModalConfirm from "@components/base/ModalConfirm";
 import { useActivityCategoryForm } from "@modules/activity/categories/hooks/useActivityCategoryForm";
 import { Controller } from "react-hook-form";
 import { SkeletonLoading } from "./SkeletonLoading";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 const ActivityCategoryForm = () => {
   const {
@@ -36,8 +37,7 @@ const ActivityCategoryForm = () => {
 
       <div className="flex flex-col gap-4 max-[960px]:gap-8 max-[960px]:pb-24">
         <div className="flex items-center gap-2 bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-          <Icon
-            name="Arrow-Left-outline"
+          <IconArrowNarrowLeft
             size={28}
             className="cursor-pointer"
             onClick={handleBack}

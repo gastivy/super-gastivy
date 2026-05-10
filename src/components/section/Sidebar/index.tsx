@@ -1,8 +1,9 @@
-import Icon from "@components/base/Icon";
+
 import { routes } from "@constants/routes";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { cn } from "@libs/classnames";
 import { useLogout } from "@modules/auth/hooks/useAuth";
+import { IconLogout } from "@tabler/icons-react";
 import { useNavigate, useRouterState } from "@tanstack/react-router";
 
 const Sidebar = () => {
@@ -50,8 +51,7 @@ const Sidebar = () => {
           }
           onClick={() => logout()}
         >
-          <Icon
-            name="Logout-solid"
+          <IconLogout
             size={20}
             className="text-shark-700 hover:text-limed-spruce-900"
           />

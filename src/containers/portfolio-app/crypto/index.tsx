@@ -3,7 +3,7 @@ import Button from "@components/base/Button";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-import Icon from "@components/base/Icon";
+
 import InputText from "@components/base/InputText";
 import Spinner from "@components/base/Spinner";
 import { useGetPortfolio, useAddPortfolio, useUpdatePortfolio, useDeletePortfolio } from "@modules/portfolio/hooks/usePortfolio";
@@ -12,6 +12,7 @@ import { useGetGroups, useAddGroup, useUpdateGroup, useDeleteGroup } from "@modu
 import { exportPortfolioToXlsx, importPortfolioFromXlsx } from "@modules/portfolio/services/xlsx";
 import { Assets } from "@assets/illustrations";
 import type { PortfolioItem } from "@modules/portfolio/models/types";
+import { IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
 
 const PortfolioCryptoContainer = () => {
   // Group state
@@ -407,7 +408,7 @@ const PortfolioCryptoContainer = () => {
               isLoading={addGroupMutation.isPending}
               disabled={!newGroupName.trim()}
             >
-              <Icon name="Plus-solid" size={16} />
+              <IconPlusFilled size={16} />
               <span className="ml-1">Create Group</span>
             </Button>
           </div>
@@ -516,7 +517,7 @@ const PortfolioCryptoContainer = () => {
                         transform: collapsedGroups.has(group.id!) ? "rotate(-90deg)" : "rotate(0deg)",
                       }}
                     >
-                      <Icon name="Down-outline" size={18} />
+                      <IconChevronDown size={18} />
                     </button>
                     <button
                       onClick={() => handleDeleteGroup(group.id!)}

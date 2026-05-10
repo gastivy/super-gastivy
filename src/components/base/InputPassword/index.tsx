@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import { inputVariants } from "./InputPassword.variants";
 import type { InputPasswordProps } from "./InputPassword.types";
-import Icon from "../Icon";
 import useDisclosure from "@hooks/useDisclosure";
 import { cn } from "@libs/classnames";
 
@@ -59,13 +59,19 @@ const InputPassword: React.FC<InputPasswordProps> = ({
           {...props}
         />
 
-        <Icon
-          name={isOpen ? "Eye-solid" : "Hide-solid"}
-          cursor="pointer"
-          size={size === "large" ? 24 : 18}
-          className={cn("text-gray-400 absolute", sizeIcon)}
-          onClick={onToggle}
-        />
+        {isOpen ? (
+          <IconEye
+            size={size === "large" ? 24 : 18}
+            className={cn("text-gray-400 absolute cursor-pointer", sizeIcon)}
+            onClick={onToggle}
+          />
+        ) : (
+          <IconEyeOff
+            size={size === "large" ? 24 : 18}
+            className={cn("text-gray-400 absolute cursor-pointer", sizeIcon)}
+            onClick={onToggle}
+          />
+        )}
       </div>
 
       {error && <p className="text-red-500 text-xs">{error}</p>}

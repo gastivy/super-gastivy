@@ -1,6 +1,6 @@
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-import Icon from "@components/base/Icon";
+
 import useClickOutside from "@hooks/useClickOutside";
 import useDisclosure from "@hooks/useDisclosure";
 import { dateTime } from "@libs/dateTime";
@@ -14,6 +14,7 @@ import { ModalConfirmDelete } from "../ModalConfirmDelete";
 import { useNavigate } from "@tanstack/react-router";
 import { routes } from "@constants/routes";
 import { useCallback } from "react";
+import { IconClockHour5, IconDots, IconFlameFilled } from "@tabler/icons-react";
 
 interface CardActivityLogProps {
   log: LogActivity;
@@ -87,13 +88,11 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
         <div className="flex basis-[50%] gap-5 max-[720px]:flex-col max-[720px]:gap-1">
           <div className="flex basis-[60%]">{log.category_name}</div>
           <div className="flex basis-[40%] items-center gap-1">
-            <Icon
-              name={log.is_done ? "Flame-solid" : "Time-Square-outline"}
-              className={
-                log.is_done ? "text-green-yellow-500" : "text-gray-400"
-              }
-              size={log.is_done ? "1.25rem" : "1rem"}
-            />
+            {log.is_done ? (
+              <IconFlameFilled className="text-green-yellow-500" size={16} />
+            ): (
+              <IconClockHour5 className="text-gray-400" size={16} />
+            )}
             <div className="text-shark-700">
               {log.is_done ? "Done" : "Pause"}
             </div>
@@ -116,8 +115,8 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
             ref={optionsRef}
             className="min-w-6 max-[720px]:hidden flex justify-end cursor-pointer"
           >
-            <Icon
-              name="More-Square-outline"
+            <IconDots
+              stroke={2}
               className="text-gray-400"
               onClick={onOpen}
             />

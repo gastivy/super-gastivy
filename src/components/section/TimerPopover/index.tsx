@@ -1,7 +1,8 @@
 import Button from "@components/base/Button";
-import Icon from "@components/base/Icon";
+
 import { routes } from "@constants/routes";
 import { useTimerActivity } from "@modules/activity/overview/useTimerActivity";
+import { IconPlayerPauseFilled, IconPlayerPlayFilled } from "@tabler/icons-react";
 import { useRouterState } from "@tanstack/react-router";
 
 const TimerPopover = () => {
@@ -26,12 +27,19 @@ const TimerPopover = () => {
     <div className="fixed z-2 top-6 right-6 max-[768px]:left-6 flex justify-between gap-5 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10">
       <div className="flex items-center gap-3">
         <div className="flex justify-center items-center bg-green-yellow-400 hover:bg-green-yellow-500 p-2 rounded-full cursor-pointer transition-all duration-300 ease-out">
-          <Icon
-            name={isStarted ? "Pause-solid" : "Play-solid"}
-            className="text-limed-spruce-800"
-            size={26}
-            onClick={handleTimer}
-          />
+          {isStarted ? (
+            <IconPlayerPauseFilled
+              size={26}
+              className="text-limed-spruce-800" 
+              onClick={handleTimer}
+            />
+          ) : (
+            <IconPlayerPlayFilled
+              size={26}
+              className="text-limed-spruce-800" 
+              onClick={handleTimer}
+            />
+          )}
         </div>
         <div className="flex flex-col gap-1">
           <div className="font-medium text-shark-700">{name}</div>

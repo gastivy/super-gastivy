@@ -151,25 +151,25 @@ const appLayoutActivityCategoriesIndexRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/login': typeof authLoginIndexRoute
-  '/register': typeof authRegisterIndexRoute
-  '/activity': typeof appLayoutActivityIndexRoute
-  '/finance': typeof appLayoutFinanceIndexRoute
-  '/journaling': typeof appLayoutJournalingIndexRoute
-  '/notes': typeof appLayoutNotesIndexRoute
-  '/settings': typeof appLayoutSettingsIndexRoute
-  '/activity/categories': typeof appLayoutActivityCategoriesIndexRoute
-  '/activity/log': typeof appLayoutActivityLogIndexRoute
-  '/activity/timer': typeof appLayoutActivityTimerIndexRoute
-  '/finance/categories': typeof appLayoutFinanceCategoriesIndexRoute
-  '/finance/statistic': typeof appLayoutFinanceStatisticIndexRoute
-  '/finance/transactions': typeof appLayoutFinanceTransactionsIndexRoute
-  '/finance/wallet': typeof appLayoutFinanceWalletIndexRoute
-  '/journaling/create': typeof appLayoutJournalingCreateIndexRoute
-  '/journaling/templates': typeof appLayoutJournalingTemplatesIndexRoute
-  '/portfolio/crypto': typeof appLayoutPortfolioCryptoIndexRoute
-  '/portfolio/overview': typeof appLayoutPortfolioOverviewIndexRoute
-  '/portfolio/stocks': typeof appLayoutPortfolioStocksIndexRoute
+  '/login/': typeof authLoginIndexRoute
+  '/register/': typeof authRegisterIndexRoute
+  '/activity/': typeof appLayoutActivityIndexRoute
+  '/finance/': typeof appLayoutFinanceIndexRoute
+  '/journaling/': typeof appLayoutJournalingIndexRoute
+  '/notes/': typeof appLayoutNotesIndexRoute
+  '/settings/': typeof appLayoutSettingsIndexRoute
+  '/activity/categories/': typeof appLayoutActivityCategoriesIndexRoute
+  '/activity/log/': typeof appLayoutActivityLogIndexRoute
+  '/activity/timer/': typeof appLayoutActivityTimerIndexRoute
+  '/finance/categories/': typeof appLayoutFinanceCategoriesIndexRoute
+  '/finance/statistic/': typeof appLayoutFinanceStatisticIndexRoute
+  '/finance/transactions/': typeof appLayoutFinanceTransactionsIndexRoute
+  '/finance/wallet/': typeof appLayoutFinanceWalletIndexRoute
+  '/journaling/create/': typeof appLayoutJournalingCreateIndexRoute
+  '/journaling/templates/': typeof appLayoutJournalingTemplatesIndexRoute
+  '/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
+  '/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
+  '/portfolio/stocks/': typeof appLayoutPortfolioStocksIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -221,25 +221,25 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/login'
-    | '/register'
-    | '/activity'
-    | '/finance'
-    | '/journaling'
-    | '/notes'
-    | '/settings'
-    | '/activity/categories'
-    | '/activity/log'
-    | '/activity/timer'
-    | '/finance/categories'
-    | '/finance/statistic'
-    | '/finance/transactions'
-    | '/finance/wallet'
-    | '/journaling/create'
-    | '/journaling/templates'
-    | '/portfolio/crypto'
-    | '/portfolio/overview'
-    | '/portfolio/stocks'
+    | '/login/'
+    | '/register/'
+    | '/activity/'
+    | '/finance/'
+    | '/journaling/'
+    | '/notes/'
+    | '/settings/'
+    | '/activity/categories/'
+    | '/activity/log/'
+    | '/activity/timer/'
+    | '/finance/categories/'
+    | '/finance/statistic/'
+    | '/finance/transactions/'
+    | '/finance/wallet/'
+    | '/journaling/create/'
+    | '/journaling/templates/'
+    | '/portfolio/crypto/'
+    | '/portfolio/overview/'
+    | '/portfolio/stocks/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -313,133 +313,133 @@ declare module '@tanstack/react-router' {
     '/(auth)/register/': {
       id: '/(auth)/register/'
       path: '/register'
-      fullPath: '/register'
+      fullPath: '/register/'
       preLoaderRoute: typeof authRegisterIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(auth)/login/': {
       id: '/(auth)/login/'
       path: '/login'
-      fullPath: '/login'
+      fullPath: '/login/'
       preLoaderRoute: typeof authLoginIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/(app)/_layout/settings/': {
       id: '/(app)/_layout/settings/'
       path: '/settings'
-      fullPath: '/settings'
+      fullPath: '/settings/'
       preLoaderRoute: typeof appLayoutSettingsIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/notes/': {
       id: '/(app)/_layout/notes/'
       path: '/notes'
-      fullPath: '/notes'
+      fullPath: '/notes/'
       preLoaderRoute: typeof appLayoutNotesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/journaling/': {
       id: '/(app)/_layout/journaling/'
       path: '/journaling'
-      fullPath: '/journaling'
+      fullPath: '/journaling/'
       preLoaderRoute: typeof appLayoutJournalingIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/': {
       id: '/(app)/_layout/finance/'
       path: '/finance'
-      fullPath: '/finance'
+      fullPath: '/finance/'
       preLoaderRoute: typeof appLayoutFinanceIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/activity/': {
       id: '/(app)/_layout/activity/'
       path: '/activity'
-      fullPath: '/activity'
+      fullPath: '/activity/'
       preLoaderRoute: typeof appLayoutActivityIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/portfolio/stocks/': {
       id: '/(app)/_layout/portfolio/stocks/'
       path: '/portfolio/stocks'
-      fullPath: '/portfolio/stocks'
+      fullPath: '/portfolio/stocks/'
       preLoaderRoute: typeof appLayoutPortfolioStocksIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/portfolio/overview/': {
       id: '/(app)/_layout/portfolio/overview/'
       path: '/portfolio/overview'
-      fullPath: '/portfolio/overview'
+      fullPath: '/portfolio/overview/'
       preLoaderRoute: typeof appLayoutPortfolioOverviewIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/portfolio/crypto/': {
       id: '/(app)/_layout/portfolio/crypto/'
       path: '/portfolio/crypto'
-      fullPath: '/portfolio/crypto'
+      fullPath: '/portfolio/crypto/'
       preLoaderRoute: typeof appLayoutPortfolioCryptoIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/journaling/templates/': {
       id: '/(app)/_layout/journaling/templates/'
       path: '/journaling/templates'
-      fullPath: '/journaling/templates'
+      fullPath: '/journaling/templates/'
       preLoaderRoute: typeof appLayoutJournalingTemplatesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/journaling/create/': {
       id: '/(app)/_layout/journaling/create/'
       path: '/journaling/create'
-      fullPath: '/journaling/create'
+      fullPath: '/journaling/create/'
       preLoaderRoute: typeof appLayoutJournalingCreateIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/wallet/': {
       id: '/(app)/_layout/finance/wallet/'
       path: '/finance/wallet'
-      fullPath: '/finance/wallet'
+      fullPath: '/finance/wallet/'
       preLoaderRoute: typeof appLayoutFinanceWalletIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/transactions/': {
       id: '/(app)/_layout/finance/transactions/'
       path: '/finance/transactions'
-      fullPath: '/finance/transactions'
+      fullPath: '/finance/transactions/'
       preLoaderRoute: typeof appLayoutFinanceTransactionsIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/statistic/': {
       id: '/(app)/_layout/finance/statistic/'
       path: '/finance/statistic'
-      fullPath: '/finance/statistic'
+      fullPath: '/finance/statistic/'
       preLoaderRoute: typeof appLayoutFinanceStatisticIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/finance/categories/': {
       id: '/(app)/_layout/finance/categories/'
       path: '/finance/categories'
-      fullPath: '/finance/categories'
+      fullPath: '/finance/categories/'
       preLoaderRoute: typeof appLayoutFinanceCategoriesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/activity/timer/': {
       id: '/(app)/_layout/activity/timer/'
       path: '/activity/timer'
-      fullPath: '/activity/timer'
+      fullPath: '/activity/timer/'
       preLoaderRoute: typeof appLayoutActivityTimerIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/activity/log/': {
       id: '/(app)/_layout/activity/log/'
       path: '/activity/log'
-      fullPath: '/activity/log'
+      fullPath: '/activity/log/'
       preLoaderRoute: typeof appLayoutActivityLogIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/activity/categories/': {
       id: '/(app)/_layout/activity/categories/'
       path: '/activity/categories'
-      fullPath: '/activity/categories'
+      fullPath: '/activity/categories/'
       preLoaderRoute: typeof appLayoutActivityCategoriesIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }

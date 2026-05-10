@@ -14,9 +14,10 @@ import {
 } from "date-fns";
 import { useJournalsByDateRange, useJournalDates, useDeleteJournal } from "@modules/journaling/hooks/useJournals";
 import TiptapEditor from "@components/base/TiptapEditor";
-import Icon from "@components/base/Icon";
+
 import Button from "@components/base/Button";
 import { routes } from "@constants/routes";
+import { IconArrowNarrowLeft, IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
 
 const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -73,7 +74,7 @@ const JournalOverviewContainer = () => {
           onClick={() => navigate({ to: routes.journaling.create.path })}
           className="flex items-center gap-2"
         >
-          <Icon name="Plus-solid" size={14} />
+          <IconPlusFilled size={14} />
           New Journal
         </Button>
       </div>
@@ -120,8 +121,7 @@ const JournalOverviewContainer = () => {
                     }
                   >
                     <div className="flex items-center gap-3 flex-1 min-w-0">
-                      <Icon
-                        name="Down-outline"
+                      <IconChevronDown
                         size={16}
                         className={`text-shark-400 transition-transform duration-200 shrink-0 ${
                           isExpanded ? "rotate-180" : ""
@@ -192,7 +192,7 @@ const JournalOverviewContainer = () => {
                   onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
                   className="p-1 text-shark-400 hover:text-shark-950 transition-colors"
                 >
-                  <Icon name="Arrow-Left-outline" size={16} />
+                  <IconArrowNarrowLeft size={16} />
                 </button>
                 <h2 className="text-sm font-semibold text-shark-950">
                   {format(currentMonth, "MMMM yyyy")}

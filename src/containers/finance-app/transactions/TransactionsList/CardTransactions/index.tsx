@@ -1,6 +1,6 @@
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-import Icon from "@components/base/Icon";
+
 import useClickOutside from "@hooks/useClickOutside";
 import useDisclosure from "@hooks/useDisclosure";
 import { useDisplayWidth } from "@hooks/useDisplayWidth";

@@ -3,10 +3,10 @@ import { multiSelectVariants } from "./MultiSelect.variants";
 import type { MultiSelectProps, Option } from "./MultiSelect.types";
 import Each from "../Each";
 import { cn } from "@libs/classnames";
-import Icon from "../Icon";
 import useDisclosure from "@hooks/useDisclosure";
 import useClickOutside from "@hooks/useClickOutside";
 import Conditional from "../Conditional";
+import { IconChevronDown, IconCircleCheckFilled, IconXFilled } from "@tabler/icons-react";
 
 export default function MultiSelect({
   options,
@@ -129,8 +129,7 @@ export default function MultiSelect({
               <div className="text-limed-spruce-900 text-[10px]">
                 {item.label}
               </div>
-              <Icon
-                name="Close-solid"
+              <IconXFilled
                 size={10}
                 className="text-limed-spruce-600 cursor-pointer"
                 onClick={() => toggleOption(item)}
@@ -159,8 +158,7 @@ export default function MultiSelect({
         />
 
         <Conditional if={selectedOptions.length === 0}>
-          <Icon
-            name="Down-outline"
+          <IconChevronDown
             size={sizeIcon}
             className="min-w-6 text-limed-spruce-300"
           />
@@ -191,8 +189,7 @@ export default function MultiSelect({
                     {opt.label}
                   </div>
                   {selected && (
-                    <Icon
-                      name="Check-solid"
+                    <IconCircleCheckFilled
                       size={16}
                       className="text-green-yellow-500"
                     />

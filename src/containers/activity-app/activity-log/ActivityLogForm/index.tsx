@@ -1,5 +1,4 @@
 import DatePicker from "@components/base/DatePicker";
-import Icon from "@components/base/Icon";
 import Select from "@components/base/Select";
 import { routes } from "@constants/routes";
 import { useGetCategory } from "@modules/activity/categories/hooks/useCategory";
@@ -29,6 +28,7 @@ import type { LogActivity } from "@modules/activity/activity-log/models";
 import { dateTime } from "@libs/dateTime";
 import { type useDisclosureProps } from "@hooks/useDisclosure";
 import Disclosure from "@components/base/Disclosure";
+import { IconArrowNarrowLeft, IconChevronDown, IconPlusFilled } from "@tabler/icons-react";
 
 interface FormActivity {
   seconds: number;
@@ -171,8 +171,7 @@ const ActivityLogForm = () => {
     <div className="flex flex-col gap-4 max-[960px]:gap-8 max-[960px]:pb-24">
       <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
         <div className="flex items-center gap-2">
-          <Icon
-            name="Arrow-Left-outline"
+          <IconArrowNarrowLeft
             className="cursor-pointer min-w-6"
             onClick={() => navigate({ to: routes.activity.activityLog.path })}
           />
@@ -198,7 +197,7 @@ const ActivityLogForm = () => {
               disabled={isPendingCreate || isPendingUpdate}
               onClick={() => append(defaultActivity)}
             >
-              <Icon name="Plus-solid" size={14} />
+              <IconPlusFilled size={14} />
               Add
             </Button>
           )}
@@ -232,7 +231,7 @@ const ActivityLogForm = () => {
                         </div>
 
                         <div className="hidden max-[960px]:flex">
-                          <Icon name="Down-outline" className="text-gray-400" />
+                          <IconChevronDown className="text-gray-400" />
                         </div>
                       </div>
 

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
-import Icon from "@components/base/Icon";
+
 import Spinner from "@components/base/Spinner";
 import { Assets } from "@assets/illustrations";
 import { useNavigate } from "@tanstack/react-router";

@@ -1,6 +1,6 @@
 import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
-import Icon from "@components/base/Icon";
+
 import { cn } from "@libs/classnames";
 import { formatter } from "@libs/formatter";
 import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";

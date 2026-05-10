@@ -1,9 +1,13 @@
 import React, { useMemo } from "react";
 import { DayPicker } from "react-day-picker";
+import {
+  IconCalendar,
+  IconChevronLeft,
+  IconChevronRight,
+} from "@tabler/icons-react";
 import { format } from "date-fns";
 import useDisclosure from "@hooks/useDisclosure";
 import InputText from "@components/base/InputText";
-import Icon from "@components/base/Icon";
 import useClickOutside from "@hooks/useClickOutside";
 import type { DatePickerRangeProps } from "./DatePicker.types";
 import { cn } from "@libs/classnames";
@@ -50,7 +54,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
           size="regular"
           value={displayValue}
           error={error}
-          prefix={<Icon name="Calendar-outline" size={18} />}
+          prefix={<IconCalendar size={18} />}
           readOnly
           onClick={onOpen}
         />
@@ -67,8 +71,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
                 PreviousMonthButton: (props) => (
                   <button {...props}>
                     <div className="flex justify-center items-center w-6 h-6 bg-white shadow rounded-full">
-                      <Icon
-                        name="Left-outline"
+                      <IconChevronLeft
                         className="text-gray-400"
                         size={18}
                       />
@@ -78,8 +81,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
                 NextMonthButton: (props) => (
                   <button {...props}>
                     <div className="flex justify-center items-center w-6 h-6 bg-white shadow rounded-full">
-                      <Icon
-                        name="Right-outline"
+                      <IconChevronRight
                         className="text-gray-400"
                         size={20}
                       />

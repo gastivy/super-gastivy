@@ -17,7 +17,7 @@ import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";
 import MultiSelect from "@components/base/MultiSelect";
 import { FilterDrawer } from "./FilterDrawer";
 import useDisclosure from "@hooks/useDisclosure";
-import Icon from "@components/base/Icon";
+
 import Button from "@components/base/Button";
 import { useNavigate } from "@tanstack/react-router";
 import { routes } from "@constants/routes";

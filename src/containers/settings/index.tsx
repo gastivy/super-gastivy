@@ -1,9 +1,10 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "@tanstack/react-router";
 import DexieDB from "@libs/dexieDB";
-import Icon from "@components/base/Icon";
+
 import Button from "@components/base/Button";
 import { routes } from "@constants/routes";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 interface BackupData {
   version: string;
@@ -167,7 +168,7 @@ const SettingsContainer = () => {
           onClick={() => navigate({ to: routes.home.path })}
           className="p-1 text-shark-500 hover:text-shark-900 transition-colors"
         >
-          <Icon name="Arrow-Left-outline" size={16} />
+          <IconArrowNarrowLeft size={16} />
         </button>
         <h1 className="text-xl font-semibold text-shark-950">Settings</h1>
       </div>

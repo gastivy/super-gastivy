@@ -5,8 +5,9 @@ import { useJournal, useSaveJournal } from "@modules/journaling/hooks/useJournal
 import { useJournalTemplates } from "@modules/journaling/hooks/useJournalTemplates";
 import TiptapEditor from "@components/base/TiptapEditor";
 import Button from "@components/base/Button";
-import Icon from "@components/base/Icon";
+
 import { routes } from "@constants/routes";
+import { IconArrowNarrowLeft, IconCircleCheckFilled } from "@tabler/icons-react";
 
 const JournalCreateContainer = () => {
   const navigate = useNavigate();
@@ -65,7 +66,7 @@ const JournalCreateContainer = () => {
           onClick={() => navigate({ to: routes.journaling.home.path })}
           className="flex items-center gap-2 text-sm text-shark-500 hover:text-shark-900 transition-colors"
         >
-          <Icon name="Arrow-Left-outline" size={16} />
+          <IconArrowNarrowLeft size={16} />
           Back
         </button>
         <Button
@@ -76,7 +77,7 @@ const JournalCreateContainer = () => {
           shape="semi-round"
           className="flex items-center gap-2"
         >
-          <Icon name="Check-solid" size={14} />
+          <IconCircleCheckFilled size={14} />
           {isEditing ? "Update" : "Save"}
         </Button>
       </div>
