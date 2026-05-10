@@ -33,7 +33,7 @@ const TimerPopover = () => {
   return (
     <div
       ref={ref}
-      className="fixed z-2 flex justify-between gap-2 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10 select-none"
+      className="fixed z-20 flex justify-between gap-2 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10 select-none"
       style={{
         left: position.x >= 0 ? position.x : undefined,
         top: position.y >= 0 ? position.y : undefined,
