@@ -1,4 +1,5 @@
 import {
+  IconGripVertical,
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
 } from "@tabler/icons-react";
@@ -6,6 +7,7 @@ import { useRouterState } from "@tanstack/react-router";
 
 import Button from "@components/base/Button";
 import { routes } from "@constants/routes";
+import useDrag from "@hooks/useDrag";
 import { useTimerActivity } from "@modules/activity/overview/useTimerActivity";
 
 const TimerPopover = () => {
@@ -20,6 +22,8 @@ const TimerPopover = () => {
     handleFinishActivity,
   } = useTimerActivity();
 
+  const { position, handlers, ref } = useDrag();
+
   if (
     !name ||
     routerState.location.pathname === routes.activity.timer.path ||
@@ -27,8 +31,22 @@ const TimerPopover = () => {
   )
     return;
   return (
-    <div className="fixed z-2 top-6 right-6 max-[768px]:left-6 flex justify-between gap-5 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10">
+    <div
+      ref={ref}
+      className="fixed z-2 flex justify-between gap-2 items-center bg-white shadow-xl shadow-shark-400/20 min-[768px]:w-100 p-3 rounded-xl border border-shark-400/10 select-none"
+      style={{
+        left: position.x >= 0 ? position.x : undefined,
+        top: position.y >= 0 ? position.y : undefined,
+        right: position.x < 0 ? 24 : undefined,
+      }}
+    >
       <div className="flex items-center gap-3">
+        <div
+          className="flex items-center cursor-grab active:cursor-grabbing text-shark-300 hover:text-shark-500 transition-colors touch-none"
+          {...handlers}
+        >
+          <IconGripVertical size={20} />
+        </div>
         <div className="flex justify-center items-center bg-green-yellow-400 hover:bg-green-yellow-500 p-2 rounded-full cursor-pointer transition-all duration-300 ease-out">
           {isStarted ? (
             <IconPlayerPauseFilled

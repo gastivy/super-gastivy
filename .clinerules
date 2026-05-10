@@ -26,8 +26,10 @@ Gastivy is a multi-app productivity web application built with React 19, TypeScr
 - **Print Width**: 80 characters
 - **Bracket Spacing**: `true`
 - **No `console.log`**: ESLint rule `"no-console": "error"` — use proper logging or remove
-- **Import Sorting**: Enforced via `eslint-plugin-simple-import-sort` — keep imports sorted (external → internal → relative)
+- **Import Sorting**: Enforced via `eslint-plugin-simple-import-sort` with custom groups (see ESLint config)
+- **Auto Format on Save**: VSCode runs Prettier + ESLint fix on save (configured in `.vscode/settings.json`)
 - **No unused locals/parameters**: TypeScript strict (`"noUnusedLocals": true`, `"noUnusedParameters": true`)
+- **ESLint**: v9 flat config (`eslint.config.mjs`) — NOT `.eslintrc.json`
 
 ## Path Aliases
 
@@ -105,6 +107,34 @@ api/                    # Vercel serverless API functions
    });
    ```
 
+## ESLint Configuration
+
+- **Config file**: `eslint.config.mjs` (ESLint v9 flat config format)
+- **Key plugins**: `typescript-eslint`, `eslint-plugin-react`, `eslint-plugin-simple-import-sort`, `eslint-plugin-prettier`, `eslint-config-prettier`
+- **Import sort groups** (enforced order):
+  1. Side effect imports (`import "..."`)
+  2. Node.js built-ins (`import fs from "node:..."`)
+  3. React packages (`import React from "react"`, `import { useState } from "react"`)
+  4. External packages (e.g., `axios`, `yup`, `dexie`, `@tabler/icons-react`)
+  5. Internal path aliases (`@pages`, `@components`, `@containers`, `@constants`, `@custom-types`, `@hooks`, `@libs`, `@modules`, `@styles`, `@assets`)
+  6. Parent imports (`../`)
+  7. Relative imports (`./`)
+  8. CSS/SCSS imports
+- **Export sorting**: Also enforced via `simple-import-sort/exports`
+- **Scripts**:
+  - `npm run lint` — Check for lint errors
+  - `npm run lint:fix` — Auto-fix lint errors (import sort, prettier formatting)
+  - `npm run format` — Format all source files with Prettier
+
+## VSCode Setup
+
+- `.vscode/settings.json` is committed to the repo with:
+  - `editor.formatOnSave: true` — Prettier formats on save
+  - `editor.codeActionsOnSave.source.fixAll.eslint: "explicit"` — ESLint auto-fix on save
+  - `source.organizeImports: "never"` — Disabled to avoid conflict with `simple-import-sort`
+  - `editor.defaultFormatter: "esbenp.prettier-vscode"`
+- Required VSCode extensions: `esbenp.prettier-vscode`, `dbaeumer.vscode-eslint`
+
 ## Routing Conventions
 
 - Routes are defined by file structure in `src/pages/`
@@ -116,12 +146,13 @@ api/                    # Vercel serverless API functions
 
 1. **Never use `console.log`** — it's an ESLint error. Remove or use proper debugging.
 2. **Always use path aliases** for cross-module imports (e.g., `@components/`, `@hooks/`, `@libs/`).
-3. **Keep imports sorted**: external packages first, then `@alias` imports, then relative imports.
+3. **Keep imports sorted**: Follow the import sort groups defined in `eslint.config.mjs` — side effects → node built-ins → react → external packages → path aliases → parent imports → relative imports → CSS/SCSS.
 4. **Follow the existing component pattern** (types → variants → component) when creating new base components.
 5. **Use `cn()`** for all conditional/merged class names.
 6. **TypeScript strict mode** is enabled — always provide proper types, no `any` unless absolutely unavoidable.
 7. **Run `npm run build`** to verify changes compile correctly before considering work done.
-8. **Run `npm run lint`** to check for linting issues.
+8. **Run `npm run lint`** to check for linting issues. Use `npm run lint:fix` to auto-fix.
 9. **Forms**: Use React Hook Form with Yup schemas for form validation.
 10. **API calls**: Use the Axios-based `httpService` in `@libs/httpService`.
 11. **Local storage/IndexedDB**: Use Dexie via `@libs/dexieDB` for client-side database needs.
+12. **ESLint config is `eslint.config.mjs`** (ESLint v9 flat config) — do NOT create `.eslintrc.json`.
