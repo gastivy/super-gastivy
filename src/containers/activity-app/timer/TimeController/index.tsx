@@ -152,7 +152,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
         <Tabs
           value={timerType}
           onValueChange={(val: string) => onTimerTypeChange(val as TimerType)}
-          className="flex flex-col items-center gap-0"
+          className="items-center gap-0"
         >
           <TabsList>
             <TabsTrigger value="stopwatch">Stopwatch</TabsTrigger>

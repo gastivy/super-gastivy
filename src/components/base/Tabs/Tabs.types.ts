@@ -1,27 +1,19 @@
-import type React from "react";
+import type { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
+import type { VariantProps } from "class-variance-authority";
 
-import type * as TabsPrimitive from "@radix-ui/react-tabs";
+import type {
+  tabsListVariants,
+  tabsTriggerVariants,
+  tabsVariants,
+} from "./Tabs.variants";
 
-export type TabsProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Root
-> & {
-  className?: string;
-};
+export type TabsProps = TabsPrimitive.Root.Props &
+  VariantProps<typeof tabsVariants>;
 
-export type TabsListProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.List
-> & {
-  className?: string;
-};
+export type TabsListProps = TabsPrimitive.List.Props &
+  VariantProps<typeof tabsListVariants>;
 
-export type TabsTriggerProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Trigger
-> & {
-  className?: string;
-};
+export type TabsTriggerProps = TabsPrimitive.Tab.Props &
+  VariantProps<typeof tabsTriggerVariants>;
 
-export type TabsContentProps = React.ComponentPropsWithoutRef<
-  typeof TabsPrimitive.Content
-> & {
-  className?: string;
-};
+export type TabsContentProps = TabsPrimitive.Panel.Props;

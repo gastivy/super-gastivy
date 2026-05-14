@@ -1,6 +1,4 @@
-import React from "react";
-
-import * as TabsPrimitive from "@radix-ui/react-tabs";
+import { Tabs as TabsPrimitive } from "@base-ui/react/tabs";
 
 import { cn } from "@libs/classnames";
 
@@ -10,56 +8,51 @@ import type {
   TabsProps,
   TabsTriggerProps,
 } from "./Tabs.types";
-import { tabsListVariants, tabsTriggerVariants } from "./Tabs.variants";
+import {
+  tabsListVariants,
+  tabsTriggerVariants,
+  tabsVariants,
+} from "./Tabs.variants";
 
-const Tabs: React.FC<TabsProps> = ({
-  className,
-  value,
-  onValueChange,
-  defaultValue,
-  ...props
-}) => (
-  <TabsPrimitive.Root
-    value={value}
-    onValueChange={onValueChange}
-    defaultValue={defaultValue}
-    className={cn("flex flex-col gap-2", className)}
-    {...props}
-  />
-);
+function Tabs({ className, ...props }: TabsProps) {
+  return (
+    <TabsPrimitive.Root
+      data-slot="tabs"
+      className={cn(tabsVariants(), className)}
+      {...props}
+    />
+  );
+}
 
-const TabsList: React.FC<TabsListProps> = ({ className, ...props }) => (
-  <TabsPrimitive.List
-    className={cn(tabsListVariants(), className)}
-    {...props}
-  />
-);
+function TabsList({ className, variant, ...props }: TabsListProps) {
+  return (
+    <TabsPrimitive.List
+      data-slot="tabs-list"
+      data-variant={variant}
+      className={cn(tabsListVariants({ variant }), className)}
+      {...props}
+    />
+  );
+}
 
-const TabsTrigger: React.FC<TabsTriggerProps> = ({
-  className,
-  value,
-  ...props
-}) => (
-  <TabsPrimitive.Trigger
-    value={value}
-    className={cn(tabsTriggerVariants(), className)}
-    {...props}
-  />
-);
+function TabsTrigger({ className, variant, ...props }: TabsTriggerProps) {
+  return (
+    <TabsPrimitive.Tab
+      data-slot="tabs-trigger"
+      className={cn(tabsTriggerVariants({ variant }), className)}
+      {...props}
+    />
+  );
+}
 
-const TabsContent: React.FC<TabsContentProps> = ({
-  className,
-  value,
-  ...props
-}) => (
-  <TabsPrimitive.Content
-    value={value}
-    className={cn(
-      "mt-2 ring-offset-white focus-visible:outline-none",
-      className
-    )}
-    {...props}
-  />
-);
+function TabsContent({ className, ...props }: TabsContentProps) {
+  return (
+    <TabsPrimitive.Panel
+      data-slot="tabs-content"
+      className={cn("flex-1 text-sm outline-none", className)}
+      {...props}
+    />
+  );
+}
 
 export { Tabs, TabsContent, TabsList, TabsTrigger };
