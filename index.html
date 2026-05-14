@@ -9,6 +9,10 @@
     <title>Gastivy</title>
   </head>
   <body>
+    <!-- Zero-FOUC: apply dark class before React hydrates -->
+    <script>
+      (function(){try{var t=localStorage.getItem('gastivy-theme');var d=t==='dark'||(t!=='light'&&window.matchMedia('(prefers-color-scheme:dark)').matches);if(d)document.documentElement.classList.add('dark')}catch(e){}})();
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

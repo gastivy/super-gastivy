@@ -29,7 +29,7 @@ export const FilterDrawer: React.FC<FilterDrawerProps> = ({
   return (
     <Drawer className="rounded-none p-4" {...props}>
       <div className="h-full flex flex-col gap-6">
-        <div className="text-limed-spruce-700 font-medium text-lg">
+        <div className="text-slate-700 font-medium text-lg">
           Filter Transactions
         </div>
 

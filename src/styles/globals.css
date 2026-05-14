@@ -3,8 +3,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import "./animations.css";
 
+/* Class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
 * {
   font-family: "Poppins", sans-serif;
+}
+
+/* Smooth theme transitions — respects reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  html.transitioning,
+  html.transitioning *,
+  html.transitioning *::before,
+  html.transitioning *::after {
+    transition: background-color 200ms ease-in-out, color 200ms ease-in-out,
+      border-color 200ms ease-in-out, box-shadow 200ms ease-in-out !important;
+  }
 }
 
 /* hide scrollbar but keep scroll */
@@ -27,53 +41,85 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-@theme {
-  --color-green-yellow-50: #f9ffe6;
-  --color-green-yellow-100: #f0ffc8;
-  --color-green-yellow-200: #e1fe98;
-  --color-green-yellow-300: #c9fa5c;
-  --color-green-yellow-400: #bbf246; /* Primary */
-  --color-green-yellow-500: #92d60c;
-  --color-green-yellow-600: #70ac04;
-  --color-green-yellow-700: #558209;
-  --color-green-yellow-800: #45670d;
-  --color-green-yellow-900: #3a5710;
-  --color-green-yellow-950: #1d3003;
+/* ============================================================
+   Color Scales — Deep Dark Theme
+   ============================================================ */
+@theme inline {
+  /* ZINC — Background & Surfaces */
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
 
-  --color-white-shark: #f7f6fa;
+  /* SLATE — Text & Content */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
 
-  --color-shark-50: #f3f7f8;
-  --color-shark-100: #e0ebed;
-  --color-shark-200: #c5d8dc;
-  --color-shark-300: #9dbbc3;
-  --color-shark-400: #6d97a3;
-  --color-shark-500: #527b88;
-  --color-shark-600: #476773;
-  --color-shark-700: #3e5660;
-  --color-shark-800: #384952;
-  --color-shark-900: #323f47;
-  --color-shark-950: #192126; /* Primary */
-
-  --color-limed-spruce-50: #f4f7f7;
-  --color-limed-spruce-100: #e2e9eb;
-  --color-limed-spruce-200: #c9d5d8;
-  --color-limed-spruce-300: #a3b6bd;
-  --color-limed-spruce-400: #768f9a;
-  --color-limed-spruce-500: #5b747f;
-  --color-limed-spruce-600: #4e616c;
-  --color-limed-spruce-700: #44525a;
-  --color-limed-spruce-800: #3d474d;
-  --color-limed-spruce-900: #384046; /* Primary */
-  --color-limed-spruce-950: #21262b;
+  /* BRAND — Accent Color (Green-Yellow) */
+  --color-brand-50: #f9ffe6;
+  --color-brand-100: #f0ffc8;
+  --color-brand-200: #e1fe98;
+  --color-brand-300: #c9fa5c;
+  --color-brand-400: #bbf246;
+  --color-brand-500: #92d60c;
+  --color-brand-600: #70ac04;
+  --color-brand-700: #558209;
+  --color-brand-800: #45670d;
+  --color-brand-900: #3a5710;
 }
 
-/* Tiptap Editor Styles */
+/* ============================================================
+   Dark mode base styles
+   ============================================================ */
+.dark {
+  color-scheme: dark;
+}
+
+html.dark,
+html.dark body {
+  background-color: var(--color-zinc-950);
+  color: var(--color-slate-200);
+}
+
+/* Card background override in dark mode */
+.dark .bg-white {
+  background-color: var(--color-zinc-900);
+}
+
+/* Text color overrides in dark mode */
+.dark .text-black {
+  color: var(--color-slate-200);
+}
+
+/* ============================================================
+   Tiptap Editor Styles
+   ============================================================ */
 .tiptap-editor .tiptap-content .tiptap {
   outline: none;
   min-height: 200px;
-  color: #192126;
+  color: var(--color-slate-900);
   font-size: 0.875rem;
   line-height: 1.6;
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap {
+  color: var(--color-slate-200);
 }
 
 .tiptap-editor .tiptap-content .tiptap p {
@@ -84,14 +130,22 @@ input[type="number"] {
   font-size: 1.25rem;
   font-weight: 700;
   margin: 1em 0 0.5em;
-  color: #192126;
+  color: var(--color-slate-900);
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap h2 {
+  color: var(--color-slate-100);
 }
 
 .tiptap-editor .tiptap-content .tiptap h3 {
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0.8em 0 0.4em;
-  color: #192126;
+  color: var(--color-slate-900);
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap h3 {
+  color: var(--color-slate-100);
 }
 
 .tiptap-editor .tiptap-content .tiptap ul {
@@ -107,26 +161,38 @@ input[type="number"] {
 }
 
 .tiptap-editor .tiptap-content .tiptap blockquote {
-  border-left: 3px solid #9dbbc3;
+  border-left: 3px solid var(--color-zinc-300);
   padding-left: 1em;
   margin: 0.5em 0;
-  color: #527b88;
+  color: var(--color-slate-500);
   font-style: italic;
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap blockquote {
+  border-left-color: var(--color-zinc-700);
 }
 
 .tiptap-editor .tiptap-content .tiptap p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   float: left;
-  color: #9dbbc3;
+  color: var(--color-zinc-400);
   pointer-events: none;
   height: 0;
 }
 
 .tiptap-editor .tiptap-content .tiptap strong {
-  color: #192126;
+  color: var(--color-slate-900);
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap strong {
+  color: var(--color-slate-100);
 }
 
 .tiptap-editor .tiptap-content .tiptap hr {
-  border-color: #c5d8dc;
+  border-color: var(--color-zinc-200);
   margin: 1em 0;
+}
+
+.dark .tiptap-editor .tiptap-content .tiptap hr {
+  border-color: var(--color-zinc-700);
 }

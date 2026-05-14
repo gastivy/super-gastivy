@@ -108,10 +108,8 @@ const TransactionsList = () => {
         />
       </Conditional>
 
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
-          Transactions
-        </div>
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">Transactions</div>
 
         <Button shape="semi-round" onClick={handleCreate}>
           Create
@@ -187,7 +185,7 @@ const TransactionsList = () => {
               of={transactionsLog}
               render={(item) => (
                 <div key={item.key}>
-                  <div className="sticky top-0 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-shark-900 text-sm font-medium bg-green-yellow-200 z-1">
+                  <div className="sticky top-0 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-zinc-900 text-sm font-medium bg-brand-200 z-1">
                     {dateTime.getDate(new Date(item.key), "en-GB", {
                       dateStyle: "long",
                     })}

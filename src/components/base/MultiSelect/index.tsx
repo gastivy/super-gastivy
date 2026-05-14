@@ -95,7 +95,7 @@ export default function MultiSelect({
       className={cn("relative w-full flex flex-col gap-2", wrapperClassName)}
     >
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       <div
@@ -132,14 +132,12 @@ export default function MultiSelect({
           render={(item) => (
             <span
               key={item.value}
-              className="flex items-center gap-1.5 bg-green-yellow-400 px-1.5 py-0.5 rounded whitespace-nowrap"
+              className="flex items-center gap-1.5 bg-brand-400 px-1.5 py-0.5 rounded whitespace-nowrap"
             >
-              <div className="text-limed-spruce-900 text-[10px]">
-                {item.label}
-              </div>
+              <div className="text-zinc-900 text-[10px]">{item.label}</div>
               <IconXFilled
                 size={10}
-                className="text-limed-spruce-600 cursor-pointer"
+                className="text-slate-600 cursor-pointer"
                 onClick={() => toggleOption(item)}
               />
             </span>
@@ -166,10 +164,7 @@ export default function MultiSelect({
         />
 
         <Conditional if={selectedOptions.length === 0}>
-          <IconChevronDown
-            size={sizeIcon}
-            className="min-w-6 text-limed-spruce-300"
-          />
+          <IconChevronDown size={sizeIcon} className="min-w-6 text-slate-400" />
         </Conditional>
       </div>
 
@@ -189,17 +184,15 @@ export default function MultiSelect({
                   key={opt.value}
                   onClick={() => toggleOption(opt)}
                   className={cn(
-                    "flex justify-between items-center gap-2 px-3 py-2 cursor-pointer  hover:bg-green-yellow-100",
+                    "flex justify-between items-center gap-2 px-3 py-2 cursor-pointer  hover:bg-brand-100",
                     selected ? "font-medium" : ""
                   )}
                 >
-                  <div className="text-limed-spruce-900 text-sm">
-                    {opt.label}
-                  </div>
+                  <div className="text-zinc-900 text-sm">{opt.label}</div>
                   {selected && (
                     <IconCircleCheckFilled
                       size={16}
-                      className="text-green-yellow-500"
+                      className="text-brand-500"
                     />
                   )}
                 </div>

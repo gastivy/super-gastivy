@@ -19,8 +19,8 @@ const EmptyState: React.FC<EmptyStateProps> = ({
     >
       <img src={src} width={width} height={height} />
       <div className="flex flex-col items-center gap-4 text-center">
-        <div className="text-xl font-medium text-shark-800">{title}</div>
-        <div className="text-shark-800">{description}</div>
+        <div className="text-xl font-medium text-slate-800">{title}</div>
+        <div className="text-slate-800">{description}</div>
       </div>
     </div>
   );

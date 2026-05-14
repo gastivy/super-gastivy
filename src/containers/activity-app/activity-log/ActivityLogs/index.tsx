@@ -61,8 +61,8 @@ const ActivityLogs: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-shark-700 font-medium text-lg">Activity Logs</div>
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-slate-700 font-medium text-lg">Activity Logs</div>
         <Button shape="semi-round" onClick={handleAddActivity}>
           Add
         </Button>
@@ -132,7 +132,7 @@ const ActivityLogs: React.FC = () => {
                     key={activity.key}
                     id={`activity-${activity.key}`}
                   >
-                    <div className="sticky -top-4 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-shark-900 text-sm font-medium bg-green-yellow-200 z-1">
+                    <div className="sticky -top-4 px-4 py-1 rounded-full w-max mx-auto text-center transition-all duration-200 text-zinc-900 text-sm font-medium bg-brand-200 z-1">
                       {dateTime.getDate(new Date(activity.key), "en-GB", {
                         dateStyle: "long",
                       })}

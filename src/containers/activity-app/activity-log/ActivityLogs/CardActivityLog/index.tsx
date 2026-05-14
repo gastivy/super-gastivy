@@ -91,23 +91,23 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
           <div className="flex basis-[60%]">{log.category_name}</div>
           <div className="flex basis-[40%] items-center gap-1">
             {log.is_done ? (
-              <IconFlameFilled className="text-green-yellow-500" size={16} />
+              <IconFlameFilled className="text-brand-500" size={16} />
             ) : (
               <IconClockHour5 className="text-gray-400" size={16} />
             )}
-            <div className="text-shark-700">
+            <div className="text-slate-700">
               {log.is_done ? "Done" : "Pause"}
             </div>
           </div>
         </div>
         <div className="flex basis-[50%] gap-5 max-[720px]:flex-col max-[720px]:gap-1">
-          <div className="flex basis-1/2 text-shark-700 max-[720px]:justify-end">
+          <div className="flex basis-1/2 text-slate-700 max-[720px]:justify-end">
             {dateTime.getRangeTime(
               String(log.start_date),
               String(log.end_date)
             )}
           </div>
-          <div className="flex basis-1/2 text-shark-700 max-[720px]:justify-end">
+          <div className="flex basis-1/2 text-slate-700 max-[720px]:justify-end">
             {dateTime.convertSecondsToTimeFormat(log.seconds)}
           </div>
         </div>
@@ -120,13 +120,13 @@ export const CardActivityLog: React.FC<CardActivityLogProps> = ({ log }) => {
             <IconDots stroke={2} className="text-gray-400" onClick={onOpen} />
 
             <Conditional if={isOpen}>
-              <div className="w-40 absolute z-1 top-12 right-0 flex flex-col bg-white border border-shark-400/30 rounded-lg overflow-hidden">
+              <div className="w-40 absolute z-1 top-12 right-0 flex flex-col bg-white border border-zinc-300/30 rounded-lg overflow-hidden">
                 <Each
                   of={options}
                   render={(option) => (
                     <div
                       key={option.key}
-                      className="px-3 py-2 hover:bg-green-yellow-100"
+                      className="px-3 py-2 hover:bg-brand-100"
                       onClick={option.onClick}
                     >
                       {option.title}

@@ -23,12 +23,12 @@ export const inputVariants = cva(
         false: "",
       },
       hasValue: {
-        true: "border-shark-500",
+        true: "border-zinc-500",
         false: "",
       },
       error: {
         true: "border-red-500 focus:border-red-500",
-        false: "border-gray-300 focus:border-green-yellow-500",
+        false: "border-gray-300 focus:border-brand-500",
       },
     },
     defaultVariants: {

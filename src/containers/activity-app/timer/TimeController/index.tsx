@@ -147,7 +147,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
         onConfirm={handleCancelActivity}
       />
 
-      <div className="w-[60%] max-[720px]:h-[calc(100dvh-190px)] bg-white max-[720px]:w-full py-8 rounded-xl flex flex-col items-center gap-8 border border-shark-700/10">
+      <div className="w-[60%] max-[720px]:h-[calc(100dvh-190px)] bg-white max-[720px]:w-full py-8 rounded-xl flex flex-col items-center gap-8 border border-zinc-700/10">
         {/* Tabs: Stopwatch / Pomodoro */}
         <Tabs
           value={timerType}
@@ -228,9 +228,9 @@ export const TimerController: React.FC<TimerControllerProps> = ({
         <div className="flex items-center gap-4">
           <div
             className={cn(
-              "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
+              "flex justify-center items-center rounded-full bg-zinc-900 hover:bg-zinc-950 w-8.5 h-8.5 cursor-pointer",
               (isStarted || isLoadingCreate || !hasData || isButtonsDisabled) &&
-                "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
+                "bg-zinc-900/40 cursor-not-allowed hover:bg-zinc-900/40"
             )}
             onClick={() =>
               !isStarted &&
@@ -251,22 +251,16 @@ export const TimerController: React.FC<TimerControllerProps> = ({
             onClick={onChangeTimer}
           >
             {isStarted ? (
-              <IconPlayerPauseFilled
-                size={48}
-                className="text-limed-spruce-800"
-              />
+              <IconPlayerPauseFilled size={48} className="text-zinc-800" />
             ) : (
-              <IconPlayerPlayFilled
-                size={48}
-                className="text-limed-spruce-800"
-              />
+              <IconPlayerPlayFilled size={48} className="text-zinc-800" />
             )}
           </Button>
           <div
             className={cn(
-              "flex justify-center items-center rounded-full bg-limed-spruce-900 hover:bg-limed-spruce-950 w-8.5 h-8.5 cursor-pointer",
+              "flex justify-center items-center rounded-full bg-zinc-900 hover:bg-zinc-950 w-8.5 h-8.5 cursor-pointer",
               (isStarted || isLoadingCreate || !hasData || isButtonsDisabled) &&
-                "bg-limed-spruce-900/40 cursor-not-allowed hover:bg-limed-spruce-900/40"
+                "bg-zinc-900/40 cursor-not-allowed hover:bg-zinc-900/40"
             )}
             onClick={() => {
               if (isStarted || isLoadingCreate || !hasData || isButtonsDisabled)

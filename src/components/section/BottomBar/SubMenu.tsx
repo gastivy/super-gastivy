@@ -34,7 +34,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
       <div
         className={`
           fixed bottom-1 left-1 right-1
-          bg-shark-950 p-5 rounded-xl z-10
+          bg-zinc-900 dark:bg-zinc-800 p-5 rounded-xl z-10
           grid grid-cols-4 max-[27rem]:grid-cols-3 gap-4
           transition-transform duration-500 ease
           ${menu ? "translate-y-0" : "invisible translate-y-[120%]"}
@@ -48,7 +48,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
               <div
                 className={cn(
                   "flex flex-col items-center gap-2 p-2 rounded-lg",
-                  isActive ? "bg-green-yellow-400" : "bg-transparent"
+                  isActive ? "bg-brand-400" : "bg-transparent"
                 )}
                 key={index}
                 onClick={() => handleClickMenu(item.path)}
@@ -57,15 +57,15 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
                   const TablerIcon = item.icon;
                   return (
                     <TablerIcon
-                      className={isActive ? "text-shark-950" : "text-white"}
+                      className={isActive ? "text-zinc-900" : "text-slate-200"}
                       size={18}
                     />
                   );
                 })()}
                 <div
                   className={cn(
-                    "text-shark-950 text-xs font-medium",
-                    isActive ? "text-shark-950" : "text-white"
+                    "text-xs font-medium",
+                    isActive ? "text-zinc-900" : "text-slate-200"
                   )}
                 >
                   {item.name}

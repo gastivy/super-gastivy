@@ -72,7 +72,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
   return (
     <div className="relative w-full flex flex-col gap-2" ref={dropdownRef}>
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       <InputText
@@ -114,7 +114,7 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
           />
 
           {showShortcut && (
-            <div className="max-h-70 overflow-y-auto w-40 flex flex-col gap-1 pl-4 border-l border-shark-400">
+            <div className="max-h-70 overflow-y-auto w-40 flex flex-col gap-1 pl-4 border-l border-zinc-300">
               <Each
                 of={shortcutDate}
                 render={(option) => {
@@ -124,8 +124,8 @@ const DatePickerRange: React.FC<DatePickerRangeProps> = ({
                       className={cn(
                         "w-full px-3 py-1.5 rounded text-sm cursor-pointer",
                         isActive
-                          ? "bg-green-yellow-400 font-medium hover:bg-green-yellow-400"
-                          : "hover:bg-green-yellow-400/30"
+                          ? "bg-brand-400 font-medium hover:bg-brand-400"
+                          : "hover:bg-brand-400/30"
                       )}
                       onClick={() => handleSelect(option)}
                       key={option.value}

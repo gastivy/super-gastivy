@@ -96,7 +96,7 @@ const FinanceCategoriesForm = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8 max-[960px]:pb-24">
-      <div className="flex justify-between items-center gap-2 bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
+      <div className="flex justify-between items-center gap-2 bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
         <div className="flex items-center gap-2">
           <IconArrowNarrowLeft
             size={28}

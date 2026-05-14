@@ -69,7 +69,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
         className: "text-xs font-medium text-green-400",
         money: `+${formatter.currency(transaction.money)}`,
         walletName: (
-          <div className="text-xs font-medium text-limed-spruce-800">
+          <div className="text-xs font-medium text-zinc-800">
             {transaction.to_wallet_name}
           </div>
         ),
@@ -81,7 +81,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
         className: "text-xs font-medium text-red-400",
         money: `-${formatter.currency(transaction.money)}`,
         walletName: (
-          <div className="text-xs font-medium text-limed-spruce-800">
+          <div className="text-xs font-medium text-zinc-800">
             {transaction.from_wallet_name}
           </div>
         ),
@@ -94,7 +94,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
         money: formatter.currency(transaction.money),
         walletName: (
           <div className="flex items-center gap-1">
-            <div className="text-xs font-medium text-limed-spruce-800">
+            <div className="text-xs font-medium text-zinc-800">
               {transaction.from_wallet_name}
             </div>
             <IconArrowNarrowRight
@@ -102,7 +102,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
               size={16}
               className="text-gray-400"
             />
-            <div className="text-xs font-medium text-limed-spruce-800">
+            <div className="text-xs font-medium text-zinc-800">
               {transaction.to_wallet_name}
             </div>
           </div>
@@ -162,13 +162,13 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
               />
 
               <Conditional if={optionActionsDisclosure.isOpen}>
-                <div className="w-40 absolute z-1 top-7 right-0 flex flex-col bg-white border border-shark-400/30 rounded-lg overflow-hidden">
+                <div className="w-40 absolute z-1 top-7 right-0 flex flex-col bg-white border border-zinc-300/30 rounded-lg overflow-hidden">
                   <Each
                     of={optionsActions}
                     render={(option, index) => (
                       <div
                         key={index}
-                        className="px-3 py-2 hover:bg-green-yellow-100 text-sm"
+                        className="px-3 py-2 hover:bg-brand-100 text-sm"
                         onClick={option.onClick}
                       >
                         {option.label}
@@ -184,7 +184,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
       {/* Notes */}
       {transaction.description && (
         <div className="w-[50%] max-[578px]:w-full flex flex-col gap-1">
-          <div className="text-xs font-medium text-limed-spruce-800">Note:</div>
+          <div className="text-xs font-medium text-zinc-800">Note:</div>
           <div
             className="flex gap-2 items-center cursor-pointer"
             onClick={() => !notesDisclosure.isOpen && notesDisclosure.onOpen()}
@@ -198,7 +198,7 @@ export const CardTransactions: React.FC<CardTransactionsProps> = ({
             </div>
 
             {!notesDisclosure.isOpen && isNoteTooLong && (
-              <div className="text-xs text-green-yellow-500">See more</div>
+              <div className="text-xs text-brand-500">See more</div>
             )}
           </div>
         </div>

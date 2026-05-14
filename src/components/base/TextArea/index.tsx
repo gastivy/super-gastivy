@@ -17,7 +17,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   return (
     <div className="w-full flex flex-col gap-2">
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       <div className="relative">
@@ -33,7 +33,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         />
 
         {maxLength && (
-          <div className="text-xs text-limed-spruce-300 absolute bottom-3 right-3">
+          <div className="text-xs text-slate-400 absolute bottom-3 right-3">
             {(value as string)?.length || 0}/{maxLength}
           </div>
         )}

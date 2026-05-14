@@ -1,17 +1,17 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  `w-max text-shark-700 inline-flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed transition-all duration-300 ease-out whitespace-nowrap font-medium`,
+  `w-max text-slate-700 dark:text-slate-300 inline-flex items-center justify-center gap-2 cursor-pointer disabled:cursor-not-allowed transition-all duration-300 ease-out whitespace-nowrap font-medium`,
   {
     variants: {
       variant: {
         primary:
-          "border border-green-yellow-400 bg-green-yellow-400 hover:bg-green-yellow-300 disabled:bg-gray-200 disabled:border-gray-200",
+          "border border-brand-400 bg-brand-400 hover:bg-brand-300 dark:hover:bg-brand-500 text-zinc-950 disabled:bg-zinc-200 disabled:border-zinc-200 disabled:dark:bg-zinc-700 disabled:dark:border-zinc-700",
         secondary:
-          "border border-white bg-white shadow-sm hover:bg-gray-50 disabled:bg-gray-200 disabled:border-gray-200",
+          "border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-700 disabled:bg-zinc-200 disabled:border-zinc-200 disabled:dark:bg-zinc-700 disabled:dark:border-zinc-700",
         outline:
-          "border border-shark-700 shadow-xs hover:bg-shark-200 disabled:bg-gray-200 disabled:border-gray-200",
-        text: "text-red-400 bg-red-50 hover:bg-red-100 disabled:bg-gray-200 disabled:border-gray-200",
+          "border border-slate-700 dark:border-slate-500 shadow-xs hover:bg-zinc-200 dark:hover:bg-zinc-700 disabled:bg-zinc-200 disabled:border-zinc-200 disabled:dark:bg-zinc-700 disabled:dark:border-zinc-700",
+        text: "text-red-400 bg-red-50 dark:bg-red-950/30 hover:bg-red-100 dark:hover:bg-red-950/50 disabled:bg-zinc-200 disabled:border-zinc-200",
       },
       size: {
         small: "text-xs px-2.5 py-1",

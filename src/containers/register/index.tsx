@@ -45,13 +45,13 @@ const RegisterContainer: React.FC = () => {
           onClick={() => navigate({ to: "/" })}
         >
           <img src={LogoIcon} width="40px" />
-          <div className="text-shark-700 font-medium text-2xl">Gastivy</div>
+          <div className="text-slate-700 font-medium text-2xl">Gastivy</div>
         </div>
       </div>
 
       <div className="w-md flex flex-col items-center justify-center gap-10 max-md:w-full max-md:px-6">
         <div className="flex flex-col items-center gap-1">
-          <div className="text-xl font-medium text-shark-700">
+          <div className="text-xl font-medium text-slate-700">
             Hello, welcome to Gastivy 👋
           </div>
           <div className="text-sm text-gray-400">
@@ -96,11 +96,11 @@ const RegisterContainer: React.FC = () => {
           </div>
 
           <div className="flex dfitems-center gap-1">
-            <div className="text-shark-700 text-sm">
+            <div className="text-slate-700 text-sm">
               Already have an account
             </div>
             <div
-              className="font-medium text-green-yellow-500 text-sm cursor-pointer"
+              className="font-medium text-brand-500 text-sm cursor-pointer"
               onClick={() => navigate({ to: "/login" })}
             >
               Sign in now

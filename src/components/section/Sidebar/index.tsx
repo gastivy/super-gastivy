@@ -15,8 +15,8 @@ const Sidebar = () => {
     },
   });
   return (
-    <aside className="h-screen w-72 flex bg-white rounded-r-2xl max-[60rem]:hidden">
-      <div className="flex flex-col justify-between gap-3 border-r border-gray-200 p-3">
+    <aside className="h-screen w-72 flex bg-white dark:bg-zinc-900 rounded-r-2xl max-[60rem]:hidden">
+      <div className="flex flex-col justify-between gap-3 border-r border-zinc-200 dark:border-zinc-800 p-3">
         <div className="flex flex-col gap-3">
           {SIDEBAR_MENU.map((item) => {
             const isActive = router.location.pathname.includes(item.path || "");
@@ -24,9 +24,7 @@ const Sidebar = () => {
               <div
                 className={cn(
                   "flex justify-between items-center cursor-pointer p-3 rounded-lg",
-                  isActive
-                    ? "bg-green-yellow-400"
-                    : "hover:bg-green-yellow-400/50"
+                  isActive ? "bg-brand-400" : "hover:bg-brand-400/50"
                 )}
                 key={item.path}
                 onClick={() => navigate({ to: item.path })}
@@ -38,8 +36,8 @@ const Sidebar = () => {
                       size={20}
                       className={
                         isActive
-                          ? "text-limed-spruce-900"
-                          : "text-shark-700 hover:text-limed-spruce-900"
+                          ? "text-zinc-900"
+                          : "text-slate-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-zinc-100"
                       }
                     />
                   );
@@ -51,18 +49,18 @@ const Sidebar = () => {
 
         <div
           className={
-            "flex justify-between items-center cursor-pointer p-3 rounded-lg hover:bg-shark-200/50"
+            "flex justify-between items-center cursor-pointer p-3 rounded-lg hover:bg-zinc-200/50 dark:hover:bg-zinc-800"
           }
           onClick={() => logout()}
         >
           <IconLogout
             size={20}
-            className="text-shark-700 hover:text-limed-spruce-900"
+            className="text-slate-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-zinc-100"
           />
         </div>
       </div>
       <div className="w-full flex flex-col gap-4 p-3">
-        <div className="capitalize font-medium text-lg limed-spruce-900">
+        <div className="capitalize font-medium text-lg text-slate-900 dark:text-slate-100">
           {router.location.pathname.split("/")[1]}
         </div>
         <div className="flex flex-col gap-2">
@@ -75,7 +73,7 @@ const Sidebar = () => {
               <div
                 key={child.path}
                 className={cn(
-                  "highlight-slide w-full flex items-center gap-2 cursor-pointer px-3 py-2 rounded-md transition-all duration-300 ease-out hover:bg-green-yellow-400/40",
+                  "highlight-slide w-full flex items-center gap-2 cursor-pointer px-3 py-2 rounded-md transition-all duration-300 ease-out hover:bg-brand-400/40",
                   {
                     active: isActive,
                   }
@@ -89,8 +87,8 @@ const Sidebar = () => {
                       size={20}
                       className={
                         isActive
-                          ? "text-limed-spruce-900"
-                          : "text-shark-700 hover:text-limed-spruce-900"
+                          ? "text-zinc-900"
+                          : "text-slate-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-zinc-100"
                       }
                     />
                   );
@@ -99,8 +97,8 @@ const Sidebar = () => {
                   className={cn(
                     "text-sm",
                     isActive
-                      ? "text-limed-spruce-900"
-                      : "text-shark-700 hover:text-limed-spruce-900"
+                      ? "text-zinc-900"
+                      : "text-slate-600 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-zinc-100"
                   )}
                 >
                   {child.name}

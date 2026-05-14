@@ -102,7 +102,7 @@ const JournalDetailContainer = () => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
-        <div className="animate-spin rounded-full h-8 w-8 border-2 border-shark-300 border-t-shark-900" />
+        <div className="animate-spin rounded-full h-8 w-8 border-2 border-zinc-300 border-t-zinc-900" />
       </div>
     );
   }
@@ -129,7 +129,7 @@ const JournalDetailContainer = () => {
         <div className="flex items-center justify-between mb-6">
           <button
             onClick={() => navigate({ to: routes.journaling.overview.path })}
-            className="flex items-center gap-2 text-sm text-shark-500 hover:text-shark-900 transition-colors"
+            className="flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
           >
             <IconArrowNarrowLeft size={16} />
             Back to journals
@@ -142,7 +142,7 @@ const JournalDetailContainer = () => {
                   search: { edit: journal.id },
                 })
               }
-              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-shark-600 hover:bg-shark-100 transition-colors"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs text-zinc-600 hover:bg-zinc-100 transition-colors"
             >
               <IconEdit size={14} />
               Edit
@@ -157,15 +157,15 @@ const JournalDetailContainer = () => {
           </div>
         </div>
 
-        <article className="bg-white rounded-xl border border-shark-200 overflow-hidden">
-          <div className="px-8 pt-8 pb-6 border-b border-shark-100">
-            <h1 className="text-3xl font-bold text-shark-950 tracking-tight leading-tight">
+        <article className="bg-white rounded-xl border border-zinc-200 overflow-hidden">
+          <div className="px-8 pt-8 pb-6 border-b border-zinc-100">
+            <h1 className="text-3xl font-bold text-zinc-950 tracking-tight leading-tight">
               {journal.title || "Untitled"}
             </h1>
             <div className="flex items-center gap-3 mt-4">
-              <span className="text-sm text-shark-500">{formattedDate}</span>
-              <span className="text-shark-300">·</span>
-              <span className="flex items-center gap-1 text-sm text-shark-500">
+              <span className="text-sm text-zinc-500">{formattedDate}</span>
+              <span className="text-zinc-300">·</span>
+              <span className="flex items-center gap-1 text-sm text-zinc-500">
                 <IconClock size={14} />
                 {readingTime} min read
               </span>
@@ -174,12 +174,12 @@ const JournalDetailContainer = () => {
 
           <div className="px-8 py-8">
             {journal.content ? (
-              <div className="prose prose-shark max-w-none">
+              <div className="prose prose-zinc max-w-none">
                 <TiptapEditor content={journal.content} editable={false} />
               </div>
             ) : (
               <div className="text-center py-12">
-                <p className="text-sm text-shark-400">
+                <p className="text-sm text-zinc-400">
                   This journal entry has no content yet.
                 </p>
                 <button
@@ -189,7 +189,7 @@ const JournalDetailContainer = () => {
                       search: { edit: journal.id },
                     })
                   }
-                  className="mt-3 text-sm text-shark-900 hover:text-shark-700 transition-colors cursor-pointer"
+                  className="mt-3 text-sm text-zinc-900 hover:text-slate-700 transition-colors cursor-pointer"
                 >
                   Start writing →
                 </button>
@@ -201,20 +201,20 @@ const JournalDetailContainer = () => {
 
       <div className="col-span-12 lg:col-span-4">
         <div className="sticky top-6 space-y-4">
-          <div className="rounded-xl border border-shark-200 bg-white p-4">
+          <div className="rounded-xl border border-zinc-200 bg-white p-4">
             <div className="flex items-center justify-between mb-4">
               <button
                 onClick={() => setCurrentMonth(subMonths(currentMonth, 1))}
-                className="p-1 text-shark-400 hover:text-shark-950 transition-colors"
+                className="p-1 text-zinc-400 hover:text-zinc-950 transition-colors"
               >
                 <IconArrowNarrowLeft size={16} />
               </button>
-              <h2 className="text-sm font-semibold text-shark-950">
+              <h2 className="text-sm font-semibold text-zinc-950">
                 {format(currentMonth, "MMMM yyyy")}
               </h2>
               <button
                 onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-                className="p-1 text-shark-400 hover:text-shark-950 transition-colors"
+                className="p-1 text-zinc-400 hover:text-zinc-950 transition-colors"
               >
                 <IconArrowNarrowRight size={16} />
               </button>
@@ -224,7 +224,7 @@ const JournalDetailContainer = () => {
               {WEEKDAYS.map((day) => (
                 <div
                   key={day}
-                  className="text-center text-xs font-medium text-shark-500 py-1"
+                  className="text-center text-xs font-medium text-zinc-500 py-1"
                 >
                   {day}
                 </div>
@@ -252,17 +252,17 @@ const JournalDetailContainer = () => {
                     }}
                     className={`relative flex flex-col items-center justify-center rounded-lg py-1.5 text-xs transition-colors ${
                       isCurrentJournal
-                        ? "bg-green-yellow-400 text-shark-950 font-semibold"
+                        ? "bg-brand-400 text-zinc-950 font-semibold"
                         : hasJournal
-                          ? "bg-shark-100 text-shark-950 hover:bg-shark-200"
+                          ? "bg-zinc-100 text-zinc-950 hover:bg-zinc-200"
                           : isToday
-                            ? "bg-shark-50 text-shark-950"
-                            : "text-shark-700 hover:bg-shark-100"
+                            ? "bg-zinc-50 text-zinc-950"
+                            : "text-slate-700 hover:bg-zinc-100"
                     }`}
                   >
                     {format(day, "d")}
                     {hasJournal && !isCurrentJournal && (
-                      <span className="mt-0.5 h-1 w-1 rounded-full bg-green-yellow-400" />
+                      <span className="mt-0.5 h-1 w-1 rounded-full bg-brand-400" />
                     )}
                   </button>
                 );
@@ -271,8 +271,8 @@ const JournalDetailContainer = () => {
           </div>
 
           {monthJournals.length > 0 && (
-            <div className="rounded-xl border border-shark-200 bg-white p-4">
-              <h3 className="text-xs font-semibold text-shark-500 uppercase tracking-wider mb-3">
+            <div className="rounded-xl border border-zinc-200 bg-white p-4">
+              <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
                 This month
               </h3>
               <div className="space-y-1.5">
@@ -289,12 +289,12 @@ const JournalDetailContainer = () => {
                     }}
                     className={`w-full text-left rounded-lg px-3 py-2 text-sm transition-colors ${
                       j.id === journal?.id
-                        ? "bg-green-yellow-50 text-shark-950 font-medium"
-                        : "text-shark-600 hover:bg-shark-50"
+                        ? "bg-brand-50 text-zinc-950 font-medium"
+                        : "text-zinc-600 hover:bg-zinc-50"
                     }`}
                   >
                     <div className="truncate">{j.title || "Untitled"}</div>
-                    <div className="text-xs text-shark-400 mt-0.5">
+                    <div className="text-xs text-zinc-400 mt-0.5">
                       {format(parseISO(j.date), "MMM d")}
                     </div>
                   </button>
@@ -311,13 +311,13 @@ const JournalDetailContainer = () => {
 function EmptyDetail({ onBack }: { onBack: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-20 h-20 rounded-full bg-shark-100 flex items-center justify-center mb-6">
-        <IconBookmark size={32} className="text-shark-400" />
+      <div className="w-20 h-20 rounded-full bg-zinc-100 flex items-center justify-center mb-6">
+        <IconBookmark size={32} className="text-zinc-400" />
       </div>
-      <h3 className="text-lg font-semibold text-shark-950 mb-2">
+      <h3 className="text-lg font-semibold text-zinc-950 mb-2">
         Journal not found
       </h3>
-      <p className="text-sm text-shark-500 max-w-sm mb-6">
+      <p className="text-sm text-zinc-500 max-w-sm mb-6">
         This journal entry doesn't exist or may have been deleted.
       </p>
       <Button onClick={onBack}>Back to journals</Button>

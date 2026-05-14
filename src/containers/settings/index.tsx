@@ -3,12 +3,16 @@ import { useRef, useState } from "react";
 import {
   IconArrowNarrowLeft,
   IconDownloadFilled,
+  IconMoon,
+  IconSun,
   IconUpload,
 } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 
 import Button from "@components/base/Button";
+import Switch from "@components/base/Switch";
 import { routes } from "@constants/routes";
+import { useTheme } from "@hooks/useTheme";
 import DexieDB from "@libs/dexieDB";
 
 interface BackupData {
@@ -162,6 +166,8 @@ const SettingsContainer = () => {
     fileInputRef.current?.click();
   };
 
+  const { isDark, toggleTheme } = useTheme();
+
   return (
     <div className="space-y-6">
       {/* Hidden file input */}
@@ -177,11 +183,13 @@ const SettingsContainer = () => {
       <div className="flex items-center gap-3">
         <button
           onClick={() => navigate({ to: routes.home.path })}
-          className="p-1 text-shark-500 hover:text-shark-900 transition-colors"
+          className="p-1 text-zinc-500 dark:text-slate-400 hover:text-zinc-900 dark:hover:text-slate-100 transition-colors"
         >
           <IconArrowNarrowLeft size={16} />
         </button>
-        <h1 className="text-xl font-semibold text-shark-950">Settings</h1>
+        <h1 className="text-xl font-semibold text-zinc-950 dark:text-slate-100">
+          Settings
+        </h1>
       </div>
 
       {/* Status Message */}
@@ -197,21 +205,55 @@ const SettingsContainer = () => {
         </div>
       )}
 
+      {/* Appearance */}
+      <div className="space-y-4">
+        <h2 className="text-sm font-medium text-zinc-900 dark:text-slate-100">
+          Appearance
+        </h2>
+
+        <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white p-5">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 shrink-0">
+                {isDark ? (
+                  <IconMoon size={18} className="text-slate-700" />
+                ) : (
+                  <IconSun size={18} className="text-slate-700" />
+                )}
+              </div>
+              <div>
+                <h3 className="text-sm font-medium text-zinc-950 dark:text-slate-100">
+                  Dark Mode
+                </h3>
+                <p className="text-xs text-zinc-500 dark:text-slate-500 mt-0.5">
+                  {isDark
+                    ? "Dark theme is currently active"
+                    : "Switch to dark theme for comfortable viewing"}
+                </p>
+              </div>
+            </div>
+            <Switch enabled={isDark} onChange={toggleTheme} />
+          </div>
+        </div>
+      </div>
+
       {/* Backup & Restore */}
       <div className="space-y-4">
-        <h2 className="text-sm font-medium text-shark-900">Backup & Restore</h2>
+        <h2 className="text-sm font-medium text-zinc-900 dark:text-slate-100">
+          Backup & Restore
+        </h2>
 
-        <div className="rounded-xl border border-shark-200 bg-white p-5 space-y-5">
+        <div className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white p-5 space-y-5">
           {/* Backup */}
           <div className="flex items-start gap-4">
             <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-green-50 shrink-0">
               <IconDownloadFilled size={18} className="text-green-600" />
             </div>
             <div className="flex-1">
-              <h3 className="text-sm font-medium text-shark-950">
+              <h3 className="text-sm font-medium text-zinc-950 dark:text-slate-100">
                 Backup Data
               </h3>
-              <p className="text-xs text-shark-500 mt-0.5">
+              <p className="text-xs text-zinc-500 dark:text-slate-500 mt-0.5">
                 Export all your data including journaling, portfolio stocks, and
                 crypto as a JSON file.
               </p>
@@ -229,7 +271,7 @@ const SettingsContainer = () => {
             </div>
           </div>
 
-          <div className="border-t border-shark-100" />
+          <div className="border-t border-zinc-100 dark:border-zinc-700" />
 
           {/* Restore */}
           <div className="flex items-start gap-4">
@@ -237,10 +279,10 @@ const SettingsContainer = () => {
               <IconUpload size={18} className="text-blue-600" />
             </div>
             <div className="flex-1">
-              <h3 className="text-sm font-medium text-shark-950">
+              <h3 className="text-sm font-medium text-zinc-950 dark:text-slate-100">
                 Restore Data
               </h3>
-              <p className="text-xs text-shark-500 mt-0.5">
+              <p className="text-xs text-zinc-500 dark:text-slate-500 mt-0.5">
                 Import a previously exported backup file. This will replace all
                 existing data.
               </p>

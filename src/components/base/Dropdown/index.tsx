@@ -41,29 +41,28 @@ const Dropdown: React.FC<DropdownProps> = ({
       )}
       onClick={handleClick}
     >
-      <div className="text-limed-spruce-400">{label || placeholder}</div>
-      <IconChevronDown className="text-limed-spruce-300" />
+      <div className="text-slate-400">{label || placeholder}</div>
+      <IconChevronDown className="text-slate-400" />
 
       {isOpen && (
-        <div className="w-full min-w-max absolute z-1 top-10 left-0 flex flex-col bg-white max-h-50 overflow-y-auto shadow-xl rounded-lg">
+        <div className="w-full min-w-max absolute z-1 top-10 left-0 flex flex-col bg-white dark:bg-zinc-900 max-h-50 overflow-y-auto shadow-xl rounded-lg">
           <Each
             of={options}
             render={(option, index) => (
               <div
                 key={index}
                 className={cn(
-                  "flex justify-between items-center gap-4 p-2 cursor-pointer hover:bg-gray-100/70",
-                  option.value === value &&
-                    "bg-green-yellow-100 hover:bg-green-yellow-100"
+                  "flex justify-between items-center gap-4 p-2 cursor-pointer hover:bg-gray-100/70 dark:hover:bg-zinc-800",
+                  option.value === value && "bg-brand-100 hover:bg-brand-100"
                 )}
                 onClick={() => onSelect(option.value, option)}
               >
-                <div className="text-xs text-limed-spruce-700">
+                <div className="text-xs text-slate-700 dark:text-slate-100">
                   {option.label}
                 </div>
 
                 {option.value === value && (
-                  <IconCheck size={14} className="text-green-yellow-500" />
+                  <IconCheck size={14} className="text-brand-500" />
                 )}
               </div>
             )}

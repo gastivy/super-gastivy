@@ -75,10 +75,8 @@ const FinanceStatisticsContainer = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
-          Statistics
-        </div>
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">Statistics</div>
       </div>
 
       <div className="h-[calc(100dvh-124px)] flex flex-col gap-6 bg-white rounded-lg max-[960px]:mb-24 p-6">
@@ -133,7 +131,7 @@ const FinanceStatisticsContainer = () => {
             <div className="border-b border-gray-300" />
             <RowData
               label="Balance"
-              className="font-medium text-limed-spruce-800"
+              className="font-medium text-zinc-800"
               value={formatter.currency(income - expenses)}
             />
           </div>

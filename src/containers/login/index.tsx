@@ -49,13 +49,13 @@ const LoginContainer: React.FC = () => {
           onClick={() => navigate({ to: "/" })}
         >
           <img src={LogoIcon} width="40px" />
-          <div className="text-shark-700 font-medium text-2xl">Gastivy</div>
+          <div className="text-slate-700 font-medium text-2xl">Gastivy</div>
         </div>
       </div>
 
       <div className="w-md flex flex-col items-center justify-center gap-10 max-md:w-full max-md:px-6">
         <div className="flex flex-col items-center gap-1">
-          <div className="text-xl font-medium text-shark-700">
+          <div className="text-xl font-medium text-slate-700">
             Welcome to Gastivy 👋
           </div>
           <div className="text-sm text-gray-400">
@@ -89,9 +89,9 @@ const LoginContainer: React.FC = () => {
           </div>
 
           <div className="w-full flex justify-center gap-1">
-            <div className="text-shark-700 text-sm">Don't have an account?</div>
+            <div className="text-slate-700 text-sm">Don't have an account?</div>
             <div
-              className="font-medium text-green-yellow-500 text-sm cursor-pointer"
+              className="font-medium text-brand-500 text-sm cursor-pointer"
               onClick={() => navigate({ to: "/register" })}
             >
               Sign up for free

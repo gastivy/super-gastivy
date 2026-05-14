@@ -44,7 +44,10 @@ const Modal = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 px-4">
       <div
         ref={dropdownRef}
-        className={cn("w-lg rounded-lg bg-white shadow-xl", className)}
+        className={cn(
+          "w-lg rounded-lg bg-white dark:bg-zinc-900 shadow-xl",
+          className
+        )}
       >
         {children}
       </div>

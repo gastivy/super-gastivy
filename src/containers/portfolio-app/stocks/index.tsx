@@ -18,6 +18,7 @@ import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
 import InputText from "@components/base/InputText";
 import Spinner from "@components/base/Spinner";
+import { formatter } from "@libs/formatter";
 import {
   useAddStockGroup,
   useDeleteStockGroup,
@@ -111,22 +112,6 @@ const StockPortfolioContainer = () => {
 
   // Check if a stock is Indonesian (IDX stocks end with .JK)
   const isIndonesianStock = (symbol: string) => symbol.endsWith(".JK");
-
-  // Close search dropdowns on outside click
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      for (const [groupId, ref] of Object.entries(searchRefs.current)) {
-        if (ref && !ref.contains(e.target as Node)) {
-          setGroupForms((prev) => ({
-            ...prev,
-            [groupId]: { ...prev[Number(groupId)], showSearchResults: false },
-          }));
-        }
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const getGroupForm = (groupId: number) => {
     return (
@@ -295,23 +280,6 @@ const StockPortfolioContainer = () => {
     }, 0);
   };
 
-  const formatCurrency = (value: number) => {
-    if (currency === "idr") {
-      return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(value);
-    }
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
-
   const handleExport = useCallback(() => {
     if (stockItems.length === 0) return;
     exportStockPortfolioToXlsx(
@@ -377,14 +345,30 @@ const StockPortfolioContainer = () => {
     [groups, addGroupMutation, addMutation]
   );
 
+  // Close search dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      for (const [groupId, ref] of Object.entries(searchRefs.current)) {
+        if (ref && !ref.contains(e.target as Node)) {
+          setGroupForms((prev) => ({
+            ...prev,
+            [groupId]: { ...prev[Number(groupId)], showSearchResults: false },
+          }));
+        }
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
       {/* Header */}
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
+      <div className="flex max-[576px]:flex-col max-[576px]:items-start max-[576px]:gap-4 justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">
           Stock Portfolio
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex max-[360px]:flex-col max-[360px]:items-start items-center gap-2">
           {/* Currency Toggle */}
           <button
             onClick={() => setCurrency(currency === "usd" ? "idr" : "usd")}
@@ -393,7 +377,7 @@ const StockPortfolioContainer = () => {
             <span
               className={
                 currency === "usd"
-                  ? "text-limed-spruce-700 font-bold"
+                  ? "text-slate-700 font-bold"
                   : "text-gray-400"
               }
             >
@@ -403,7 +387,7 @@ const StockPortfolioContainer = () => {
             <span
               className={
                 currency === "idr"
-                  ? "text-limed-spruce-700 font-bold"
+                  ? "text-slate-700 font-bold"
                   : "text-gray-400"
               }
             >
@@ -411,7 +395,7 @@ const StockPortfolioContainer = () => {
             </span>
           </button>
 
-          <div className="w-px h-5 bg-gray-200" />
+          <div className="w-px h-5 bg-gray-200 max-[360px]:hidden" />
 
           <input
             ref={importRef}
@@ -420,23 +404,26 @@ const StockPortfolioContainer = () => {
             className="hidden"
             onChange={handleImport}
           />
-          <Button
-            variant="outline"
-            size="small"
-            onClick={() => importRef.current?.click()}
-          >
-            <IconUpload stroke={2} size={16} />
-            <span className="ml-1">Import</span>
-          </Button>
-          <Button
-            variant="outline"
-            size="small"
-            onClick={handleExport}
-            disabled={stockItems.length === 0}
-          >
-            <IconDownloadFilled size={16} />
-            <span className="ml-1">Export</span>
-          </Button>
+
+          <div className="flex gap-4">
+            <Button
+              variant="outline"
+              size="small"
+              onClick={() => importRef.current?.click()}
+            >
+              <IconUpload stroke={2} size={16} />
+              <span className="ml-1">Import</span>
+            </Button>
+            <Button
+              variant="outline"
+              size="small"
+              onClick={handleExport}
+              disabled={stockItems.length === 0}
+            >
+              <IconDownloadFilled size={16} />
+              <span className="ml-1">Export</span>
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -448,15 +435,15 @@ const StockPortfolioContainer = () => {
             <div className="h-8 w-48 animate-pulse bg-gray-200 rounded" />
           </Conditional>
           <Conditional if={!isLoadingPrices || stockItems.length === 0}>
-            <div className="text-2xl font-bold text-limed-spruce-700">
-              {formatCurrency(totalValue)}
+            <div className="text-2xl font-bold text-slate-700">
+              {formatter.currency(totalValue, { currency })}
             </div>
           </Conditional>
         </div>
 
         {/* Create Group */}
         <div className="bg-white p-6 rounded-lg">
-          <h3 className="text-md font-medium text-limed-spruce-700 mb-4">
+          <h3 className="text-md font-medium text-slate-700 mb-4">
             Create Stock Group
           </h3>
           <div className="flex flex-col gap-4 md:flex-row md:items-end">
@@ -542,7 +529,7 @@ const StockPortfolioContainer = () => {
                             if (e.key === "Escape") cancelEditGroup();
                           }}
                           autoFocus
-                          className="text-md font-semibold text-limed-spruce-700 border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:border-green-yellow-400"
+                          className="text-md font-semibold text-slate-700 border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:border-brand-400"
                         />
                         <button
                           onClick={saveEditGroup}
@@ -562,7 +549,7 @@ const StockPortfolioContainer = () => {
                     </Conditional>
                     <Conditional if={editingGroupId !== group.id}>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-md font-semibold text-limed-spruce-700">
+                        <h3 className="text-md font-semibold text-slate-700">
                           {group.name}
                         </h3>
                         <button
@@ -575,7 +562,7 @@ const StockPortfolioContainer = () => {
                       </div>
                     </Conditional>
                     <span className="text-xs text-gray-500">
-                      {formatCurrency(groupTotal)}
+                      {formatter.currency(groupTotal, { currency })}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -717,11 +704,11 @@ const StockPortfolioContainer = () => {
                                 className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors"
                               >
                                 <div className="flex items-center gap-3">
-                                  <div className="w-8 h-8 rounded-full bg-green-yellow-400/30 flex items-center justify-center text-xs font-bold text-limed-spruce-700">
+                                  <div className="w-8 h-8 rounded-full bg-brand-400/30 flex items-center justify-center text-xs font-bold text-slate-700">
                                     {item.symbol.charAt(0)}
                                   </div>
                                   <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-limed-spruce-700">
+                                    <span className="text-sm font-medium text-slate-700">
                                       {item.symbol}
                                     </span>
                                     <span className="text-xs text-gray-500">
@@ -732,8 +719,10 @@ const StockPortfolioContainer = () => {
 
                                 <div className="flex gap-4">
                                   <div className="flex flex-col items-end">
-                                    <span className="text-sm font-medium text-limed-spruce-700">
-                                      {formatCurrency(totalItemValue)}
+                                    <span className="text-sm font-medium text-slate-700">
+                                      {formatter.currency(totalItemValue, {
+                                        currency,
+                                      })}
                                     </span>
                                     <div className="flex items-center gap-2">
                                       <Conditional
@@ -759,7 +748,7 @@ const StockPortfolioContainer = () => {
                                               cancelEditItem();
                                           }}
                                           autoFocus
-                                          className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-green-yellow-400"
+                                          className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-brand-400"
                                         />
                                         <button
                                           onClick={saveEditItem}
@@ -781,7 +770,9 @@ const StockPortfolioContainer = () => {
                                       >
                                         <span className="text-xs text-gray-500">
                                           {item.shares} ×{" "}
-                                          {formatCurrency(convertedPrice)}
+                                          {formatter.currency(convertedPrice, {
+                                            currency,
+                                          })}
                                         </span>
                                         <button
                                           onClick={() => startEditItem(item)}
@@ -865,11 +856,11 @@ const StockSearchDropdown = ({
             className="flex items-center gap-3 px-4 py-2 hover:bg-gray-50 cursor-pointer"
             onClick={() => onSelect(stock)}
           >
-            <div className="w-6 h-6 rounded-full bg-green-yellow-400/30 flex items-center justify-center text-[10px] font-bold text-limed-spruce-700">
+            <div className="w-6 h-6 rounded-full bg-brand-400/30 flex items-center justify-center text-[10px] font-bold text-slate-700">
               {stock.symbol.charAt(0)}
             </div>
             <div className="flex flex-col">
-              <span className="text-sm font-medium text-limed-spruce-700">
+              <span className="text-sm font-medium text-slate-700">
                 {stock.symbol}
               </span>
               <span className="text-xs text-gray-500">{stock.shortName}</span>

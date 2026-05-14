@@ -10,7 +10,7 @@ export const Route = createFileRoute("/(app)/_layout")({
 
 function Layout() {
   return (
-    <div className="h-screen max-h-dvh relative flex bg-white-shark">
+    <div className="h-screen max-h-dvh relative flex bg-zinc-50 dark:bg-zinc-950">
       <Sidebar />
       <main className="h-screen relative flex-1 p-4 max-[960px]:py-0 overflow-y-auto">
         <TimerPopover />

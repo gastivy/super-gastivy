@@ -30,14 +30,14 @@ const Switch: React.FC<SwitchProps> = ({
   return (
     <div className="flex flex-col gap-2">
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
       <div
         ref={trackRef}
         onClick={toggleSwitch}
         className={cn(
           "w-full h-6 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300",
-          enabled ? "bg-green-yellow-400" : "bg-gray-300",
+          enabled ? "bg-brand-400" : "bg-gray-300",
           className
         )}
       >

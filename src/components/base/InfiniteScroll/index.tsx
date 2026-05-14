@@ -32,7 +32,7 @@ const InfiniteScroll: React.FC<InfiniteScrollProps> = ({
       {children}
       {isFetchingNextPage && (
         <div className="w-full flex justify-center items-center bg-white py-2">
-          <Spinner className="fill-shark-700 text-green-yellow-400" />
+          <Spinner className="fill-slate-700 text-brand-400" />
         </div>
       )}
     </div>

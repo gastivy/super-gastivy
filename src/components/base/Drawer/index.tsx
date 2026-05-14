@@ -44,7 +44,7 @@ const Drawer: React.FC<DrawerProps> = ({
       <div
         ref={drawerRef}
         className={cn(
-          "absolute right-0 left-0 bottom-0 w-full rounded-t-2xl bg-white shadow-xl transition-transform duration-300 ease-out",
+          "absolute right-0 left-0 bottom-0 w-full rounded-t-2xl bg-white dark:bg-zinc-900 shadow-xl transition-transform duration-300 ease-out",
           isFullHeight ? "h-full" : "h-auto",
           isOpen ? "translate-y-0" : "translate-y-full",
           className

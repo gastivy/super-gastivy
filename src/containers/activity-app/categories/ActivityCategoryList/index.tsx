@@ -25,8 +25,8 @@ const ActivityCategoryList = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">
           Activity Category
         </div>
         <Button shape="semi-round" onClick={handleAddCategory}>
@@ -63,7 +63,7 @@ const ActivityCategoryList = () => {
                 return (
                   <div
                     key={category.id}
-                    className="flex items-center gap-4 bg-white p-4 rounded-lg border border-shark-700/10 cursor-pointer"
+                    className="flex items-center gap-4 bg-white p-4 rounded-lg border border-zinc-700/10 cursor-pointer"
                     onClick={() =>
                       navigate({
                         to: routes.activity.categories.path,
@@ -71,18 +71,18 @@ const ActivityCategoryList = () => {
                       })
                     }
                   >
-                    <div className="flex bg-green-yellow-400 p-2.5 rounded-lg">
+                    <div className="flex bg-brand-400 p-2.5 rounded-lg">
                       <IconDropletHalf2Filled
                         stroke={2}
-                        className="text-limed-spruce-900"
+                        className="text-zinc-900"
                         size={28}
                       />
                     </div>
                     <div className="flex flex-col gap-1">
-                      <div className="text-sm text-shark-700 font-medium">
+                      <div className="text-sm text-slate-700 font-medium">
                         {category.name}
                       </div>
-                      <div className="text-sm text-shark-700">
+                      <div className="text-sm text-slate-700">
                         {category.minutes} minutes
                       </div>
                     </div>

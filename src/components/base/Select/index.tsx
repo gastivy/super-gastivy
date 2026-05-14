@@ -62,7 +62,7 @@ const Select = ({
       className={cn("w-full flex flex-col gap-2", wrapperClassName)}
     >
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       <div className="relative">
@@ -93,7 +93,7 @@ const Select = ({
           <IconChevronDown
             size={sizeIcon}
             className={cn(
-              "transition-transform text-limed-spruce-300",
+              "transition-transform text-slate-400",
               isOpen && "rotate-180"
             )}
           />
@@ -117,17 +117,15 @@ const Select = ({
                     key={opt.value}
                     onClick={() => handleSelect(opt)}
                     className={cn(
-                      "flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-green-yellow-100",
+                      "flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-brand-100",
                       selected && "font-medium"
                     )}
                   >
-                    <span className="text-sm text-limed-spruce-900">
-                      {opt.label}
-                    </span>
+                    <span className="text-sm text-zinc-900">{opt.label}</span>
                     {selected && (
                       <IconCircleCheckFilled
                         size={16}
-                        className="text-green-yellow-500"
+                        className="text-brand-500"
                       />
                     )}
                   </div>

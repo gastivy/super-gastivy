@@ -59,14 +59,14 @@ const TiptapEditor = ({
   return (
     <div className={`tiptap-editor ${className}`}>
       {editable && (
-        <div className="tiptap-toolbar flex items-center gap-1 border-b border-shark-200 pb-2 mb-3">
+        <div className="tiptap-toolbar flex items-center gap-1 border-b border-zinc-200 pb-2 mb-3">
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBold().run()}
             className={`px-2 py-1 rounded text-xs transition-colors ${
               editor.isActive("bold")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             B
@@ -76,8 +76,8 @@ const TiptapEditor = ({
             onClick={() => editor.chain().focus().toggleItalic().run()}
             className={`px-2 py-1 rounded text-xs italic transition-colors ${
               editor.isActive("italic")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             I
@@ -87,13 +87,13 @@ const TiptapEditor = ({
             onClick={() => editor.chain().focus().toggleStrike().run()}
             className={`px-2 py-1 rounded text-xs line-through transition-colors ${
               editor.isActive("strike")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             S
           </button>
-          <div className="w-px h-4 bg-shark-300 mx-1" />
+          <div className="w-px h-4 bg-zinc-300 mx-1" />
           <button
             type="button"
             onClick={() =>
@@ -101,8 +101,8 @@ const TiptapEditor = ({
             }
             className={`px-2 py-1 rounded text-xs font-bold transition-colors ${
               editor.isActive("heading", { level: 2 })
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             H2
@@ -114,20 +114,20 @@ const TiptapEditor = ({
             }
             className={`px-2 py-1 rounded text-xs font-bold transition-colors ${
               editor.isActive("heading", { level: 3 })
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             H3
           </button>
-          <div className="w-px h-4 bg-shark-300 mx-1" />
+          <div className="w-px h-4 bg-zinc-300 mx-1" />
           <button
             type="button"
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={`px-2 py-1 rounded text-xs transition-colors ${
               editor.isActive("bulletList")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             • List
@@ -137,8 +137,8 @@ const TiptapEditor = ({
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
             className={`px-2 py-1 rounded text-xs transition-colors ${
               editor.isActive("orderedList")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             1. List
@@ -148,8 +148,8 @@ const TiptapEditor = ({
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
             className={`px-2 py-1 rounded text-xs transition-colors ${
               editor.isActive("blockquote")
-                ? "bg-shark-900 text-white"
-                : "bg-shark-100 text-shark-600 hover:bg-shark-200"
+                ? "bg-zinc-900 text-white"
+                : "bg-zinc-100 text-slate-600 hover:bg-zinc-200"
             }`}
           >
             " Quote

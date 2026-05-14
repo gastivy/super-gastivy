@@ -75,7 +75,7 @@ const InputText: React.FC<InputTextProps> = ({
   return (
     <div className={cn("flex flex-col gap-2 w-full", wrapperClassName)}>
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
       <div className="relative flex items-center">
         {prefix && (

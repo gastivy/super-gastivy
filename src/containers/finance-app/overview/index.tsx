@@ -28,27 +28,23 @@ const FinanceOverviewContainer = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
-          Overview
-        </div>
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">Overview</div>
       </div>
 
       <div className="h-[calc(100dvh-124px)] flex gap-6 rounded-lg max-[960px]:mb-24">
         <div className="w-full flex flex-col gap-6 bg-white p-4 rounded-lg">
-          <div className="w-full min-h-36 relative bg-green-yellow-400/85 p-4 rounded-lg overflow-hidden">
-            <div className="w-84 h-84 bg-green-yellow-400 rounded-full absolute -left-28 -top-10 z-1" />
+          <div className="w-full min-h-36 relative bg-brand-400/85 p-4 rounded-lg overflow-hidden">
+            <div className="w-84 h-84 bg-brand-400 rounded-full absolute -left-28 -top-10 z-1" />
             <div className="w-20 h-20 bg-white/30 rounded-full absolute right-16 top-7 z-1" />
             <div className="w-20 h-20 bg-white/50 rounded-full absolute right-4 top-7 z-1" />
 
             <div className="flex flex-col gap-6 absolute z-2">
-              <div className="text-limed-spruce-700 font-medium text-xl">
+              <div className="text-slate-700 font-medium text-xl">
                 Ganna Prasetya
               </div>
               <div className="flex flex-col gap-2">
-                <div className="text-sm text-limed-spruce-700">
-                  Current Balance
-                </div>
+                <div className="text-sm text-slate-700">Current Balance</div>
                 <Conditional if={isLoadingBalance}>
                   <div className="h-4 w-40 animate-pulse bg-gray-200" />
                 </Conditional>
@@ -56,7 +52,7 @@ const FinanceOverviewContainer = () => {
                   if={!isLoadingBalance && Boolean(dataBalance?.data?.balance)}
                 >
                   <div className="flex items-center gap-2">
-                    <div className="text-lg font-medium text-limed-spruce-700">
+                    <div className="text-lg font-medium text-slate-700">
                       {isOpen
                         ? formatter.currency(dataBalance?.data?.balance)
                         : "Rp ********"}
@@ -82,7 +78,7 @@ const FinanceOverviewContainer = () => {
 
           <div className="flex flex-col gap-4">
             <div className="flex justify-between">
-              <div className="text-limed-spruce-700">Last Transactions</div>
+              <div className="text-slate-700">Last Transactions</div>
               <div
                 className="text-gray-400 cursor-pointer"
                 onClick={() =>

@@ -26,8 +26,8 @@ const FinanceWalletList = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">Wallet</div>
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">Wallet</div>
         <Button shape="semi-round" onClick={handleAddWallet}>
           Create New Wallet
         </Button>
@@ -70,16 +70,16 @@ const FinanceWalletList = () => {
                     })
                   }
                 >
-                  <div className="flex justify-center items-center bg-green-yellow-400 p-3 rounded-lg">
+                  <div className="flex justify-center items-center bg-brand-400 p-3 rounded-lg">
                     <IconWallet
                       stroke={2}
                       size={32}
-                      className="text-limed-spruce-800"
+                      className="text-zinc-800"
                     />
                   </div>
 
                   <div className="flex flex-col gap-1">
-                    <div className="font-medium text-limed-spruce-800">
+                    <div className="font-medium text-zinc-800">
                       {wallet.name}
                     </div>
                     <div className="text-sm text-gray-600">

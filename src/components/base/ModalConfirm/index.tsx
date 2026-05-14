@@ -28,12 +28,12 @@ const ModalConfirm: React.FC<ModalConfirmProps> = ({
       <div className="min-h-36 flex flex-col justify-around items-center gap-10">
         <div className="flex flex-col gap-4">
           {title && (
-            <div className="text-center text-xl text-limed-spruce-800 font-medium">
+            <div className="text-center text-xl text-zinc-800 font-medium">
               {title}
             </div>
           )}
           {description && (
-            <div className="text-center text-sm text-shark-700">
+            <div className="text-center text-sm text-slate-700">
               {description}
             </div>
           )}
@@ -41,7 +41,7 @@ const ModalConfirm: React.FC<ModalConfirmProps> = ({
         <div className="flex gap-4">
           <Button
             shape="semi-round"
-            className="w-30 shadow-md shadow-green-yellow-400/70"
+            className="w-30 shadow-md shadow-brand-400/70"
             onClick={onConfirm}
           >
             Yes

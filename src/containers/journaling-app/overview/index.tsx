@@ -137,12 +137,12 @@ const JournalOverviewContainer = () => {
 
   return (
     <div className="max-w-3xl mx-auto pb-12 relative">
-      <div className="flex items-center justify-between mb-8 sticky border border-shark-100 bg-white top-0 left-0 p-4 rounded-2xl z-10">
+      <div className="flex items-center justify-between mb-8 sticky border border-zinc-100 bg-white top-0 left-0 p-4 rounded-2xl z-10">
         <div>
-          <h1 className="text-2xl font-bold text-shark-950 tracking-tight">
+          <h1 className="text-2xl font-bold text-zinc-950 tracking-tight">
             Journal
           </h1>
-          <p className="text-sm text-shark-500 mt-1">
+          <p className="text-sm text-zinc-500 mt-1">
             Your thoughts, stories, and reflections
           </p>
         </div>
@@ -167,11 +167,11 @@ const JournalOverviewContainer = () => {
             return (
               <div key={key}>
                 <div className="flex items-center gap-3 mb-4">
-                  <IconCalendar size={16} className="text-shark-400" />
-                  <h2 className="text-sm font-semibold text-shark-500 uppercase tracking-wider">
+                  <IconCalendar size={16} className="text-zinc-400" />
+                  <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wider">
                     {label}
                   </h2>
-                  <div className="flex-1 h-px bg-shark-200" />
+                  <div className="flex-1 h-px bg-zinc-200" />
                 </div>
 
                 <div className="space-y-4">
@@ -191,7 +191,7 @@ const JournalOverviewContainer = () => {
                             params: { id: String(journal.id) },
                           })
                         }
-                        className="group cursor-pointer rounded-xl border border-shark-200 bg-white p-5 transition-all hover:border-shark-300 hover:shadow-sm"
+                        className="group cursor-pointer rounded-xl border border-zinc-200 bg-white p-5 transition-all hover:border-zinc-300 hover:shadow-sm"
                       >
                         <div className="flex items-start gap-4">
                           <div
@@ -206,21 +206,21 @@ const JournalOverviewContainer = () => {
                           </div>
 
                           <div className="flex-1 min-w-0">
-                            <h3 className="text-lg font-semibold text-shark-950 group-hover:text-shark-700 transition-colors leading-snug">
+                            <h3 className="text-lg font-semibold text-zinc-950 group-hover:text-slate-700 transition-colors leading-snug">
                               {journal.title || "Untitled"}
                             </h3>
                             {preview && (
-                              <p className="mt-1.5 text-sm text-shark-500 line-clamp-2 leading-relaxed">
+                              <p className="mt-1.5 text-sm text-zinc-500 line-clamp-2 leading-relaxed">
                                 {preview}
                               </p>
                             )}
                             <div className="flex items-center gap-3 mt-3">
-                              <span className="flex items-center gap-1 text-xs text-shark-400">
+                              <span className="flex items-center gap-1 text-xs text-zinc-400">
                                 <IconClock size={12} />
                                 {readingTime} min read
                               </span>
-                              <span className="text-xs text-shark-300">·</span>
-                              <span className="text-xs text-shark-400">
+                              <span className="text-xs text-zinc-300">·</span>
+                              <span className="text-xs text-zinc-400">
                                 {dayLabel}
                               </span>
                             </div>
@@ -238,8 +238,8 @@ const JournalOverviewContainer = () => {
           {hasMore && (
             <div ref={sentinelRef} className="flex justify-center py-8">
               {isFetchingPage && (
-                <div className="flex items-center gap-2 text-sm text-shark-400">
-                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-shark-300 border-t-shark-600" />
+                <div className="flex items-center gap-2 text-sm text-zinc-400">
+                  <div className="animate-spin rounded-full h-4 w-4 border-2 border-zinc-300 border-t-zinc-600" />
                   Loading more entries...
                 </div>
               )}
@@ -249,7 +249,7 @@ const JournalOverviewContainer = () => {
           {/* End of list indicator */}
           {!hasMore && allJournals.length > 0 && (
             <div className="text-center py-6">
-              <p className="text-xs text-shark-400">
+              <p className="text-xs text-zinc-400">
                 You've reached the end — {totalCount} journal
                 {totalCount !== 1 ? "s" : ""}
               </p>
@@ -264,13 +264,13 @@ const JournalOverviewContainer = () => {
 function EmptyState({ onCreate }: { onCreate: () => void }) {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
-      <div className="w-20 h-20 rounded-full bg-shark-100 flex items-center justify-center mb-6">
-        <IconBookmark size={32} className="text-shark-400" />
+      <div className="w-20 h-20 rounded-full bg-zinc-100 flex items-center justify-center mb-6">
+        <IconBookmark size={32} className="text-zinc-400" />
       </div>
-      <h3 className="text-lg font-semibold text-shark-950 mb-2">
+      <h3 className="text-lg font-semibold text-zinc-950 mb-2">
         No journals yet
       </h3>
-      <p className="text-sm text-shark-500 max-w-sm mb-6">
+      <p className="text-sm text-zinc-500 max-w-sm mb-6">
         Start capturing your thoughts, stories, and reflections. Your journal
         entries will appear here.
       </p>

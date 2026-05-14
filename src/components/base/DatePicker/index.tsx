@@ -47,7 +47,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
       ref={dropdownRef}
     >
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       <div className="w-full relative flex">

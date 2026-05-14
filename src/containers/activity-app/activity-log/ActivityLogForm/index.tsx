@@ -177,13 +177,13 @@ const ActivityLogForm = () => {
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8 max-[960px]:pb-24">
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-1 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
         <div className="flex items-center gap-2">
           <IconArrowNarrowLeft
             className="cursor-pointer min-w-6"
             onClick={() => navigate({ to: routes.activity.activityLog.path })}
           />
-          <div className="text-shark-800 font-medium">
+          <div className="text-slate-800 font-medium">
             {form?.id ? "Update Activity Log" : "Create Activity Log"}
           </div>
         </div>
@@ -198,7 +198,7 @@ const ActivityLogForm = () => {
 
       <div className="overflow-y-auto flex flex-col gap-6 bg-white rounded-lg p-5 max-[960px]:p-4">
         <div className="flex justify-between items-center">
-          <div className="text-lg font-medium text-limed-spruce-800">
+          <div className="text-lg font-medium text-zinc-800">
             Activity Items
           </div>
 

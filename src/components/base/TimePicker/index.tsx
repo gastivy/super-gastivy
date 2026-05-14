@@ -48,7 +48,7 @@ const TimerPicker: React.FC<TimerPickerProps> = ({
       className={cn("relative w-full flex flex-col gap-2", wrapperClassName)}
     >
       {label && (
-        <span className="text-sm font-medium text-shark-700">{label}</span>
+        <span className="text-sm font-medium text-slate-700">{label}</span>
       )}
 
       {/* INPUT */}
@@ -89,9 +89,8 @@ const TimerPicker: React.FC<TimerPickerProps> = ({
                     }}
                     key={h}
                     className={cn(
-                      "cursor-pointer px-3 py-2 text-sm text-center hover:bg-green-yellow-100 rounded",
-                      h === hour &&
-                        "bg-green-yellow-400 text-limed-spruce-800 font-medium"
+                      "cursor-pointer px-3 py-2 text-sm text-center hover:bg-brand-100 rounded",
+                      h === hour && "bg-brand-400 text-zinc-800 font-medium"
                     )}
                     onClick={() => setHour(h)}
                   >
@@ -114,9 +113,8 @@ const TimerPicker: React.FC<TimerPickerProps> = ({
                     }}
                     key={m}
                     className={cn(
-                      "cursor-pointer px-3 py-2 text-sm text-center hover:bg-green-yellow-100 rounded",
-                      m === minute &&
-                        "bg-green-yellow-400 text-limed-spruce-800 font-medium"
+                      "cursor-pointer px-3 py-2 text-sm text-center hover:bg-brand-100 rounded",
+                      m === minute && "bg-brand-400 text-zinc-800 font-medium"
                     )}
                     onClick={() => setMinute(m)}
                   >

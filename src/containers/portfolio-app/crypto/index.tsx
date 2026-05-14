@@ -18,6 +18,7 @@ import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
 import InputText from "@components/base/InputText";
 import Spinner from "@components/base/Spinner";
+import { formatter } from "@libs/formatter";
 import {
   type CurrencyCode,
   useCoinSearch,
@@ -280,23 +281,6 @@ const PortfolioCryptoContainer = () => {
     }, 0);
   };
 
-  const formatCurrency = (value: number) => {
-    if (currency === "idr") {
-      return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(value);
-    }
-    return new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
-  };
-
   const handleExport = useCallback(() => {
     if (portfolioItems.length === 0) return;
     exportPortfolioToXlsx(
@@ -365,8 +349,8 @@ const PortfolioCryptoContainer = () => {
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
       {/* Header */}
-      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-shark-800/10">
-        <div className="text-lg text-limed-spruce-700 font-medium">
+      <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
+        <div className="text-lg text-slate-700 font-medium">
           Portfolio Overview
         </div>
         <div className="flex items-center gap-2">
@@ -378,7 +362,7 @@ const PortfolioCryptoContainer = () => {
             <span
               className={
                 currency === "usd"
-                  ? "text-limed-spruce-700 font-bold"
+                  ? "text-slate-700 font-bold"
                   : "text-gray-400"
               }
             >
@@ -388,7 +372,7 @@ const PortfolioCryptoContainer = () => {
             <span
               className={
                 currency === "idr"
-                  ? "text-limed-spruce-700 font-bold"
+                  ? "text-slate-700 font-bold"
                   : "text-gray-400"
               }
             >
@@ -435,15 +419,15 @@ const PortfolioCryptoContainer = () => {
             <div className="h-8 w-48 animate-pulse bg-gray-200 rounded" />
           </Conditional>
           <Conditional if={!isLoadingPrices || portfolioItems.length === 0}>
-            <div className="text-2xl font-bold text-limed-spruce-700">
-              {formatCurrency(totalValue)}
+            <div className="text-2xl font-bold text-slate-700">
+              {formatter.currency(totalValue, { currency })}
             </div>
           </Conditional>
         </div>
 
         {/* Create Group */}
         <div className="bg-white p-6 rounded-lg">
-          <h3 className="text-md font-medium text-limed-spruce-700 mb-4">
+          <h3 className="text-md font-medium text-slate-700 mb-4">
             Create Portfolio Group
           </h3>
           <div className="flex flex-col gap-4 md:flex-row md:items-end">
@@ -529,7 +513,7 @@ const PortfolioCryptoContainer = () => {
                             if (e.key === "Escape") cancelEditGroup();
                           }}
                           autoFocus
-                          className="text-md font-semibold text-limed-spruce-700 border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:border-green-yellow-400"
+                          className="text-md font-semibold text-slate-700 border border-gray-300 rounded px-2 py-0.5 focus:outline-none focus:border-brand-400"
                         />
                         <button
                           onClick={saveEditGroup}
@@ -549,7 +533,7 @@ const PortfolioCryptoContainer = () => {
                     </Conditional>
                     <Conditional if={editingGroupId !== group.id}>
                       <div className="flex items-center gap-2">
-                        <h3 className="text-md font-semibold text-limed-spruce-700">
+                        <h3 className="text-md font-semibold text-slate-700">
                           {group.name}
                         </h3>
                         <button
@@ -562,7 +546,7 @@ const PortfolioCryptoContainer = () => {
                       </div>
                     </Conditional>
                     <span className="text-xs text-gray-500">
-                      {formatCurrency(groupTotal)}
+                      {formatter.currency(groupTotal, { currency })}
                     </span>
                   </div>
                   <div className="flex items-center gap-2">
@@ -707,12 +691,12 @@ const PortfolioCryptoContainer = () => {
                                       className="w-8 h-8 rounded-full"
                                     />
                                   ) : (
-                                    <div className="w-8 h-8 rounded-full bg-green-yellow-400/30 flex items-center justify-center text-xs font-bold text-limed-spruce-700">
+                                    <div className="w-8 h-8 rounded-full bg-brand-400/30 flex items-center justify-center text-xs font-bold text-slate-700">
                                       {item.symbol.charAt(0)}
                                     </div>
                                   )}
                                   <div className="flex flex-col">
-                                    <span className="text-sm font-medium text-limed-spruce-700">
+                                    <span className="text-sm font-medium text-slate-700">
                                       {item.symbol}
                                     </span>
                                     <span className="text-xs text-gray-500">
@@ -723,8 +707,10 @@ const PortfolioCryptoContainer = () => {
 
                                 <div className="flex gap-4">
                                   <div className="flex flex-col items-end">
-                                    <span className="text-sm font-medium text-limed-spruce-700">
-                                      {formatCurrency(totalItemValue)}
+                                    <span className="text-sm font-medium text-slate-700">
+                                      {formatter.currency(totalItemValue, {
+                                        currency,
+                                      })}
                                     </span>
                                     <div className="flex items-center gap-2">
                                       <Conditional
@@ -750,7 +736,7 @@ const PortfolioCryptoContainer = () => {
                                               cancelEditItem();
                                           }}
                                           autoFocus
-                                          className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-green-yellow-400"
+                                          className="w-20 text-xs text-right border border-gray-300 rounded px-1.5 py-0.5 focus:outline-none focus:border-brand-400"
                                         />
                                         <button
                                           onClick={saveEditItem}
@@ -772,7 +758,9 @@ const PortfolioCryptoContainer = () => {
                                       >
                                         <span className="text-xs text-gray-500">
                                           {item.amount} ×{" "}
-                                          {formatCurrency(currentPrice)}
+                                          {formatter.currency(currentPrice, {
+                                            currency,
+                                          })}
                                         </span>
                                         <button
                                           onClick={() => startEditItem(item)}
@@ -864,7 +852,7 @@ const CoinSearchDropdown = ({
               />
             )}
             <div className="flex flex-col">
-              <span className="text-sm font-medium text-limed-spruce-700">
+              <span className="text-sm font-medium text-slate-700">
                 {coin.symbol}
               </span>
               <span className="text-xs text-gray-500">{coin.name}</span>

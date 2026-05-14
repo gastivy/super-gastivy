@@ -70,11 +70,11 @@ const JournalTemplatesContainer = () => {
         <div className="flex items-center gap-3">
           <button
             onClick={() => navigate({ to: routes.journaling.overview.path })}
-            className="p-1 text-shark-500 hover:text-shark-900 transition-colors"
+            className="p-1 text-zinc-500 hover:text-zinc-900 transition-colors"
           >
             <IconArrowNarrowLeft size={16} />
           </button>
-          <h1 className="text-xl font-semibold text-shark-950">Templates</h1>
+          <h1 className="text-xl font-semibold text-zinc-950">Templates</h1>
         </div>
         {!isCreating && (
           <Button
@@ -92,14 +92,14 @@ const JournalTemplatesContainer = () => {
 
       {/* Create/Edit Form */}
       {isCreating && (
-        <div className="space-y-4 rounded-xl border border-shark-200 bg-white p-5">
+        <div className="space-y-4 rounded-xl border border-zinc-200 bg-white p-5">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-shark-950">
+            <h3 className="text-sm font-medium text-zinc-950">
               {editingId ? "Edit Template" : "New Template"}
             </h3>
             <button
               onClick={resetForm}
-              className="text-xs text-shark-500 hover:text-shark-900 transition-colors"
+              className="text-xs text-zinc-500 hover:text-zinc-900 transition-colors"
             >
               Cancel
             </button>
@@ -110,10 +110,10 @@ const JournalTemplatesContainer = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Template name..."
-            className="w-full rounded-lg border border-shark-200 bg-white px-4 py-2.5 text-sm text-shark-950 placeholder:text-shark-400 outline-none focus:border-green-yellow-400 focus:ring-1 focus:ring-green-yellow-400 transition-all"
+            className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2.5 text-sm text-zinc-950 placeholder:text-zinc-400 outline-none focus:border-brand-400 focus:ring-1 focus:ring-brand-400 transition-all"
           />
 
-          <div className="rounded-xl border border-shark-200 p-4">
+          <div className="rounded-xl border border-zinc-200 p-4">
             <TiptapEditor
               content={content || undefined}
               placeholder="Template content..."
@@ -136,9 +136,9 @@ const JournalTemplatesContainer = () => {
       {/* Template List */}
       <div className="space-y-3">
         {templates.length === 0 ? (
-          <div className="rounded-xl border border-shark-200 bg-white p-8 text-center">
-            <p className="text-sm text-shark-500">No templates yet</p>
-            <p className="text-xs text-shark-400 mt-1">
+          <div className="rounded-xl border border-zinc-200 bg-white p-8 text-center">
+            <p className="text-sm text-zinc-500">No templates yet</p>
+            <p className="text-xs text-zinc-400 mt-1">
               Create templates to quickly start journal entries
             </p>
           </div>
@@ -146,22 +146,22 @@ const JournalTemplatesContainer = () => {
           templates.map((template) => (
             <div
               key={template.id}
-              className="rounded-xl border border-shark-200 bg-white p-4 hover:bg-shark-50 transition-colors"
+              className="rounded-xl border border-zinc-200 bg-white p-4 hover:bg-zinc-50 transition-colors"
             >
               <div className="flex items-center justify-between">
-                <h4 className="text-sm font-medium text-shark-950">
+                <h4 className="text-sm font-medium text-zinc-950">
                   {template.name}
                 </h4>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => handleEdit(template)}
-                    className="p-1 text-shark-400 hover:text-shark-900 transition-colors"
+                    className="p-1 text-zinc-400 hover:text-zinc-900 transition-colors"
                   >
                     <IconEdit stroke={2} size={14} />
                   </button>
                   <button
                     onClick={() => template.id && handleDelete(template.id)}
-                    className="p-1 text-shark-400 hover:text-red-500 transition-colors"
+                    className="p-1 text-zinc-400 hover:text-red-500 transition-colors"
                   >
                     <IconTrash stroke={2} size={14} />
                   </button>

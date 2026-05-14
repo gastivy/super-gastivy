@@ -24,7 +24,7 @@ export const inputVariants = cva(
       },
       error: {
         true: "border-red-500 focus:border-red-500",
-        false: "border-gray-300 focus:border-green-yellow-500",
+        false: "border-gray-300 focus:border-brand-500",
       },
     },
     defaultVariants: {
