@@ -1,15 +1,22 @@
-import { useMemo } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { routes } from "@constants/routes";
+import usePomodoro, { playAlarmSound } from "@hooks/usePomodoro";
 import useStopwatch from "@hooks/useStopwatch";
 import DexieDB from "@libs/dexieDB";
 import { useCreateActivity } from "@modules/activity/activity-log/hooks/useActivity";
+import type { TimerType } from "@modules/activity/activity-log/models/dexie";
 
-export const useTimerActivity = () => {
+const DEFAULT_POMODORO_DURATION = 25 * 60; // 25 minutes in seconds
+
+export const useTimerActivity = (
+  timerType: TimerType = "stopwatch",
+  pomodoroDuration: number = DEFAULT_POMODORO_DURATION
+) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const activities = useLiveQuery(() => DexieDB.activities.toArray(), []) || [];
@@ -32,13 +39,73 @@ export const useTimerActivity = () => {
 
   const name = currentActivity?.name || "";
 
-  const { formatted, seconds } = useStopwatch(timer);
-
   const lastItem = currentActivity?.data?.at(-1);
   const existingTime =
     currentActivity?.data.filter((time) => time.end_date) || [];
 
   const isStarted = useMemo(() => lastItem && !lastItem?.end_date, [lastItem]);
+
+  // Use a ref for the pause handler so pomodoro can call it
+  const stopAlarmRef = useRef<(() => void) | null>(null);
+  const [isAlarmPlaying, setIsAlarmPlaying] = useState(false);
+  const handlePauseTimerRef = useRef<(() => Promise<void>) | null>(null);
+
+  const handlePauseTimer = useCallback(async () => {
+    if (!currentActivity) return;
+    if (lastItem?.end_date) return;
+    const data = [
+      ...existingTime,
+      { start_date: lastItem?.start_date, end_date: new Date() },
+    ];
+    await DexieDB.activities.put({
+      id: currentActivity.id || "",
+      name: currentActivity.name || "",
+      data: data.map((item) => ({
+        ...item,
+        is_done: false,
+        description: "",
+      })),
+      timer_type: timerType,
+      pomodoro_duration: pomodoroDuration,
+    });
+  }, [currentActivity, lastItem, existingTime, timerType, pomodoroDuration]);
+
+  handlePauseTimerRef.current = handlePauseTimer;
+
+  const handlePomodoroComplete = useCallback(() => {
+    const stopAlarm = playAlarmSound();
+    stopAlarmRef.current = stopAlarm;
+    setIsAlarmPlaying(true);
+    handlePauseTimerRef.current?.();
+  }, []);
+
+  const handleStopAlarm = useCallback(() => {
+    stopAlarmRef.current?.();
+    stopAlarmRef.current = null;
+    setIsAlarmPlaying(false);
+  }, []);
+
+  // Stopwatch hook
+  const stopwatchResult = useStopwatch(timer);
+
+  // Pomodoro hook
+  const pomodoroResult = usePomodoro({
+    duration: pomodoroDuration,
+    dataTimer: timer,
+    onComplete: handlePomodoroComplete,
+  });
+
+  const isPomodoro = timerType === "pomodoro";
+
+  const formatted = isPomodoro
+    ? pomodoroResult.formatted
+    : stopwatchResult.formatted;
+
+  const seconds = isPomodoro
+    ? pomodoroResult.remainingSeconds
+    : stopwatchResult.seconds;
+
+  const progress = isPomodoro ? pomodoroResult.progress : 0;
 
   const handleStartTimer = async () => {
     if (!currentActivity.id) return;
@@ -55,23 +122,8 @@ export const useTimerActivity = () => {
         is_done: false,
         description: "",
       })),
-    });
-  };
-
-  const handlePauseTimer = async () => {
-    if (lastItem?.end_date) return;
-    const data = [
-      ...existingTime,
-      { start_date: lastItem?.start_date, end_date: new Date() },
-    ];
-    await DexieDB.activities.put({
-      id: currentActivity.id || "",
-      name: currentActivity.name || "",
-      data: data.map((item) => ({
-        ...item,
-        is_done: false,
-        description: "",
-      })),
+      timer_type: timerType,
+      pomodoro_duration: pomodoroDuration,
     });
   };
 
@@ -106,10 +158,13 @@ export const useTimerActivity = () => {
     currentActivity,
     formatted,
     seconds,
+    progress,
     isStarted,
     name,
     isLoadingCreate,
     handleTimer,
     handleFinishActivity,
+    isAlarmPlaying,
+    handleStopAlarm,
   };
 };

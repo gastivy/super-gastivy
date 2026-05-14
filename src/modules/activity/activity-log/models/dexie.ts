@@ -5,8 +5,12 @@ export interface DataActivity {
   description: string;
 }
 
+export type TimerType = "stopwatch" | "pomodoro";
+
 export interface ActivitiesDexieStore {
   id: string;
   name: string;
   data: DataActivity[];
+  timer_type?: TimerType;
+  pomodoro_duration?: number; // in seconds
 }
