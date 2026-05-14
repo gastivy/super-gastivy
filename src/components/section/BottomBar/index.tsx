@@ -1,44 +1,61 @@
 import { useState } from "react";
 
-import { useRouterState } from "@tanstack/react-router";
+import { IconChevronDown, IconLayoutDashboard } from "@tabler/icons-react";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 
-import Each from "@components/base/Each";
+import Conditional from "@components/base/Conditional";
 import { SIDEBAR_MENU } from "@constants/sidebar";
 import { cn } from "@libs/classnames";
 
 import { SubMenu } from "./SubMenu";
 
+const MORE_ITEMS = SIDEBAR_MENU.slice(2); // Portfolio, Journal, Settings
+
 const BottomBar = () => {
   const router = useRouterState();
+  const navigate = useNavigate();
+  const [isExpanded, setIsExpanded] = useState(false);
   const [selectMenu, setSelectMenu] = useState("");
 
+  const isMoreActive = MORE_ITEMS.some(
+    (menu) => router.location.pathname.split("/")[1] === menu.path.split("/")[1]
+  );
+
+  const handleMenuClick = (menu: (typeof SIDEBAR_MENU)[number]) => {
+    if (menu.children.length > 0) {
+      setSelectMenu(menu.name);
+    } else {
+      navigate({ to: menu.path });
+    }
+  };
+
   return (
-    <div className="relative">
-      <div className="hidden fixed z-1 bottom-4 left-5 right-5 bg-shark-950 p-4 rounded-xl max-[60rem]:flex gap-3 max-[36rem]:left-4 max-[36rem]:right-4 max-[25rem]:left-3 max-[25rem]:right-3 shadow-lg shadow-shark-950/30">
-        <Each
-          of={SIDEBAR_MENU}
-          render={(menu, index) => {
+    <>
+      <div
+        className={cn(
+          "hidden fixed z-1 bottom-1 left-1 right-1 bg-shark-950 p-4 rounded-2xl max-[60rem]:flex max-[60rem]:flex-col gap-3 shadow-lg shadow-shark-950/30 transition-all duration-300"
+        )}
+      >
+        {/* Main row - always visible */}
+        <div className="grid grid-cols-3 gap-3">
+          {SIDEBAR_MENU.slice(0, isExpanded ? 99 : 2).map((menu) => {
             const isActive =
               router.location.pathname.split("/")[1] ===
               menu.path.split("/")[1];
+            const TablerIcon = menu.icon;
             return (
               <div
-                key={index}
+                key={menu.name}
                 className={cn(
-                  "w-full flex justify-center items-center gap-2 p-2 rounded-lg",
+                  "w-full flex justify-center items-center gap-2 p-2 rounded-lg cursor-pointer max-[380px]:flex-col",
                   isActive ? "bg-green-yellow-400" : "bg-transparent"
                 )}
-                onClick={() => setSelectMenu(menu.name)}
+                onClick={() => handleMenuClick(menu)}
               >
-                {(() => {
-                  const TablerIcon = menu.icon;
-                  return (
-                    <TablerIcon
-                      size={20}
-                      className={isActive ? "text-shark-950" : "text-white"}
-                    />
-                  );
-                })()}
+                <TablerIcon
+                  size={20}
+                  className={isActive ? "text-shark-950" : "text-white"}
+                />
                 <div
                   className={cn("text-shark-950 text-xs font-medium", {
                     "text-white": !isActive,
@@ -48,12 +65,55 @@ const BottomBar = () => {
                 </div>
               </div>
             );
-          }}
-        />
+          })}
+
+          {/* More button - hidden when expanded */}
+          {!isExpanded && (
+            <div
+              className={cn(
+                "w-full flex justify-center items-center gap-2 p-2 rounded-lg cursor-pointer max-[380px]:flex-col",
+                isMoreActive ? "bg-green-yellow-400" : "bg-transparent"
+              )}
+              onClick={() => setIsExpanded(true)}
+            >
+              <IconLayoutDashboard
+                stroke={2}
+                size={20}
+                className={isMoreActive ? "text-shark-950" : "text-white"}
+              />
+              <div
+                className={cn("text-shark-950 text-xs font-medium", {
+                  "text-white": !isMoreActive,
+                })}
+              >
+                More
+              </div>
+            </div>
+          )}
+        </div>
+
+        <Conditional if={isExpanded}>
+          <div
+            className={cn(
+              "grid grid-cols-3 gap-3 overflow-hidden transition-all duration-300 ease-in-out",
+              isExpanded
+                ? "max-h-40 opacity-100 mt-0"
+                : "max-h-0 opacity-0 mt-0"
+            )}
+          >
+            <div
+              className="col-span-3 flex justify-center items-center gap-1 pt-1 cursor-pointer"
+              onClick={() => setIsExpanded(false)}
+            >
+              <IconChevronDown size={14} className="text-white" />
+              <div className="text-white text-xs font-medium">Less</div>
+            </div>
+          </div>
+        </Conditional>
       </div>
 
       <SubMenu menu={selectMenu} onClose={() => setSelectMenu("")} />
-    </div>
+    </>
   );
 };
 

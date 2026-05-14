@@ -16,11 +16,16 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
   const navigate = useNavigate();
   const submenu =
     SIDEBAR_MENU.find((item) => item.name === menu)?.children || [];
+
+  const handleClickMenu = (path: string) => {
+    navigate({ to: path });
+    onClose();
+  };
   return (
     <div className="hidden max-[60rem]:flex">
       <div
         className={`
-          fixed inset-0 bg-black/40 z-10
+          fixed inset-0 bg-black/40 backdrop-blur-sm z-10
           transition-opacity duration-300
           ${menu ? "opacity-100" : "opacity-0 pointer-events-none"}
         `}
@@ -28,7 +33,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
       />
       <div
         className={`
-          fixed bottom-2 left-2 right-2
+          fixed bottom-1 left-1 right-1
           bg-shark-950 p-5 rounded-xl z-10
           grid grid-cols-4 max-[27rem]:grid-cols-3 gap-4
           transition-transform duration-500 ease
@@ -46,7 +51,7 @@ export const SubMenu: React.FC<Props> = ({ menu, onClose }) => {
                   isActive ? "bg-green-yellow-400" : "bg-transparent"
                 )}
                 key={index}
-                onClick={() => navigate({ to: item.path })}
+                onClick={() => handleClickMenu(item.path)}
               >
                 {(() => {
                   const TablerIcon = item.icon;
