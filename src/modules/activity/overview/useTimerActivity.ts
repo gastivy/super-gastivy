@@ -11,11 +11,9 @@ import DexieDB from "@libs/dexieDB";
 import { useCreateActivity } from "@modules/activity/activity-log/hooks/useActivity";
 import type { TimerType } from "@modules/activity/activity-log/models/dexie";
 
-const DEFAULT_POMODORO_DURATION = 25 * 60; // 25 minutes in seconds
-
 export const useTimerActivity = (
   timerType: TimerType = "stopwatch",
-  pomodoroDuration: number = DEFAULT_POMODORO_DURATION
+  pomodoroDuration: number = 0
 ) => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -65,8 +63,8 @@ export const useTimerActivity = (
         is_done: false,
         description: "",
       })),
-      timer_type: timerType,
-      pomodoro_duration: pomodoroDuration,
+      timer_type: currentActivity.timer_type || timerType,
+      pomodoro_duration: currentActivity.pomodoro_duration || pomodoroDuration,
     });
   }, [currentActivity, lastItem, existingTime, timerType, pomodoroDuration]);
 
@@ -85,17 +83,24 @@ export const useTimerActivity = (
     setIsAlarmPlaying(false);
   }, []);
 
+  // Resolve actual values: prefer saved activity data over hook parameters.
+  // This ensures TimerPopover (which passes no args) uses the correct duration
+  // from the DexieDB record instead of defaulting to 25 minutes.
+  const resolvedTimerType: TimerType = currentActivity?.timer_type || timerType;
+  const resolvedPomodoroDuration: number =
+    currentActivity?.pomodoro_duration || pomodoroDuration;
+
   // Stopwatch hook
   const stopwatchResult = useStopwatch(timer);
 
   // Pomodoro hook
   const pomodoroResult = usePomodoro({
-    duration: pomodoroDuration,
+    duration: resolvedPomodoroDuration,
     dataTimer: timer,
     onComplete: handlePomodoroComplete,
   });
 
-  const isPomodoro = timerType === "pomodoro";
+  const isPomodoro = resolvedTimerType === "pomodoro";
 
   const formatted = isPomodoro
     ? pomodoroResult.formatted
@@ -154,6 +159,13 @@ export const useTimerActivity = (
     });
   };
 
+  const handleCancelActivity = async () => {
+    await DexieDB.activities.clear();
+    stopAlarmRef.current?.();
+    stopAlarmRef.current = null;
+    setIsAlarmPlaying(false);
+  };
+
   return {
     currentActivity,
     formatted,
@@ -164,6 +176,7 @@ export const useTimerActivity = (
     isLoadingCreate,
     handleTimer,
     handleFinishActivity,
+    handleCancelActivity,
     isAlarmPlaying,
     handleStopAlarm,
   };
