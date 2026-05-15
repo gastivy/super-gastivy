@@ -22,8 +22,14 @@ import CreateCashGroup from "./CreateCashGroup";
 
 const PortfolioCashContainer = () => {
   const [currency, setCurrency] = useState<CurrencyCode>("idr");
+  const actions = useCashPortfolioActionsProvider();
 
+  const { data: walletData } = useGetWallet();
   const { data: exchangeRate } = useExchangeRate();
+  const { data: groups = [], isLoading: isLoadingGroups } = useGetCashGroups();
+  const { data: cashPortfolioItems = [], isLoading: isLoadingPortfolio } =
+    useGetCashPortfolio();
+
   const usdToIdr = exchangeRate?.usdToIdr || 1;
 
   const convertBalance = (idrBalance: number) => {
@@ -31,14 +37,6 @@ const PortfolioCashContainer = () => {
     return idrBalance / usdToIdr;
   };
 
-  const actions = useCashPortfolioActionsProvider();
-
-  const { data: groups = [], isLoading: isLoadingGroups } = useGetCashGroups();
-
-  const { data: cashPortfolioItems = [], isLoading: isLoadingPortfolio } =
-    useGetCashPortfolio();
-
-  const { data: walletData } = useGetWallet();
   const wallets = walletData?.data || [];
 
   const itemsByGroup = useMemo(() => {
@@ -61,7 +59,6 @@ const PortfolioCashContainer = () => {
     return map;
   }, [cashPortfolioItems]);
 
-  // Calculate total portfolio balance (stored value is in IDR)
   const totalBalance = useMemo(() => {
     return cashPortfolioItems.reduce((sum, item) => sum + (item.value || 0), 0);
   }, [cashPortfolioItems]);

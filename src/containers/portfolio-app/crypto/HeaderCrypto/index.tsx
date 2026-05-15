@@ -1,121 +1,20 @@
 import type React from "react";
-import { useCallback, useRef } from "react";
 
-import { IconDownloadFilled, IconUpload } from "@tabler/icons-react";
+import { IconDownloadFilled } from "@tabler/icons-react";
 
 import Button from "@components/base/Button";
-import type { PortfolioGroup } from "@modules/portfolio/models/types";
-import type { PortfolioItem } from "@modules/portfolio/models/types";
-import {
-  exportPortfolioToXlsx,
-  importPortfolioFromXlsx,
-} from "@modules/portfolio/services/xlsx";
+import { useCryptoPortfolioActions } from "@modules/portfolio/hooks/useCryptoPortfolioActions";
 
 interface HeaderCryptoProps {
   currency: "usd" | "idr";
   setCurrency: (currency: "usd" | "idr") => void;
-  portfolioItems: PortfolioItem[];
-  groups: PortfolioGroup[];
-  priceData?:
-    | {
-        usd?: Map<
-          string,
-          { currentPrice: number; priceChange24h: number; image?: string }
-        >;
-        idr?: Map<
-          string,
-          { currentPrice: number; priceChange24h: number; image?: string }
-        >;
-      }
-    | undefined;
-  addGroupMutation: {
-    mutateAsync: (group: {
-      name: string;
-      createdAt: string;
-    }) => Promise<PortfolioGroup>;
-  };
-  addMutation: {
-    mutate: (item: Omit<PortfolioItem, "id">) => void;
-  };
-  setImportError: (error: string | null) => void;
 }
 
 const HeaderCrypto: React.FC<HeaderCryptoProps> = ({
   currency,
   setCurrency,
-  portfolioItems,
-  groups,
-  priceData,
-  addGroupMutation,
-  addMutation,
-  setImportError,
 }) => {
-  const importRef = useRef<HTMLInputElement>(null);
-
-  const handleExport = useCallback(() => {
-    if (portfolioItems.length === 0) return;
-    exportPortfolioToXlsx(
-      portfolioItems,
-      groups,
-      priceData?.usd,
-      `portfolio-${new Date().toISOString().slice(0, 10)}`
-    );
-  }, [portfolioItems, groups, priceData]);
-
-  const handleImport = useCallback(
-    async (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (!file) return;
-
-      setImportError(null);
-
-      const result = await importPortfolioFromXlsx(file);
-
-      if (result.errors.length > 0) {
-        setImportError(result.errors.join("; "));
-      }
-
-      if (result.items.length > 0) {
-        // Create groups that don't exist yet
-        const existingGroupNames = new Map(
-          groups.map((g) => [g.name.toLowerCase(), g.id!])
-        );
-        const groupNameToId = new Map<string, number>(existingGroupNames);
-
-        for (const groupName of result.groupNames) {
-          const lowerName = groupName.toLowerCase();
-          if (!groupNameToId.has(lowerName)) {
-            const newGroup = await addGroupMutation.mutateAsync({
-              name: groupName,
-              createdAt: new Date().toISOString(),
-            });
-            groupNameToId.set(lowerName, newGroup.id!);
-          }
-        }
-
-        // Add items with resolved groupIds
-        result.items.forEach((item) => {
-          const extendedItem = item as Omit<PortfolioItem, "id"> & {
-            _groupName: string;
-          };
-          const groupId =
-            groupNameToId.get(
-              (extendedItem._groupName || "Default").toLowerCase()
-            ) || 1;
-
-          addMutation.mutate({
-            ...item,
-            groupId,
-          });
-        });
-      }
-
-      if (importRef.current) {
-        importRef.current.value = "";
-      }
-    },
-    [groups, addGroupMutation, addMutation, setImportError]
-  );
+  const { portfolioItems } = useCryptoPortfolioActions();
 
   return (
     <div className="flex justify-between items-center bg-white p-6 max-[960px]:p-4 sticky top-0 max-[960px]:top-4 z-10 rounded-lg max-[960px]:shadow-xl shadow-zinc-800/10">
@@ -147,27 +46,7 @@ const HeaderCrypto: React.FC<HeaderCryptoProps> = ({
 
         <div className="w-px h-5 bg-gray-200" />
 
-        <input
-          ref={importRef}
-          type="file"
-          accept=".xlsx,.xls"
-          className="hidden"
-          onChange={handleImport}
-        />
-        <Button
-          variant="outline"
-          size="small"
-          onClick={() => importRef.current?.click()}
-        >
-          <IconUpload stroke={2} size={16} />
-          <span className="ml-1">Import</span>
-        </Button>
-        <Button
-          variant="outline"
-          size="small"
-          disabled={portfolioItems.length === 0}
-          onClick={handleExport}
-        >
+        <Button variant="outline" size="small" disabled={portfolioItems.length === 0}>
           <IconDownloadFilled size={16} />
           <span className="ml-1">Export</span>
         </Button>

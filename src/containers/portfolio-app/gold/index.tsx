@@ -17,7 +17,6 @@ import InputText from "@components/base/InputText";
 import Spinner from "@components/base/Spinner";
 import ToggleCurrency from "@components/base/ToogleCurrency";
 import { formatter } from "@libs/formatter";
-import { useExchangeRate } from "@modules/portfolio/hooks/useStockPrices";
 import type { CurrencyCode } from "@modules/portfolio/hooks/useCryptoPrices";
 import {
   useAddGoldPortfolio,
@@ -26,6 +25,7 @@ import {
   useGoldPrice,
   useUpdateGoldPortfolio,
 } from "@modules/portfolio/hooks/useGoldPortfolio";
+import { useExchangeRate } from "@modules/portfolio/hooks/useStockPrices";
 
 const PortfolioGoldContainer = () => {
   const [currency, setCurrency] = useState<CurrencyCode>("idr");
