@@ -72,6 +72,10 @@ export const routes = {
       name: "Cash",
       path: "/portfolio/cash",
     },
+    gold: {
+      name: "Gold",
+      path: "/portfolio/gold",
+    },
   },
   journaling: {
     overview: {

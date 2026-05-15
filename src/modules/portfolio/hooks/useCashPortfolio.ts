@@ -33,6 +33,27 @@ export const useAddCashPortfolio = () => {
   });
 };
 
+export const useUpdateCashPortfolio = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async ({
+      id,
+      ...updates
+    }: {
+      id: number;
+      name?: string;
+      value?: number;
+    }) => {
+      await DexieDB.cashPortfolio.update(id, updates);
+      return { id, ...updates };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: CASH_PORTFOLIO_QUERY_KEY });
+    },
+  });
+};
+
 export const useDeleteCashPortfolio = () => {
   const queryClient = useQueryClient();
 

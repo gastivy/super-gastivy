@@ -6,6 +6,9 @@ import type {
   JournalTemplate,
 } from "@modules/journaling/models/types";
 import type {
+  GoldItem,
+} from "@modules/portfolio/models/goldTypes";
+import type {
   CashGroup,
   CashPortfolioItem,
 } from "@modules/portfolio/models/cashTypes";
@@ -30,6 +33,7 @@ interface DexieStores extends Dexie {
   journalTemplates: Table<JournalTemplate, number>;
   cashPortfolio: Table<CashPortfolioItem, number>;
   cashGroups: Table<CashGroup, number>;
+  goldPortfolio: Table<GoldItem, number>;
 }
 
 db.version(1).stores({
@@ -75,6 +79,32 @@ db.version(6).stores({
   journalTemplates: "++id, name, createdAt",
   cashPortfolio: "++id, groupId, walletId, walletName, createdAt",
   cashGroups: "++id, name, createdAt",
+});
+
+db.version(7).stores({
+  activities: "id, name, data",
+  portfolio: "++id, groupId, coinId, symbol, name, amount, createdAt",
+  portfolioGroups: "++id, name, createdAt",
+  stockPortfolio: "++id, groupId, symbol, name, shares, createdAt",
+  stockGroups: "++id, name, createdAt",
+  journals: "++id, date, title, createdAt",
+  journalTemplates: "++id, name, createdAt",
+  cashPortfolio: "++id, groupId, walletId, walletName, createdAt",
+  cashGroups: "++id, name, createdAt",
+  goldPortfolio: "++id, name, grams, createdAt",
+});
+
+db.version(8).stores({
+  activities: "id, name, data",
+  portfolio: "++id, groupId, coinId, symbol, name, amount, createdAt",
+  portfolioGroups: "++id, name, createdAt",
+  stockPortfolio: "++id, groupId, symbol, name, shares, createdAt",
+  stockGroups: "++id, name, createdAt",
+  journals: "++id, date, title, createdAt",
+  journalTemplates: "++id, name, createdAt",
+  cashPortfolio: "++id, groupId, name, value, createdAt",
+  cashGroups: "++id, name, createdAt",
+  goldPortfolio: "++id, name, grams, createdAt",
 });
 
 const DexieDB = db as DexieStores;

@@ -19,6 +19,7 @@ import { Route as appLayoutFinanceIndexRouteImport } from './pages/(app)/_layout
 import { Route as appLayoutActivityIndexRouteImport } from './pages/(app)/_layout.activity/index'
 import { Route as appLayoutPortfolioStocksIndexRouteImport } from './pages/(app)/_layout.portfolio/stocks/index'
 import { Route as appLayoutPortfolioOverviewIndexRouteImport } from './pages/(app)/_layout.portfolio/overview/index'
+import { Route as appLayoutPortfolioGoldIndexRouteImport } from './pages/(app)/_layout.portfolio/gold/index'
 import { Route as appLayoutPortfolioCryptoIndexRouteImport } from './pages/(app)/_layout.portfolio/crypto/index'
 import { Route as appLayoutPortfolioCashIndexRouteImport } from './pages/(app)/_layout.portfolio/cash/index'
 import { Route as appLayoutJournalingTemplatesIndexRouteImport } from './pages/(app)/_layout.journaling/templates/index'
@@ -82,6 +83,12 @@ const appLayoutPortfolioOverviewIndexRoute =
   appLayoutPortfolioOverviewIndexRouteImport.update({
     id: '/portfolio/overview/',
     path: '/portfolio/overview/',
+    getParentRoute: () => appLayoutRoute,
+  } as any)
+const appLayoutPortfolioGoldIndexRoute =
+  appLayoutPortfolioGoldIndexRouteImport.update({
+    id: '/portfolio/gold/',
+    path: '/portfolio/gold/',
     getParentRoute: () => appLayoutRoute,
   } as any)
 const appLayoutPortfolioCryptoIndexRoute =
@@ -184,6 +191,7 @@ export interface FileRoutesByFullPath {
   '/journaling/templates/': typeof appLayoutJournalingTemplatesIndexRoute
   '/portfolio/cash/': typeof appLayoutPortfolioCashIndexRoute
   '/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
+  '/portfolio/gold/': typeof appLayoutPortfolioGoldIndexRoute
   '/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
   '/portfolio/stocks/': typeof appLayoutPortfolioStocksIndexRoute
 }
@@ -208,6 +216,7 @@ export interface FileRoutesByTo {
   '/journaling/templates': typeof appLayoutJournalingTemplatesIndexRoute
   '/portfolio/cash': typeof appLayoutPortfolioCashIndexRoute
   '/portfolio/crypto': typeof appLayoutPortfolioCryptoIndexRoute
+  '/portfolio/gold': typeof appLayoutPortfolioGoldIndexRoute
   '/portfolio/overview': typeof appLayoutPortfolioOverviewIndexRoute
   '/portfolio/stocks': typeof appLayoutPortfolioStocksIndexRoute
 }
@@ -234,6 +243,7 @@ export interface FileRoutesById {
   '/(app)/_layout/journaling/templates/': typeof appLayoutJournalingTemplatesIndexRoute
   '/(app)/_layout/portfolio/cash/': typeof appLayoutPortfolioCashIndexRoute
   '/(app)/_layout/portfolio/crypto/': typeof appLayoutPortfolioCryptoIndexRoute
+  '/(app)/_layout/portfolio/gold/': typeof appLayoutPortfolioGoldIndexRoute
   '/(app)/_layout/portfolio/overview/': typeof appLayoutPortfolioOverviewIndexRoute
   '/(app)/_layout/portfolio/stocks/': typeof appLayoutPortfolioStocksIndexRoute
 }
@@ -260,6 +270,7 @@ export interface FileRouteTypes {
     | '/journaling/templates/'
     | '/portfolio/cash/'
     | '/portfolio/crypto/'
+    | '/portfolio/gold/'
     | '/portfolio/overview/'
     | '/portfolio/stocks/'
   fileRoutesByTo: FileRoutesByTo
@@ -284,6 +295,7 @@ export interface FileRouteTypes {
     | '/journaling/templates'
     | '/portfolio/cash'
     | '/portfolio/crypto'
+    | '/portfolio/gold'
     | '/portfolio/overview'
     | '/portfolio/stocks'
   id:
@@ -309,6 +321,7 @@ export interface FileRouteTypes {
     | '/(app)/_layout/journaling/templates/'
     | '/(app)/_layout/portfolio/cash/'
     | '/(app)/_layout/portfolio/crypto/'
+    | '/(app)/_layout/portfolio/gold/'
     | '/(app)/_layout/portfolio/overview/'
     | '/(app)/_layout/portfolio/stocks/'
   fileRoutesById: FileRoutesById
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/portfolio/overview'
       fullPath: '/portfolio/overview/'
       preLoaderRoute: typeof appLayoutPortfolioOverviewIndexRouteImport
+      parentRoute: typeof appLayoutRoute
+    }
+    '/(app)/_layout/portfolio/gold/': {
+      id: '/(app)/_layout/portfolio/gold/'
+      path: '/portfolio/gold'
+      fullPath: '/portfolio/gold/'
+      preLoaderRoute: typeof appLayoutPortfolioGoldIndexRouteImport
       parentRoute: typeof appLayoutRoute
     }
     '/(app)/_layout/portfolio/crypto/': {
@@ -504,6 +524,7 @@ interface appLayoutRouteChildren {
   appLayoutJournalingTemplatesIndexRoute: typeof appLayoutJournalingTemplatesIndexRoute
   appLayoutPortfolioCashIndexRoute: typeof appLayoutPortfolioCashIndexRoute
   appLayoutPortfolioCryptoIndexRoute: typeof appLayoutPortfolioCryptoIndexRoute
+  appLayoutPortfolioGoldIndexRoute: typeof appLayoutPortfolioGoldIndexRoute
   appLayoutPortfolioOverviewIndexRoute: typeof appLayoutPortfolioOverviewIndexRoute
   appLayoutPortfolioStocksIndexRoute: typeof appLayoutPortfolioStocksIndexRoute
 }
@@ -528,6 +549,7 @@ const appLayoutRouteChildren: appLayoutRouteChildren = {
     appLayoutJournalingTemplatesIndexRoute,
   appLayoutPortfolioCashIndexRoute: appLayoutPortfolioCashIndexRoute,
   appLayoutPortfolioCryptoIndexRoute: appLayoutPortfolioCryptoIndexRoute,
+  appLayoutPortfolioGoldIndexRoute: appLayoutPortfolioGoldIndexRoute,
   appLayoutPortfolioOverviewIndexRoute: appLayoutPortfolioOverviewIndexRoute,
   appLayoutPortfolioStocksIndexRoute: appLayoutPortfolioStocksIndexRoute,
 }

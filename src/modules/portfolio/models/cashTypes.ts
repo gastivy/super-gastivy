@@ -7,7 +7,8 @@ export interface CashGroup {
 export interface CashPortfolioItem {
   id?: number;
   groupId: number;
-  walletId: string;
-  walletName: string;
+  name: string;
+  value: number;
+  walletId?: string;
   createdAt: string;
 }

@@ -11,6 +11,7 @@ interface TotalPortfolioValueProps {
   cryptoTotal: number;
   cashTotal: number;
   stockTotal: number;
+  goldTotal: number;
 }
 
 const TotalPortfolioValue: React.FC<TotalPortfolioValueProps> = ({
@@ -20,6 +21,7 @@ const TotalPortfolioValue: React.FC<TotalPortfolioValueProps> = ({
   currency,
   stockTotal,
   cashTotal,
+  goldTotal,
 }) => {
   return (
     <div className="bg-white rounded-lg p-6">
@@ -34,6 +36,7 @@ const TotalPortfolioValue: React.FC<TotalPortfolioValueProps> = ({
         <div className="flex gap-4 mt-2 text-xs text-gray-400">
           <span>Crypto: {formatter.currency(cryptoTotal, { currency })}</span>
           <span>Stocks: {formatter.currency(stockTotal, { currency })}</span>
+          <span>Gold: {formatter.currency(goldTotal, { currency })}</span>
           <span>Cash: {formatter.currency(cashTotal, { currency })}</span>
         </div>
       </Conditional>

@@ -94,7 +94,7 @@ const CryptoSummary: React.FC<CryptoSummaryProps> = ({ currency }) => {
             <Each
               of={topCryptos}
               render={(item) => (
-                <div className="flex items-center py-1.5">
+                <div className="flex items-center py-1.5" key={item.id}>
                   <div className="flex items-center gap-2 flex-1">
                     {item.image ? (
                       <img
