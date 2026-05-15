@@ -46,7 +46,11 @@ const HeaderCrypto: React.FC<HeaderCryptoProps> = ({
 
         <div className="w-px h-5 bg-gray-200" />
 
-        <Button variant="outline" size="small" disabled={portfolioItems.length === 0}>
+        <Button
+          variant="outline"
+          size="small"
+          disabled={portfolioItems.length === 0}
+        >
           <IconDownloadFilled size={16} />
           <span className="ml-1">Export</span>
         </Button>

@@ -6,6 +6,7 @@ import Conditional from "@components/base/Conditional";
 import Each from "@components/base/Each";
 import EmptyState from "@components/base/EmptyState";
 import { routes } from "@constants/routes";
+import { cn } from "@libs/classnames";
 import { dateTime } from "@libs/dateTime";
 import { useGetActivity } from "@modules/activity/activity-log/hooks/useActivity";
 
@@ -21,7 +22,7 @@ export const LastActivity = () => {
         <div className="font-medium text-xl">Last Activities</div>
         {activities.length > 0 && (
           <div
-            className="text-slate-400 cursor-pointer"
+            className="text-slate-400 dark:text-slate-200 cursor-pointer"
             onClick={() => navigate({ to: routes.activity.activityLog.path })}
           >
             See All
@@ -50,7 +51,7 @@ export const LastActivity = () => {
               >
                 <div className="flex justify-between items-center">
                   <div className="font-medium">{activity.category_name}</div>
-                  <div className="text-sm">
+                  <div className="text-sm dark:text-slate-200">
                     {dateTime.getRangeTime(
                       String(activity.start_date),
                       String(activity.end_date)
@@ -69,7 +70,10 @@ export const LastActivity = () => {
                       />
                     )}
                     <div
-                      className={is_done ? "text-zinc-900" : "text-slate-400"}
+                      className={cn(
+                        "dark:text-slate-500",
+                        is_done ? "text-zinc-900" : "text-slate-400"
+                      )}
                     >
                       {is_done ? "Done" : "Pause"}
                     </div>

@@ -29,7 +29,9 @@ export const ProgressActivty: React.FC = () => {
   return (
     <div className="w-full lg:max-w-[60%] flex flex-col gap-4">
       <div className="flex flex-col gap-5 bg-white p-4 rounded-lg shadow-2xl shadow-zinc-400/10">
-        <div className="font-medium text-xl">Overview Activity</div>
+        <div className="font-medium text-xl text-slate-900 dark:text-slate-100">
+          Overview Activity
+        </div>
 
         <div className="relative flex justify-between gap-4">
           <DatePickerRange
@@ -73,17 +75,18 @@ export const ProgressActivty: React.FC = () => {
                   onClick={() => handleClickActivity(item)}
                 >
                   <div className="flex justify-between">
-                    <div className="text-md font-medium text-zinc-900">
+                    <div className="text-md font-medium text-zinc-900 dark:text-slate-100">
                       {item.name}
                     </div>
                     <div className="flex items-end flex-col gap-1">
-                      <div className="text-sm text-slate-400">
+                      <div className="text-sm text-slate-400 dark:text-slate-200">
                         {item.minutes}/{item.target} minutes
                       </div>
                       <div
                         className={cn("text-sm", {
-                          "text-slate-400": minutesRemaining === 0,
-                          "text-zinc-400": minutesRemaining > 0,
+                          "text-slate-400 dark:text-slate-500":
+                            minutesRemaining === 0,
+                          "text-green-300": minutesRemaining > 0,
                           "text-red-400": minutesRemaining < 0,
                         })}
                       >
