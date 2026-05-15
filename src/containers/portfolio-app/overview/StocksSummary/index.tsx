@@ -34,6 +34,7 @@ const StocksSummary: React.FC<StocksSummaryProps> = ({
   usdToIdr,
 }) => {
   const navigate = useNavigate();
+  const MAX_TOTAL_STOCKS = 10;
 
   const convertPrice = (nativePrice: number, symbol: string): number => {
     const isIdx = symbol.endsWith(".JK");
@@ -66,7 +67,7 @@ const StocksSummary: React.FC<StocksSummaryProps> = ({
         };
       })
       .sort((a, b) => b.value - a.value)
-      .slice(0, 5);
+      .slice(0, MAX_TOTAL_STOCKS);
   }, [stockItems, stockPriceMap, currency, usdToIdr]);
 
   return (
@@ -149,10 +150,10 @@ const StocksSummary: React.FC<StocksSummaryProps> = ({
                 </div>
               )}
             />
-            <Conditional if={stockItems.length > 5}>
+            <Conditional if={stockItems.length > MAX_TOTAL_STOCKS}>
               <div className="text-center text-xs text-gray-400 pt-1">
-                +{stockItems.length - 5} more stock
-                {stockItems.length - 5 > 1 ? "s" : ""}
+                +{stockItems.length - MAX_TOTAL_STOCKS} more stock
+                {stockItems.length - MAX_TOTAL_STOCKS > 1 ? "s" : ""}
               </div>
             </Conditional>
           </div>

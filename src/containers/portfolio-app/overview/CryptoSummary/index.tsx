@@ -12,6 +12,7 @@ import {
   useCryptoPrices,
 } from "@modules/portfolio/hooks/useCryptoPrices";
 import { useGetPortfolio } from "@modules/portfolio/hooks/usePortfolio";
+import type { PortfolioItem } from "@modules/portfolio/models/types";
 
 interface CryptoSummaryProps {
   currency: CurrencyCode;
@@ -19,6 +20,7 @@ interface CryptoSummaryProps {
 
 const CryptoSummary: React.FC<CryptoSummaryProps> = ({ currency }) => {
   const navigate = useNavigate();
+  const MAX_TOTAL_CRYPTO = 10;
 
   const { data: cryptoItems = [] } = useGetPortfolio();
   const { data: cryptoPriceData } = useCryptoPrices(cryptoItems);
@@ -29,22 +31,34 @@ const CryptoSummary: React.FC<CryptoSummaryProps> = ({ currency }) => {
     return sum + item.amount * price;
   }, 0);
 
-  const topCryptos = useMemo(
-    () =>
-      [...cryptoItems]
-        .map((item) => {
-          const entry = cryptoPriceMap?.get(item.coinId);
-          return {
-            ...item,
-            value: item.amount * (entry?.currentPrice || 0),
-            change: entry?.priceChange24h || 0,
-            image: entry?.image || "",
-          };
-        })
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 5),
-    [cryptoItems, cryptoPriceMap]
-  );
+  const mergeCoinByCoinId = () => {
+    const result: Record<string, PortfolioItem> = {};
+
+    cryptoItems.forEach((crypto) => {
+      if (result[crypto.coinId]) {
+        result[crypto.coinId].amount += crypto.amount;
+      } else {
+        result[crypto.coinId] = { ...crypto };
+      }
+    });
+
+    return Object.values(result);
+  };
+
+  const topCryptos = useMemo(() => {
+    return mergeCoinByCoinId()
+      .map((item) => {
+        const entry = cryptoPriceMap?.get(item.coinId);
+        return {
+          ...item,
+          value: item.amount * (entry?.currentPrice || 0),
+          change: entry?.priceChange24h || 0,
+          image: entry?.image || "",
+        };
+      })
+      .sort((a, b) => b.value - a.value)
+      .slice(0, MAX_TOTAL_CRYPTO);
+  }, [cryptoItems, cryptoPriceMap]);
 
   return (
     <div className="bg-white rounded-lg overflow-hidden">
@@ -133,8 +147,8 @@ const CryptoSummary: React.FC<CryptoSummaryProps> = ({ currency }) => {
 
             <Conditional if={cryptoItems.length > 5}>
               <div className="text-center text-xs text-gray-400 pt-1">
-                +{cryptoItems.length - 5} more asset
-                {cryptoItems.length - 5 > 1 ? "s" : ""}
+                +{cryptoItems.length - MAX_TOTAL_CRYPTO} more asset
+                {cryptoItems.length - MAX_TOTAL_CRYPTO > 1 ? "s" : ""}
               </div>
             </Conditional>
           </div>
