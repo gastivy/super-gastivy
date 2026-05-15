@@ -3,19 +3,23 @@ import type { StockItem } from "@modules/portfolio/models/stockTypes";
 import type { PortfolioItem } from "@modules/portfolio/models/types";
 
 interface AllocationProps {
+  cashTotal: number;
   cryptoTotal: number;
   grandTotal: number;
   stockTotal: number;
   cryptoItems: PortfolioItem[];
   stockItems: StockItem[];
+  cashItems: { walletId: string; walletName: string }[];
 }
 
 const Allocation: React.FC<AllocationProps> = ({
+  cashTotal,
   cryptoTotal,
   grandTotal,
   stockTotal,
   cryptoItems,
   stockItems,
+  cashItems,
 }) => {
   return (
     <div className="bg-white p-6 rounded-lg">
@@ -37,6 +41,14 @@ const Allocation: React.FC<AllocationProps> = ({
             }}
           />
         </Conditional>
+        <Conditional if={cashTotal > 0}>
+          <div
+            className="bg-green-400 transition-all duration-500"
+            style={{
+              width: `${(cashTotal / grandTotal) * 100}%`,
+            }}
+          />
+        </Conditional>
       </div>
       <div className="flex items-center gap-4 mt-2">
         <Conditional if={cryptoItems.length > 0}>
@@ -52,6 +64,14 @@ const Allocation: React.FC<AllocationProps> = ({
             <div className="w-2.5 h-2.5 rounded-full bg-blue-400" />
             <span className="text-xs text-gray-600">
               Stocks {((stockTotal / grandTotal) * 100).toFixed(1)}%
+            </span>
+          </div>
+        </Conditional>
+        <Conditional if={cashItems.length > 0}>
+          <div className="flex items-center gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
+            <span className="text-xs text-gray-600">
+              Cash {((cashTotal / grandTotal) * 100).toFixed(1)}%
             </span>
           </div>
         </Conditional>

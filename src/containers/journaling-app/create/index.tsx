@@ -57,7 +57,7 @@ const JournalCreateContainer = () => {
     };
 
     const id = await saveMutation.mutateAsync(entry);
-    // navigate({ to: routes.journaling.overview.path });
+    navigate({ to: routes.journaling.overview.path });
     return id;
   };
 

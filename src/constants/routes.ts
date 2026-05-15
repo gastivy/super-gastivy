@@ -68,6 +68,10 @@ export const routes = {
       name: "Crypto",
       path: "/portfolio/crypto",
     },
+    cash: {
+      name: "Cash",
+      path: "/portfolio/cash",
+    },
   },
   journaling: {
     overview: {

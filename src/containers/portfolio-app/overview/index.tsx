@@ -1,10 +1,6 @@
 import { useMemo, useState } from "react";
 
-import {
-  IconArrowNarrowRight,
-  IconCoins,
-  IconStack2Filled,
-} from "@tabler/icons-react";
+import { IconArrowNarrowRight, IconStack2Filled } from "@tabler/icons-react";
 import { useNavigate } from "@tanstack/react-router";
 
 import { Assets } from "@assets/illustrations";
@@ -15,6 +11,8 @@ import Spinner from "@components/base/Spinner";
 import ToggleCurrency from "@components/base/ToogleCurrency";
 import { routes } from "@constants/routes";
 import { formatter } from "@libs/formatter";
+import { useGetWallet } from "@modules/finance/wallet/hooks/useWallet";
+import { useGetCashPortfolio } from "@modules/portfolio/hooks/useCashPortfolio";
 import {
   type CurrencyCode,
   useCryptoPrices,
@@ -27,6 +25,8 @@ import {
 } from "@modules/portfolio/hooks/useStockPrices";
 
 import Allocation from "./Allocation";
+import CashSummary from "./CashSummary";
+import CryptoSummary from "./CryptoSummary";
 
 const PortfolioOverviewContainer = () => {
   const navigate = useNavigate();
@@ -56,35 +56,24 @@ const PortfolioOverviewContainer = () => {
     return sum + item.amount * price;
   }, 0);
 
-  const cryptoTotalChange = useMemo(() => {
-    if (cryptoItems.length === 0) return 0;
-    const totalPrev = cryptoItems.reduce((sum, item) => {
-      const entry = cryptoPriceMap?.get(item.coinId);
-      const price = entry?.currentPrice || 0;
-      const change = entry?.priceChange24h || 0;
-      const prevPrice = change !== 0 ? price / (1 + change / 100) : price;
-      return sum + item.amount * prevPrice;
-    }, 0);
-    if (totalPrev === 0) return 0;
-    return ((cryptoTotal - totalPrev) / totalPrev) * 100;
-  }, [cryptoItems, cryptoPriceMap, cryptoTotal]);
+  // Cash data
+  const { data: cashItems = [] } = useGetCashPortfolio();
+  const { data: walletResponse } = useGetWallet();
 
-  const topCryptos = useMemo(
-    () =>
-      [...cryptoItems]
-        .map((item) => {
-          const entry = cryptoPriceMap?.get(item.coinId);
-          return {
-            ...item,
-            value: item.amount * (entry?.currentPrice || 0),
-            change: entry?.priceChange24h || 0,
-            image: entry?.image || "",
-          };
-        })
-        .sort((a, b) => b.value - a.value)
-        .slice(0, 5),
-    [cryptoItems, cryptoPriceMap]
-  );
+  const walletMap = useMemo(() => {
+    const map = new Map<string, { balance: number; name: string }>();
+    if (walletResponse?.data) {
+      walletResponse.data.forEach((w) => map.set(w.id, w));
+    }
+    return map;
+  }, [walletResponse]);
+
+  const cashTotalIdr = cashItems.reduce((sum, item) => {
+    const wallet = walletMap.get(item.walletId);
+    return sum + (wallet?.balance ?? 0);
+  }, 0);
+
+  const cashTotal = currency === "idr" ? cashTotalIdr : cashTotalIdr / usdToIdr;
 
   // Stock calculations — prices from Yahoo are in native currency
   const stockTotal = stockItems.reduce((sum, item) => {
@@ -129,8 +118,9 @@ const PortfolioOverviewContainer = () => {
     isLoadingCryptoPrices ||
     isLoadingStocks ||
     isLoadingStockPrices;
-  const hasPortfolio = cryptoItems.length > 0 || stockItems.length > 0;
-  const grandTotal = cryptoTotal + stockTotal;
+  const hasPortfolio =
+    cryptoItems.length > 0 || stockItems.length > 0 || cashItems.length > 0;
+  const grandTotal = cryptoTotal + stockTotal + cashTotal;
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
@@ -162,31 +152,33 @@ const PortfolioOverviewContainer = () => {
 
       <Conditional if={hasPortfolio}>
         <div className="flex flex-col gap-6">
-          <div className="bg-white p-6 rounded-lg">
-            <div className="text-sm text-gray-500 mb-1">
+          <div className="bg-white rounded-lg p-6">
+            <div className="text-xs text-gray-500 mb-1">
               Total Portfolio Value
             </div>
             <Conditional if={isLoading}>
-              <div className="h-9 w-56 animate-pulse bg-gray-200 rounded" />
+              <Spinner className="w-5 h-5" />
             </Conditional>
             <Conditional if={!isLoading}>
               <div className="text-2xl font-bold text-slate-700">
                 {formatter.currency(grandTotal, { currency })}
               </div>
-              <div className="flex items-center gap-3 mt-1 text-xs text-gray-500">
+              <div className="flex gap-4 mt-2 text-xs text-gray-400">
                 <span>
                   Crypto: {formatter.currency(cryptoTotal, { currency })}
                 </span>
-                <span>•</span>
                 <span>
                   Stocks: {formatter.currency(stockTotal, { currency })}
                 </span>
+                <span>Cash: {formatter.currency(cashTotal, { currency })}</span>
               </div>
             </Conditional>
           </div>
 
           <Conditional if={grandTotal > 0}>
             <Allocation
+              cashItems={cashItems}
+              cashTotal={cashTotal}
               cryptoItems={cryptoItems}
               grandTotal={grandTotal}
               cryptoTotal={cryptoTotal}
@@ -195,125 +187,9 @@ const PortfolioOverviewContainer = () => {
             />
           </Conditional>
 
-          {/* Two-column summary cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Crypto Summary */}
-            <div className="bg-white rounded-lg overflow-hidden">
-              <div className="flex items-center justify-between p-6 pb-3 border-b border-gray-100">
-                <div className="flex items-center gap-2">
-                  <IconCoins stroke={2} size={18} className="text-yellow-500" />
-                  <span className="text-md font-semibold text-slate-700">
-                    Crypto
-                  </span>
-                </div>
-                <button
-                  onClick={() => navigate({ to: routes.portfolio.crypto.path })}
-                  className="text-xs text-gray-400 hover:text-slate-700 cursor-pointer transition-colors flex items-center gap-1"
-                >
-                  View All
-                  <IconArrowNarrowRight stroke={2} size={12} />
-                </button>
-              </div>
+            <CryptoSummary currency={currency} />
 
-              <Conditional if={cryptoItems.length === 0}>
-                <div className="p-6 text-center">
-                  <p className="text-sm text-gray-400 mb-3">
-                    No crypto holdings yet
-                  </p>
-                  <button
-                    onClick={() =>
-                      navigate({ to: routes.portfolio.crypto.path })
-                    }
-                    className="text-sm text-brand-600 hover:text-brand-700 font-medium cursor-pointer"
-                  >
-                    + Add Crypto
-                  </button>
-                </div>
-              </Conditional>
-
-              <Conditional if={cryptoItems.length > 0}>
-                <div className="p-6 pt-4">
-                  <div className="flex items-end justify-between mb-4">
-                    <div>
-                      <div className="text-xs text-gray-500">Total Value</div>
-                      <div className="text-xl font-bold text-slate-700">
-                        {formatter.currency(cryptoTotal, { currency })}
-                      </div>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <span className="text-xs text-gray-400">24h</span>
-                      <span
-                        className={`text-sm font-medium ${
-                          cryptoTotalChange >= 0
-                            ? "text-green-600"
-                            : "text-red-500"
-                        }`}
-                      >
-                        {cryptoTotalChange >= 0 ? "+" : ""}
-                        {cryptoTotalChange.toFixed(2)}%
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <div className="flex items-center text-[10px] text-gray-400 uppercase tracking-wider pb-1 border-b border-gray-50">
-                      <span className="flex-1">Asset</span>
-                      <span className="w-24 text-right">Value</span>
-                      <span className="w-16 text-right">24h</span>
-                    </div>
-                    <Each
-                      of={topCryptos}
-                      render={(item) => (
-                        <div className="flex items-center py-1.5">
-                          <div className="flex items-center gap-2 flex-1">
-                            {item.image ? (
-                              <img
-                                src={item.image}
-                                alt={item.symbol}
-                                className="w-5 h-5 rounded-full"
-                              />
-                            ) : (
-                              <div className="w-5 h-5 rounded-full bg-yellow-400/30 flex items-center justify-center text-[9px] font-bold text-slate-700">
-                                {item.symbol.charAt(0)}
-                              </div>
-                            )}
-                            <div className="flex flex-col">
-                              <span className="text-xs font-medium text-slate-700">
-                                {item.symbol}
-                              </span>
-                              <span className="text-[10px] text-gray-400">
-                                {item.name}
-                              </span>
-                            </div>
-                          </div>
-                          <span className="w-24 text-right text-xs font-medium text-slate-700">
-                            {formatter.currency(item.value, { currency })}
-                          </span>
-                          <span
-                            className={`w-16 text-right text-xs font-medium ${
-                              item.change >= 0
-                                ? "text-green-600"
-                                : "text-red-500"
-                            }`}
-                          >
-                            {item.change >= 0 ? "+" : ""}
-                            {item.change.toFixed(2)}%
-                          </span>
-                        </div>
-                      )}
-                    />
-                    <Conditional if={cryptoItems.length > 5}>
-                      <div className="text-center text-xs text-gray-400 pt-1">
-                        +{cryptoItems.length - 5} more asset
-                        {cryptoItems.length - 5 > 1 ? "s" : ""}
-                      </div>
-                    </Conditional>
-                  </div>
-                </div>
-              </Conditional>
-            </div>
-
-            {/* Stocks Summary */}
             <div className="bg-white rounded-lg overflow-hidden">
               <div className="flex items-center justify-between p-6 pb-3 border-b border-gray-100">
                 <div className="flex items-center gap-2">
@@ -411,6 +287,8 @@ const PortfolioOverviewContainer = () => {
                 </div>
               </Conditional>
             </div>
+
+            <CashSummary currency={currency} usdToIdr={usdToIdr} />
           </div>
         </div>
       </Conditional>

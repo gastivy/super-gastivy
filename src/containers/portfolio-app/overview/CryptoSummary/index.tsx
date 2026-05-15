@@ -130,6 +130,7 @@ const CryptoSummary: React.FC<CryptoSummaryProps> = ({ currency }) => {
                 </div>
               )}
             />
+
             <Conditional if={cryptoItems.length > 5}>
               <div className="text-center text-xs text-gray-400 pt-1">
                 +{cryptoItems.length - 5} more asset

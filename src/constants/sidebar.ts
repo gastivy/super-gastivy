@@ -111,6 +111,11 @@ export const SIDEBAR_MENU: SidebarMenu[] = [
         path: routes.portfolio.crypto.path,
         icon: IconCoins,
       },
+      {
+        name: "Cash",
+        path: routes.portfolio.cash.path,
+        icon: IconWallet,
+      },
     ],
   },
   {
