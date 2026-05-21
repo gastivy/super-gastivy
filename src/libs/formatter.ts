@@ -35,12 +35,10 @@ export const formatter = {
 
     if (!val) return fallback;
 
-    const parsedValue = parseInt(String(val || 0));
-
     if (currency === "usd") {
-      return formatUsd(parsedValue);
+      return formatUsd(Number(val || 0));
     }
 
-    return formatIdr(parsedValue);
+    return formatIdr(Number(val || 0));
   },
 };
