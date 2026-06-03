@@ -16,10 +16,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return;
     }
 
-    const result = await yahooFinance.search(query.trim(), {
-      quotesCount: 10,
-      newsCount: 0,
-    });
+    const result = await yahooFinance.search(
+      query.trim(),
+      { quotesCount: 10, newsCount: 0 },
+      { validateResult: false }
+    );
 
     const stocks = (result.quotes || [])
       .filter(

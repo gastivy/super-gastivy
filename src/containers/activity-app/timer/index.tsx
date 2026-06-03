@@ -25,9 +25,16 @@ const TimerActivityContainer: React.FC = () => {
     isLoadingCreate,
     handleTimer,
     handleFinishActivity,
+    handleCancelActivity,
     isAlarmPlaying,
     handleStopAlarm,
   } = useTimerActivity(timerType, pomodoroDuration);
+
+  const handleCancelAndReset = () => {
+    handleCancelActivity();
+    setTimerType("stopwatch");
+    setPomodoroDuration(DEFAULT_POMODORO_DURATION);
+  };
 
   return (
     <div className="flex flex-col gap-4 max-[960px]:gap-8">
@@ -53,6 +60,7 @@ const TimerActivityContainer: React.FC = () => {
           onFinishActivity={handleFinishActivity}
           isAlarmPlaying={isAlarmPlaying}
           onStopAlarm={handleStopAlarm}
+          onCancelActivity={handleCancelAndReset}
         />
         <LogActivity data={currentActivity?.data || []} />
       </div>

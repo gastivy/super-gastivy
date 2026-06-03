@@ -17,7 +17,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const symbols = symbolsParam.split(",").map((s) => s.trim());
-    const results = await yahooFinance.quote(symbols);
+    const results = await yahooFinance.quote(symbols, {}, { validateResult: false });
     const quotes = Array.isArray(results) ? results : [results];
 
     const mapped = quotes

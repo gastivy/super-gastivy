@@ -27,21 +27,25 @@ export function yahooFinancePlugin(): Plugin {
               return;
             }
 
-            const result = await yahooFinance.search(query.trim(), {
-              quotesCount: 10,
-              newsCount: 0,
-            });
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const result = (await yahooFinance.search(
+              query.trim(),
+              { quotesCount: 10, newsCount: 0 },
+              { validateResult: false }
+            )) as any;
 
             const stocks = (result.quotes || [])
               .filter(
-                (q) =>
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                (q: any) =>
                   "quoteType" in q &&
                   (q.quoteType === "EQUITY" || q.quoteType === "ETF") &&
                   "symbol" in q &&
                   q.symbol
               )
               .slice(0, 10)
-              .map((q) => ({
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              .map((q: any) => ({
                 symbol: q.symbol!,
                 shortName:
                   ("shortname" in q && q.shortname) ||
@@ -66,7 +70,7 @@ export function yahooFinancePlugin(): Plugin {
           req.method === "GET"
         ) {
           try {
-            const result = await yahooFinance.quote("IDR=X");
+            const result = await yahooFinance.quote("IDR=X", {}, { validateResult: false });
             const quote = Array.isArray(result) ? result[0] : result;
             const rate = quote?.regularMarketPrice || 1;
 
@@ -93,7 +97,7 @@ export function yahooFinancePlugin(): Plugin {
             }
 
             const symbols = symbolsParam.split(",").map((s) => s.trim());
-            const results = await yahooFinance.quote(symbols);
+            const results = await yahooFinance.quote(symbols, {}, { validateResult: false });
             const quotes = Array.isArray(results) ? results : [results];
 
             const mapped = quotes

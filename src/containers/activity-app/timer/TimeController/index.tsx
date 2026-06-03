@@ -41,6 +41,7 @@ interface TimerControllerProps {
   onChangeTimer: () => void;
   onFinishActivity: () => void;
   onStopAlarm: () => void;
+  onCancelActivity: () => void;
 }
 
 export const TimerController: React.FC<TimerControllerProps> = ({
@@ -58,6 +59,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
   onPomodoroDurationChange,
   onFinishActivity,
   onStopAlarm,
+  onCancelActivity,
 }) => {
   const { data, isLoading } = useGetListCategory();
   const { isOpen, onClose, onOpen } = useDisclosure({ open: false });
@@ -90,6 +92,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
   const handleCancelActivity = async () => {
     if ((isStarted || isLoadingCreate) && !hasData) return;
     await DexieDB.activities.clear();
+    onCancelActivity();
     onClose();
   };
 
@@ -213,6 +216,7 @@ export const TimerController: React.FC<TimerControllerProps> = ({
             </CircularProgressbarWithChildren>
           </div>
         </div>
+
         {/* Stop Alarm Button */}
         {isAlarmPlaying && (
           <Button

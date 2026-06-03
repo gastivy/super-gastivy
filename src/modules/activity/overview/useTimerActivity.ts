@@ -1,11 +1,15 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef } from "react";
 
 import { useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { routes } from "@constants/routes";
-import usePomodoro, { playAlarmSound } from "@hooks/usePomodoro";
+import usePomodoro, {
+  playAlarmSound,
+  stopAlarmSound,
+  useIsAlarmPlaying,
+} from "@hooks/usePomodoro";
 import useStopwatch from "@hooks/useStopwatch";
 import DexieDB from "@libs/dexieDB";
 import { useCreateActivity } from "@modules/activity/activity-log/hooks/useActivity";
@@ -44,9 +48,8 @@ export const useTimerActivity = (
   const isStarted = useMemo(() => lastItem && !lastItem?.end_date, [lastItem]);
 
   // Use a ref for the pause handler so pomodoro can call it
-  const stopAlarmRef = useRef<(() => void) | null>(null);
-  const [isAlarmPlaying, setIsAlarmPlaying] = useState(false);
   const handlePauseTimerRef = useRef<(() => Promise<void>) | null>(null);
+  const { isAlarmPlaying } = useIsAlarmPlaying();
 
   const handlePauseTimer = useCallback(async () => {
     if (!currentActivity) return;
@@ -71,16 +74,12 @@ export const useTimerActivity = (
   handlePauseTimerRef.current = handlePauseTimer;
 
   const handlePomodoroComplete = useCallback(() => {
-    const stopAlarm = playAlarmSound();
-    stopAlarmRef.current = stopAlarm;
-    setIsAlarmPlaying(true);
+    playAlarmSound();
     handlePauseTimerRef.current?.();
   }, []);
 
   const handleStopAlarm = useCallback(() => {
-    stopAlarmRef.current?.();
-    stopAlarmRef.current = null;
-    setIsAlarmPlaying(false);
+    stopAlarmSound();
   }, []);
 
   // Resolve actual values: prefer saved activity data over hook parameters.
@@ -161,9 +160,7 @@ export const useTimerActivity = (
 
   const handleCancelActivity = async () => {
     await DexieDB.activities.clear();
-    stopAlarmRef.current?.();
-    stopAlarmRef.current = null;
-    setIsAlarmPlaying(false);
+    stopAlarmSound();
   };
 
   return {

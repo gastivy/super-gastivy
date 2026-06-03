@@ -78,16 +78,59 @@ const usePomodoro = ({
   };
 };
 
-export const playAlarmSound = (): (() => void) => {
-  const audio = new Audio(westminsterChimes);
-  audio.loop = true;
-  audio.volume = 0.5;
-  audio.play();
+// --- Shared alarm state (singleton pattern for cross-component sync) ---
+let alarmAudio: HTMLAudioElement | null = null;
+let sharedIsAlarmPlaying = false;
+const alarmStateListeners = new Set<(playing: boolean) => void>();
 
-  return () => {
-    audio.pause();
-    audio.currentTime = 0;
-  };
+const notifyAlarmStateListeners = (playing: boolean) => {
+  for (const listener of alarmStateListeners) {
+    listener(playing);
+  }
+};
+
+export const useIsAlarmPlaying = (): {
+  isAlarmPlaying: boolean;
+} => {
+  const [isAlarmPlaying, setIsAlarmPlaying] = useState(sharedIsAlarmPlaying);
+
+  useEffect(() => {
+    alarmStateListeners.add(setIsAlarmPlaying);
+    return () => {
+      alarmStateListeners.delete(setIsAlarmPlaying);
+    };
+  }, []);
+
+  return { isAlarmPlaying };
+};
+
+export const stopAlarmSound = (): void => {
+  if (alarmAudio) {
+    alarmAudio.pause();
+    alarmAudio.currentTime = 0;
+    alarmAudio = null;
+  }
+  if (sharedIsAlarmPlaying) {
+    sharedIsAlarmPlaying = false;
+    notifyAlarmStateListeners(false);
+  }
+};
+
+export const playAlarmSound = (): (() => void) => {
+  // If an alarm is already playing, don't create a new one
+  if (alarmAudio) {
+    return stopAlarmSound;
+  }
+
+  alarmAudio = new Audio(westminsterChimes);
+  alarmAudio.loop = true;
+  alarmAudio.volume = 0.5;
+  alarmAudio.play();
+
+  sharedIsAlarmPlaying = true;
+  notifyAlarmStateListeners(true);
+
+  return stopAlarmSound;
 };
 
 export default usePomodoro;
