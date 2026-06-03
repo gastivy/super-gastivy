@@ -9,4 +9,5 @@ export type DatePickerRangeProps = PropsBase & {
   placeholder?: string;
   onBlur?: () => void;
   onSelect?: (date: Date | undefined) => void;
+  defaultHour?: number;
 };

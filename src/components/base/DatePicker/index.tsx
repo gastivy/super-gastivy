@@ -25,6 +25,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
   placeholder = "Select date",
   onBlur,
   onSelect,
+  defaultHour = 8,
   ...props
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
@@ -33,6 +34,16 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
     () => (props.value ? format(props.value, "dd-MMM-yyyy") : ""),
     [props.value]
   );
+
+  const handleSelect = (date: Date | undefined) => {
+    if (date) {
+      const adjusted = new Date(date);
+      adjusted.setHours(defaultHour, 0, 0, 0);
+      onSelect?.(adjusted);
+    } else {
+      onSelect?.(date);
+    }
+  };
 
   const handleBlur = () => {
     onBlur?.();
@@ -87,7 +98,7 @@ const DatePicker: React.FC<DatePickerRangeProps> = ({
                   </button>
                 ),
               }}
-              onSelect={onSelect}
+              onSelect={handleSelect}
               {...props}
             />
           </div>
