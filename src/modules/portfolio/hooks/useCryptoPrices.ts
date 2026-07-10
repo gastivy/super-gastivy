@@ -7,7 +7,7 @@ import { CoinGeckoService } from "../services/coingecko";
 
 export type CurrencyCode = "usd" | "idr";
 
-interface PriceMapEntry {
+export interface PriceMapEntry {
   currentPrice: number;
   priceChange24h: number;
   image: string;

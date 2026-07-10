@@ -143,12 +143,17 @@ const PortfolioOverviewContainer = () => {
               cashItems={cashItems}
               cashTotal={cashTotal}
               cryptoItems={cryptoItems}
+              cryptoPriceMap={cryptoPriceMap}
+              cryptoTotal={cryptoTotal}
+              currency={currency}
               goldItems={goldItems}
               goldTotal={goldTotal}
               grandTotal={grandTotal}
-              cryptoTotal={cryptoTotal}
+              pricePerGramIdr={pricePerGramIdr}
               stockItems={stockItems}
+              stockQuoteMap={stockQuoteMap}
               stockTotal={stockTotal}
+              usdToIdr={usdToIdr}
             />
           </Conditional>
 

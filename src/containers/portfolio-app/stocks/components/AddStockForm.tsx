@@ -67,9 +67,7 @@ const AddStockForm = ({
           onClick={() => onAdd(groupId)}
           isLoading={isAdding}
           disabled={
-            !form.selectedStock ||
-            !form.shares ||
-            Number(form.shares) <= 0
+            !form.selectedStock || !form.shares || Number(form.shares) <= 0
           }
         >
           Add
