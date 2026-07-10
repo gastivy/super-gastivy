@@ -11,6 +11,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@components/base/Tabs";
+import ToggleCurrency from "@components/base/ToogleCurrency";
 import { formatter } from "@libs/formatter";
 import type {
   CurrencyCode,
@@ -50,6 +51,7 @@ interface AllocationModalProps {
   stockQuoteMap?: Map<string, StockQuote>;
   usdToIdr: number;
   pricePerGramIdr: number;
+  onToggleCurrency: (currency: CurrencyCode) => void;
 }
 
 const CATEGORY_COLORS: Record<AssetCategory, string> = {
@@ -76,6 +78,7 @@ const AllocationModal: React.FC<AllocationModalProps> = ({
   stockQuoteMap,
   usdToIdr,
   pricePerGramIdr,
+  onToggleCurrency,
 }) => {
   const convertFromIdr = (idrValue: number) => {
     if (currency === "idr") return idrValue;
@@ -224,13 +227,16 @@ const AllocationModal: React.FC<AllocationModalProps> = ({
         <span className="text-md font-semibold text-slate-700">
           Allocation Detail
         </span>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-slate-700 cursor-pointer transition-colors"
-          aria-label="Close"
-        >
-          <IconX size={18} />
-        </button>
+        <div className="flex items-center gap-3">
+          <ToggleCurrency currency={currency} onToggle={onToggleCurrency} />
+          <button
+            onClick={onClose}
+            className="text-gray-400 hover:text-slate-700 cursor-pointer transition-colors"
+            aria-label="Close"
+          >
+            <IconX size={18} />
+          </button>
+        </div>
       </div>
 
       <Tabs

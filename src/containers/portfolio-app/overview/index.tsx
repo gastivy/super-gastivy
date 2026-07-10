@@ -149,6 +149,7 @@ const PortfolioOverviewContainer = () => {
               goldItems={goldItems}
               goldTotal={goldTotal}
               grandTotal={grandTotal}
+              onToggleCurrency={(val) => setCurrency(val)}
               pricePerGramIdr={pricePerGramIdr}
               stockItems={stockItems}
               stockQuoteMap={stockQuoteMap}

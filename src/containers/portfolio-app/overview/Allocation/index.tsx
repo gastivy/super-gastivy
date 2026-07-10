@@ -29,6 +29,7 @@ interface AllocationProps {
   stockQuoteMap?: Map<string, StockQuote>;
   usdToIdr: number;
   pricePerGramIdr: number;
+  onToggleCurrency: (currency: CurrencyCode) => void;
 }
 
 const Allocation: React.FC<AllocationProps> = ({
@@ -46,6 +47,7 @@ const Allocation: React.FC<AllocationProps> = ({
   stockQuoteMap,
   usdToIdr,
   pricePerGramIdr,
+  onToggleCurrency,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure({ open: false });
 
@@ -149,6 +151,7 @@ const Allocation: React.FC<AllocationProps> = ({
         grandTotal={grandTotal}
         isOpen={isOpen}
         onClose={onClose}
+        onToggleCurrency={onToggleCurrency}
         pricePerGramIdr={pricePerGramIdr}
         stockItems={stockItems}
         stockQuoteMap={stockQuoteMap}
