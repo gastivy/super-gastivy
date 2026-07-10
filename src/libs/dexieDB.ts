@@ -6,12 +6,10 @@ import type {
   JournalTemplate,
 } from "@modules/journaling/models/types";
 import type {
-  GoldItem,
-} from "@modules/portfolio/models/goldTypes";
-import type {
   CashGroup,
   CashPortfolioItem,
 } from "@modules/portfolio/models/cashTypes";
+import type { GoldItem } from "@modules/portfolio/models/goldTypes";
 import type {
   StockGroup,
   StockItem,

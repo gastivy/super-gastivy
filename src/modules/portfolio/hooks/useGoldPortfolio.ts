@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-
 import axios from "axios";
+
 import DexieDB from "@libs/dexieDB";
 
 import type { GoldItem, GoldPriceData } from "../models/goldTypes";
@@ -74,8 +74,7 @@ export const useDeleteGoldPortfolio = () => {
 
 // --- Gold Price API ---
 
-const GOLD_API_URL =
-  "https://api-pluang.pluang.com/api/v3/asset/gold/pricing";
+const GOLD_API_URL = "https://api-pluang.pluang.com/api/v3/asset/gold/pricing";
 
 interface GoldPriceResponse {
   statusCode: number;

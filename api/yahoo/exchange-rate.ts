@@ -10,7 +10,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const result = await yahooFinance.quote("IDR=X", {}, { validateResult: false });
+    const result = await yahooFinance.quote(
+      "IDR=X",
+      {},
+      { validateResult: false }
+    );
     const quote = Array.isArray(result) ? result[0] : result;
     const rate = quote?.regularMarketPrice || 1;
     res.status(200).json({ usdToIdr: rate });

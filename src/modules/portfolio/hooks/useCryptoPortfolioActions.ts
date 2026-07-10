@@ -1,5 +1,15 @@
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
+import type { PortfolioItem } from "../models/types";
+
+import { useCryptoPrices } from "./useCryptoPrices";
 import {
   useAddPortfolio,
   useDeletePortfolio,
@@ -11,8 +21,6 @@ import {
   useGetGroups,
   useUpdateGroup,
 } from "./usePortfolioGroup";
-import { useCryptoPrices } from "./useCryptoPrices";
-import type { PortfolioItem } from "../models/types";
 
 interface GroupForm {
   searchQuery: string;
@@ -44,10 +52,7 @@ interface CryptoPortfolioActionsValue {
 
   // Group form state
   getGroupForm: (groupId: number) => GroupForm;
-  updateGroupForm: (
-    groupId: number,
-    updates: Partial<GroupForm>
-  ) => void;
+  updateGroupForm: (groupId: number, updates: Partial<GroupForm>) => void;
   searchRefs: React.MutableRefObject<Record<number, HTMLDivElement | null>>;
 
   // Group CRUD
@@ -91,9 +96,7 @@ export const useCryptoPortfolioActions = () => {
   return context;
 };
 
-export const useCryptoPortfolioActionsProvider = (
-  currency: "usd" | "idr"
-) => {
+export const useCryptoPortfolioActionsProvider = (currency: "usd" | "idr") => {
   // Collapse state
   const [collapsedGroups, setCollapsedGroups] = useState<Set<number>>(
     new Set()
@@ -184,10 +187,7 @@ export const useCryptoPortfolioActionsProvider = (
     );
   };
 
-  const updateGroupForm = (
-    groupId: number,
-    updates: Partial<GroupForm>
-  ) => {
+  const updateGroupForm = (groupId: number, updates: Partial<GroupForm>) => {
     setGroupForms((prev) => ({
       ...prev,
       [groupId]: { ...getGroupForm(groupId), ...updates },

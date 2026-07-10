@@ -1,4 +1,4 @@
-import type React from "react";
+import { useState } from "react";
 
 import {
   IconCheck,
@@ -9,42 +9,56 @@ import {
 
 import Conditional from "@components/base/Conditional";
 import { formatter } from "@libs/formatter";
-import { useCryptoPortfolioActions } from "@modules/portfolio/hooks/useCryptoPortfolioActions";
-import type { PortfolioItem } from "@modules/portfolio/models/types";
 
-interface CryptoItemCardProps {
-  item: PortfolioItem;
-  currency: "usd" | "idr";
-}
+import type { StockItemRowProps } from "./types";
 
-const CryptoItemCard: React.FC<CryptoItemCardProps> = ({ item, currency }) => {
-  const {
-    priceMap,
-    editingItemId,
-    editingItemAmount,
-    setEditingItemAmount,
-    startEditItem,
-    saveEditItem,
-    cancelEditItem,
-    handleDelete,
-  } = useCryptoPortfolioActions();
+const StockItemRow = ({
+  item,
+  quote,
+  currency,
+  convertPrice,
+  onDelete,
+  onUpdateItem,
+}: StockItemRowProps) => {
+  const [editingItemId, setEditingItemId] = useState<number | null>(null);
+  const [editingItemShares, setEditingItemShares] = useState("");
 
-  const priceData = priceMap?.get(item.coinId);
-  const currentPrice = priceData?.currentPrice || 0;
-  const priceChange = priceData?.priceChange24h || 0;
-  const totalItemValue = item.amount * currentPrice;
-  const image = priceData?.image;
+  const nativePrice = quote?.regularMarketPrice || 0;
+  const convertedPrice = convertPrice(item.symbol, nativePrice);
+  const priceChange = quote?.regularMarketChangePercent || 0;
+  const totalItemValue = item.shares * convertedPrice;
+
+  const startEditItem = () => {
+    setEditingItemId(item.id ?? null);
+    setEditingItemShares(String(item.shares));
+  };
+
+  const saveEditItem = () => {
+    if (
+      editingItemId === null ||
+      !editingItemShares ||
+      Number(editingItemShares) <= 0
+    )
+      return;
+    onUpdateItem({
+      id: editingItemId,
+      shares: Number(editingItemShares),
+    });
+    setEditingItemId(null);
+    setEditingItemShares("");
+  };
+
+  const cancelEditItem = () => {
+    setEditingItemId(null);
+    setEditingItemShares("");
+  };
 
   return (
     <div className="flex items-center justify-between p-4 border border-gray-100 rounded-lg hover:bg-gray-50 transition-colors">
       <div className="flex items-center gap-3">
-        {image ? (
-          <img src={image} alt={item.name} className="w-8 h-8 rounded-full" />
-        ) : (
-          <div className="w-8 h-8 rounded-full bg-brand-400/30 flex items-center justify-center text-xs font-bold text-slate-700">
-            {item.symbol.charAt(0)}
-          </div>
-        )}
+        <div className="w-8 h-8 rounded-full bg-brand-400/30 flex items-center justify-center text-xs font-bold text-slate-700">
+          {item.symbol.charAt(0)}
+        </div>
         <div className="flex flex-col">
           <span className="text-sm font-medium text-slate-700">
             {item.symbol}
@@ -56,18 +70,20 @@ const CryptoItemCard: React.FC<CryptoItemCardProps> = ({ item, currency }) => {
       <div className="flex gap-4">
         <div className="flex flex-col items-end">
           <span className="text-sm font-medium text-slate-700">
-            {formatter.currency(totalItemValue, { currency })}
+            {formatter.currency(totalItemValue, {
+              currency,
+            })}
           </span>
           <div className="flex items-center gap-2">
             <Conditional if={editingItemId === item.id}>
               <input
                 type="text"
                 inputMode="decimal"
-                value={editingItemAmount}
+                value={editingItemShares}
                 onChange={(e) => {
                   const val = e.target.value.replace(/[^0-9.]/g, "");
                   const parts = val.split(".");
-                  if (parts.length <= 2) setEditingItemAmount(val);
+                  if (parts.length <= 2) setEditingItemShares(val);
                 }}
                 onKeyDown={(e) => {
                   if (e.key === "Enter") saveEditItem();
@@ -93,12 +109,15 @@ const CryptoItemCard: React.FC<CryptoItemCardProps> = ({ item, currency }) => {
             </Conditional>
             <Conditional if={editingItemId !== item.id}>
               <span className="text-xs text-gray-500">
-                {item.amount} × {formatter.currency(currentPrice, { currency })}
+                {item.shares} ×{" "}
+                {formatter.currency(convertedPrice, {
+                  currency,
+                })}
               </span>
               <button
-                onClick={() => startEditItem(item)}
+                onClick={startEditItem}
                 className="text-gray-400 hover:text-gray-600 cursor-pointer transition-colors"
-                title="Edit amount"
+                title="Edit shares"
               >
                 <IconEdit stroke={2} size={12} />
               </button>
@@ -115,7 +134,7 @@ const CryptoItemCard: React.FC<CryptoItemCardProps> = ({ item, currency }) => {
         </div>
 
         <button
-          onClick={() => handleDelete(item.id!)}
+          onClick={() => onDelete(item.id!)}
           className="ml-3 text-red-400 hover:text-red-600 cursor-pointer transition-colors"
           title="Remove from portfolio"
         >
@@ -126,4 +145,4 @@ const CryptoItemCard: React.FC<CryptoItemCardProps> = ({ item, currency }) => {
   );
 };
 
-export default CryptoItemCard;
+export default StockItemRow;

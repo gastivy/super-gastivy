@@ -27,7 +27,6 @@ export function yahooFinancePlugin(): Plugin {
               return;
             }
 
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const result = (await yahooFinance.search(
               query.trim(),
               { quotesCount: 10, newsCount: 0 },
@@ -70,7 +69,11 @@ export function yahooFinancePlugin(): Plugin {
           req.method === "GET"
         ) {
           try {
-            const result = await yahooFinance.quote("IDR=X", {}, { validateResult: false });
+            const result = await yahooFinance.quote(
+              "IDR=X",
+              {},
+              { validateResult: false }
+            );
             const quote = Array.isArray(result) ? result[0] : result;
             const rate = quote?.regularMarketPrice || 1;
 
@@ -97,7 +100,11 @@ export function yahooFinancePlugin(): Plugin {
             }
 
             const symbols = symbolsParam.split(",").map((s) => s.trim());
-            const results = await yahooFinance.quote(symbols, {}, { validateResult: false });
+            const results = await yahooFinance.quote(
+              symbols,
+              {},
+              { validateResult: false }
+            );
             const quotes = Array.isArray(results) ? results : [results];
 
             const mapped = quotes
